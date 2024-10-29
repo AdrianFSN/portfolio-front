@@ -1,0 +1,261 @@
+.main {
+  background-color: var(--body-color);
+  padding: 0;
+  margin: 0;
+}
+
+.main .main__section__skills__intro {
+  padding: 2rem;
+  padding-bottom: 0;
+  /* margin: 0; */
+}
+
+.main .main__section__skills__intro h2 {
+  margin-bottom: 1rem;
+}
+
+.main .main__section__bio {
+  display: block;
+  padding: 0;
+  margin: 0;
+  text-align: justify;
+}
+
+.main .main__section__bio .main__info__bio .main__info__bio__text {
+  padding: 2rem;
+}
+
+.main .main__section__bio .main__info__picture {
+  background: rgba(0, 0, 0, 0.95);
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.main .main__section__bio .main__info__picture img {
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.main .main__section__skills {
+  background: var(--main-brand-color);
+  padding: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-bottom: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.main .main__section__skills .main__section__skills__container {
+  display: block;
+  padding: 1rem;
+  margin: 0 auto;
+  background-color: var(--body-color);
+  border-radius: 5px;
+  width: 90%;
+}
+
+.main__section__skills__red__bar {
+  background-color: var(--main-brand-color);
+  border-radius: 10px;
+  height: 1.2rem;
+}
+
+.main
+  .main__section__skills
+  .main__section__skills__container
+  .main__section__skills__black__bar {
+  background-color: var(--main-text-color);
+  padding: 0.2rem;
+  border-radius: 10px;
+}
+
+.creativity {
+  width: 97%;
+}
+
+.strategy {
+  width: 95%;
+}
+
+.python {
+  width: 75%;
+}
+
+.javascript {
+  width: 60%;
+}
+
+.progress__bar__creativity {
+  animation: progress__bar__creativity 2s ease-in;
+}
+
+@keyframes progress__bar__creativity {
+  0% {
+    width: 0%;
+    background-color: var(--bg-color);
+  }
+
+  80% {
+    width: 100%;
+  }
+
+  90% {
+    width: 95%;
+  }
+
+  95% {
+    width: 98%;
+  }
+
+  100% {
+    width: 97%;
+  }
+}
+
+.progress__bar__strategy {
+  animation: progress__bar__strategy 2s ease-in;
+}
+
+@keyframes progress__bar__strategy {
+  0% {
+    width: 0%;
+    background-color: var(--bg-color);
+  }
+
+  80% {
+    width: 99%;
+  }
+
+  90% {
+    width: 93%;
+  }
+
+  95% {
+    width: 98%;
+  }
+
+  100% {
+    width: 95%;
+  }
+}
+
+.progress__bar__python {
+  animation: progress__bar__python 2s ease-in;
+}
+
+@keyframes progress__bar__python {
+  0% {
+    width: 0;
+    background-color: var(--bg-color);
+  }
+
+  80% {
+    width: 79%;
+  }
+
+  90% {
+    width: 74%;
+  }
+
+  95% {
+    width: 77%;
+  }
+
+  100% {
+    width: 75%;
+  }
+}
+
+.progress__bar__javascript {
+  animation: progress__bar__javascript 2s ease-in;
+}
+
+@keyframes progress__bar__javascript {
+  0% {
+    width: 0%;
+    background-color: var(--bg-color);
+  }
+
+  80% {
+    width: 62%;
+  }
+
+  90% {
+    width: 59%;
+  }
+
+  95% {
+    width: 61%;
+  }
+
+  100% {
+    width: 60%;
+  }
+}
+
+.main .main__section__skills .main__section__skills__container h2 {
+  text-align: left;
+}
+
+@media (width > 768px) {
+  .main .main__section__bio {
+    text-align: left;
+  }
+
+  .main .main__section__bio .main__info__picture {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .main .main__section__bio .main__info__picture img {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+  }
+
+  .main .main__section__skills {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width > 1024px) {
+  .main .main__section__bio .main__info__picture {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .main .main__section__bio .main__info__picture img {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+  }
+
+  .main .main__section__skills {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (width > 1440px) {
+  .main .main__section__bio .main__info__picture {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .main .main__section__bio .main__info__picture img {
+    display: block;
+    margin: 0 auto;
+    width: 40%;
+  }
+
+  .main .main__section__skills {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

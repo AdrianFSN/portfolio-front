@@ -4,11 +4,14 @@ import "./styles/common.css";
 import "./styles/components.css";
 import "./styles/portfolio.css";
 import "./styles/fonts.css";
+import RootRouter from "./routes/RootRouter";
 
 function App() {
   return (
     <>
-      <Layout>Hola</Layout>
+      <Layout>
+        <RootRouter />
+      </Layout>
     </>
   );
 }
