@@ -1,0 +1,127 @@
+.footer {
+  background-color: var(--bg-color);
+  padding: 4rem 1rem;
+  font-size: 2rem;
+  margin-bottom: 0;
+  box-shadow: 0px 0px 7px 0px #cfcc98;
+}
+
+.footer .footer__section {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.footer .footer__section .footer__brand__logo {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.footer .footer__section.footer__logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
+  gap: 30px;
+}
+
+.footer .footer__section.footer__logos figure {
+  padding: 0;
+  margin: 0;
+  width: 30%;
+}
+
+.footer .footer__section.footer__logos img {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.footer .footer__section.footer__logos .social__icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 30px;
+}
+
+.footer
+  .footer__section.footer__logos
+  .social__icons
+  .footer__social__icon__item
+  i {
+  color: var(--main-text-color);
+  font-size: 2.9rem;
+}
+
+.footer .footer__section .footer__copyright {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--main-text-color);
+}
+
+@media (width > 768px) {
+  .footer .footer__section {
+    width: 65%;
+    margin: 0 auto;
+  }
+
+  .footer .footer__section .footer__brand__logo {
+    display: flex;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer .footer__section.footer__logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    gap: 30px;
+  }
+
+  .footer .footer__section.footer__logos figure {
+    padding: 0;
+    margin: 0;
+    width: 10%;
+  }
+
+  .footer .footer__section.footer__logos img {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .footer .footer__section.footer__logos .social__icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 30px;
+  }
+
+  .footer
+    .footer__section.footer__logos
+    .social__icons
+    .footer__social__icon__item
+    i {
+    color: var(--main-text-color);
+    font-size: 2.8rem;
+  }
+
+  .footer .footer__section .footer__copyright {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--main-text-color);
+  }
+}

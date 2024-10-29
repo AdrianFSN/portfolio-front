@@ -1,0 +1,143 @@
+.porfolio__main {
+  background: var(--body-color);
+  padding: 0;
+}
+
+.porfolio {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.porfolio .porfolio__intro__video {
+  background: radial-gradient(
+    circle,
+    rgba(250, 25, 12, 1) 0%,
+    rgba(0, 0, 0, 1) 56%
+  );
+  padding: 0;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.porfolio__main .porfolio .porfolio__video__caption {
+  padding: 1rem;
+}
+
+.porfolio__main .porfolio .porfolio__video__caption h3 {
+  margin: 0;
+}
+
+.porfolio .porfolio__intro__video .video__small {
+  display: block;
+  padding: 0;
+  margin-bottom: 0;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.porfolio__video__fade {
+  opacity: 100%;
+  animation: porfolio__video__fade 2s ease-in-out;
+}
+
+@keyframes porfolio__video__fade {
+  0% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 100%;
+  }
+}
+
+.porfolio__grid__panel__item__list {
+  display: grid;
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  grid-template-columns: 1fr;
+  margin-bottom: 0;
+}
+
+.porfolio__grid__panel__item__list li {
+  margin-top: 3rem;
+}
+
+.porfolio__item__picture {
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.porfolio__grid__panel__item__list img {
+  width: 100%;
+  border-radius: 3px;
+}
+
+.porfolio__grid__panel__item__list img:hover {
+  transition: border-right 0.5s ease-in-out;
+}
+
+@media (hover: hover) {
+  .porfolio__grid__panel__item__list img:hover {
+    border-right: 1rem solid var(--main-brand-color);
+  }
+}
+
+.porfolio__img__caption {
+  text-align: center;
+  padding: 1rem;
+}
+
+.porfolio__img__caption h3 {
+  margin: 0;
+}
+
+@media (width > 768px) {
+  .porfolio .porfolio__intro__video .video__small {
+    padding: 2rem;
+    border-radius: 2.5rem;
+    width: 70%;
+  }
+
+  .porfolio__item__picture {
+    display: block;
+    margin: 0 auto;
+    width: 72%;
+  }
+}
+
+@media (width > 1024px) {
+  .porfolio .porfolio__intro__video .video__small {
+    padding: 2rem;
+    border-radius: 2.5rem;
+    width: 55%;
+  }
+
+  .porfolio__grid__panel__item__list {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 0;
+  }
+
+  .porfolio__item__picture {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+  }
+}
+
+@media (width > 1440px) {
+  .porfolio .porfolio__intro__video .video__small {
+    display: block;
+    padding: 2rem;
+    border-radius: 2.5rem;
+    margin-bottom: 0;
+    margin: 0 auto;
+    width: 35%;
+  }
+}

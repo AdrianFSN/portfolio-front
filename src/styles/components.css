@@ -1,0 +1,205 @@
+.hidden {
+  display: none;
+}
+
+@media (width > 768px) {
+  .hidden {
+    display: block;
+  }
+}
+
+.btn {
+  background-color: var(--main-brand-color);
+  color: var(--main-text-color);
+  text-decoration: none;
+  font-weight: bolder;
+  border: none;
+  border-radius: 3px;
+  padding: 1rem;
+  transition: background-color 0.7s linear, color 0.7s linear;
+}
+
+@media (hover: hover) {
+  .btn:hover {
+    background-color: var(--main-text-color);
+    color: var(--secondary-text-color);
+  }
+}
+
+.formulario {
+  display: block;
+  padding-top: 2rem;
+  width: 100%;
+}
+
+.formulario .formulario__campo {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem 0 2rem;
+  margin: 0;
+}
+
+.formulario__fieldset {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 2rem;
+  margin: 2rem 2rem 1rem;
+  border-radius: 3px;
+}
+
+.formulario__fieldset h3,
+.formulario__fieldset h4 {
+  margin: 0.8rem;
+}
+
+.formulario__even__label h4 {
+  margin-top: 2rem;
+}
+
+.formulario__radio__buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: var(--main-brand-color);
+  color: var(--main-brand-color);
+}
+
+.formulario__suscribir {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem 0 2rem;
+  margin: 0;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.formulario__input {
+  padding: 1rem;
+  background: var(--main-brand-color);
+  color: var(--secondary-text-color);
+  border: none;
+  border-radius: 3px;
+}
+
+.formulario__textarea {
+  /* margin-bottom: 2rem; */
+  background: var(--body-color);
+  border: 1px dotted var(--main-brand-color);
+  color: var(--main-text-color);
+  border-radius: 3px;
+}
+
+.formulario__input::placeholder {
+  color: var(--secondary-text-color);
+}
+
+.formulario__campo.formulario__botones {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 5rem;
+  justify-content: center;
+}
+
+.formulario__btn__clear {
+  background-color: transparent;
+  border: 2px solid var(--main-text-color);
+  cursor: pointer;
+  transition: color 0.7s linear, background-color 0.7s linear;
+}
+
+.formulario__btn__submit {
+  background-color: transparent;
+  border: 2px solid var(--main-brand-color);
+  padding-left: 3rem;
+  padding-right: 3rem;
+  color: var(--main-brand-color);
+  cursor: pointer;
+  transition: color 0.7s linear, background-color 0.7s linear;
+}
+
+@media (hover: hover) {
+  .formulario__btn__clear:hover {
+    color: var(--secondary-text-color);
+    background-color: var(--main-text-color);
+  }
+
+  .formulario__btn__submit:hover {
+    color: var(--main-text-color);
+    background-color: var(--main-brand-color);
+  }
+}
+
+.formulario__campo.formulario__botones {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 5rem;
+  gap: 1rem;
+}
+
+@media (width > 768px) {
+  .formulario {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+  }
+
+  .formulario__organize__meet__message {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+
+  .formulario__organize__meet__message h3 {
+    font-size: 1.8rem;
+  }
+
+  .formulario__fieldset.formulario__grid__extend,
+    .formulario__campo.formulario__grid__extend,
+    .formulario__suscribir.formulario__grid__extend,
+    /* .formulario__items__pairs.formulario__grid__extend, */
+    .formulario__organize__meet__message.formulario__grid__extend,
+    .formulario__campo.formulario__botones.formulario__grid__extend {
+    grid-column: span 2;
+  }
+
+  .formulario__items__pairs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .formulario__campo.formulario__botones.formulario__grid__extend {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .formulario__even__label h4 {
+    margin-top: 0.8rem;
+  }
+
+  .formulario__organize__meet__message.formulario__grid__extend {
+    display: flex;
+    justify-content: center;
+  }
+
+  .formulario__fieldset.formulario__items__pairs.formulario__grid__extend {
+    margin: 1rem 5rem;
+  }
+}
+
+@media (width > 1024px) {
+  .formulario__fieldset.formulario__items__pairs.formulario__grid__extend {
+    margin: 1rem 15rem;
+    /* grid-column: span 1; */
+  }
+}
