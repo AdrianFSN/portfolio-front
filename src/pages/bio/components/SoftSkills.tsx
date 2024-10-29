@@ -7,7 +7,7 @@ const SoftSkills = () => {
       <li>
         <Skill
           title="Creativity"
-          amount="97"
+          amount={97}
         />
       </li>
       {/* <li className="main__section__skills__container">
