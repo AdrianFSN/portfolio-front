@@ -23,14 +23,6 @@ const Footer = () => {
                 <i className="fa-brands fa-linkedin"></i>
               </a>
             </li>
-            <li className="footer__social__icon__item">
-              <a
-                href="https://www.instagram.com/los_creacionistas/?igsh=MTJyM3Q5ZzkyY2cxbg%3D%3D"
-                target="_blank"
-              >
-                <i className="fa-brands fa-square-instagram"></i>
-              </a>
-            </li>
           </ul>
         </nav>
       </section>
