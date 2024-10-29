@@ -1,5 +1,4 @@
 import React from "react";
-//import "react-circular-progressbar/dist/styles.css";
 import { useSpring, animated } from "@react-spring/web";
 import styled from "styled-components";
 
