@@ -10,6 +10,8 @@ const Bio = () => {
         id="bio"
       >
         <BioDescription />
+      </section>
+      <section className="main__section__bio">
         <BioPicture />
       </section>
       <section className="main__section__skills__intro">

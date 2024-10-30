@@ -7,7 +7,6 @@
 .main .main__section__skills__intro {
   padding: 2rem;
   padding-bottom: 0;
-  /* margin: 0; */
 }
 
 .main .main__section__skills__intro h2 {
@@ -54,7 +53,7 @@
 }
 
 .main .main__section__skills {
-  background: var(--main-brand-color);
+  background: transparent;
   padding: 1rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -70,6 +69,7 @@
   padding: 1rem;
   margin: 0 auto;
   background-color: var(--body-color);
+  border: 1px solid var(--main-brand-color);
   border-radius: 5px;
   width: 90%;
 }

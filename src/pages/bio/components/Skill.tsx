@@ -8,8 +8,9 @@ interface SkillProps {
 }
 
 const SkillContainer = styled.div`
-  background: var(--bg-color);
+  background: var(--body-color);
   padding: 2rem;
+  border: 2px solid var(--bg-color);
   border-radius: 10px;
   position: relative;
   text-align: center;
@@ -86,7 +87,7 @@ const Skill: React.FC<SkillProps> = ({ title, amount }) => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            fontSize: "3.2rem",
+            fontSize: "3.5rem",
           }}
         >
           {styles.value.to((val) => `${Math.round(val)}`)}
