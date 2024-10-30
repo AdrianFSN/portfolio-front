@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Bio from "../pages/bio/Bio";
+import JobExamplesList from "../pages/jobExamples/JobExamplesList";
 const RootRouter = () => {
   return (
     <Routes>
@@ -7,6 +8,10 @@ const RootRouter = () => {
       <Route
         path="/"
         element={<Bio />}
+      />
+      <Route
+        path="/development"
+        element={<JobExamplesList category="development" />}
       />
     </Routes>
   );
