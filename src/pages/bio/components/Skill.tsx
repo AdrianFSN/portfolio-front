@@ -34,15 +34,15 @@ const Skill: React.FC<SkillProps> = ({ title, amount }) => {
   const styles = useSpring({
     value: amount,
     from: { value: 0 },
-    config: { duration: 1500 },
+    config: { duration: 3000 },
   });
 
   const colorStyles = useSpring({
     stroke: styles.value.to((val) => {
-      if (val < 40) return "var(--bg-color)";
+      if (val < 20) return "var(--bg-color)";
       return "var(--main-brand-color)";
     }),
-    config: { duration: 1500 },
+    config: { duration: 3000 },
   });
 
   // Calcular el perímetro del círculo
@@ -54,14 +54,14 @@ const Skill: React.FC<SkillProps> = ({ title, amount }) => {
       <h3>{title}</h3>
       <BadgeContainer>
         <animated.svg
-          viewBox="0 0 100 100"
-          style={{ width: "100%", height: "100%" }}
+          viewBox="0 0 120 120"
+          style={{ width: "120%", height: "120%" }}
         >
           <circle
-            cx="50"
-            cy="50"
+            cx="51"
+            cy="51"
             r={radius}
-            stroke="var(--main-text-color)"
+            stroke="rgba(0, 0, 0, 0.2)"
             strokeWidth="10%"
             fill="none"
           />
