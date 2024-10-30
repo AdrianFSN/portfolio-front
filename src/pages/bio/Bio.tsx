@@ -1,4 +1,5 @@
 import BioDescription from "./components/BioDescription";
+import BioPicture from "./components/BioPicture";
 import SoftSkills from "./components/SoftSkills";
 
 const Bio = () => {
@@ -9,6 +10,7 @@ const Bio = () => {
         id="bio"
       >
         <BioDescription />
+        <BioPicture />
       </section>
       <section className="main__section__skills__intro">
         <SoftSkills />

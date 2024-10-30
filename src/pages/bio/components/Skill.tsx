@@ -9,15 +9,15 @@ interface SkillProps {
 
 const SkillContainer = styled.div`
   background: var(--bg-color);
-  padding: 2em;
+  padding: 2rem;
   border-radius: 10px;
   position: relative;
   text-align: center;
 
   h3 {
-    font-size: 2.2em;
-    margin-bottom: 0.2em;
-    margin-top: 0.2em;
+    font-size: 2.2rem;
+    margin-bottom: 0.2rem;
+    margin-top: 0.2rem;
   }
 `;
 
@@ -26,7 +26,7 @@ const BadgeContainer = styled.div`
   height: 150px;
   margin: 0 auto;
   position: relative;
-  font-size: 1.5em;
+  font-size: 1.5rem;
 `;
 
 const Skill: React.FC<SkillProps> = ({ title, amount }) => {
@@ -73,7 +73,7 @@ const Skill: React.FC<SkillProps> = ({ title, amount }) => {
             strokeDashoffset={styles.value.to(
               (val) => strokeDasharray - (strokeDasharray * val) / 100
             )}
-            strokeWidth="5"
+            strokeWidth="6%"
             strokeLinecap="butt"
             style={{
               stroke: colorStyles.stroke, // Aplica el color animado aquí
@@ -86,7 +86,7 @@ const Skill: React.FC<SkillProps> = ({ title, amount }) => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            fontSize: "2em",
+            fontSize: "3.2rem",
           }}
         >
           {styles.value.to((val) => `${Math.round(val)}`)}

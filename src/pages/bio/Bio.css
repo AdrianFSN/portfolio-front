@@ -26,16 +26,31 @@
 }
 
 .main .main__section__bio .main__info__picture {
-  background: rgba(0, 0, 0, 0.95);
+  position: relative;
+  background: url(./bg_images/developer2.jpg) no-repeat center center;
+  background-color: rgba(0, 0, 0, 0.95);
+  background-size: cover;
   display: block;
   margin: 0 auto;
   width: 100%;
 }
 
+.main .main__section__bio .main__info__picture .bio__picture__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
 .main .main__section__bio .main__info__picture img {
+  position: relative;
   display: block;
   margin: 0 auto;
   width: 90%;
+  z-index: 2;
 }
 
 .main .main__section__skills {
