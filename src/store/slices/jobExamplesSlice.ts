@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getJobExamplesListThunk } from "../thunks/jobExamplesListThunk";
 
 export const jobExamplesInitialState = {
-  data: [],
+  data: {},
   loading: false,
   error: undefined as string | undefined,
 };
@@ -27,7 +27,7 @@ const JobExamplesSlice = createSlice({
       })
       .addCase(getJobExamplesListThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload.data;
+        state.data = action.payload;
         state.error = undefined;
       })
       .addCase(getJobExamplesListThunk.rejected, (state, action) => {
