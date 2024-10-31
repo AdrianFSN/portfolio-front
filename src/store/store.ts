@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-
 import jobExamplesListReducer from "./slices/jobExamplesSlice";
 
 export const store = configureStore({

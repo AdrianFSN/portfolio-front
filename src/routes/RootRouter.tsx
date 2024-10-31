@@ -6,7 +6,7 @@ const RootRouter = () => {
     <Routes>
       {/** Public Routes */}
       <Route
-        path="/"
+        path="/bio"
         element={<Bio />}
       />
       <Route
