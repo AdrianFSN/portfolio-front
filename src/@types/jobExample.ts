@@ -30,6 +30,7 @@ export interface JobExample {
   versions: JobExampleVersion[];
   launchPeriod: string;
   linkToUrl: string;
+  linkToGitHub: string;
   category: string[];
   owner: string;
   pictures: Pictures;

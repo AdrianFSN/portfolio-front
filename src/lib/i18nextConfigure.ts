@@ -32,7 +32,7 @@ i18n.use(initReactI18next).init({
 });
 
 i18n.on("languageChanged", (lng) => {
-  Cookies.set("portfolio-AS-locale", lng, { expires: 365 });
+  Cookies.set("X-portfolio-AS-locale", lng, { expires: 365 });
 });
 
 export default i18n;
