@@ -26,7 +26,7 @@
 
 .main .main__section__bio .main__info__picture {
   position: relative;
-  background: url(./bg_images/developer2.jpg) no-repeat center center;
+  background: url(../../assets/bg_images/developer2.jpg) no-repeat center center;
   background-color: rgba(0, 0, 0, 0.95);
   background-size: cover;
   display: block;

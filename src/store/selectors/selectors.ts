@@ -17,3 +17,6 @@ export const getJobsListMessageSelector = (state: RootState) => {
   const jobs = state.jobExamplesList.data as Jobs;
   return jobs.message;
 };
+export const getJobsListLoadingSelector = (state: RootState) => {
+  return state.jobExamplesList.loading;
+};

@@ -3,4 +3,10 @@ export const JOB_EXAMPLES_API_URI = "/api/job-examples";
 export const IMAGES_DB_PATH = `${
   import.meta.env.VITE_API_BASE_URL
 }uploads/image/`;
-export const THUMBNAILS_DB_PATH = "thumbnails/";
+export const MAIN_THUMBNAILS_DB_PATH = `${
+  import.meta.env.VITE_API_BASE_URL
+}uploads/image/thumbnails/`;
+export const IMG_THUMBNAILS_DB_PATH = `${
+  import.meta.env.VITE_API_BASE_URL
+}uploads/image/thumbnails/thumbnail_`;
+export const ORIGIN = import.meta.env.VITE_API_BASE_URL;
