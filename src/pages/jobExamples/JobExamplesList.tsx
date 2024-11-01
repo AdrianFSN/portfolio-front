@@ -1,4 +1,3 @@
-import "../../styles/portfolio.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobExamplesListThunk } from "../../store/thunks/jobExamplesListThunk";
@@ -12,6 +11,8 @@ import {
 import { JobExample } from "../../@types/jobExample";
 import { ORIGIN, IMG_THUMBNAILS_DB_PATH } from "../../utils/constants";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
+import convertStringToIcon from "../../utils/convertStringToIcon";
+import icons from "../../utils/icons";
 
 interface JobExamplesListProps {
   category: string;
@@ -76,7 +77,20 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ category }) => {
                     </picture>
                     <div className="portfolio__img__caption">
                       <h3>{jobExample.versions[0].title}</h3>
-                      <p>{jobExample.versions[0].technologies}</p>
+                      <p>
+                        {jobExample.versions[0].technologies.map((tech) => {
+                          const iconClass = convertStringToIcon(tech, icons);
+
+                          return iconClass ? (
+                            <span
+                              key={tech}
+                              className={iconClass}
+                            />
+                          ) : (
+                            <span key={tech}> {tech}</span>
+                          );
+                        })}
+                      </p>
                       <p>{jobExample.linkToUrl ? jobExample.linkToUrl : ""}</p>
                       <p>
                         {jobExample.linkToGitHub ? jobExample.linkToGitHub : ""}
