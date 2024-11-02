@@ -87,9 +87,31 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ category }) => {
                         );
                       })}
                     </div>
-                    <p>{jobExample.linkToUrl ? jobExample.linkToUrl : ""}</p>
                     <p>
-                      {jobExample.linkToGitHub ? jobExample.linkToGitHub : ""}
+                      {jobExample.linkToUrl ? (
+                        <a
+                          href={jobExample.linkToUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {jobExample.linkToUrl}
+                        </a>
+                      ) : (
+                        ""
+                      )}
+                    </p>
+                    <p>
+                      {jobExample.linkToGitHub ? (
+                        <a
+                          href={jobExample.linkToGitHub}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {jobExample.linkToGitHub}
+                        </a>
+                      ) : (
+                        ""
+                      )}
                     </p>
                     <p>{jobExample.versions[0].info}</p>
                   </div>
