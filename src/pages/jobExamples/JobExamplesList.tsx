@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getJobExamplesListThunk } from "../../store/thunks/jobExamplesListThunk";
-import { AppDispatch } from "../../store/store";
+import { useSelector } from "react-redux";
 import {
   getJobExamplesListSelector,
   getJobsListLoadingSelector,
@@ -14,12 +12,7 @@ import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader
 import convertStringToIcon from "../../utils/convertStringToIcon";
 import icons from "../../utils/icons";
 
-interface JobExamplesListProps {
-  category: string;
-}
-
-const JobExamplesList: React.FC<JobExamplesListProps> = ({ category }) => {
-  const dispatch: AppDispatch = useDispatch();
+const JobExamplesList = () => {
   const jobsList: JobExample[] | undefined = useSelector(
     getJobExamplesListSelector
   );
@@ -30,10 +23,6 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ category }) => {
   const isLoading = useSelector(getJobsListLoadingSelector);
 
   const imgUrlPath = `${IMG_THUMBNAILS_DB_PATH}`;
-
-  useEffect(() => {
-    dispatch(getJobExamplesListThunk(category));
-  }, [category, dispatch]);
 
   useEffect(() => {
     if (jobsState === "error") {

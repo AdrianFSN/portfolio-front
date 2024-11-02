@@ -11,7 +11,7 @@ const RootRouter = () => {
       />
       <Route
         path="/development"
-        element={<Development />}
+        element={<Development category="development" />}
       />
     </Routes>
   );
