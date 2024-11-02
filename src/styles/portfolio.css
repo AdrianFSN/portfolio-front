@@ -94,6 +94,19 @@
   margin: 0;
 }
 
+.porfolio__icons__tech {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+}
+
+.porfolio__icons__tech .porfolio__icon {
+  /* color: red; */
+  font-size: 3rem;
+}
+
 @media (width > 768px) {
   .porfolio .porfolio__intro__video .video__small {
     padding: 2rem;

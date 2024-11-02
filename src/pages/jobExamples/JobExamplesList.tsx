@@ -50,16 +50,16 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ category }) => {
         />
       )}
       {!isError ? (
-        <div className="portfolio__main">
-          <section className="portfolio__grid">
+        <main className="porfolio__main">
+          <section className="porfolio__grid">
             <div>
               <h1>Development</h1>
             </div>
-            <div className="portfolio__grid__panel">
-              <ul className="portfolio__grid__panel__item__list">
+            <div className="porfolio__grid__panel">
+              <ul className="porfolio__grid__panel__item__list">
                 {jobsList?.map((jobExample) => (
                   <li key={jobExample._id}>
-                    <picture className="portfolio__item__picture">
+                    <picture className="porfolio__item__picture">
                       <source
                         media="(max-width: 767px)"
                         srcSet={`${imgUrlPath}${encodeURIComponent(
@@ -75,22 +75,22 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ category }) => {
                         crossOrigin={origin}
                       />
                     </picture>
-                    <div className="portfolio__img__caption">
+                    <div className="porfolio__img__caption">
                       <h3>{jobExample.versions[0].title}</h3>
-                      <p>
+                      <div className="porfolio__icons__tech">
                         {jobExample.versions[0].technologies.map((tech) => {
                           const iconClass = convertStringToIcon(tech, icons);
 
                           return iconClass ? (
                             <span
                               key={tech}
-                              className={iconClass}
+                              className={`porfolio__icon ${iconClass}`}
                             />
                           ) : (
                             <span key={tech}> {tech}</span>
                           );
                         })}
-                      </p>
+                      </div>
                       <p>{jobExample.linkToUrl ? jobExample.linkToUrl : ""}</p>
                       <p>
                         {jobExample.linkToGitHub ? jobExample.linkToGitHub : ""}
@@ -102,7 +102,7 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ category }) => {
               </ul>
             </div>
           </section>
-        </div>
+        </main>
       ) : (
         <div>{jobsMessage}</div>
       )}
