@@ -50,59 +50,54 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ category }) => {
         />
       )}
       {!isError ? (
-        <main className="porfolio__main">
-          <section className="porfolio__grid">
-            <div>
-              <h1>Development</h1>
-            </div>
-            <div className="porfolio__grid__panel">
-              <ul className="porfolio__grid__panel__item__list">
-                {jobsList?.map((jobExample) => (
-                  <li key={jobExample._id}>
-                    <picture className="porfolio__item__picture">
-                      <source
-                        media="(max-width: 767px)"
-                        srcSet={`${imgUrlPath}${encodeURIComponent(
-                          jobExample.pictures.mainPicture
-                        )}`}
-                      />
+        <section className="porfolio__grid">
+          <div className="porfolio__grid__panel">
+            <ul className="porfolio__grid__panel__item__list">
+              {jobsList?.map((jobExample) => (
+                <li key={jobExample._id}>
+                  <picture className="porfolio__item__picture">
+                    <source
+                      media="(max-width: 767px)"
+                      srcSet={`${imgUrlPath}${encodeURIComponent(
+                        jobExample.pictures.mainPicture
+                      )}`}
+                    />
 
-                      <img
-                        src={`${imgUrlPath}${encodeURIComponent(
-                          jobExample.pictures.mainPicture
-                        )}`}
-                        alt={jobExample.versions[0].title}
-                        crossOrigin={origin}
-                      />
-                    </picture>
-                    <div className="porfolio__img__caption">
-                      <h3>{jobExample.versions[0].title}</h3>
-                      <div className="porfolio__icons__tech">
-                        {jobExample.versions[0].technologies.map((tech) => {
-                          const iconClass = convertStringToIcon(tech, icons);
+                    <img
+                      src={`${imgUrlPath}${encodeURIComponent(
+                        jobExample.pictures.mainPicture
+                      )}`}
+                      alt={jobExample.versions[0].title}
+                      crossOrigin={origin}
+                    />
+                  </picture>
+                  <div className="porfolio__img__caption">
+                    <h3>{jobExample.versions[0].title}</h3>
+                    <div className="porfolio__icons__tech">
+                      {jobExample.versions[0].technologies.map((tech) => {
+                        const iconClass = convertStringToIcon(tech, icons);
 
-                          return iconClass ? (
-                            <span
-                              key={tech}
-                              className={`porfolio__icon ${iconClass}`}
-                            />
-                          ) : (
-                            <span key={tech}> {tech}</span>
-                          );
-                        })}
-                      </div>
-                      <p>{jobExample.linkToUrl ? jobExample.linkToUrl : ""}</p>
-                      <p>
-                        {jobExample.linkToGitHub ? jobExample.linkToGitHub : ""}
-                      </p>
-                      <p>{jobExample.versions[0].info}</p>
+                        return iconClass ? (
+                          <span
+                            key={tech}
+                            className={`porfolio__icon ${iconClass}`}
+                          />
+                        ) : (
+                          <span key={tech}> {tech}</span>
+                        );
+                      })}
                     </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-        </main>
+                    <p>{jobExample.linkToUrl ? jobExample.linkToUrl : ""}</p>
+                    <p>
+                      {jobExample.linkToGitHub ? jobExample.linkToGitHub : ""}
+                    </p>
+                    <p>{jobExample.versions[0].info}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
       ) : (
         <div>{jobsMessage}</div>
       )}

@@ -1,4 +1,5 @@
 .porfolio__main {
+  width: 100vw;
   background: var(--body-color);
   padding: 0;
 }
@@ -7,6 +8,12 @@
   width: 100%;
   padding: 0;
   margin: 0;
+}
+
+.porfolio__main .examples__showcase {
+  display: block;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .porfolio .porfolio__intro__video {
@@ -103,7 +110,6 @@
 }
 
 .porfolio__icons__tech .porfolio__icon {
-  /* color: red; */
   font-size: 3rem;
 }
 
