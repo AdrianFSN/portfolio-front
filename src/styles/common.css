@@ -57,7 +57,15 @@ main {
   }
 }
 
-@media (width > 768px) {
+@media (width <=375px) {
+  h1 {
+    font-size: 4rem;
+    text-align: center;
+    padding-right: 0;
+  }
+}
+
+@media (width >= 768px) {
   main {
     text-align: left;
   }

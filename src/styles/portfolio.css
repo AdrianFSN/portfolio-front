@@ -113,7 +113,7 @@
   font-size: 3rem;
 }
 
-@media (width > 768px) {
+@media (width >= 768px) {
   .porfolio .porfolio__intro__video .video__small {
     padding: 2rem;
     border-radius: 2.5rem;

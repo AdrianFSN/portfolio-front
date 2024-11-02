@@ -1,7 +1,7 @@
 .header {
   background: var(--bg-color);
   top: 0;
-  height: 10rem;
+  height: 15vh;
   position: sticky;
   justify-content: space-between;
   align-items: center;
@@ -134,10 +134,17 @@
   color: var(--secondary-text-color);
 }
 
-@media (width > 768px) {
+@media (width <=375px) {
   .header {
     background-color: var(--bg-color);
-    height: 5dvh;
+    height: 15vh;
+  }
+}
+
+@media (width >= 768px) {
+  .header {
+    background-color: var(--bg-color);
+    height: 5vh;
     flex-direction: row;
   }
 
@@ -197,8 +204,11 @@
 }
 
 @media (width > 1024px) {
+  .header {
+    height: 10vh;
+  }
   .header .header__image {
-    max-width: 20%;
+    max-width: 15%;
     margin: 0;
   }
 }
