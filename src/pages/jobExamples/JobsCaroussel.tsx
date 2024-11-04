@@ -13,7 +13,7 @@ const JobsCaroussel: React.FC<JobsCarousselProps> = ({ items, autoPlay }) => {
   const imgUrlPath = `${IMAGES_DB_PATH}`;
   const { currentItem, currentIndex, animationClass } = useCarousel(
     items,
-    4000,
+    5000,
     autoPlay
   );
 
@@ -42,13 +42,15 @@ const JobsCaroussel: React.FC<JobsCarousselProps> = ({ items, autoPlay }) => {
         <h3>{(currentItem as JobExample).versions[0].title}</h3>
       </div>
 
-      <p
+      <span
         className={
           autoPlay ? "caroussel__controls__hidden" : "caroussel__controls"
         }
       >
+        <i className="fa-solid fa-chevron-left"></i>
         {currentIndex + 1} / {items.length}
-      </p>
+        <i className="fa-solid fa-chevron-right"></i>
+      </span>
     </>
   );
 };

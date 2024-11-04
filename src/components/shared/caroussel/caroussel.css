@@ -1,9 +1,8 @@
 .caroussel {
-  display: flex;
+  display: block;
   position: relative;
   background: var(--main-text-color);
   width: 100vw;
-  justify-content: flex-start;
   margin-left: 0rem;
   padding: 0;
 }
@@ -24,10 +23,11 @@
 }
 
 .caroussel__controls {
-  display: block;
+  display: flex;
   width: 100%;
-  margin: 0 auto;
-  color: var(--main-text-color);
+  justify-content: center;
+  align-items: center;
+  color: var(--main-brand-color);
   text-align: center;
 }
 
