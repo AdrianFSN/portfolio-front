@@ -1,0 +1,14 @@
+.jobs__messages {
+  background: var(--main-text-color);
+  height: 50dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--bg-color);
+}
+
+.jobs__messages p {
+  width: 50%;
+  margin: 0;
+}
