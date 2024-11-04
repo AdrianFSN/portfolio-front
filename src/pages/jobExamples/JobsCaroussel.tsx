@@ -11,13 +11,17 @@ interface JobsCarousselProps {
 const JobsCaroussel: React.FC<JobsCarousselProps> = ({ items, autoPlay }) => {
   const origin = ORIGIN;
   const imgUrlPath = `${IMAGES_DB_PATH}`;
-  const { currentItem, currentIndex } = useCarousel(items, 3000, autoPlay);
+  const { currentItem, currentIndex, animationClass } = useCarousel(
+    items,
+    4000,
+    autoPlay
+  );
 
   return (
     <>
       <div
         key={(currentItem as JobExample)._id}
-        className="caroussel__screen__item "
+        className={`caroussel__screen__item ${animationClass}`}
       >
         <picture className="caroussel__item__picture">
           <source
@@ -27,6 +31,7 @@ const JobsCaroussel: React.FC<JobsCarousselProps> = ({ items, autoPlay }) => {
             )}`}
           />
           <img
+            className="caroussel__img__fade"
             src={`${imgUrlPath}${encodeURIComponent(
               (currentItem as JobExample).pictures.mainPicture
             )}`}

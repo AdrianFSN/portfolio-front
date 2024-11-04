@@ -6,6 +6,7 @@ function useCarousel(
   autoPlay = true
 ) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [animationClass, setAnimationClass] = useState("entering");
 
   useEffect(() => {
     if (!autoPlay) {
@@ -13,18 +14,38 @@ function useCarousel(
     }
 
     const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+      setAnimationClass("exiting");
+      setTimeout(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+        setAnimationClass("entering");
+      }, 500); // Duración de la animación de salida
     }, interval);
 
     return () => clearInterval(timer);
   }, [items.length, interval, autoPlay]);
 
+  const next = () => {
+    setAnimationClass("exiting");
+    setTimeout(() => {
+      setCurrentIndex((currentIndex + 1) % items.length);
+      setAnimationClass("entering");
+    }, 500); // Duración de la animación de salida
+  };
+
+  const prev = () => {
+    setAnimationClass("exiting");
+    setTimeout(() => {
+      setCurrentIndex((currentIndex - 1 + items.length) % items.length);
+      setAnimationClass("entering");
+    }, 500); // Duración de la animación de salida
+  };
+
   return {
     currentItem: items[currentIndex],
-    next: () => setCurrentIndex((currentIndex + 1) % items.length),
-    prev: () =>
-      setCurrentIndex((currentIndex - 1 + items.length) % items.length),
+    next,
+    prev,
     currentIndex,
+    animationClass,
   };
 }
 

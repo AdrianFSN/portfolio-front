@@ -21,15 +21,20 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
   return (
     <main className="porfolio__main">
       <h1>Development</h1>
-      <section className="caroussel">
-        <JobsCaroussel
-          items={jobs}
-          autoPlay={true}
-        />
-      </section>
-      <section className="examples__showcase">
-        {jobs && jobs.length > 0 && <JobExamplesList />}
-      </section>
+
+      {jobs && jobs.length > 0 && (
+        <>
+          <section className="caroussel">
+            <JobsCaroussel
+              items={jobs}
+              autoPlay={true}
+            />
+          </section>
+          <section className="examples__showcase">
+            <JobExamplesList />
+          </section>
+        </>
+      )}
     </main>
   );
 };
