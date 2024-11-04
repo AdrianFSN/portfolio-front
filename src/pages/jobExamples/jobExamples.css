@@ -12,3 +12,9 @@
   width: 50%;
   margin: 0;
 }
+
+@media (width >= 768px) {
+  .jobs__messages {
+    height: 60dvh;
+  }
+}
