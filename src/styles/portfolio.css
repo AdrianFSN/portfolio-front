@@ -83,6 +83,7 @@
 }
 
 .porfolio__grid__panel__item__list img:hover {
+  cursor: pointer;
   transition: border-right 0.5s ease-in-out;
 }
 

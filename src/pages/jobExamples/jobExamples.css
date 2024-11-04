@@ -13,11 +13,35 @@
   margin: 0;
 }
 
-@media (width >= 768px) {
+.jobs__collection__title {
+  padding: 2rem;
+  margin: 0;
+  text-align: center;
+}
+
+.jobs__collection__title h2 {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  border-bottom: 1rem dashed var(--main-text-color);
+}
+
+@media (min-width: 768px) {
   .jobs__messages {
     height: 60dvh;
   }
+
+  .jobs__collection__title h2 {
+    width: 60%;
+  }
 }
+
+@media (min-width: 1024px) {
+  .jobs__collection__title h2 {
+    width: 50%;
+  }
+}
+
 @media (width >= 2500px) {
   .jobs__messages {
     height: 50dvh;

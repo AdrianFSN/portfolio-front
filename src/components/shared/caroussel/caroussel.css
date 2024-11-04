@@ -2,22 +2,29 @@
   display: block;
   position: relative;
   background: var(--main-text-color);
-  width: 100vw;
+  width: 100%;
   margin-left: 0rem;
   padding: 0;
+  overflow: hidden;
 }
 
 .caroussel h3 {
-  top: 35dvh;
+  top: 23dvh;
   position: absolute;
   background: var(--main-brand-color);
   width: 35%;
   padding-left: 1rem;
+  padding-right: 2rem;
   padding-bottom: 0;
   text-align: left;
   z-index: 1;
 }
 
+@media (min-width: 426px) {
+  .caroussel h3 {
+    top: 35dvh;
+  }
+}
 .caroussel__controls__hidden {
   display: none;
 }
@@ -61,23 +68,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   border-radius: 3px;
 }
-
-/* .caroussel__img__fade {
-  opacity: 100%;
-  animation: caroussel__img__fade 1s ease-in-out;
-}
-
-@keyframes caroussel__img__fade {
-  0% {
-    opacity: 0%;
-  }
-
-  100% {
-    opacity: 100%;
-  }
-} */
 
 .caroussel__screen__item.entering {
   animation: slideIn 0.5s ease-out forwards;
@@ -110,6 +103,7 @@
 }
 
 .caroussel__screen__item img:hover {
+  cursor: pointer;
   transition: border-right 0.5s ease-in-out;
 }
 

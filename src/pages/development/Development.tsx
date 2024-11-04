@@ -35,6 +35,9 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
               autoPlay={true}
             />
           </section>
+          <section className="jobs__collection__title">
+            <h2>Jobs Collection</h2>
+          </section>
           <section className="examples__showcase">
             <JobExamplesList />
           </section>
