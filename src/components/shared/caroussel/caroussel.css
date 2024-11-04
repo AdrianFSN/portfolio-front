@@ -2,7 +2,7 @@
   display: flex;
   position: relative;
   background: var(--main-text-color);
-  width: 100%;
+  width: 100vw;
   justify-content: flex-start;
   margin-left: 0rem;
   padding: 0;
