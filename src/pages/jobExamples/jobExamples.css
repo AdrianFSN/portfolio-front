@@ -18,3 +18,8 @@
     height: 60dvh;
   }
 }
+@media (width >= 2500px) {
+  .jobs__messages {
+    height: 50dvh;
+  }
+}
