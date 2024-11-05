@@ -1,3 +1,5 @@
+import "./PageController.css";
+
 interface PageControllerProps {
   children: React.ReactNode;
   page?: number;
@@ -28,13 +30,17 @@ const PageController: React.FC<PageControllerProps> = ({
   };
 
   return (
-    <section>
+    <section className="page__controller">
       <i
-        className="fa-solid fa-chevron-left"
+        className="page__controller__controls fa-solid fa-chevron-left"
         onClick={handlePrevPage}
         style={{
-          opacity: currentPage > 1 ? 1 : 0.5,
+          opacity: currentPage > 1 ? 1 : 0.2,
           cursor: currentPage > 1 ? "pointer" : "default",
+          color:
+            currentPage > 1
+              ? "var(--main-brand-color"
+              : "var(--main-text-color)",
         }}
       ></i>
       <div>
@@ -42,12 +48,16 @@ const PageController: React.FC<PageControllerProps> = ({
         <span>{`Page ${currentPage} of ${totalPages}`}</span>
       </div>
       <i
-        className="fa-solid fa-chevron-right"
+        className="page__controller__controls fa-solid fa-chevron-right"
         onClick={handleNextPage}
-        /* style={{
-          opacity: currentPage < totalPages ? 1 : 0.5,
+        style={{
+          opacity: currentPage < totalPages ? 1 : 0.2,
           cursor: currentPage < totalPages ? "pointer" : "default",
-        }} */
+          color:
+            currentPage < totalPages
+              ? "var(--main-brand-color"
+              : "var(--main-text-color)",
+        }}
       ></i>
     </section>
   );

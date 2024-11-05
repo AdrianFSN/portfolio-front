@@ -30,7 +30,6 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
 
   useEffect(() => {
     updateLimitByScreenSize(setLimit);
-
     const handleResize = () => updateLimitByScreenSize(setLimit);
     window.addEventListener("resize", handleResize);
 

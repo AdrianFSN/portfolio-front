@@ -96,6 +96,7 @@
 .porfolio__img__caption {
   text-align: center;
   padding: 1rem;
+  color: var(--main-text-color);
 }
 
 .porfolio__img__caption h3 {
@@ -114,7 +115,7 @@
   font-size: 3rem;
 }
 
-@media (width >= 768px) {
+@media (min-width: 768px) {
   .porfolio .porfolio__intro__video .video__small {
     padding: 2rem;
     border-radius: 2.5rem;
@@ -128,7 +129,7 @@
   }
 }
 
-@media (width > 1024px) {
+@media (min-width: 1024px) {
   .porfolio .porfolio__intro__video .video__small {
     padding: 2rem;
     border-radius: 2.5rem;

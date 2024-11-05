@@ -1,0 +1,36 @@
+.page__controller {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 1rem;
+  align-items: center;
+  text-align: center;
+}
+
+.page__controller__controls {
+  color: var(--main-brand-color);
+  font-size: 3rem;
+}
+
+@media (min-width: 768px) {
+  .page__controller__controls {
+    font-size: 4rem;
+  }
+}
+@media (min-width: 1024px) {
+  .page__controller {
+    font-size: 1.2rem;
+  }
+
+  .page__controller__controls {
+    font-size: 5rem;
+  }
+}
+@media (min-width: 2500px) {
+  .page__controller {
+    font-size: 2rem;
+  }
+  .page__controller__controls {
+    font-size: 7rem;
+  }
+}
