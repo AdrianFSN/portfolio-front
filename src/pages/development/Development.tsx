@@ -8,6 +8,7 @@ import JobsCaroussel from "../jobExamples/JobsCaroussel";
 import { JobExample } from "../../@types/jobExample";
 import {
   getJobExamplesListSelector,
+  getjobsCarousselSelector,
   getJobsListCurrentPageSelector,
   getJobsListMessageSelector,
   getJobsListTotalPagesSelector,
@@ -16,9 +17,11 @@ import JobExamplesList from "../jobExamples/JobExamplesList";
 import PageController from "../../components/shared/controllers/PageController";
 import { LIMIT_DEFAULT } from "../../utils/constants";
 import { updateLimitByScreenSize } from "../../utils/updateLimitByScreenSize";
+import { getJobsCarousselThunk } from "../../store/thunks/jobsCarousselThumk";
 
 const Development: React.FC<JobPagesProps> = ({ category }) => {
   const dispatch: AppDispatch = useDispatch();
+  const jobsCaroussel = useSelector(getjobsCarousselSelector);
   const jobs: JobExample[] | undefined = useSelector(
     getJobExamplesListSelector
   );
@@ -39,6 +42,10 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
   }, []);
 
   useEffect(() => {
+    dispatch(getJobsCarousselThunk({ category }));
+  }, [category, dispatch]);
+
+  useEffect(() => {
     dispatch(
       getJobExamplesListThunk({ category, page: page?.toString(), limit })
     );
@@ -54,15 +61,17 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
   return (
     <main className="porfolio__main">
       <h1>Development</h1>
+      {jobsCaroussel && jobsCaroussel.length > 0 && (
+        <section className="caroussel">
+          <JobsCaroussel
+            items={jobsCaroussel}
+            autoPlay={true}
+          />
+        </section>
+      )}
 
       {jobs && jobs.length > 0 ? (
         <>
-          {/* <section className="caroussel">
-            <JobsCaroussel
-              items={jobs}
-              autoPlay={true}
-            />
-          </section> */}
           <section className="jobs__collection__title">
             <h2>Jobs Collection</h2>
           </section>
@@ -75,7 +84,7 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
               currentPage={jobsCurrentPage}
               totalPages={jobsTotalPages}
             >
-              <JobExamplesList />
+              <JobExamplesList jobs={jobs} />
             </PageController>
           </section>
         </>

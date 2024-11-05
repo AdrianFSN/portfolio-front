@@ -1,3 +1,6 @@
+import { JobExample } from "./jobExample";
+
 export default interface JobExamplesListProps {
-  category: string;
+  category?: string;
+  jobs?: JobExample[] | undefined;
 }

@@ -1,21 +1,17 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
-  getJobExamplesListSelector,
   getJobsListLoadingSelector,
   getJobsListMessageSelector,
   getJobsListStateSelector,
 } from "../../store/selectors/selectors";
-import { JobExample } from "../../@types/jobExample";
+import JobExamplesListProps from "../../@types/jobExamplesListProps";
 import { ORIGIN, IMG_THUMBNAILS_DB_PATH } from "../../utils/constants";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import convertStringToIcon from "../../utils/convertStringToIcon";
 import icons from "../../utils/icons";
 
-const JobExamplesList = () => {
-  const jobsList: JobExample[] | undefined = useSelector(
-    getJobExamplesListSelector
-  );
+const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
   const origin = ORIGIN;
   const jobsMessage = useSelector(getJobsListMessageSelector);
   const jobsState = useSelector(getJobsListStateSelector);
@@ -42,7 +38,7 @@ const JobExamplesList = () => {
         <section className="porfolio__grid">
           <div className="porfolio__grid__panel">
             <ul className="porfolio__grid__panel__item__list">
-              {jobsList?.map((jobExample) => (
+              {jobs?.map((jobExample) => (
                 <li key={jobExample._id}>
                   <picture className="porfolio__item__picture">
                     <source
