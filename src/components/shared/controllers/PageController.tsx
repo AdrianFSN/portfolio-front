@@ -44,10 +44,10 @@ const PageController: React.FC<PageControllerProps> = ({
       <i
         className="fa-solid fa-chevron-right"
         onClick={handleNextPage}
-        style={{
+        /* style={{
           opacity: currentPage < totalPages ? 1 : 0.5,
           cursor: currentPage < totalPages ? "pointer" : "default",
-        }}
+        }} */
       ></i>
     </section>
   );

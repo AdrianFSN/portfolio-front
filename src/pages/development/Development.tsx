@@ -14,6 +14,8 @@ import {
 } from "../../store/selectors/selectors";
 import JobExamplesList from "../jobExamples/JobExamplesList";
 import PageController from "../../components/shared/controllers/PageController";
+import { LIMIT_DEFAULT } from "../../utils/constants";
+import { updateLimitByScreenSize } from "../../utils/updateLimitByScreenSize";
 
 const Development: React.FC<JobPagesProps> = ({ category }) => {
   const dispatch: AppDispatch = useDispatch();
@@ -24,7 +26,18 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
   const jobsCurrentPage = useSelector(getJobsListCurrentPageSelector);
   const jobsTotalPages = useSelector(getJobsListTotalPagesSelector);
   const [page, setPage] = useState(1);
-  const limit = "1";
+  const [limit, setLimit] = useState(LIMIT_DEFAULT);
+
+  useEffect(() => {
+    updateLimitByScreenSize(setLimit);
+
+    const handleResize = () => updateLimitByScreenSize(setLimit);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     dispatch(
@@ -33,10 +46,10 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
   }, [category, dispatch, page, limit]);
 
   const handleNextPage = () => {
-    setPage((page % jobsTotalPages) + 1);
+    setPage(((page as number) % jobsTotalPages) + 1);
   };
   const handlePrevPage = () => {
-    setPage(((page - 2 + jobsTotalPages) % jobsTotalPages) + 1);
+    setPage((((page as number) - 2 + jobsTotalPages) % jobsTotalPages) + 1);
   };
 
   return (
@@ -45,19 +58,19 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
 
       {jobs && jobs.length > 0 ? (
         <>
-          <section className="caroussel">
+          {/* <section className="caroussel">
             <JobsCaroussel
               items={jobs}
               autoPlay={true}
             />
-          </section>
+          </section> */}
           <section className="jobs__collection__title">
             <h2>Jobs Collection</h2>
           </section>
           <section className="examples__showcase">
             <PageController
-              page={page ? page : 1}
-              limit={limit ? limit : "5"}
+              page={page}
+              limit={limit}
               prev={handlePrevPage}
               next={handleNextPage}
               currentPage={jobsCurrentPage}
