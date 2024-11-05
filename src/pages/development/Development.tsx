@@ -2,15 +2,18 @@ import "../jobExamples/jobExamples.css";
 import JobPagesProps from "../../@types/JobPages";
 import { AppDispatch } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getJobExamplesListThunk } from "../../store/thunks/jobExamplesListThunk";
 import JobsCaroussel from "../jobExamples/JobsCaroussel";
 import { JobExample } from "../../@types/jobExample";
 import {
   getJobExamplesListSelector,
+  getJobsListCurrentPageSelector,
   getJobsListMessageSelector,
+  getJobsListTotalPagesSelector,
 } from "../../store/selectors/selectors";
 import JobExamplesList from "../jobExamples/JobExamplesList";
+import PageController from "../../components/shared/controllers/PageController";
 
 const Development: React.FC<JobPagesProps> = ({ category }) => {
   const dispatch: AppDispatch = useDispatch();
@@ -18,10 +21,23 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
     getJobExamplesListSelector
   );
   const jobsMessages = useSelector(getJobsListMessageSelector);
+  const jobsCurrentPage = useSelector(getJobsListCurrentPageSelector);
+  const jobsTotalPages = useSelector(getJobsListTotalPagesSelector);
+  const [page, setPage] = useState(1);
+  const limit = "1";
 
   useEffect(() => {
-    dispatch(getJobExamplesListThunk(category));
-  }, [category, dispatch]);
+    dispatch(
+      getJobExamplesListThunk({ category, page: page?.toString(), limit })
+    );
+  }, [category, dispatch, page, limit]);
+
+  const handleNextPage = () => {
+    setPage((page % jobsTotalPages) + 1);
+  };
+  const handlePrevPage = () => {
+    setPage(((page - 2 + jobsTotalPages) % jobsTotalPages) + 1);
+  };
 
   return (
     <main className="porfolio__main">
@@ -39,7 +55,16 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
             <h2>Jobs Collection</h2>
           </section>
           <section className="examples__showcase">
-            <JobExamplesList />
+            <PageController
+              page={page ? page : 1}
+              limit={limit ? limit : "5"}
+              prev={handlePrevPage}
+              next={handleNextPage}
+              currentPage={jobsCurrentPage}
+              totalPages={jobsTotalPages}
+            >
+              <JobExamplesList />
+            </PageController>
           </section>
         </>
       ) : (

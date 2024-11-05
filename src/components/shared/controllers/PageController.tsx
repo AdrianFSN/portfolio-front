@@ -1,10 +1,7 @@
-import { useEffect } from "react";
-import usePagination from "../../../hooks/usePagination";
-
 interface PageControllerProps {
   children: React.ReactNode;
-  page: number;
-  limit: number;
+  page?: number;
+  limit?: string;
   prev: () => void;
   next: () => void;
   currentPage: number;
@@ -13,24 +10,28 @@ interface PageControllerProps {
 
 const PageController: React.FC<PageControllerProps> = ({
   children,
-  page,
-  limit,
   prev,
   next,
   currentPage,
   totalPages,
 }) => {
-  const { setPaginationParams } = usePagination(page, limit);
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      prev();
+    }
+  };
 
-  useEffect(() => {
-    setPaginationParams();
-  }, [page, limit, setPaginationParams]);
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      next();
+    }
+  };
 
   return (
     <section>
       <i
         className="fa-solid fa-chevron-left"
-        onClick={currentPage > 1 ? prev : undefined}
+        onClick={handlePrevPage}
         style={{
           opacity: currentPage > 1 ? 1 : 0.5,
           cursor: currentPage > 1 ? "pointer" : "default",
@@ -42,7 +43,7 @@ const PageController: React.FC<PageControllerProps> = ({
       </div>
       <i
         className="fa-solid fa-chevron-right"
-        onClick={currentPage < totalPages ? next : undefined}
+        onClick={handleNextPage}
         style={{
           opacity: currentPage < totalPages ? 1 : 0.5,
           cursor: currentPage < totalPages ? "pointer" : "default",
