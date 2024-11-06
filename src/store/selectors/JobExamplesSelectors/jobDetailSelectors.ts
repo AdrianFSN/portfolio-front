@@ -5,9 +5,9 @@ export const getJobDetailResponseSelector = (state: RootState) => {
   const job = state.jobDetail.data as Job;
   return job;
 };
-export const getJobDetailListSelector = (state: RootState) => {
+export const getJobDetailSelector = (state: RootState) => {
   const job = state.jobDetail.data as Job;
-  return job.data?.data;
+  return job.data;
 };
 export const getJobDetailStateSelector = (state: RootState) => {
   const job = state.jobDetail.data as Job;
