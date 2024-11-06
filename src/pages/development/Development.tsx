@@ -8,6 +8,7 @@ import JobsCaroussel from "../jobExamples/JobsCaroussel";
 import { JobExample } from "../../@types/jobExample";
 import {
   getJobExamplesListSelector,
+  getjobsCarousselMessageSelector,
   getjobsCarousselSelector,
   getJobsListCurrentPageSelector,
   getJobsListMessageSelector,
@@ -28,6 +29,7 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
   const jobsMessages = useSelector(getJobsListMessageSelector);
   const jobsCurrentPage = useSelector(getJobsListCurrentPageSelector);
   const jobsTotalPages = useSelector(getJobsListTotalPagesSelector);
+  const carousselMessages = useSelector(getjobsCarousselMessageSelector);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(LIMIT_DEFAULT);
 
@@ -61,13 +63,17 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
   return (
     <main className="porfolio__main">
       <h1>Development</h1>
-      {jobsCaroussel && jobsCaroussel.length > 0 && (
+      {jobsCaroussel && jobsCaroussel.length > 0 ? (
         <section className="caroussel">
           <JobsCaroussel
             items={jobsCaroussel}
             autoPlay={true}
           />
         </section>
+      ) : (
+        <div className="caroussel">
+          <p>{carousselMessages}</p>
+        </div>
       )}
 
       {jobs && jobs.length > 0 ? (
