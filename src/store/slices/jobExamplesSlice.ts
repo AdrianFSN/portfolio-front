@@ -1,12 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getJobExamplesListThunk } from "../thunks/jobExamplesListThunk";
 
-/* export interface JobExamplesListState {
-  data: Record<string, unknown>; // Ajusta el tipo de 'data' según lo que esperes
-  loading: boolean;
-  error?: string; // Se puede omitir el 'undefined' si usas '?'.
-} */
-
 export const jobExamplesInitialState = {
   data: {},
   loading: false,

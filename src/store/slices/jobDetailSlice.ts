@@ -1,0 +1,44 @@
+import { createSlice } from "@reduxjs/toolkit";
+import { getJobDetailThunk } from "../thunks/jobDetailThunk";
+
+export const jobDetailInitialState = {
+  data: {},
+  loading: false,
+  error: undefined as string | undefined,
+};
+
+const JobDetailSlice = createSlice({
+  name: "jobDetailSlice",
+  initialState: jobDetailInitialState,
+  reducers: {
+    setJobDetail: (state, action) => {
+      state.data = action.payload;
+    },
+    resetJobDetail: (state) => {
+      state.data = jobDetailInitialState.data;
+      state.loading = false;
+      state.error = undefined;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getJobDetailThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getJobDetailThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+        state.error = undefined;
+      })
+      .addCase(getJobDetailThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+  },
+});
+
+export const {
+  setJobDetail: setJobExamples,
+  resetJobDetail: resetJobExamples,
+} = JobDetailSlice.actions;
+export default JobDetailSlice.reducer;
