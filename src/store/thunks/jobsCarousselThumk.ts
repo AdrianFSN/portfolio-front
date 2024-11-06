@@ -5,13 +5,14 @@ import {
   CATEGORY_FILTER_URI,
   JOB_EXAMPLES_API_URI,
 } from "../../utils/constants";
+import StandardResponseInterface from "../../@types/StandardResponse";
 
 interface FetchJobsCarousselParams {
   category?: string;
 }
 
 export const getJobsCarousselThunk = createAsyncThunk<
-  AxiosResponse<unknown>,
+  AxiosResponse<StandardResponseInterface>,
   FetchJobsCarousselParams
 >("jobsCaroussel/getJobsCarousselList", async ({ category }) => {
   const url = category
