@@ -18,7 +18,7 @@ import JobExamplesList from "../jobExamples/JobExamplesList";
 import PageController from "../../components/shared/controllers/PageController";
 import { LIMIT_DEFAULT } from "../../utils/constants";
 import { updateLimitByScreenSize } from "../../utils/updateLimitByScreenSize";
-import { getJobsCarousselThunk } from "../../store/thunks/jobsCarousselThumk";
+import { getJobsCarousselThunk } from "../../store/thunks/jobsCarousselThunk";
 
 const Development: React.FC<JobPagesProps> = ({ category }) => {
   const dispatch: AppDispatch = useDispatch();

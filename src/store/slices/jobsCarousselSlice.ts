@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getJobsCarousselThunk } from "../thunks/jobsCarousselThumk";
+import { getJobsCarousselThunk } from "../thunks/jobsCarousselThunk";
 
 export const jobsCarousselInitialState = {
   data: {},
