@@ -1,4 +1,4 @@
-import Job from "../../../@types/Job";
+import Job from "../../../@types/job";
 import { RootState } from "../../store";
 
 export const getJobDetailResponseSelector = (state: RootState) => {
@@ -19,4 +19,7 @@ export const getJobDetailMessageSelector = (state: RootState) => {
 };
 export const getJobDetailLoadingSelector = (state: RootState) => {
   return state.jobDetail.loading;
+};
+export const getJobDetailErrorSelector = (state: RootState) => {
+  return state.jobDetail.error;
 };

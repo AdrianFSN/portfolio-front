@@ -1,55 +1,87 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../store/store";
-import { getJobDetailThunk } from "../../store/thunks/jobDetailThunk";
+import { useSelector } from "react-redux";
 import {
-  getJobDetailLoadingSelector,
   getJobDetailMessageSelector,
   getJobDetailSelector,
-  getJobDetailStateSelector,
 } from "../../store/selectors/JobExamplesSelectors/jobDetailSelectors";
 import { IMAGES_DB_PATH, ORIGIN } from "../../utils/constants";
-import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
+import convertStringToIcon from "../../utils/convertStringToIcon";
+import icons from "../../utils/icons";
 
 interface JobDetailProps {
   jobId: string;
 }
 
 const JobDetail: React.FC<JobDetailProps> = ({ jobId }) => {
-  const dispatch: AppDispatch = useDispatch();
   const origin = ORIGIN;
   const job = useSelector(getJobDetailSelector);
   const jobMessage = useSelector(getJobDetailMessageSelector);
-  const jobState = useSelector(getJobDetailStateSelector);
-  const [isError, setIsError] = useState(false);
-  const isLoading = useSelector(getJobDetailLoadingSelector);
   const imgUrlPath = IMAGES_DB_PATH;
-
-  useEffect(() => {
-    dispatch(getJobDetailThunk({ jobId }));
-  }, [jobId, dispatch]);
-
-  useEffect(() => {
-    if (jobState === "error") {
-      setIsError(true);
-    }
-  }, [jobState]);
+  const jobVersion = job ? job.versions[0] : undefined;
 
   return (
     <>
-      {isLoading && (
-        <CustomPulseLoader
-          isLoading={isLoading}
-          $customHeight="100px"
-        />
-      )}
-      {!isError && job ? (
-        <section>
-          <ul>
-            <li key={job._id}>
-              <h3>{job.versions[0].title}</h3>
-            </li>
-          </ul>
+      {job ? (
+        <section key={jobId}>
+          <section>
+            <picture>
+              <img
+                src={`${imgUrlPath}${job.pictures.mainPicture}`}
+                alt={job.versions[0].title}
+                crossOrigin={origin}
+              />
+            </picture>
+          </section>
+          <section>
+            <h3>{jobVersion?.title}</h3>
+            <div>
+              <p>{jobVersion?.info}</p>
+              <ul>
+                <li className={job.linkToUrl ? "" : "hidden"}>
+                  <a
+                    href={job.linkToUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {job.linkToUrl}
+                  </a>
+                </li>
+                <li className={job.linkToGitHub ? "" : "hidden"}>
+                  <a
+                    href={job.linkToGitHub}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {job.linkToGitHub}
+                  </a>
+                </li>
+                <li className={jobVersion?.customer ? "" : "hidden"}>
+                  {jobVersion?.customer}
+                </li>
+                <li>{job.launchPeriod}</li>
+              </ul>
+              <div
+                className={
+                  jobVersion?.technologies &&
+                  jobVersion?.technologies.length > 0
+                    ? ""
+                    : "hidden"
+                }
+              >
+                {jobVersion?.technologies.map((tech) => {
+                  const iconClass = convertStringToIcon(tech, icons);
+
+                  return iconClass ? (
+                    <span
+                      key={tech}
+                      className={`porfolio__icon ${iconClass}`}
+                    />
+                  ) : (
+                    <span key={tech}> {tech}</span>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
         </section>
       ) : (
         <div>{jobMessage}</div>
