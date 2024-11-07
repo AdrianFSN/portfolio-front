@@ -55,9 +55,13 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId }) => {
                   </a>
                 </li>
                 <li className={jobVersion?.customer ? "" : "hidden"}>
+                  <strong>Customer: </strong>
                   {jobVersion?.customer}
                 </li>
-                <li>{job.launchPeriod}</li>
+                <li>
+                  <strong>Date: </strong>
+                  {job.launchPeriod}
+                </li>
               </ul>
               <div
                 className={

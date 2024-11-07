@@ -58,48 +58,46 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
                   </picture>
                   <div className="porfolio__img__caption">
                     <h3>{jobExample.versions[0].title}</h3>
-                    <div className="porfolio__icons__tech">
-                      {jobExample.versions[0].technologies.map((tech) => {
-                        const iconClass = convertStringToIcon(tech, icons);
-
-                        return iconClass ? (
-                          <span
-                            key={tech}
-                            className={`porfolio__icon ${iconClass}`}
-                          />
-                        ) : (
-                          <span key={tech}> {tech}</span>
-                        );
-                      })}
-                    </div>
-                    <p>
-                      {jobExample.linkToUrl ? (
-                        <a
-                          href={jobExample.linkToUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {jobExample.linkToUrl}
-                        </a>
-                      ) : (
-                        ""
-                      )}
-                    </p>
-                    <p>
-                      {jobExample.linkToGitHub ? (
-                        <a
-                          href={jobExample.linkToGitHub}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {jobExample.linkToGitHub}
-                        </a>
-                      ) : (
-                        ""
-                      )}
-                    </p>
-                    <p>{jobExample.versions[0].info}</p>
                   </div>
+                  <div className="porfolio__icons__tech">
+                    {jobExample.versions[0].technologies.map((tech) => {
+                      const iconClass = convertStringToIcon(tech, icons);
+
+                      return iconClass ? (
+                        <span
+                          key={tech}
+                          className={`porfolio__icon ${iconClass}`}
+                        />
+                      ) : (
+                        <span key={tech}> {tech}</span>
+                      );
+                    })}
+                  </div>
+                  <p className={jobExample.linkToUrl ? "" : "hidden"}>
+                    <a
+                      href={jobExample.linkToUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {jobExample.linkToUrl}
+                    </a>
+                  </p>
+                  <p className={jobExample.linkToGitHub ? "" : "hidden"}>
+                    <a
+                      href={jobExample.linkToGitHub}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {jobExample.linkToGitHub}
+                    </a>
+                  </p>
+                  <p>
+                    <strong>Customer:</strong> {jobExample.versions[0].customer}
+                  </p>
+                  <p>
+                    <strong>Date: </strong> {jobExample.launchPeriod}
+                  </p>
+                  <p>{jobExample.versions[0].info}</p>
                 </li>
               ))}
             </ul>
