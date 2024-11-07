@@ -1,11 +1,15 @@
 import { useSelector } from "react-redux";
 import {
+  getJobDetailAudiosSelector,
+  getJobDetailImagesSelector,
   getJobDetailMessageSelector,
   getJobDetailSelector,
+  getJobDetailVideosSelector,
 } from "../../store/selectors/JobExamplesSelectors/jobDetailSelectors";
 import { IMAGES_DB_PATH, ORIGIN } from "../../utils/constants";
 import convertStringToIcon from "../../utils/convertStringToIcon";
 import icons from "../../utils/icons";
+import { useEffect, useState } from "react";
 
 interface JobDetailProps {
   jobId: string;
@@ -14,9 +18,21 @@ interface JobDetailProps {
 const JobDetail: React.FC<JobDetailProps> = ({ jobId }) => {
   const origin = ORIGIN;
   const job = useSelector(getJobDetailSelector);
+  const pictures = useSelector(getJobDetailImagesSelector);
+  const audios = useSelector(getJobDetailAudiosSelector);
+  const videos = useSelector(getJobDetailVideosSelector);
   const jobMessage = useSelector(getJobDetailMessageSelector);
   const imgUrlPath = IMAGES_DB_PATH;
   const jobVersion = job ? job.versions[0] : undefined;
+  const [jobFiles, setJobFiles] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (job && job.pictures) {
+      setJobFiles([...pictures, ...videos, ...audios]);
+    }
+  }, [pictures, videos, audios, job]);
+
+  console.log("Esto es jobFiles: ", jobFiles);
 
   return (
     <>
@@ -26,7 +42,7 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId }) => {
             <picture>
               <img
                 src={`${imgUrlPath}${job.pictures.mainPicture}`}
-                alt={job.versions[0].title}
+                alt={jobVersion?.title}
                 crossOrigin={origin}
               />
             </picture>
