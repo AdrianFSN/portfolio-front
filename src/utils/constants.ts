@@ -6,6 +6,14 @@ export const IMAGES_DB_PATH = `${
   import.meta.env.VITE_API_BASE_URL
 }uploads/image/`;
 
+export const VIDEOS_DB_PATH = `${
+  import.meta.env.VITE_API_BASE_URL
+}uploads/video/`;
+
+export const AUDIOS_DB_PATH = `${
+  import.meta.env.VITE_API_BASE_URL
+}uploads/audio/`;
+
 export const MAIN_THUMBNAILS_DB_PATH = `${
   import.meta.env.VITE_API_BASE_URL
 }uploads/image/thumbnails/`;

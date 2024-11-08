@@ -18,7 +18,7 @@ function useCarousel(
       setTimeout(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
         setAnimationClass("entering");
-      }, 500); // Duración de la animación de salida
+      }, 500);
     }, interval);
 
     return () => clearInterval(timer);
@@ -29,7 +29,7 @@ function useCarousel(
     setTimeout(() => {
       setCurrentIndex((currentIndex + 1) % items.length);
       setAnimationClass("entering");
-    }, 500); // Duración de la animación de salida
+    }, 500);
   };
 
   const prev = () => {
@@ -37,7 +37,7 @@ function useCarousel(
     setTimeout(() => {
       setCurrentIndex((currentIndex - 1 + items.length) % items.length);
       setAnimationClass("entering");
-    }, 500); // Duración de la animación de salida
+    }, 500);
   };
 
   return {

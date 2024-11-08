@@ -4,11 +4,11 @@ import {
   getJobDetailImagesSelector,
   getJobDetailVideosSelector,
 } from "../../store/selectors/JobExamplesSelectors/jobDetailSelectors";
-import { IMAGES_DB_PATH, ORIGIN } from "../../utils/constants";
 import convertStringToIcon from "../../utils/convertStringToIcon";
 import icons from "../../utils/icons";
 import { useEffect, useState } from "react";
 import { JobExample } from "../../@types/jobExample";
+import JobDetailCaroussel from "./JobDetailCaroussel";
 
 interface JobDetailProps {
   jobId: string;
@@ -16,16 +16,14 @@ interface JobDetailProps {
 }
 
 const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
-  const origin = ORIGIN;
   const pictures = useSelector(getJobDetailImagesSelector);
   const audios = useSelector(getJobDetailAudiosSelector);
   const videos = useSelector(getJobDetailVideosSelector);
-  const imgUrlPath = IMAGES_DB_PATH;
   const jobVersion = job ? job.versions[0] : undefined;
   const [jobFiles, setJobFiles] = useState<string[]>([]);
 
   useEffect(() => {
-    if (job && job.pictures) {
+    if ((job && job.pictures) || job.videos || job.audios) {
       setJobFiles([...pictures, ...videos, ...audios]);
     }
   }, [pictures, videos, audios, job]);
@@ -35,15 +33,14 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
   return (
     <>
       <section key={jobId}>
-        <section>
-          <picture>
-            <img
-              src={`${imgUrlPath}${job.pictures.mainPicture}`}
-              alt={jobVersion?.title}
-              crossOrigin={origin}
+        {job && jobFiles.length > 0 && (
+          <section>
+            <JobDetailCaroussel
+              items={jobFiles}
+              autoPlay={true}
             />
-          </picture>
-        </section>
+          </section>
+        )}
         <section>
           <h3>{jobVersion?.title}</h3>
           <div>
