@@ -3,21 +3,21 @@ import {
   getJobDetailAudiosSelector,
   getJobDetailImagesSelector,
   getJobDetailMessageSelector,
-  getJobDetailSelector,
   getJobDetailVideosSelector,
 } from "../../store/selectors/JobExamplesSelectors/jobDetailSelectors";
 import { IMAGES_DB_PATH, ORIGIN } from "../../utils/constants";
 import convertStringToIcon from "../../utils/convertStringToIcon";
 import icons from "../../utils/icons";
 import { useEffect, useState } from "react";
+import { JobExample } from "../../@types/jobExample";
 
 interface JobDetailProps {
   jobId: string;
+  job: JobExample;
 }
 
-const JobDetail: React.FC<JobDetailProps> = ({ jobId }) => {
+const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
   const origin = ORIGIN;
-  const job = useSelector(getJobDetailSelector);
   const pictures = useSelector(getJobDetailImagesSelector);
   const audios = useSelector(getJobDetailAudiosSelector);
   const videos = useSelector(getJobDetailVideosSelector);

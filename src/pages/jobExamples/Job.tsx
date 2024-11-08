@@ -18,7 +18,7 @@ const Job = () => {
   const [error, setError] = useState("");
   const isLoading = useSelector(getJobDetailLoadingSelector);
   const isError = useSelector(getJobDetailErrorSelector);
-  console.log("esto es jobId: ", jobId);
+
   useEffect(() => {
     if (jobId) {
       dispatch(getJobDetailThunk({ jobId }));
@@ -41,7 +41,10 @@ const Job = () => {
       )}
       {jobId && job && !isError ? (
         <main className="porfolio">
-          <JobDetail jobId={jobId} />
+          <JobDetail
+            jobId={jobId}
+            job={job}
+          />
         </main>
       ) : (
         <main className="porfolio">

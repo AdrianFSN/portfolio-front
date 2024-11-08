@@ -1,20 +1,21 @@
-import Job from "../../../@types/job";
+import { createSelector } from "reselect";
+import JobInterface from "../../../@types/Job";
 import { RootState } from "../../store";
 
 export const getJobDetailResponseSelector = (state: RootState) => {
-  const job = state.jobDetail.data as Job;
+  const job = state.jobDetail.data as JobInterface;
   return job;
 };
 export const getJobDetailSelector = (state: RootState) => {
-  const job = state.jobDetail.data as Job;
+  const job = state.jobDetail.data as JobInterface;
   return job.data;
 };
 export const getJobDetailStateSelector = (state: RootState) => {
-  const job = state.jobDetail.data as Job;
+  const job = state.jobDetail.data as JobInterface;
   return job.state;
 };
 export const getJobDetailMessageSelector = (state: RootState) => {
-  const job = state.jobDetail.data as Job;
+  const job = state.jobDetail.data as JobInterface;
   return job.message;
 };
 export const getJobDetailLoadingSelector = (state: RootState) => {
@@ -23,24 +24,29 @@ export const getJobDetailLoadingSelector = (state: RootState) => {
 export const getJobDetailErrorSelector = (state: RootState) => {
   return state.jobDetail.error;
 };
-export const getJobDetailImagesSelector = (state: RootState) => {
-  const job = state.jobDetail.data as Job;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { _id, ...filteredPictures } = job.data.pictures;
-  const pictures = Object.values(filteredPictures);
-  return pictures;
-};
-export const getJobDetailVideosSelector = (state: RootState) => {
-  const job = state.jobDetail.data as Job;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { _id, ...filteredVideos } = job.data.videos;
-  const videos = Object.values(filteredVideos);
-  return videos;
-};
-export const getJobDetailAudiosSelector = (state: RootState) => {
-  const job = state.jobDetail.data as Job;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { _id, ...filteredAudios } = job.data.audios;
-  const audios = Object.values(filteredAudios);
-  return audios;
-};
+export const getJobDetailImagesSelector = createSelector(
+  (state: RootState) => state.jobDetail.data as JobInterface,
+  (job) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { _id, ...filteredPictures } = job.data.pictures;
+    return Object.values(filteredPictures);
+  }
+);
+
+export const getJobDetailVideosSelector = createSelector(
+  (state: RootState) => state.jobDetail.data as JobInterface,
+  (job) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { _id, ...filteredVideos } = job.data.videos;
+    return Object.values(filteredVideos);
+  }
+);
+
+export const getJobDetailAudiosSelector = createSelector(
+  (state: RootState) => state.jobDetail.data as JobInterface,
+  (job) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { _id, ...filteredAudios } = job.data.audios;
+    return Object.values(filteredAudios);
+  }
+);
