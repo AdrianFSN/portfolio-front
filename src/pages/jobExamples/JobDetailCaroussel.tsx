@@ -47,88 +47,94 @@ const JobDetailCaroussel: React.FC<JobDetailCarousselProps> = ({
   };
 
   return (
-    <>
-      <div
-        className={
-          !autoPlay ? "caroussel__controls" : "caroussel__controls__hidden"
-        }
-      >
-        <i
-          className="fa-solid fa-chevron-left"
-          onClick={prev}
-        ></i>
-      </div>
-      <section className="caroussel__middle__block">
-        <div
-          key={currentItemAsString}
-          className={`caroussel__screen__item ${animationClass}`}
-        >
-          <div>
-            {isImage(currentItemAsString) && (
-              <picture className="caroussel__item__picture">
-                <source
-                  media="(max-width: 767px)"
-                  srcSet={getFileUrl(currentItemAsString)}
-                />
-                <img
-                  className="caroussel__img__fade"
-                  src={getFileUrl(currentItemAsString)}
-                  alt={currentItemAsString}
-                  crossOrigin={origin}
-                />
-              </picture>
-            )}
-            {isVideo(currentItemAsString) && (
-              <div className="caroussel__item__video">
-                <video
-                  className="caroussel__video__fade"
-                  controls
-                  crossOrigin={origin}
-                >
-                  <source
-                    src={getFileUrl(currentItemAsString)}
-                    type="video/mp4"
-                  />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            )}
-            {isAudio(currentItemAsString) && (
-              <div className="caroussel__item__audio">
-                <audio
-                  className="caroussel__audio__fade"
-                  controls
-                  crossOrigin={origin}
-                >
-                  <source
-                    src={getFileUrl(currentItemAsString)}
-                    type="audio/mpeg"
-                  />
-                  Your browser does not support the audio element.
-                </audio>
-              </div>
-            )}
-          </div>
-        </div>
+    <section className="caroussel">
+      <div className="caroussel__section__with__controls">
         <div
           className={
-            !autoPlay ? "caroussel__controls" : "caroussel__controls__hidden"
+            !autoPlay
+              ? "caroussel__controls__prev"
+              : "caroussel__controls__hidden"
           }
         >
-          {currentIndex + 1} / {items.length}
+          <i
+            className="fa-solid fa-chevron-left"
+            onClick={prev}
+          ></i>
         </div>
-      </section>
-      <div
-        className={
-          !autoPlay ? "caroussel__controls" : "caroussel__controls__hidden"
-        }
-      >
-        <i
-          className="fa-solid fa-chevron-right"
-          onClick={next}
-        ></i>
+        <section className="caroussel__middle__block">
+          <div
+            key={currentItemAsString}
+            className={`caroussel__screen__item ${animationClass}`}
+          >
+            <div>
+              {isImage(currentItemAsString) && (
+                <picture className="caroussel__item__picture">
+                  <source
+                    media="(max-width: 767px)"
+                    srcSet={getFileUrl(currentItemAsString)}
+                  />
+                  <img
+                    className="caroussel__img__fade"
+                    src={getFileUrl(currentItemAsString)}
+                    alt={currentItemAsString}
+                    crossOrigin={origin}
+                  />
+                </picture>
+              )}
+              {isVideo(currentItemAsString) && (
+                <div className="caroussel__item__video">
+                  <video
+                    className="caroussel__video__fade"
+                    controls
+                    crossOrigin={origin}
+                  >
+                    <source
+                      src={getFileUrl(currentItemAsString)}
+                      type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              )}
+              {isAudio(currentItemAsString) && (
+                <div className="caroussel__item__audio">
+                  <audio
+                    className="caroussel__audio__fade"
+                    controls
+                    crossOrigin={origin}
+                  >
+                    <source
+                      src={getFileUrl(currentItemAsString)}
+                      type="audio/mpeg"
+                    />
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
+              )}
+            </div>
+          </div>
+          <div
+            className={
+              !autoPlay ? "caroussel__controls" : "caroussel__controls__hidden"
+            }
+          >
+            {currentIndex + 1} / {items.length}
+          </div>
+        </section>
+        <div
+          className={
+            !autoPlay
+              ? "caroussel__controls__next"
+              : "caroussel__controls__hidden"
+          }
+        >
+          <i
+            className="fa-solid fa-chevron-right"
+            onClick={next}
+          ></i>
+        </div>
       </div>
-    </>
+    </section>
   );
 };
 
