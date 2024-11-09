@@ -1,12 +1,12 @@
 import React from "react";
 
-interface CarouselControlsProps {
+interface CarousselControlsProps {
   pointer: number;
   itemsLength: number;
   setPointer: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const CarouselControls: React.FC<CarouselControlsProps> = ({
+const CarousselControls: React.FC<CarousselControlsProps> = ({
   pointer,
   itemsLength,
   setPointer,
@@ -38,4 +38,4 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({
   );
 };
 
-export default CarouselControls;
+export default CarousselControls;

@@ -21,7 +21,7 @@ const JobDetailCaroussel: React.FC<JobDetailCarousselProps> = ({
   const videoUrlPath = `${VIDEOS_DB_PATH}`;
   const audioUrlPath = `${AUDIOS_DB_PATH}`;
 
-  const { currentItem, currentIndex, animationClass } = useCarousel(
+  const { currentItem, currentIndex, animationClass, next, prev } = useCarousel(
     items,
     5000,
     autoPlay
@@ -53,7 +53,10 @@ const JobDetailCaroussel: React.FC<JobDetailCarousselProps> = ({
           !autoPlay ? "caroussel__controls" : "caroussel__controls__hidden"
         }
       >
-        <i className="fa-solid fa-chevron-left"></i>
+        <i
+          className="fa-solid fa-chevron-left"
+          onClick={prev}
+        ></i>
       </div>
       <section className="caroussel__middle__block">
         <div
@@ -120,7 +123,10 @@ const JobDetailCaroussel: React.FC<JobDetailCarousselProps> = ({
           !autoPlay ? "caroussel__controls" : "caroussel__controls__hidden"
         }
       >
-        <i className="fa-solid fa-chevron-right"></i>
+        <i
+          className="fa-solid fa-chevron-right"
+          onClick={next}
+        ></i>
       </div>
     </>
   );

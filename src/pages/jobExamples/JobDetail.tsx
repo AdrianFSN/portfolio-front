@@ -37,7 +37,7 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
           <section>
             <JobDetailCaroussel
               items={jobFiles}
-              autoPlay={true}
+              autoPlay={false}
             />
           </section>
         )}
