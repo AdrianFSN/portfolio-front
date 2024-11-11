@@ -37,8 +37,5 @@ const JobDetailSlice = createSlice({
   },
 });
 
-export const {
-  setJobDetail: setJobExamples,
-  resetJobDetail: resetJobExamples,
-} = JobDetailSlice.actions;
+export const { setJobDetail, resetJobDetail } = JobDetailSlice.actions;
 export default JobDetailSlice.reducer;

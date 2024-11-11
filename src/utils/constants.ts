@@ -27,3 +27,5 @@ export const ORIGIN = import.meta.env.VITE_API_BASE_URL;
 export const LIMIT_DEFAULT = "4";
 export const LIMIT_UNDER_769 = "1";
 export const LIMIT_OVER_769 = "2";
+
+export const SESSION_LOGIN_API_URI = "/api/session";
