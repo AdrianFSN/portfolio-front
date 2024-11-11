@@ -145,24 +145,35 @@
 
 @media (min-width: 768px) {
   .caroussel__controls__prev {
-    padding-right: 2rem;
-    margin-left: 1rem;
+    padding-right: 1rem;
+    margin-left: 2rem;
   }
 
   .caroussel__controls__next {
-    padding-left: 2rem;
-    margin-right: 1rem;
+    padding-left: 1rem;
+    margin-right: 2rem;
   }
 }
 
 @media (min-width: 1024px) {
   .caroussel__controls__prev {
-    padding-right: 4rem;
-    margin-left: 0;
+    padding-right: 2rem;
+    margin-left: 3rem;
   }
 
   .caroussel__controls__next {
-    padding-left: 4rem;
-    margin-right: 0;
+    padding-left: 2rem;
+    margin-right: 3rem;
+  }
+}
+@media (min-width: 1440px) {
+  .caroussel__controls__prev {
+    padding-right: 0.5rem;
+    margin-left: 4rem;
+  }
+
+  .caroussel__controls__next {
+    padding-left: 0.5rem;
+    margin-right: 4rem;
   }
 }

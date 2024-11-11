@@ -57,4 +57,20 @@
     gap: 1rem;
     align-items: center;
   }
+
+  .job__detail__picture {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .job__detail__picture {
+    width: 70%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .job__detail__picture {
+    width: 50%;
+  }
 }

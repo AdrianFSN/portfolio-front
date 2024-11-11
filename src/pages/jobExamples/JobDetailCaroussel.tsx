@@ -111,7 +111,6 @@ const JobDetailCaroussel: React.FC<JobDetailCarousselProps> = ({
                 {isVideo(currentItemAsString) && (
                   <div className="job__detail__video">
                     <video
-                      className=""
                       controls
                       crossOrigin={origin}
                     >
