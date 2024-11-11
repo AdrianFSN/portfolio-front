@@ -1,8 +1,10 @@
 .job__detail__caroussel {
-  display: block;
+  display: flex;
   position: relative;
   background: transparent;
+  align-items: center;
   width: 100dvw;
+  min-height: 40dvh;
   color: var(--main-text-color);
   overflow: hidden;
   box-shadow: 0 4px 6px -4px rgba(121, 120, 106, 0.3);
