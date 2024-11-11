@@ -44,29 +44,30 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
         )}
         <section className="job__detail">
           <h3>{jobVersion?.title}</h3>
-          <div>
-            <div
-              className={
-                jobVersion?.technologies && jobVersion?.technologies.length > 0
-                  ? ""
-                  : "hidden"
-              }
-            >
-              <div className="porfolio__icons__tech">
-                {jobVersion?.technologies.map((tech) => {
-                  const iconClass = convertStringToIcon(tech, icons);
 
-                  return iconClass ? (
-                    <span
-                      key={tech}
-                      className={`porfolio__icon ${iconClass}`}
-                    />
-                  ) : (
-                    <span key={tech}> {tech}</span>
-                  );
-                })}
-              </div>
+          <div
+            className={
+              jobVersion?.technologies && jobVersion?.technologies.length > 0
+                ? ""
+                : "hidden"
+            }
+          >
+            <div className="porfolio__icons__tech">
+              {jobVersion?.technologies.map((tech) => {
+                const iconClass = convertStringToIcon(tech, icons);
+
+                return iconClass ? (
+                  <span
+                    key={tech}
+                    className={`porfolio__icon ${iconClass}`}
+                  />
+                ) : (
+                  <span key={tech}> {tech}</span>
+                );
+              })}
             </div>
+          </div>
+          <div className="job__detail__text__section">
             <p>{jobVersion?.info}</p>
             <ul className="job__detail__list">
               <li className={job.linkToUrl ? "" : "hidden"}>
