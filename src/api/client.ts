@@ -1,5 +1,6 @@
 import axios from "axios";
 import i18n from "i18next";
+import storage from "../utils/storage";
 
 export const client = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -41,4 +42,8 @@ export const setAuthorizationHeader = (token: string) => {
 
 export const removeAuthorizationHeader = () => {
   delete client.defaults.headers.common["Authorization"];
+};
+
+export const logout = () => {
+  storage.remove("authToken");
 };
