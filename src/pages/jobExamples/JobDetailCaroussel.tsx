@@ -23,6 +23,7 @@ const JobDetailCaroussel: React.FC<JobDetailCarousselProps> = ({
   const videoUrlPath = `${VIDEOS_DB_PATH}`;
   const audioUrlPath = `${AUDIOS_DB_PATH}`;
   const [show, setShow] = useState(true);
+  const [displayImg, setDisplayImg] = useState(false);
 
   const { currentItem, currentIndex, animationClass, next, prev } = useCarousel(
     items,
@@ -55,85 +56,107 @@ const JobDetailCaroussel: React.FC<JobDetailCarousselProps> = ({
     }
   }, [autoPlay]);
 
+  const handleDisplayImg = () => {
+    setDisplayImg(true);
+  };
+  const handleCloseImg = () => {
+    setDisplayImg(false);
+  };
+
   return (
-    <section className="job__detail__caroussel">
-      <div className="caroussel__section__with__controls">
-        {show && (
-          <div className="caroussel__controls__prev">
-            <i
-              className="fa-solid fa-chevron-left"
-              onClick={prev}
-            ></i>
-          </div>
-        )}
-        <section className="caroussel__middle__block">
-          <div
-            key={currentItemAsString}
-            className={`caroussel__screen__item ${animationClass}`}
-          >
-            <div>
-              {isImage(currentItemAsString) && (
-                <picture className="caroussel__item__picture">
-                  <source
-                    media="(max-width: 767px)"
-                    srcSet={getFileUrl(currentItemAsString)}
-                  />
-                  <img
-                    className="caroussel__img__fade"
-                    src={getFileUrl(currentItemAsString)}
-                    alt={currentItemAsString}
-                    crossOrigin={origin}
-                  />
-                </picture>
-              )}
-              {isVideo(currentItemAsString) && (
-                <div className="caroussel__item__video">
-                  <video
-                    className="caroussel__video__fade"
-                    controls
-                    crossOrigin={origin}
-                  >
-                    <source
-                      src={getFileUrl(currentItemAsString)}
-                      type="video/mp4"
-                    />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              )}
-              {isAudio(currentItemAsString) && (
-                <div className="caroussel__item__audio">
-                  <audio
-                    className="caroussel__audio__fade"
-                    controls
-                    crossOrigin={origin}
-                  >
-                    <source
-                      src={getFileUrl(currentItemAsString)}
-                      type="audio/mpeg"
-                    />
-                    Your browser does not support the audio element.
-                  </audio>
-                </div>
-              )}
-            </div>
-          </div>
+    <>
+      {displayImg && (
+        <div className="img__overlay__bg">
+          <picture>
+            <img
+              src={getFileUrl(currentItemAsString)}
+              alt={currentItemAsString}
+              crossOrigin={origin}
+              onClick={handleCloseImg}
+            />
+          </picture>
+        </div>
+      )}
+      <section className="job__detail__caroussel">
+        <div className="caroussel__section__with__controls">
           {show && (
-            <div className="caroussel__controls">
-              {currentIndex + 1} / {items.length}
+            <div className="caroussel__controls__prev">
+              <i
+                className="fa-solid fa-chevron-left"
+                onClick={prev}
+              ></i>
             </div>
           )}
-        </section>
-        {show && (
-          <div className="caroussel__controls__next">
-            <i
-              className="fa-solid fa-chevron-right"
-              onClick={next}
-            ></i>
-          </div>
-        )}
-      </div>
-    </section>
+          <section className="caroussel__middle__block">
+            <div
+              key={currentItemAsString}
+              className={`caroussel__screen__item ${animationClass}`}
+            >
+              <div>
+                {isImage(currentItemAsString) && (
+                  <picture className="caroussel__item__picture job__detail__img">
+                    <source
+                      media="(max-width: 767px)"
+                      srcSet={getFileUrl(currentItemAsString)}
+                    />
+                    <img
+                      className="caroussel__img__fade"
+                      src={getFileUrl(currentItemAsString)}
+                      alt={currentItemAsString}
+                      crossOrigin={origin}
+                      onClick={handleDisplayImg}
+                    />
+                  </picture>
+                )}
+                {isVideo(currentItemAsString) && (
+                  <div className="caroussel__item__video">
+                    <video
+                      className="caroussel__video__fade"
+                      controls
+                      crossOrigin={origin}
+                    >
+                      <source
+                        src={getFileUrl(currentItemAsString)}
+                        type="video/mp4"
+                      />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                )}
+                {isAudio(currentItemAsString) && (
+                  <div className="caroussel__item__audio">
+                    <audio
+                      className="caroussel__audio__fade"
+                      controls
+                      crossOrigin={origin}
+                    >
+                      <source
+                        src={getFileUrl(currentItemAsString)}
+                        type="audio/mpeg"
+                      />
+                      Your browser does not support the audio element.
+                    </audio>
+                  </div>
+                )}
+              </div>
+            </div>
+            {show && (
+              <div className="caroussel__controls">
+                {currentIndex + 1} / {items.length}
+              </div>
+            )}
+          </section>
+          {show && (
+            <div className="caroussel__controls__next">
+              <i
+                className="fa-solid fa-chevron-right"
+                onClick={next}
+              ></i>
+            </div>
+          )}
+        </div>
+      </section>
+    </>
   );
 };
 

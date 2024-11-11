@@ -115,6 +115,22 @@
   font-size: 3rem;
 }
 
+.img__overlay__bg {
+  display: flex;
+  width: 100dvw;
+  height: 100%;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.img__overlay__bg img:hover {
+  cursor: zoom-out;
+}
+
 @media (min-width: 768px) {
   .porfolio .porfolio__intro__video .video__small {
     padding: 2rem;

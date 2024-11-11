@@ -4,10 +4,44 @@
   background: transparent;
   width: 100dvw;
   color: var(--main-text-color);
-  padding: 0;
   overflow: hidden;
+  box-shadow: 0 4px 6px -4px rgba(121, 120, 106, 0.3);
 }
 
 .job__detail {
-  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: justify;
+  padding: 0 2rem 2rem;
+}
+
+.job__detail h3 {
+  text-align: center;
+}
+
+.job__detail__top__section {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+}
+
+.job__detail__img img:hover {
+  cursor: zoom-in;
+}
+
+@media (min-width: 768px) {
+  .job__detail h3 {
+    text-align: justify;
+  }
+
+  .job__detail .porfolio__icons__tech {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    gap: 1rem;
+    align-items: center;
+  }
 }
