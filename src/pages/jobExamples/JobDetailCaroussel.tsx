@@ -94,7 +94,7 @@ const JobDetailCaroussel: React.FC<JobDetailCarousselProps> = ({
             >
               <div>
                 {isImage(currentItemAsString) && (
-                  <picture className="caroussel__item__picture job__detail__img">
+                  <picture className="job__detail__picture job__detail__img">
                     <source
                       media="(max-width: 767px)"
                       srcSet={getFileUrl(currentItemAsString)}
@@ -109,9 +109,9 @@ const JobDetailCaroussel: React.FC<JobDetailCarousselProps> = ({
                   </picture>
                 )}
                 {isVideo(currentItemAsString) && (
-                  <div className="caroussel__item__video">
+                  <div className="job__detail__video">
                     <video
-                      className="caroussel__video__fade"
+                      className=""
                       controls
                       crossOrigin={origin}
                     >
@@ -124,9 +124,8 @@ const JobDetailCaroussel: React.FC<JobDetailCarousselProps> = ({
                   </div>
                 )}
                 {isAudio(currentItemAsString) && (
-                  <div className="caroussel__item__audio">
+                  <div>
                     <audio
-                      className="caroussel__audio__fade"
                       controls
                       crossOrigin={origin}
                     >
