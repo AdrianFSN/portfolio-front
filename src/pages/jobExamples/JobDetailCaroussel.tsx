@@ -6,6 +6,8 @@ import {
 } from "../../utils/constants";
 import useCarousel from "../../hooks/useCarousel";
 import "../../components/shared/caroussel/caroussel.css";
+import "./JobDetail.css";
+import { useEffect, useState } from "react";
 
 interface JobDetailCarousselProps {
   items: string[];
@@ -20,10 +22,11 @@ const JobDetailCaroussel: React.FC<JobDetailCarousselProps> = ({
   const imgUrlPath = `${IMAGES_DB_PATH}`;
   const videoUrlPath = `${VIDEOS_DB_PATH}`;
   const audioUrlPath = `${AUDIOS_DB_PATH}`;
+  const [show, setShow] = useState(true);
 
   const { currentItem, currentIndex, animationClass, next, prev } = useCarousel(
     items,
-    5000,
+    3000,
     autoPlay
   );
 
@@ -46,21 +49,23 @@ const JobDetailCaroussel: React.FC<JobDetailCarousselProps> = ({
     return "";
   };
 
+  useEffect(() => {
+    if (autoPlay) {
+      setShow(false);
+    }
+  }, [autoPlay]);
+
   return (
-    <section className="caroussel">
+    <section className="job__detail__caroussel">
       <div className="caroussel__section__with__controls">
-        <div
-          className={
-            !autoPlay
-              ? "caroussel__controls__prev"
-              : "caroussel__controls__hidden"
-          }
-        >
-          <i
-            className="fa-solid fa-chevron-left"
-            onClick={prev}
-          ></i>
-        </div>
+        {show && (
+          <div className="caroussel__controls__prev">
+            <i
+              className="fa-solid fa-chevron-left"
+              onClick={prev}
+            ></i>
+          </div>
+        )}
         <section className="caroussel__middle__block">
           <div
             key={currentItemAsString}
@@ -113,26 +118,20 @@ const JobDetailCaroussel: React.FC<JobDetailCarousselProps> = ({
               )}
             </div>
           </div>
-          <div
-            className={
-              !autoPlay ? "caroussel__controls" : "caroussel__controls__hidden"
-            }
-          >
-            {currentIndex + 1} / {items.length}
-          </div>
+          {show && (
+            <div className="caroussel__controls">
+              {currentIndex + 1} / {items.length}
+            </div>
+          )}
         </section>
-        <div
-          className={
-            !autoPlay
-              ? "caroussel__controls__next"
-              : "caroussel__controls__hidden"
-          }
-        >
-          <i
-            className="fa-solid fa-chevron-right"
-            onClick={next}
-          ></i>
-        </div>
+        {show && (
+          <div className="caroussel__controls__next">
+            <i
+              className="fa-solid fa-chevron-right"
+              onClick={next}
+            ></i>
+          </div>
+        )}
       </div>
     </section>
   );

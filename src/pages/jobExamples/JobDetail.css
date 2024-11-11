@@ -1,0 +1,13 @@
+.job__detail__caroussel {
+  display: block;
+  position: relative;
+  background: transparent;
+  width: 100dvw;
+  color: var(--main-text-color);
+  padding: 0;
+  overflow: hidden;
+}
+
+.job__detail {
+  margin-left: 2rem;
+}

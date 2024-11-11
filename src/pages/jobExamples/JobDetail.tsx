@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import "./JobDetail.css";
 import {
   getJobDetailAudiosSelector,
   getJobDetailImagesSelector,
@@ -31,7 +32,7 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
   console.log("Esto es jobFiles: ", jobFiles);
 
   return (
-    <>
+    <main className="porfolio__main">
       <section key={jobId}>
         {job && jobFiles.length > 0 && (
           <section>
@@ -41,7 +42,7 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
             />
           </section>
         )}
-        <section>
+        <section className="job__detail">
           <h3>{jobVersion?.title}</h3>
           <div>
             <p>{jobVersion?.info}</p>
@@ -96,7 +97,7 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
           </div>
         </section>
       </section>
-    </>
+    </main>
   );
 };
 
