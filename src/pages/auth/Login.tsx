@@ -1,14 +1,37 @@
+import { useEffect, useState } from "react";
+import RegularButton from "../../components/shared/buttons/RegularButton";
 import "./Login.css";
+import { useDispatch } from "react-redux";
+import { loginThunk } from "../../store/thunks/loginThunk";
+import { AppDispatch } from "../../store/store";
 
 const Login = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const [disableSubmit, setDisableSubmit] = useState(true);
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
+
+  useEffect(() => {
+    if (!inputEmail || !inputPassword) {
+      setDisableSubmit(true);
+    } else {
+      setDisableSubmit(false);
+    }
+  }, [inputEmail, inputPassword]);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(loginThunk({ email: inputEmail, password: inputPassword }));
+  };
+
   return (
     <main className="main__login">
       <h1>Login</h1>
       <section>
         <form
           className="login__form"
-          method="post"
-          action="/archivo"
+          noValidate
+          onSubmit={handleSubmit}
         >
           <fieldset className="form__fieldset">
             <legend>
@@ -24,6 +47,8 @@ const Login = () => {
               <input
                 className="form__input"
                 type="text"
+                value={inputEmail}
+                onChange={(e) => setInputEmail(e.target.value)}
                 name="Email"
                 id="email"
                 placeholder="Your email"
@@ -39,7 +64,9 @@ const Login = () => {
               </label>
               <input
                 className="form__input"
-                type="text"
+                type="password"
+                value={inputPassword}
+                onChange={(e) => setInputPassword(e.target.value)}
                 name="Password"
                 id="password"
                 placeholder="Your password"
@@ -47,6 +74,13 @@ const Login = () => {
               />
             </div>
           </fieldset>
+          <RegularButton
+            className="btn form__button"
+            disabled={disableSubmit}
+            type="submit"
+          >
+            Submit
+          </RegularButton>
         </form>
       </section>
     </main>
