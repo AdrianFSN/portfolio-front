@@ -46,4 +46,5 @@ export const removeAuthorizationHeader = () => {
 
 export const logout = () => {
   storage.remove("authToken");
+  removeAuthorizationHeader();
 };

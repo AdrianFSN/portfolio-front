@@ -46,6 +46,10 @@ a {
   transition: color 0.5s linear;
 }
 
+body {
+  background: var(--body-color);
+}
+
 main {
   text-align: justify;
 }
@@ -57,7 +61,7 @@ main {
   }
 }
 
-@media (width <=375px) {
+@media (width <=425px) {
   h1 {
     font-size: 4rem;
     text-align: center;

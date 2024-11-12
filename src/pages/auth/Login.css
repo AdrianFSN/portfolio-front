@@ -1,0 +1,59 @@
+.main__login {
+  display: flex;
+  flex-direction: column;
+  height: 55dvh;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.form__fieldset {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 0;
+  margin: 2rem 2rem 1rem;
+  border-radius: 3px;
+}
+
+.form__fieldset h3 {
+  margin: 0;
+}
+
+.form__fieldset legend {
+  padding: 0;
+}
+
+.form__fieldset h4 {
+  margin: 1rem;
+}
+
+.login__fieldset__field {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  margin: 0 1rem 1.5rem;
+}
+
+.form__input {
+  padding: 1rem;
+  background: var(--main-brand-color);
+  color: var(--secondary-text-color);
+  border: none;
+  border-radius: 3px;
+}
+
+.form__input::placeholder {
+  color: var(--secondary-text-color);
+  text-align: center;
+}
+
+.form__label {
+  padding: -10rem;
+}

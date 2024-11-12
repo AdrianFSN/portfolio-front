@@ -3,7 +3,7 @@ import { loginThunk } from "../thunks/loginThunk";
 import storage from "../../utils/storage";
 
 export const loginInitialState = {
-  authState: !!storage.get("authToken"),
+  loggedInState: !!storage.get("authToken"),
   loading: false,
   error: undefined as string | undefined,
 };
@@ -13,10 +13,10 @@ const loginSlice = createSlice({
   initialState: loginInitialState,
   reducers: {
     setAuth: (state, action) => {
-      state.authState = action.payload;
+      state.loggedInState = action.payload;
     },
     resetLogin: (state) => {
-      state.authState = loginInitialState.authState;
+      state.loggedInState = loginInitialState.loggedInState;
       state.loading = false;
       state.error = undefined;
     },
@@ -28,7 +28,7 @@ const loginSlice = createSlice({
       })
       .addCase(loginThunk.fulfilled, (state) => {
         state.loading = false;
-        state.authState = true;
+        state.loggedInState = true;
         state.error = undefined;
       })
       .addCase(loginThunk.rejected, (state, action) => {

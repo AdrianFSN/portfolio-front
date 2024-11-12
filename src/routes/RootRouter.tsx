@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Bio from "../pages/bio/Bio";
 import Development from "../pages/development/Development";
 import Job from "../pages/jobExamples/Job";
+import Login from "../pages/auth/Login";
 const RootRouter = () => {
   return (
     <Routes>
@@ -17,6 +18,10 @@ const RootRouter = () => {
       <Route
         path="/:id"
         element={<Job />}
+      />
+      <Route
+        path="/session"
+        element={<Login />}
       />
     </Routes>
   );
