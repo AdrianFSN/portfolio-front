@@ -38,7 +38,7 @@ const Login = () => {
       setDecodedToken(decodeToken(storedToken as string));
       setUsername(decodedToken.username);
     }
-  }, [decodedToken, decodedToken.username, storedToken]);
+  }, [decodedToken.username, storedToken]);
 
   useEffect(() => {
     if (!inputEmail || !inputPassword) {
