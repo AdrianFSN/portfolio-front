@@ -5,6 +5,10 @@
   height: 60dvh;
 }
 
+.main__login p {
+  margin-left: 2rem;
+}
+
 .login__form {
   display: flex;
   flex-direction: column;

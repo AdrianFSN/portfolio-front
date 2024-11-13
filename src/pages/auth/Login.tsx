@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import RegularButton from "../../components/shared/buttons/RegularButton";
 import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,12 +8,15 @@ import { AppDispatch } from "../../store/store";
 import {
   getAuthErrorSelector,
   getAuthMessageSelector,
-  getAuthStateSelector,
   getIsLoggedSelector,
 } from "../../store/selectors/AuthSelectors/authSelectors";
 import { useNavigate } from "react-router-dom";
+import CustomAlert from "../../components/shared/alert/CustomAlert";
+import storage from "../../utils/storage";
+import decodeToken from "../../utils/getDataFromToken";
 
 const Login = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const to = "/bio";
   const dispatch: AppDispatch = useDispatch();
@@ -23,6 +27,18 @@ const Login = () => {
   const successMessage = useSelector(getAuthMessageSelector);
   const [alertMessage, setAlertMessage] = useState("");
   const error = useSelector(getAuthErrorSelector);
+  const storedToken = storage.get("authToken");
+  const [decodedToken, setDecodedToken] = useState({
+    username: "",
+  });
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    if (storedToken) {
+      setDecodedToken(decodeToken(storedToken as string));
+      setUsername(decodedToken.username);
+    }
+  }, [decodedToken, decodedToken.username, storedToken]);
 
   useEffect(() => {
     if (!inputEmail || !inputPassword) {
@@ -56,12 +72,16 @@ const Login = () => {
 
   return (
     <main className="main__login">
-      <h1>Login</h1>
+      <h1>{t("login.login")}</h1>
       <section>
-        {alertMessage && <div>{alertMessage}</div>}
+        {alertMessage && (
+          <CustomAlert type={error ? "error" : "success"}>
+            {alertMessage}
+          </CustomAlert>
+        )}
         {isLogged ? (
           <div>
-            <p>You are already signed in</p>
+            <p>{t("login.already_signed_in", { username })}</p>
           </div>
         ) : (
           <>

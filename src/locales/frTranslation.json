@@ -4,5 +4,9 @@
     "introduction": "Je m'appelle Adrián Sotés, d'où A S, pour finir par 'A ese!' Parce que je veux que vous me choisissiez pour travailler ensemble sur vos projets. Je suis créateur de contenu, développeur web full stack junior et expert en ludification.",
     "career": "J'ai consacré une grande partie de ma carrière professionnelle à développer des communautés virtuelles. Je suis titulaire d'un diplôme en Communication Audiovisuelle. Mon désir de continuer à grandir professionnellement dans tous les domaines créatifs m'a amené à étudier le design, le community management, le son, l'harmonie moderne et, maintenant, la programmation et le développement web.",
     "goal": "Mon objectif est de comprendre tous les profils à partir desquels aborder le développement d'un contenu ; ainsi, parvenir à ce qu'il fonctionne pour le but pour lequel il a été conçu : le plan d'affaires d'une entreprise, l'art, le divertissement... Les motivations sont infinies. Quelle est la vôtre ?"
+  },
+  "login": {
+    "login": "Connecte-toi",
+    "already_signed_in": "Tu as commencé une session en tant que {{username}}"
   }
 }

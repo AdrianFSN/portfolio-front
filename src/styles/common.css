@@ -4,6 +4,8 @@
   --main-text-color: #000;
   --secondary-text-color: rgb(238, 235, 208);
   --main-brand-color: rgb(250, 25, 12);
+  --error-color: rgb(248, 168, 164);
+  --success-color: rgb(184, 246, 206);
   font-size: 16px;
   font-family: "Inconsolata", sans-serif;
 }
