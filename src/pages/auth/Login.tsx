@@ -77,7 +77,9 @@ const Login = () => {
   const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     setAlertMessage("");
-    dispatch(resetLogin());
+    if (error) {
+      dispatch(resetLogin());
+    }
   };
 
   return (
