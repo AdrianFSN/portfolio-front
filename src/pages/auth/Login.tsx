@@ -7,6 +7,7 @@ import { loginThunk } from "../../store/thunks/loginThunk";
 import { AppDispatch } from "../../store/store";
 import {
   getAuthErrorSelector,
+  getAuthLoadingSelector,
   getAuthMessageSelector,
   getIsLoggedSelector,
 } from "../../store/selectors/AuthSelectors/authSelectors";
@@ -14,6 +15,8 @@ import { useNavigate } from "react-router-dom";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
 import storage from "../../utils/storage";
 import decodeToken from "../../utils/getDataFromToken";
+import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
+import { resetLogin } from "../../store/slices/loginSlice";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -24,6 +27,7 @@ const Login = () => {
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const isLogged = useSelector(getIsLoggedSelector);
+  const isLoading = useSelector(getAuthLoadingSelector);
   const successMessage = useSelector(getAuthMessageSelector);
   const [alertMessage, setAlertMessage] = useState("");
   const error = useSelector(getAuthErrorSelector);
@@ -67,7 +71,13 @@ const Login = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await dispatch(loginThunk({ email: inputEmail, password: inputPassword }));
+    dispatch(loginThunk({ email: inputEmail, password: inputPassword }));
+  };
+
+  const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setAlertMessage("");
+    dispatch(resetLogin());
   };
 
   return (
@@ -75,7 +85,10 @@ const Login = () => {
       <h1>{t("login.login")}</h1>
       <section>
         {alertMessage && (
-          <CustomAlert type={error ? "error" : "success"}>
+          <CustomAlert
+            type={error ? "error" : "success"}
+            onClick={handleCloseAlert}
+          >
             {alertMessage}
           </CustomAlert>
         )}
@@ -136,7 +149,14 @@ const Login = () => {
                 disabled={disableSubmit}
                 type="submit"
               >
-                Submit
+                {isLoading ? (
+                  <CustomPulseLoader
+                    isLoading={isLoading}
+                    $customHeight="100%"
+                  />
+                ) : (
+                  "Submit"
+                )}
               </RegularButton>
             </form>
           </>

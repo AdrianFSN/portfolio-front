@@ -3,6 +3,7 @@ import styled from "styled-components";
 interface CustomAlertProps {
   type: "success" | "error";
   children: React.ReactNode;
+  onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 const AlertContainer = styled.div<CustomAlertProps>`
@@ -19,8 +20,19 @@ const AlertContainer = styled.div<CustomAlertProps>`
   z-index: 20;
 `;
 
-const CustomAlert: React.FC<CustomAlertProps> = ({ type, children }) => {
-  return <AlertContainer type={type}>{children}</AlertContainer>;
+const CustomAlert: React.FC<CustomAlertProps> = ({
+  type,
+  children,
+  onClick,
+}) => {
+  return (
+    <AlertContainer
+      type={type}
+      onClick={onClick}
+    >
+      {children}
+    </AlertContainer>
+  );
 };
 
 export default CustomAlert;
