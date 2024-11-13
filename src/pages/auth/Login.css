@@ -5,6 +5,11 @@
   height: 60dvh;
 }
 
+.main__login h1 {
+  text-align: center;
+  padding-right: 0;
+}
+
 .main__login p {
   margin-left: 2rem;
 }
@@ -89,10 +94,20 @@
     cursor: not-allowed;
   }
 }
+@media (max-width: 375px) {
+  .form__fieldset {
+    margin: 1rem 0;
+  }
+}
 
 @media (min-width: 768px) {
   .main__login {
     height: 60dvh;
+  }
+
+  .main__login h1 {
+    text-align: right;
+    padding-right: 2rem;
   }
 
   .form__button {
