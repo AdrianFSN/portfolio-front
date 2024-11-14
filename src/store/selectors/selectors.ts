@@ -20,6 +20,10 @@ export const getJobsListMessageSelector = (state: RootState) => {
 export const getJobsListLoadingSelector = (state: RootState) => {
   return state.jobExamplesList.loading;
 };
+
+export const getJobsListErrorSelector = (state: RootState) =>
+  state.jobExamplesList.error;
+
 export const getJobsListCurrentPageSelector = (state: RootState) => {
   const jobsPages = state.jobExamplesList.data as Jobs;
   return jobsPages.data?.currentPage;
