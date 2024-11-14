@@ -1,5 +1,5 @@
 export default interface JobPagesProps {
-  category: string;
+  category?: string;
   page?: number;
   limit?: string;
 }

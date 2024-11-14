@@ -8,7 +8,7 @@ import {
 import StandardResponseInterface from "../../@types/StandardResponse";
 
 interface FetchJobsParams {
-  category: string;
+  category?: string;
   page?: string;
   limit?: string;
 }

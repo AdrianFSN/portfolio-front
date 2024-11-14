@@ -48,9 +48,13 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
   }, [category, dispatch]);
 
   useEffect(() => {
-    dispatch(
-      getJobExamplesListThunk({ category, page: page?.toString(), limit })
-    );
+    if (category) {
+      dispatch(
+        getJobExamplesListThunk({ category, page: page?.toString(), limit })
+      );
+    } else {
+      dispatch(getJobExamplesListThunk({ page: page?.toString(), limit }));
+    }
   }, [category, dispatch, page, limit]);
 
   const handleNextPage = () => {
