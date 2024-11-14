@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getJobDetailThunk } from "../thunks/jobDetailThunk";
+import { deleteJobThunk, getJobDetailThunk } from "../thunks/jobDetailThunk";
 
 export const jobDetailInitialState = {
   data: {},
@@ -31,6 +31,19 @@ const JobDetailSlice = createSlice({
         state.error = undefined;
       })
       .addCase(getJobDetailThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(deleteJobThunk.pending, (state) => {
+        state.loading = true;
+        state.error = undefined;
+      })
+      .addCase(deleteJobThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+        state.error = undefined;
+      })
+      .addCase(deleteJobThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

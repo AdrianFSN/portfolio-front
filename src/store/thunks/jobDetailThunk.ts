@@ -16,3 +16,12 @@ export const getJobDetailThunk = createAsyncThunk<
   const response = await client.get(url);
   return response;
 });
+
+export const deleteJobThunk = createAsyncThunk<
+  AxiosResponse<StandardResponseInterface>,
+  FetchJobDetailParams
+>("jobDetail/deleteJob", async ({ jobId }) => {
+  const url = `${JOB_EXAMPLES_API_URI}/${jobId}`;
+  const response = await client.delete(url);
+  return response;
+});

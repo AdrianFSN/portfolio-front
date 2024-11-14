@@ -1,6 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { JobExample } from "../../@types/jobExample";
 import { IMG_THUMBNAILS_DB_PATH, ORIGIN } from "../../utils/constants";
+import { AppDispatch } from "../../store/store";
+import { useDispatch } from "react-redux";
+import { deleteJobThunk } from "../../store/thunks/jobDetailThunk";
 
 interface AdminJobsSectionProps {
   jobsList: JobExample[];
@@ -13,10 +16,14 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
 }) => {
   const { t } = useTranslation();
   const imgUrlPath = `${IMG_THUMBNAILS_DB_PATH}`;
+  const dispatch: AppDispatch = useDispatch();
   const origin = ORIGIN;
   const filteredList = jobsList
     ? jobsList.filter((jobExample) => jobExample.category.includes(category))
     : [];
+  const handleDeleteJob = (jobId: string) => {
+    dispatch(deleteJobThunk({ jobId }));
+  };
 
   return (
     <div>
@@ -42,7 +49,10 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
                 </picture>
                 <p>{jobExample.versions[0].title}</p>
                 <i className="fa-solid fa-pen-to-square"></i>
-                <i className="fa-solid fa-trash"></i>
+                <i
+                  className="fa-solid fa-trash"
+                  onClick={() => handleDeleteJob(jobExample._id)}
+                ></i>
               </li>
             ))}
           </ul>
