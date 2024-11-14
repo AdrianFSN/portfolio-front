@@ -21,7 +21,7 @@ import { resetLogin } from "../../store/slices/loginSlice";
 const Login = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const to = "/bio";
+  const to = "/admin";
   const dispatch: AppDispatch = useDispatch();
   const [disableSubmit, setDisableSubmit] = useState(true);
   const [inputEmail, setInputEmail] = useState("");

@@ -21,9 +21,8 @@ export const loginThunk = createAsyncThunk<
   const url = SESSION_LOGIN_API_URI;
   const response = await client.post(url, credentials);
 
-  if (response && response.data.token) {
-    setAuthorizationHeader(response.data.token);
-    storage.set("authToken", response.data.token);
-  }
+  setAuthorizationHeader(response.data.token);
+  storage.set("authToken", response.data.token);
+
   return response;
 });

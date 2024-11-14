@@ -12,6 +12,7 @@ client.interceptors.request.use(
     if (currentLanguage) {
       config.headers["Accept-Language"] = currentLanguage;
     }
+    console.log("Request headers:", config.headers);
     return config;
   },
   (error) => {
@@ -38,6 +39,10 @@ client.interceptors.response.use(
 
 export const setAuthorizationHeader = (token: string) => {
   client.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  console.log(
+    "Authorization header set:",
+    client.defaults.headers.common["Authorization"]
+  );
 };
 
 export const removeAuthorizationHeader = () => {
