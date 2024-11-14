@@ -37,3 +37,7 @@
 .main__admin img {
   object-fit: cover;
 }
+
+.main__admin p {
+  margin-left: 1rem;
+}
