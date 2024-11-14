@@ -1,0 +1,39 @@
+.main__admin {
+  width: 100dvw;
+  min-height: 60dvh;
+}
+
+.main__admin h2 {
+  background: var(--main-text-color);
+  color: var(--secondary-text-color);
+  padding: 0;
+  margin-top: 0;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.main__admin ul {
+  list-style: none;
+  margin-right: 2rem;
+  margin-left: -1rem;
+}
+
+.main__admin li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  gap: 1rem;
+}
+
+.main__admin picture {
+  max-width: 50%;
+}
+
+.main__admin i {
+  font-size: 1.5rem;
+}
+
+.main__admin img {
+  object-fit: cover;
+}

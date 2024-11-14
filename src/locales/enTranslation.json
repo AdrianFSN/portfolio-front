@@ -8,5 +8,11 @@
   "login": {
     "login": "Login",
     "already_signed_in": "You are signed in as {{username}}"
+  },
+  "admin": {
+    "title": "Admin",
+    "development": "Development",
+    "audio": "Audio",
+    "liveOps": "LiveOps"
   }
 }
