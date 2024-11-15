@@ -2,9 +2,18 @@ import { useTranslation } from "react-i18next";
 import { JobExample } from "../../@types/jobExample";
 import { IMG_THUMBNAILS_DB_PATH, ORIGIN } from "../../utils/constants";
 import { AppDispatch } from "../../store/store";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteJobThunk } from "../../store/thunks/jobDetailThunk";
 import { getJobExamplesListThunk } from "../../store/thunks/jobExamplesListThunk";
+import {
+  getJobDetailErrorSelector,
+  getJobDetailLoadingSelector,
+  getJobDetailMessageSelector,
+} from "../../store/selectors/JobExamplesSelectors/jobDetailSelectors";
+import CustomAlert from "../../components/shared/alert/CustomAlert";
+import { useEffect, useState } from "react";
+import { resetJobDetail } from "../../store/slices/jobDetailSlice";
+import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 
 interface AdminJobsSectionProps {
   jobsList: JobExample[];
@@ -22,14 +31,42 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
   const filteredList = jobsList
     ? jobsList.filter((jobExample) => jobExample.category.includes(category))
     : [];
+  const error = useSelector(getJobDetailErrorSelector);
+  const successMessage = useSelector(getJobDetailMessageSelector);
+  const isLoading = useSelector(getJobDetailLoadingSelector);
+  const [alertMessage, setAlertMessage] = useState("");
+
+  useEffect(() => {
+    if (!error && successMessage) {
+      setAlertMessage(successMessage);
+    } else {
+      setAlertMessage(error as string);
+    }
+  }, [successMessage, error]);
+
   const handleDeleteJob = async (jobId: string) => {
     await dispatch(deleteJobThunk({ jobId }));
     await dispatch(getJobExamplesListThunk({ limit: "1000" }));
   };
 
+  const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setAlertMessage("");
+    dispatch(resetJobDetail());
+  };
+
   return (
     <div>
-      {filteredList && filteredList.length > 0 ? (
+      {alertMessage && (
+        <CustomAlert
+          type={error ? "error" : "success"}
+          onClick={handleCloseAlert}
+        >
+          {alertMessage}
+        </CustomAlert>
+      )}
+      {isLoading && <CustomPulseLoader isLoading={isLoading} />}
+      {!isLoading && filteredList && filteredList.length > 0 ? (
         <section>
           <ul>
             {filteredList.map((jobExample) => (

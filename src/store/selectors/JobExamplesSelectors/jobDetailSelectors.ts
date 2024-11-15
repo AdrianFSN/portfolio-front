@@ -18,12 +18,12 @@ export const getJobDetailMessageSelector = (state: RootState) => {
   const job = state.jobDetail.data as JobInterface;
   return job.message;
 };
-export const getJobDetailLoadingSelector = (state: RootState) => {
-  return state.jobDetail.loading;
-};
-export const getJobDetailErrorSelector = (state: RootState) => {
-  return state.jobDetail.error;
-};
+export const getJobDetailLoadingSelector = (state: RootState) =>
+  state.jobDetail.loading;
+
+export const getJobDetailErrorSelector = (state: RootState) =>
+  state.jobDetail.error;
+
 export const getJobDetailImagesSelector = createSelector(
   (state: RootState) => state.jobDetail.data as JobInterface,
   (job) => {
