@@ -1,0 +1,164 @@
+.edit__job__form {
+  position: fixed;
+  width: 100%;
+  height: 100dvh;
+  background: rgba(0, 0, 0, 0.5);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+}
+
+.edit__job__form h1 {
+  text-align: center;
+  padding-right: 0;
+}
+
+.edit__job__form p {
+  margin-left: 2rem;
+}
+
+.job__form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  border-radius: 3px;
+}
+.job__form h2 {
+  background: var(--main-brand-color);
+  color: var(--main-text-color);
+}
+
+.form__fieldset {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 0;
+  margin: 2rem 2rem 1rem;
+  border: 1px dotted var(--main-text-color);
+  border-radius: 3px;
+}
+
+.form__fieldset h3 {
+  margin: 0;
+}
+
+.form__fieldset legend {
+  padding: 0;
+}
+
+.form__fieldset h4 {
+  margin: 1rem;
+}
+
+.login__fieldset__field {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  margin: 0 1rem 1.5rem;
+}
+
+.form__input {
+  padding: 1rem;
+  background: var(--bg-color);
+  color: var(--main-text-color);
+  border: 1px dotted var(--main-text-color);
+  border-radius: 3px;
+  text-align: center;
+}
+
+.form__input::placeholder {
+  color: var(--main-text-color);
+  text-align: center;
+}
+
+.form__button {
+  background-color: var(--main-text-color);
+  color: var(--secondary-text-color);
+  width: 85%;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  border-radius: 3px;
+  padding: 1rem;
+  margin: 0 auto;
+  transition: background-color 0.2s linear, color 0.2s linear;
+}
+
+.form__button:disabled {
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--secondary-text-color);
+}
+
+@media (hover: hover) {
+  .form__button:hover {
+    background-color: var(--main-brand-color);
+    color: var(--main-text-color);
+  }
+  .form__button:disabled {
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--secondary-text-color);
+    cursor: not-allowed;
+  }
+}
+@media (max-width: 375px) {
+  .form__fieldset {
+    margin: 1rem 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .edit__job__form {
+    height: 60dvh;
+  }
+
+  .edit__job__form h1 {
+    text-align: right;
+    padding-right: 2rem;
+  }
+
+  .form__button {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .edit__job__form {
+    height: 70dvh;
+  }
+}
+
+@media (min-width: 1440px) {
+  .edit__job__form {
+    height: 60dvh;
+  }
+
+  .form__fieldset {
+    padding: 0 25rem 2rem;
+  }
+  .form__button {
+    width: 30%;
+  }
+}
+
+@media (min-width: 2500px) {
+  .edit__job__form {
+    height: 55dvh;
+  }
+
+  .form__fieldset {
+    padding: 0 45rem 2rem;
+  }
+  .form__button {
+    width: 30%;
+  }
+}

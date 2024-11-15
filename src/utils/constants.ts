@@ -53,3 +53,7 @@ export const VALID_CATEGORIES = [
   "video",
   "writing",
 ];
+
+// Job detail
+export const TITLE_MAX_CHARS = 60;
+export const EXCERPT_MAX_CHARS = 200;

@@ -16,6 +16,7 @@ import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import RegularButton from "../../components/shared/buttons/RegularButton";
 import imgNotAvailable from "../../assets/thumb_img_not_available.jpg";
+import EditJob from "./EditJob";
 
 interface AdminJobsSectionProps {
   jobsList: JobExample[];
@@ -39,6 +40,8 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
   const [alertMessage, setAlertMessage] = useState("");
   const [confirmDeletion, setConfirmDeletion] = useState(false);
   const [jobToDelete, setJobToDelete] = useState("");
+  const [jobToEdit, setJobToEdit] = useState("");
+  const [showEditForm, setShowEditForm] = useState(false);
 
   useEffect(() => {
     if (!error && successMessage) {
@@ -57,6 +60,11 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
     await dispatch(deleteJobThunk({ jobId }));
     await dispatch(getJobExamplesListThunk({ limit: "1000" }));
     setConfirmDeletion(false);
+  };
+
+  const handleEditJob = (jobId: string) => {
+    setJobToEdit(jobId);
+    setShowEditForm(true);
   };
 
   const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -105,7 +113,10 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
                   />
                 </picture>
                 <p>{jobExample.versions[0].title}</p>
-                <i className="fa-solid fa-pen-to-square"></i>
+                <i
+                  className="fa-solid fa-pen-to-square"
+                  onClick={() => handleEditJob(jobExample._id)}
+                ></i>
                 <i
                   className="fa-solid fa-trash"
                   onClick={() => handleConfirmDeleteJob(jobExample._id)}
@@ -135,6 +146,11 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
               </RegularButton>
             </span>
           </div>
+        </section>
+      )}
+      {showEditForm && (
+        <section>
+          <EditJob jobId={jobToEdit} />
         </section>
       )}
     </section>
