@@ -32,7 +32,7 @@ const JobDetailSlice = createSlice({
       })
       .addCase(getJobDetailThunk.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload as string;
       })
       .addCase(deleteJobThunk.pending, (state) => {
         state.loading = true;
@@ -45,7 +45,7 @@ const JobDetailSlice = createSlice({
       })
       .addCase(deleteJobThunk.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload as string;
       });
   },
 });

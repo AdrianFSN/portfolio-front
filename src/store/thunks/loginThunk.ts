@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { client, setAuthorizationHeader } from "../../api/client";
 import { SESSION_LOGIN_API_URI } from "../../utils/constants";
 import storage from "../../utils/storage";
@@ -13,16 +13,20 @@ interface FetchLoginParams {
 export const loginThunk = createAsyncThunk<
   AxiosResponse<AuthResponseInterface>,
   FetchLoginParams
->("login", async ({ email, password }) => {
-  const credentials = {
-    email,
-    password,
-  };
-  const url = SESSION_LOGIN_API_URI;
-  const response = await client.post(url, credentials);
+>("login", async ({ email, password }, { rejectWithValue }) => {
+  try {
+    const credentials = {
+      email,
+      password,
+    };
+    const url = SESSION_LOGIN_API_URI;
+    const response = await client.post(url, credentials);
 
-  setAuthorizationHeader(response.data.token);
-  storage.set("authToken", response.data.token);
+    setAuthorizationHeader(response.data.token);
+    storage.set("authToken", response.data.token);
 
-  return response;
+    return response;
+  } catch (error) {
+    return rejectWithValue((error as AxiosError).message);
+  }
 });

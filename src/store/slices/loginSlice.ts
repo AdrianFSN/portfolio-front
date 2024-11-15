@@ -41,7 +41,7 @@ const loginSlice = createSlice({
         state.loading = false;
         state.message = "Something went wrong";
         state.state = "error";
-        state.error = action.error.message;
+        state.error = action.payload as string;
       });
   },
 });
