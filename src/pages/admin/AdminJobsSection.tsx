@@ -4,6 +4,7 @@ import { IMG_THUMBNAILS_DB_PATH, ORIGIN } from "../../utils/constants";
 import { AppDispatch } from "../../store/store";
 import { useDispatch } from "react-redux";
 import { deleteJobThunk } from "../../store/thunks/jobDetailThunk";
+import { getJobExamplesListThunk } from "../../store/thunks/jobExamplesListThunk";
 
 interface AdminJobsSectionProps {
   jobsList: JobExample[];
@@ -21,8 +22,9 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
   const filteredList = jobsList
     ? jobsList.filter((jobExample) => jobExample.category.includes(category))
     : [];
-  const handleDeleteJob = (jobId: string) => {
-    dispatch(deleteJobThunk({ jobId }));
+  const handleDeleteJob = async (jobId: string) => {
+    await dispatch(deleteJobThunk({ jobId }));
+    await dispatch(getJobExamplesListThunk({ limit: "1000" }));
   };
 
   return (
