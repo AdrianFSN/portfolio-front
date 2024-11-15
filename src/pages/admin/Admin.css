@@ -41,3 +41,35 @@
 .main__admin p {
   margin-left: 1rem;
 }
+
+.confirm__delete__job__overlay {
+  position: fixed;
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.overlay__content {
+  background: var(--body-color);
+  margin: 1rem;
+  padding: 3rem;
+  border-radius: 3px;
+}
+
+.overlay__message {
+  margin-bottom: 1rem;
+}
+
+.overlay__buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}

@@ -20,6 +20,9 @@
     "writing": "Writing"
   },
   "generic": {
-    "empty_section": "This section is empty"
+    "empty_section": "This section is empty",
+    "confirm_deletion": "Are you sure you want to delete this?",
+    "cancel": "Cancel",
+    "yes": "Yes"
   }
 }

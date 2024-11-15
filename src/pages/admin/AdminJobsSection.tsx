@@ -14,6 +14,7 @@ import CustomAlert from "../../components/shared/alert/CustomAlert";
 import { useEffect, useState } from "react";
 import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
+import RegularButton from "../../components/shared/buttons/RegularButton";
 
 interface AdminJobsSectionProps {
   jobsList: JobExample[];
@@ -35,6 +36,8 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
   const successMessage = useSelector(getJobDetailMessageSelector);
   const isLoading = useSelector(getJobDetailLoadingSelector);
   const [alertMessage, setAlertMessage] = useState("");
+  const [confirmDeletion, setConfirmDeletion] = useState(false);
+  const [jobToDelete, setJobToDelete] = useState("");
 
   useEffect(() => {
     if (!error && successMessage) {
@@ -44,9 +47,15 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
     }
   }, [successMessage, error]);
 
+  const handleConfirmDeleteJob = (jobId: string) => {
+    setConfirmDeletion(true);
+    setJobToDelete(jobId);
+  };
+
   const handleDeleteJob = async (jobId: string) => {
     await dispatch(deleteJobThunk({ jobId }));
     await dispatch(getJobExamplesListThunk({ limit: "1000" }));
+    setConfirmDeletion(false);
   };
 
   const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -56,7 +65,7 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
   };
 
   return (
-    <div>
+    <section>
       {alertMessage && (
         <CustomAlert
           type={error ? "error" : "success"}
@@ -90,7 +99,7 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
                 <i className="fa-solid fa-pen-to-square"></i>
                 <i
                   className="fa-solid fa-trash"
-                  onClick={() => handleDeleteJob(jobExample._id)}
+                  onClick={() => handleConfirmDeleteJob(jobExample._id)}
                 ></i>
               </li>
             ))}
@@ -99,7 +108,27 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
       ) : (
         <p>{t("generic.empty_section")}</p>
       )}
-    </div>
+      {confirmDeletion && (
+        <section className="confirm__delete__job__overlay">
+          <div className="overlay__content">
+            <div className="overlay__message">
+              {t("generic.confirm_deletion")}
+            </div>
+            <span className="overlay__buttons">
+              <RegularButton onClick={() => setConfirmDeletion(false)}>
+                {t("generic.cancel")}
+              </RegularButton>{" "}
+              <RegularButton
+                skin="danger"
+                onClick={() => handleDeleteJob(jobToDelete)}
+              >
+                {t("generic.yes")}
+              </RegularButton>
+            </span>
+          </div>
+        </section>
+      )}
+    </section>
   );
 };
 export default AdminJobsSection;
