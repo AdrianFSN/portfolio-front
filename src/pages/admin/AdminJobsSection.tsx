@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import RegularButton from "../../components/shared/buttons/RegularButton";
+import imgNotAvailable from "../../assets/thumb_img_not_available.jpg";
 
 interface AdminJobsSectionProps {
   jobsList: JobExample[];
@@ -83,14 +84,22 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
                 <picture>
                   <source
                     media="(max-width: 767px)"
-                    srcSet={`${imgUrlPath}${encodeURIComponent(
+                    srcSet={
                       jobExample.pictures.mainPicture
-                    )}`}
+                        ? `${imgUrlPath}${encodeURIComponent(
+                            jobExample.pictures.mainPicture
+                          )}`
+                        : imgNotAvailable
+                    }
                   />
                   <img
-                    src={`${imgUrlPath}${encodeURIComponent(
+                    src={
                       jobExample.pictures.mainPicture
-                    )}`}
+                        ? `${imgUrlPath}${encodeURIComponent(
+                            jobExample.pictures.mainPicture
+                          )}`
+                        : imgNotAvailable
+                    }
                     alt={jobExample.versions[0].title}
                     crossOrigin={origin}
                   />

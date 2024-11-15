@@ -2,6 +2,7 @@ import { JobExample } from "../../@types/jobExample";
 import { IMAGES_DB_PATH, ORIGIN } from "../../utils/constants";
 import useCarousel from "../../hooks/useCarousel";
 import "../../components/shared/caroussel/caroussel.css";
+import imgNotAvailable from "../../assets/img_not_available.jpg";
 
 interface JobsCarousselProps {
   items: JobExample[];
@@ -10,7 +11,7 @@ interface JobsCarousselProps {
 
 const JobsCaroussel: React.FC<JobsCarousselProps> = ({ items, autoPlay }) => {
   const origin = ORIGIN;
-  const imgUrlPath = `${IMAGES_DB_PATH}`;
+  const imgUrlPath = IMAGES_DB_PATH;
   const { currentItem, currentIndex, animationClass } = useCarousel(
     items,
     5000,
@@ -26,15 +27,23 @@ const JobsCaroussel: React.FC<JobsCarousselProps> = ({ items, autoPlay }) => {
         <picture className="caroussel__item__picture">
           <source
             media="(max-width: 767px)"
-            srcSet={`${imgUrlPath}${encodeURIComponent(
+            srcSet={
               (currentItem as JobExample).pictures.mainPicture
-            )}`}
+                ? `${imgUrlPath}${encodeURIComponent(
+                    (currentItem as JobExample).pictures.mainPicture
+                  )}`
+                : imgNotAvailable
+            }
           />
           <img
             className="caroussel__img__fade"
-            src={`${imgUrlPath}${encodeURIComponent(
+            src={
               (currentItem as JobExample).pictures.mainPicture
-            )}`}
+                ? `${imgUrlPath}${encodeURIComponent(
+                    (currentItem as JobExample).pictures.mainPicture
+                  )}`
+                : imgNotAvailable
+            }
             alt={(currentItem as JobExample).versions[0].title}
             crossOrigin={origin}
           />

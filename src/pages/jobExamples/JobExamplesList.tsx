@@ -10,6 +10,7 @@ import { ORIGIN, IMG_THUMBNAILS_DB_PATH } from "../../utils/constants";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import convertStringToIcon from "../../utils/convertStringToIcon";
 import icons from "../../utils/icons";
+import imgNotAvailable from "../../assets/img_not_available.jpg";
 
 const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
   const origin = ORIGIN;
@@ -43,15 +44,23 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
                   <picture className="porfolio__item__picture">
                     <source
                       media="(max-width: 767px)"
-                      srcSet={`${imgUrlPath}${encodeURIComponent(
+                      srcSet={
                         jobExample.pictures.mainPicture
-                      )}`}
+                          ? `${imgUrlPath}${encodeURIComponent(
+                              jobExample.pictures.mainPicture
+                            )}`
+                          : imgNotAvailable
+                      }
                     />
 
                     <img
-                      src={`${imgUrlPath}${encodeURIComponent(
+                      src={
                         jobExample.pictures.mainPicture
-                      )}`}
+                          ? `${imgUrlPath}${encodeURIComponent(
+                              jobExample.pictures.mainPicture
+                            )}`
+                          : imgNotAvailable
+                      }
                       alt={jobExample.versions[0].title}
                       crossOrigin={origin}
                     />
