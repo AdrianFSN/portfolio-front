@@ -84,7 +84,10 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
         </CustomAlert>
       )}
       {isLoading && <CustomPulseLoader isLoading={isLoading} />}
-      {!isLoading && filteredList && filteredList.length > 0 ? (
+      {!showEditForm &&
+      !isLoading &&
+      filteredList &&
+      filteredList.length > 0 ? (
         <section>
           <ul>
             {filteredList.map((jobExample) => (

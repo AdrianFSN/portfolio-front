@@ -55,5 +55,5 @@ export const VALID_CATEGORIES = [
 ];
 
 // Job detail
-export const TITLE_MAX_CHARS = 60;
-export const EXCERPT_MAX_CHARS = 200;
+export const TITLE_MAX_LENGTH = 60;
+export const EXCERPT_MAX_LENGTH = 200;

@@ -34,6 +34,7 @@ const Admin = () => {
           <>
             <h2>{t(`admin.${category}`)}</h2>
             <AdminJobsSection
+              key={category}
               jobsList={jobsList}
               category={category}
             />

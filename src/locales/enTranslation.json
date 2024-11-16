@@ -20,7 +20,13 @@
     "writing": "Writing",
     "edit_job": "Edit Job",
     "job_title": "Job Title",
-    "job_excerpt": "Job Excerpt"
+    "job_excerpt": "Job Excerpt",
+    "descriptive_info": "Descriptive info",
+    "context_info": "Context",
+    "launch_period": "Launch period",
+    "customer": "customer",
+    "link_to_url": "Project's URL",
+    "link_to_github": "Link to Github"
   },
   "generic": {
     "empty_section": "This section is empty",
