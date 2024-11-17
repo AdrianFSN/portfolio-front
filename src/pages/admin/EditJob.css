@@ -79,6 +79,18 @@
   font-weight: bold;
 }
 
+.login__fieldset__field .file__section__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.delete__former__file {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
 .form__input.form__file {
   width: 100%;
   padding: 0.5rem 0;

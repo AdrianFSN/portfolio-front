@@ -11,6 +11,9 @@ export interface Pictures {
   _id: string;
   mainPicture: string;
   picture2: string;
+  picture3: string;
+  picture4: string;
+  picture5: string;
 }
 
 export interface Videos {
