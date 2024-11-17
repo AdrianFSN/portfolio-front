@@ -31,14 +31,13 @@ const Admin = () => {
       {isLoading && <CustomPulseLoader isLoading={isLoading} />}
       {jobsList && jobsList.length > 0 ? (
         VALID_CATEGORIES.map((category) => (
-          <>
+          <div key={category}>
             <h2>{t(`admin.${category}`)}</h2>
             <AdminJobsSection
-              key={category}
               jobsList={jobsList}
               category={category}
             />
-          </>
+          </div>
         ))
       ) : (
         <div>{t("generic.empty_section")}</div>

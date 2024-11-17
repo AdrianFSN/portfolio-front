@@ -1,14 +1,8 @@
 .edit__job__form {
   /* position: fixed; */
   width: 100%;
-  height: 100dvh;
-  background: rgba(0, 0, 0, 0.5);
-  /*   top: 50%;
-  left: 50%; */
-  /*  transform: translate(-50%, -50%); */
 
   text-align: center;
-  /* z-index: 10; */
 }
 
 .edit__job__form h1 {
@@ -21,10 +15,6 @@
 }
 
 .job__form {
-  /*   position: absolute; */
-  /* top: 50%;
-  left: 50%; */
-  /* transform: translate(-50%, -50%); */
   background: var(--bg-color);
   display: flex;
   flex-direction: column;
@@ -70,7 +60,7 @@
 
 .form__input {
   padding: 1rem;
-  background: var(--bg-color);
+  background: var(--body-color);
   color: var(--main-text-color);
   border: 1px dotted var(--main-text-color);
   border-radius: 3px;
@@ -80,6 +70,27 @@
 .form__input::placeholder {
   color: var(--main-text-color);
   text-align: center;
+}
+
+.form__select {
+  background: var(--body-color);
+}
+
+.form__select option:checked {
+  background-color: var(--main-brand-color);
+  font-weight: bold;
+}
+
+.form__input.form__file {
+  width: 100%;
+  padding: 0.5rem 0;
+  margin: 0 auto;
+}
+
+.file-upload-label.form__file__button {
+  background: var(--body-color);
+  border: 1px dotted var(--main-brand-color);
+  border-radius: 3px;
 }
 
 .form__button {

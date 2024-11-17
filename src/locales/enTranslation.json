@@ -26,13 +26,22 @@
     "launch_period": "Launch period",
     "customer": "customer",
     "link_to_url": "Project's URL",
-    "link_to_github": "Link to Github"
+    "link_to_github": "Link to Github",
+    "job_type": "Job type",
+    "category": "Category",
+    "technologies": "Technologies",
+    "job_files": "Job files",
+    "main_picture": "Main Picture",
+    "picture2": "Picture 2",
+    "delete_old_file": "Delete old file"
   },
   "generic": {
     "empty_section": "This section is empty",
     "confirm_deletion": "Are you sure you want to delete this?",
     "cancel": "Cancel",
     "yes": "Yes",
-    "characters": "characters"
+    "characters": "characters",
+    "no_file_chosen": "No file chosen",
+    "choose_a_file": "Choose a file"
   }
 }

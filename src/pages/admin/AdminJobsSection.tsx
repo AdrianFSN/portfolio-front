@@ -1,6 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { JobExample } from "../../@types/jobExample";
-import { IMG_THUMBNAILS_DB_PATH, ORIGIN } from "../../utils/constants";
+import {
+  ADMIN_ROUTES_PATH,
+  IMG_THUMBNAILS_DB_PATH,
+  ORIGIN,
+} from "../../utils/constants";
 import { AppDispatch } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteJobThunk } from "../../store/thunks/jobDetailThunk";
@@ -16,7 +20,7 @@ import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import RegularButton from "../../components/shared/buttons/RegularButton";
 import imgNotAvailable from "../../assets/thumb_img_not_available.jpg";
-import EditJob from "./EditJob";
+import { useNavigate } from "react-router-dom";
 
 interface AdminJobsSectionProps {
   jobsList: JobExample[];
@@ -29,6 +33,7 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
 }) => {
   const { t } = useTranslation();
   const imgUrlPath = `${IMG_THUMBNAILS_DB_PATH}`;
+  const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const origin = ORIGIN;
   const filteredList = jobsList
@@ -41,7 +46,7 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
   const [confirmDeletion, setConfirmDeletion] = useState(false);
   const [jobToDelete, setJobToDelete] = useState("");
   const [jobToEdit, setJobToEdit] = useState("");
-  const [showEditForm, setShowEditForm] = useState(false);
+  const toEditForm = `${ADMIN_ROUTES_PATH}/${jobToEdit}`;
 
   useEffect(() => {
     if (!error && successMessage) {
@@ -50,6 +55,13 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
       setAlertMessage(error as string);
     }
   }, [successMessage, error]);
+
+  useEffect(() => {
+    if (jobToEdit) {
+      navigate(toEditForm);
+      setJobToEdit("");
+    }
+  }, [jobToEdit, navigate, toEditForm]);
 
   const handleConfirmDeleteJob = (jobId: string) => {
     setConfirmDeletion(true);
@@ -64,7 +76,6 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
 
   const handleEditJob = (jobId: string) => {
     setJobToEdit(jobId);
-    setShowEditForm(true);
   };
 
   const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -84,10 +95,7 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
         </CustomAlert>
       )}
       {isLoading && <CustomPulseLoader isLoading={isLoading} />}
-      {!showEditForm &&
-      !isLoading &&
-      filteredList &&
-      filteredList.length > 0 ? (
+      {!isLoading && filteredList && filteredList.length > 0 ? (
         <section>
           <ul>
             {filteredList.map((jobExample) => (
@@ -149,11 +157,6 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
               </RegularButton>
             </span>
           </div>
-        </section>
-      )}
-      {showEditForm && (
-        <section>
-          <EditJob jobId={jobToEdit} />
         </section>
       )}
     </section>
