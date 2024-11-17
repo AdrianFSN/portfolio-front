@@ -33,7 +33,14 @@
     "job_files": "Job files",
     "main_picture": "Main Picture",
     "picture2": "Picture 2",
-    "delete_old_file": "Delete old file"
+    "picture3": "Picture 3",
+    "picture4": "Picture 4",
+    "picture5": "Picture 5",
+    "main_video": "Main video",
+    "video2": "Video 2",
+    "main_audio": "Main audio",
+    "audio2": "Audio 2",
+    "delete_old_file": "Delete former file"
   },
   "generic": {
     "empty_section": "This section is empty",

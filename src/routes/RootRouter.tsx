@@ -18,7 +18,7 @@ const RootRouter = () => {
         element={<Development category="development" />}
       />
       <Route
-        path="/:id"
+        path="/job/:id"
         element={<Job />}
       />
       <Route
@@ -27,12 +27,8 @@ const RootRouter = () => {
       />
 
       {/** Private Routes */}
-      {/*  <Route
-        path="/admin"
-        element={<Admin />}
-      /> */}
       <Route
-        path="/admin"
+        path="/edit"
         element={<Outlet />}
       >
         <Route

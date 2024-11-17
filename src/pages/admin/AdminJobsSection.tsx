@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { JobExample } from "../../@types/jobExample";
 import {
-  ADMIN_ROUTES_PATH,
+  EDIT_ROUTES_PATH,
   IMG_THUMBNAILS_DB_PATH,
   ORIGIN,
 } from "../../utils/constants";
@@ -46,7 +46,7 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
   const [confirmDeletion, setConfirmDeletion] = useState(false);
   const [jobToDelete, setJobToDelete] = useState("");
   const [jobToEdit, setJobToEdit] = useState("");
-  const toEditForm = `${ADMIN_ROUTES_PATH}/${jobToEdit}`;
+  const toEditForm = `${EDIT_ROUTES_PATH}/${jobToEdit}`;
 
   useEffect(() => {
     if (!error && successMessage) {

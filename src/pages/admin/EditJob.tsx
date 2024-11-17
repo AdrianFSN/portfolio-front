@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./EditJob.css";
 import { useTranslation } from "react-i18next";
 import RegularButton from "../../components/shared/buttons/RegularButton";
@@ -8,15 +8,16 @@ import {
   TITLE_MAX_LENGTH,
   VALID_CATEGORIES,
 } from "../../utils/constants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getJobDetailSelector } from "../../store/selectors/JobExamplesSelectors/jobDetailSelectors";
+import { getJobDetailThunk } from "../../store/thunks/jobDetailThunk";
+import { AppDispatch } from "../../store/store";
+import { useParams } from "react-router-dom";
 
-interface EditJobProps {
-  jobId?: string;
-}
-
-const EditJob: React.FC<EditJobProps> = ({ jobId }) => {
+const EditJob = () => {
   const { t } = useTranslation();
+  const { jobId } = useParams();
+  const dispatch: AppDispatch = useDispatch();
   const isLoading = false;
   const [inputTitle, setInputTitle] = useState("");
   const [inputExcerpt, setInputExcerpt] = useState("");
@@ -36,6 +37,68 @@ const EditJob: React.FC<EditJobProps> = ({ jobId }) => {
   const [inputMainAudio, setInputMainAudio] = useState("");
   const [inputAudio2, setInputAudio2] = useState("");
   const job = useSelector(getJobDetailSelector);
+  const jobFiles = [
+    {
+      key: "mainPicture",
+      fileInput: inputMainPicture,
+      setFile: (fileName: string) => setInputMainPicture(fileName),
+      title: t("admin.main_picture"),
+    },
+    {
+      key: "picture2",
+      fileInput: inputPicture2,
+      setFile: (fileName: string) => setInputPicture2(fileName),
+      title: t("admin.picture2"),
+    },
+    {
+      key: "picture3",
+      fileInput: inputPicture3,
+      setFile: (fileName: string) => setInputPicture3(fileName),
+      title: t("admin.picture3"),
+    },
+    {
+      key: "picture4",
+      fileInput: inputPicture4,
+      setFile: (fileName: string) => setInputPicture4(fileName),
+      title: t("admin.picture4"),
+    },
+    {
+      key: "picture5",
+      fileInput: inputPicture5,
+      setFile: (fileName: string) => setInputPicture5(fileName),
+      title: t("admin.picture5"),
+    },
+    {
+      key: "mainVideo",
+      fileInput: inputMainVideo,
+      setFile: (fileName: string) => setInputMainVideo(fileName),
+      title: t("admin.main_video"),
+    },
+    {
+      key: "video2",
+      fileInput: inputVideo2,
+      setFile: (fileName: string) => setInputVideo2(fileName),
+      title: t("admin.video2"),
+    },
+    {
+      key: "mainAudio",
+      fileInput: inputMainAudio,
+      setFile: (fileName: string) => setInputMainAudio(fileName),
+      title: t("admin.main_audio"),
+    },
+    {
+      key: "audio2",
+      fileInput: inputAudio2,
+      setFile: (fileName: string) => setInputAudio2(fileName),
+      title: t("admin.audio2"),
+    },
+  ];
+
+  useEffect(() => {
+    if (jobId) {
+      dispatch(getJobDetailThunk({ jobId }));
+    }
+  }, [jobId, dispatch]);
 
   console.log("Este es el job que voy a editar: ", job);
 
@@ -225,77 +288,40 @@ const EditJob: React.FC<EditJobProps> = ({ jobId }) => {
           <legend>
             <h3>{t("admin.job_files")}</h3>
           </legend>
-          <div className="login__fieldset__field">
-            <label
-              className="form__label"
-              htmlFor="mainPicture"
+          {jobFiles.map((fileItem) => (
+            <div
+              className="login__fieldset__field"
+              key={fileItem.key}
             >
-              <h4>{t("admin.main_picture")}</h4>
-            </label>
-            <input
-              className="form__input form__file"
-              type="file"
-              id="mainPicture"
-              onChange={(e) => {
-                const file = e.target.files ? e.target.files[0] : null;
-                setInputMainPicture(
-                  file ? file.name : `${t("generic.no_file_chosen")}`
-                );
-              }}
-              name="MainPicture"
-              style={{ display: "none" }}
-            />
-
-            <label
-              htmlFor="mainPicture"
-              className="file-upload-label form__file__button"
-            >
-              {inputMainPicture || t("generic.choose_a_file")}
-            </label>
-          </div>
-          <div className="login__fieldset__field">
-            <label
-              className="form__label"
-              htmlFor="picture2"
-            >
-              <h4>{t("admin.picture2")}</h4>
-            </label>
-            <input
-              className="form__input form__file"
-              type="file"
-              id="picture2"
-              onChange={(e) => {
-                const file = e.target.files ? e.target.files[0] : null;
-                setInputPicture2(
-                  file ? file.name : `${t("generic.no_file_chosen")}`
-                );
-              }}
-              name="Picture2"
-              style={{ display: "none" }}
-            />
-            <div>
-              <label
-                htmlFor="picture2"
-                className="file-upload-label form__file__button"
-              >
-                {inputPicture2 || t("generic.choose_a_file")}
-              </label>
-              <span>
+              <div>
+                <label
+                  className="form__label"
+                  htmlFor={fileItem.key}
+                >
+                  <h4>{fileItem.title}</h4>
+                </label>
                 <input
-                  type="checkbox"
-                  id="deleteMainPicture"
-                  name="DeleteMainPicture"
-                  checked={false}
+                  className="form__input form__file"
+                  type="file"
+                  id={fileItem.key}
+                  onChange={(e) => {
+                    const file = e.target.files ? e.target.files[0] : null;
+                    fileItem.setFile(
+                      file ? file.name : `${t("generic.no_file_chosen")}`
+                    );
+                  }}
+                  name={fileItem.key}
+                  style={{ display: "none" }}
                 />
                 <label
-                  htmlFor="deleteMainPicture"
-                  className="form__label"
+                  htmlFor={fileItem.key}
+                  className="file-upload-label form__file__button"
                 >
-                  {t("admin.delete_old_file")}
+                  {fileItem.fileInput || t("generic.choose_a_file")}
                 </label>
-              </span>
+              </div>
             </div>
-          </div>
+          ))}
         </fieldset>
 
         <RegularButton
