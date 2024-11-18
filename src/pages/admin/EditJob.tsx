@@ -19,140 +19,97 @@ const EditJob = () => {
   const { jobId } = useParams();
   const dispatch: AppDispatch = useDispatch();
   const isLoading = false;
-  const [inputTitle, setInputTitle] = useState("");
-  const [inputExcerpt, setInputExcerpt] = useState("");
-  const [inputLaunchPeriod, setInputLaunchPeriod] = useState("");
-  const [inputLinkToUrl, setInputLinkToUrl] = useState("");
-  const [inputCustomer, setInputCustomer] = useState("");
-  const [inputLinkToGithub, setInputLinkToGithub] = useState("");
-  const [inputCategory, setInputCategory] = useState<string[]>([]);
-  const [inputTechnologies, setInputTechnologies] = useState("");
-  const [inputMainPicture, setInputMainPicture] = useState("");
-  const [inputPicture2, setInputPicture2] = useState("");
-  const [inputPicture3, setInputPicture3] = useState("");
-  const [inputPicture4, setInputPicture4] = useState("");
-  const [inputPicture5, setInputPicture5] = useState("");
-  const [inputMainVideo, setInputMainVideo] = useState("");
-  const [inputVideo2, setInputVideo2] = useState("");
-  const [inputMainAudio, setInputMainAudio] = useState("");
-  const [inputAudio2, setInputAudio2] = useState("");
-  const [deleteMainPicture, setDeleteMainPicture] = useState(false);
-  const [deletePicture2, setDeletePicture2] = useState(false);
-  const [deletePicture3, setDeletePicture3] = useState(false);
-  const [deletePicture4, setDeletePicture4] = useState(false);
-  const [deletePicture5, setDeletePicture5] = useState(false);
-  const [deleteMainVideo, setDeleteMainVideo] = useState(false);
-  const [deleteVideo2, setDeleteVideo2] = useState(false);
-  const [deleteMainAudio, setDeleteMainAudio] = useState(false);
-  const [deleteAudio2, setDeleteAudio2] = useState(false);
   const job = useSelector(getJobDetailSelector);
   const jobFiles = [
     {
       key: "mainPicture",
-      fileInput: inputMainPicture,
       current: job && job.pictures.mainPicture ? job.pictures.mainPicture : "",
-      setFile: (fileName: string) => setInputMainPicture(fileName),
       title: t("admin.main_picture"),
-      deletionFlag: deleteMainPicture,
-      setDeletionFlag: (value: boolean) => setDeleteMainPicture(value),
+      fileExtension: ["jpg", "jpg", "png", "gif"],
     },
     {
       key: "picture2",
-      fileInput: inputPicture2,
       current: job && job.pictures.picture2 ? job.pictures.picture2 : "",
-      setFile: (fileName: string) => setInputPicture2(fileName),
       title: t("admin.picture2"),
-      deletionFlag: deletePicture2,
-      setDeletionFlag: (value: boolean) => setDeletePicture2(value),
+      fileExtension: ["jpg", "jpg", "png", "gif"],
     },
     {
       key: "picture3",
-      fileInput: inputPicture3,
       current: job && job.pictures.picture3 ? job.pictures.picture3 : "",
-      setFile: (fileName: string) => setInputPicture3(fileName),
       title: t("admin.picture3"),
-      deletionFlag: deletePicture3,
-      setDeletionFlag: (value: boolean) => setDeletePicture3(value),
+      fileExtension: ["jpg", "jpg", "png", "gif"],
     },
     {
       key: "picture4",
-      fileInput: inputPicture4,
       current: job && job.pictures.picture4 ? job.pictures.picture4 : "",
-      setFile: (fileName: string) => setInputPicture4(fileName),
       title: t("admin.picture4"),
-      deletionFlag: deletePicture4,
-      setDeletionFlag: (value: boolean) => setDeletePicture4(value),
+      fileExtension: ["jpg", "jpg", "png", "gif"],
     },
     {
       key: "picture5",
-      fileInput: inputPicture5,
       current: job && job.pictures.picture5 ? job.pictures.picture5 : "",
-      setFile: (fileName: string) => setInputPicture5(fileName),
       title: t("admin.picture5"),
-      deletionFlag: deletePicture5,
-      setDeletionFlag: (value: boolean) => setDeletePicture5(value),
+      fileExtension: ["jpg", "jpg", "png", "gif"],
     },
     {
       key: "mainVideo",
-      fileInput: inputMainVideo,
       current: job && job.videos.mainVideo ? job.videos.mainVideo : "",
-      setFile: (fileName: string) => setInputMainVideo(fileName),
       title: t("admin.main_video"),
-      deletionFlag: deleteMainVideo,
-      setDeletionFlag: (value: boolean) => setDeleteMainVideo(value),
+      fileExtension: ["mp4"],
     },
     {
       key: "video2",
-      fileInput: inputVideo2,
       current: job && job.videos.video2 ? job.videos.video2 : "",
-      setFile: (fileName: string) => setInputVideo2(fileName),
       title: t("admin.video2"),
-      deletionFlag: deleteVideo2,
-      setDeletionFlag: (value: boolean) => setDeleteVideo2(value),
+      fileExtension: ["mp4"],
     },
     {
       key: "mainAudio",
-      fileInput: inputMainAudio,
       current: job && job.audios.mainAudio ? job.audios.mainAudio : "",
-      setFile: (fileName: string) => setInputMainAudio(fileName),
       title: t("admin.main_audio"),
-      deletionFlag: deleteMainAudio,
-      setDeletionFlag: (value: boolean) => setDeleteMainAudio(value),
+      fileExtension: ["mp3", "mpeg"],
     },
     {
       key: "audio2",
-      fileInput: inputAudio2,
       current: job && job.audios.audio2 ? job.audios.audio2 : "",
-      setFile: (fileName: string) => setInputAudio2(fileName),
       title: t("admin.audio2"),
-      deletionFlag: deleteAudio2,
-      setDeletionFlag: (value: boolean) => setDeleteAudio2(value),
+      fileExtension: ["mp3", "mpeg"],
     },
   ];
-  const [formData, setFormData] = useState({
+  const [textData, setTextData] = useState({
     title: "",
     technologies: [],
     launchPeriod: "",
     info: "",
     linkToUrl: "",
     linkToGitHub: "",
+    customer: "",
     category: [],
+  });
+
+  const [picturesData, setPicturesData] = useState({
     mainPicture: null,
     picture2: null,
     picture3: null,
     picture4: null,
     picture5: null,
-    mainVideo: null,
-    video2: null,
-    mainAudio: null,
-    audio2: null,
     deleteMainPicture: false,
     deletePicture2: false,
     deletePicture3: false,
     deletePicture4: false,
     deletePicture5: false,
+  });
+
+  const [videosData, setVideosData] = useState({
+    mainVideo: null,
+    video2: null,
     deleteMainVideo: false,
     deleteVideo2: false,
+  });
+
+  const [audiosData, setAudiosData] = useState({
+    mainAudio: null,
+    audio2: null,
     deleteMainAudio: false,
     deleteAudio2: false,
   });
@@ -163,24 +120,80 @@ const EditJob = () => {
     }
   }, [jobId, dispatch]);
 
+  useEffect(() => {
+    console.log("Esto es textData: ", textData);
+    console.log("Esto es picturesData: ", picturesData);
+    console.log("Esto es videosData: ", videosData);
+    console.log("Esto es audiosData: ", audiosData);
+  }, [textData, picturesData, audiosData, videosData]);
+
   console.log("Este es el job que voy a editar: ", job);
 
-  useEffect(() => {
-    if (job) {
-      setFormValues({
-        title: inputTitle ? inputTitle : job.versions[0].title,
-        technologies: inputTechnologies
-          ? inputTechnologies
-          : job.versions[0].technologies,
-        launchPeriod: inputLaunchPeriod ? inputLaunchPeriod : job.launchPeriod,
-        info: inputExcerpt ? inputExcerpt : job.versions[0].info,
-        inputLinkToUrl: inputLinkToUrl ? inputLinkToUrl : job.linkToUrl,
-        inputLinkToGitHub: inputLinkToGithub
-          ? inputLinkToGithub
-          : job.linkToGitHub,
-      });
+  const handleTextOnChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name } = event.target;
+    setTextData((prevFormData) => ({
+      ...prevFormData,
+      [name]: event.target.value,
+    }));
+  };
+
+  const handlePicturesOnChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, type } = event.target;
+
+    if (type === "checkbox") {
+      setPicturesData((prevFormData) => ({
+        ...prevFormData,
+        [name]: (event.target as HTMLInputElement).checked,
+      }));
+    } else if (type === "file") {
+      const files = (event.target as HTMLInputElement).files;
+      setPicturesData((prevFormData) => ({
+        ...prevFormData,
+        [name]: files?.[0] || null,
+      }));
     }
-  });
+  };
+  const handleVideosOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, type } = event.target;
+
+    if (type === "checkbox") {
+      setVideosData((prevFormData) => ({
+        ...prevFormData,
+        [name]: (event.target as HTMLInputElement).checked,
+      }));
+    } else if (type === "file") {
+      const files = (event.target as HTMLInputElement).files;
+      setVideosData((prevFormData) => ({
+        ...prevFormData,
+        [name]: files?.[0] || null,
+      }));
+    }
+  };
+
+  const handleAudiosOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, type } = event.target;
+
+    if (type === "checkbox") {
+      setAudiosData((prevFormData) => ({
+        ...prevFormData,
+        [name]: (event.target as HTMLInputElement).checked,
+      }));
+    } else if (type === "file") {
+      const files = (event.target as HTMLInputElement).files;
+      setAudiosData((prevFormData) => ({
+        ...prevFormData,
+        [name]: files?.[0] || null,
+      }));
+    }
+  };
+
+  const handleSubmit = () => {};
 
   return (
     <main className="edit__job__form">
@@ -205,15 +218,17 @@ const EditJob = () => {
               <input
                 className="form__input"
                 type="text"
-                value={inputTitle ? inputTitle : job.versions[0].title}
-                onChange={(e) => setInputTitle(e.target.value)}
-                name="Title"
+                value={textData.title}
+                onChange={handleTextOnChange}
+                name="title"
                 id="title"
                 placeholder={t("admin.job_title")}
                 max-length={TITLE_MAX_LENGTH}
               />
               <p>{`${
-                inputTitle ? inputTitle.length : job.versions[0].title.length
+                textData.title
+                  ? textData.title.length
+                  : job.versions[0].title.length
               } / ${TITLE_MAX_LENGTH} ${t("generic.characters")}`}</p>
             </div>
             <div className="login__fieldset__field">
@@ -225,15 +240,17 @@ const EditJob = () => {
               </label>
               <textarea
                 className="form__input"
-                value={inputExcerpt ? inputExcerpt : job.versions[0].info}
-                onChange={(e) => setInputExcerpt(e.target.value)}
-                name="Excerpt"
+                value={textData.info}
+                onChange={handleTextOnChange}
+                name="info"
                 id="excerpt"
                 placeholder={t("admin.job_excerpt")}
                 max-length={EXCERPT_MAX_LENGTH}
               />
               <p>{`${
-                inputExcerpt ? inputExcerpt.length : job.versions[0].info.length
+                textData.info
+                  ? textData.info.length
+                  : job.versions[0].info.length
               } / ${EXCERPT_MAX_LENGTH} ${t("generic.characters")}`}</p>
             </div>
           </fieldset>
@@ -251,9 +268,9 @@ const EditJob = () => {
               <input
                 className="form__input"
                 type="text"
-                value={inputLaunchPeriod ? inputLaunchPeriod : job.launchPeriod}
-                onChange={(e) => setInputLaunchPeriod(e.target.value)}
-                name="LaunchPeriod"
+                value={textData.launchPeriod}
+                onChange={handleTextOnChange}
+                name="launchPeriod"
                 id="launchPeriod"
                 placeholder={t("admin.launch_period")}
               />
@@ -268,9 +285,9 @@ const EditJob = () => {
               <input
                 className="form__input"
                 type="text"
-                value={inputCustomer ? inputCustomer : job.versions[0].customer}
-                onChange={(e) => setInputCustomer(e.target.value)}
-                name="Customer"
+                value={textData.customer}
+                onChange={handleTextOnChange}
+                name="customer"
                 id="customer"
                 placeholder={t("admin.customer")}
               />
@@ -285,8 +302,8 @@ const EditJob = () => {
               <input
                 className="form__input"
                 type="text"
-                value={inputLinkToUrl ? inputLinkToUrl : job.linkToUrl}
-                onChange={(e) => setInputLinkToUrl(e.target.value)}
+                value={textData.linkToUrl}
+                onChange={handleTextOnChange}
                 name="LinToUrl"
                 id="linkToUrl"
                 placeholder={t("admin.link_to_url")}
@@ -302,9 +319,9 @@ const EditJob = () => {
               <input
                 className="form__input"
                 type="text"
-                value={inputLinkToGithub ? inputLinkToGithub : job.linkToGitHub}
-                onChange={(e) => setInputLinkToGithub(e.target.value)}
-                name="LinToGithub"
+                value={textData.linkToGitHub}
+                onChange={handleTextOnChange}
+                name="linkToGithub"
                 id="linkToGithub"
                 placeholder={t("admin.link_to_github")}
               />
@@ -323,15 +340,9 @@ const EditJob = () => {
               </label>
               <select
                 className="form__select"
-                value={inputCategory}
-                onChange={(e) => {
-                  const selectedOptions = Array.from(
-                    e.target.selectedOptions,
-                    (option) => option.value
-                  );
-                  setInputCategory(selectedOptions);
-                }}
-                name="Category"
+                value={textData.category}
+                onChange={handleTextOnChange}
+                name="category"
                 id="category"
                 multiple
               >
@@ -355,13 +366,9 @@ const EditJob = () => {
               <input
                 className="form__input"
                 type="text"
-                value={
-                  inputTechnologies
-                    ? inputTechnologies
-                    : job.versions[0].technologies
-                }
-                onChange={(e) => setInputTechnologies(e.target.value)}
-                name="Technologies"
+                value={textData.technologies}
+                onChange={handleTextOnChange}
+                name="technologies"
                 id="technologies"
                 placeholder={t("admin.technologies")}
               />
@@ -388,8 +395,22 @@ const EditJob = () => {
                         <span className="delete__former__file">
                           <input
                             type="checkbox"
-                            checked={fileItem.deletionFlag}
-                            onChange={(e) => fileItem.setDeletionFlag(!e)}
+                            name={`delete${fileItem.key
+                              .charAt(0)
+                              .toUpperCase()}${fileItem.key.slice(1)}`}
+                            onChange={(event) => {
+                              if (
+                                fileItem.key.toLowerCase().includes("picture")
+                              ) {
+                                handlePicturesOnChange(event);
+                              } else if (
+                                fileItem.key.toLowerCase().includes("audio")
+                              ) {
+                                handleAudiosOnChange(event);
+                              } else {
+                                handleVideosOnChange(event);
+                              }
+                            }}
                           />
                           {t("admin.delete_old_file")}
                         </span>
@@ -401,11 +422,14 @@ const EditJob = () => {
                     className="form__input form__file"
                     type="file"
                     id={fileItem.key}
-                    onChange={(e) => {
-                      const file = e.target.files ? e.target.files[0] : null;
-                      fileItem.setFile(
-                        file ? file.name : `${t("generic.no_file_chosen")}`
-                      );
+                    onChange={(event) => {
+                      if (fileItem.key.toLowerCase().includes("picture")) {
+                        handlePicturesOnChange(event);
+                      } else if (fileItem.key.toLowerCase().includes("audio")) {
+                        handleAudiosOnChange(event);
+                      } else {
+                        handleVideosOnChange(event);
+                      }
                     }}
                     name={fileItem.key}
                     style={{ display: "none" }}
@@ -414,7 +438,7 @@ const EditJob = () => {
                     htmlFor={fileItem.key}
                     className="file-upload-label form__file__button"
                   >
-                    {fileItem.fileInput || t("generic.choose_a_file")}
+                    {t("generic.choose_a_file")}
                   </label>
                 </div>
               </div>
