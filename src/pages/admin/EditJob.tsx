@@ -25,55 +25,46 @@ const EditJob = () => {
       key: "mainPicture",
       current: job && job.pictures.mainPicture ? job.pictures.mainPicture : "",
       title: t("admin.main_picture"),
-      fileExtension: ["jpg", "jpg", "png", "gif"],
     },
     {
       key: "picture2",
       current: job && job.pictures.picture2 ? job.pictures.picture2 : "",
       title: t("admin.picture2"),
-      fileExtension: ["jpg", "jpg", "png", "gif"],
     },
     {
       key: "picture3",
       current: job && job.pictures.picture3 ? job.pictures.picture3 : "",
       title: t("admin.picture3"),
-      fileExtension: ["jpg", "jpg", "png", "gif"],
     },
     {
       key: "picture4",
       current: job && job.pictures.picture4 ? job.pictures.picture4 : "",
       title: t("admin.picture4"),
-      fileExtension: ["jpg", "jpg", "png", "gif"],
     },
     {
       key: "picture5",
       current: job && job.pictures.picture5 ? job.pictures.picture5 : "",
       title: t("admin.picture5"),
-      fileExtension: ["jpg", "jpg", "png", "gif"],
     },
     {
       key: "mainVideo",
       current: job && job.videos.mainVideo ? job.videos.mainVideo : "",
       title: t("admin.main_video"),
-      fileExtension: ["mp4"],
     },
     {
       key: "video2",
       current: job && job.videos.video2 ? job.videos.video2 : "",
       title: t("admin.video2"),
-      fileExtension: ["mp4"],
     },
     {
       key: "mainAudio",
       current: job && job.audios.mainAudio ? job.audios.mainAudio : "",
       title: t("admin.main_audio"),
-      fileExtension: ["mp3", "mpeg"],
     },
     {
       key: "audio2",
       current: job && job.audios.audio2 ? job.audios.audio2 : "",
       title: t("admin.audio2"),
-      fileExtension: ["mp3", "mpeg"],
     },
   ];
   const [textData, setTextData] = useState({
@@ -85,6 +76,7 @@ const EditJob = () => {
     linkToGitHub: "",
     customer: "",
     category: [],
+    versionId: "",
   });
 
   const [picturesData, setPicturesData] = useState({
@@ -98,6 +90,7 @@ const EditJob = () => {
     deletePicture3: false,
     deletePicture4: false,
     deletePicture5: false,
+    collectionId: "",
   });
 
   const [videosData, setVideosData] = useState({
@@ -105,6 +98,7 @@ const EditJob = () => {
     video2: null,
     deleteMainVideo: false,
     deleteVideo2: false,
+    collectionId: "",
   });
 
   const [audiosData, setAudiosData] = useState({
@@ -112,6 +106,7 @@ const EditJob = () => {
     audio2: null,
     deleteMainAudio: false,
     deleteAudio2: false,
+    collectionId: "",
   });
 
   useEffect(() => {
@@ -138,6 +133,7 @@ const EditJob = () => {
     setTextData((prevFormData) => ({
       ...prevFormData,
       [name]: event.target.value,
+      versionId: job.versions[0]._id,
     }));
   };
 
@@ -150,12 +146,14 @@ const EditJob = () => {
       setPicturesData((prevFormData) => ({
         ...prevFormData,
         [name]: (event.target as HTMLInputElement).checked,
+        collectionId: job.pictures._id,
       }));
     } else if (type === "file") {
       const files = (event.target as HTMLInputElement).files;
       setPicturesData((prevFormData) => ({
         ...prevFormData,
         [name]: files?.[0] || null,
+        collectionId: job.pictures._id,
       }));
     }
   };
@@ -166,12 +164,14 @@ const EditJob = () => {
       setVideosData((prevFormData) => ({
         ...prevFormData,
         [name]: (event.target as HTMLInputElement).checked,
+        collectionId: job.videos._id,
       }));
     } else if (type === "file") {
       const files = (event.target as HTMLInputElement).files;
       setVideosData((prevFormData) => ({
         ...prevFormData,
         [name]: files?.[0] || null,
+        collectionId: job.videos._id,
       }));
     }
   };
@@ -183,12 +183,14 @@ const EditJob = () => {
       setAudiosData((prevFormData) => ({
         ...prevFormData,
         [name]: (event.target as HTMLInputElement).checked,
+        collectionId: job.audios._id,
       }));
     } else if (type === "file") {
       const files = (event.target as HTMLInputElement).files;
       setAudiosData((prevFormData) => ({
         ...prevFormData,
         [name]: files?.[0] || null,
+        collectionId: job.audios._id,
       }));
     }
   };
