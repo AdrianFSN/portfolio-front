@@ -53,6 +53,12 @@
   color: var(--main-text-color);
 }
 
+.form__submit__cancel__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .form__fieldset {
   display: flex;
   flex-direction: column;

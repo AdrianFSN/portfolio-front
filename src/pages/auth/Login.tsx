@@ -17,11 +17,12 @@ import storage from "../../utils/storage";
 import decodeToken from "../../utils/getDataFromToken";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import { resetLogin } from "../../store/slices/loginSlice";
+import { EDIT_ROUTES_PATH } from "../../utils/constants";
 
 const Login = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const to = "/admin";
+  const to = EDIT_ROUTES_PATH;
   const dispatch: AppDispatch = useDispatch();
   const [disableSubmit, setDisableSubmit] = useState(true);
   const [inputEmail, setInputEmail] = useState("");
@@ -67,7 +68,7 @@ const Login = () => {
       }, 3000);
       return () => clearTimeout(timer);
     }
-  }, [isLogged, navigate]);
+  }, [isLogged, navigate, to]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

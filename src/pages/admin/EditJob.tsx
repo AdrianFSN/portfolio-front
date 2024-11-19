@@ -3,31 +3,58 @@ import "./EditJob.css";
 import { useTranslation } from "react-i18next";
 import RegularButton from "../../components/shared/buttons/RegularButton";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
-import { VALID_CATEGORIES } from "../../utils/constants";
+import { EDIT_ROUTES_PATH, VALID_CATEGORIES } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobDetailSelector } from "../../store/selectors/JobExamplesSelectors/jobDetailSelectors";
 import { getJobDetailThunk } from "../../store/thunks/jobDetailThunk";
 import { AppDispatch } from "../../store/store";
 import { useNavigate, useParams } from "react-router-dom";
+import { updateJobBasicsThunk } from "../../store/thunks/editJobBasicsThunk";
+import { resetEditJobBasics } from "../../store/slices/jobBasicsSlice";
+import {
+  getEditJobBasicsErrorSelector,
+  getEditJobBasicsLoadingSelector,
+  getEditJobBasicsMessageSelector,
+} from "../../store/selectors/editJobsSelectors/editJobsSelectors";
+import CustomAlert from "../../components/shared/alert/CustomAlert";
+import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 
 const EditJob = () => {
   const { t } = useTranslation();
   const { jobId } = useParams();
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoading = false;
+  const toEditPage = EDIT_ROUTES_PATH;
   const job = useSelector(getJobDetailSelector);
   const [toLocalizeJob, setToLocalizeJob] = useState("");
   const [toEditJobImages, setToEditJobImages] = useState("");
   const [toEditJobVideos, setToEditJobVideos] = useState("");
   const [toEditJobAudios, setToEditJobAudios] = useState("");
+  const error = useSelector(getEditJobBasicsErrorSelector);
+  const successMessage = useSelector(getEditJobBasicsMessageSelector);
+  const isLoading = useSelector(getEditJobBasicsLoadingSelector);
+  const [alertMessage, setAlertMessage] = useState("");
 
-  const [textData, setTextData] = useState({
+  interface TextDataInterface {
+    launchPeriod: string;
+    linkToUrl: string;
+    linkToGitHub: string;
+    category: string[];
+  }
+  const [textData, setTextData] = useState<TextDataInterface>({
     launchPeriod: "",
     linkToUrl: "",
     linkToGitHub: "",
     category: [],
   });
+
+  useEffect(() => {
+    if (!error && successMessage) {
+      setAlertMessage(successMessage);
+    } else {
+      setAlertMessage(error as string);
+    }
+  }, [successMessage, error]);
 
   useEffect(() => {
     if (jobId) {
@@ -37,10 +64,18 @@ const EditJob = () => {
 
   useEffect(() => {
     if (job) {
-      setToLocalizeJob(`/edit/job/${job._id}/version/${job.versions[0]._id}`);
-      setToEditJobImages(`/edit/job/${job._id}/pictures/${job.pictures._id}`);
-      setToEditJobVideos(`/edit/job/${job._id}/videos/${job.videos._id}`);
-      setToEditJobAudios(`/edit/job/${job._id}/audios/${job.audios._id}`);
+      setToLocalizeJob(
+        `${EDIT_ROUTES_PATH}/job/${job._id}/version/${job.versions[0]._id}`
+      );
+      setToEditJobImages(
+        `${EDIT_ROUTES_PATH}/job/${job._id}/pictures/${job.pictures._id}`
+      );
+      setToEditJobVideos(
+        `${EDIT_ROUTES_PATH}/job/${job._id}/videos/${job.videos._id}`
+      );
+      setToEditJobAudios(
+        `${EDIT_ROUTES_PATH}/job/${job._id}/audios/${job.audios._id}`
+      );
     }
   }, [job]);
 
@@ -49,6 +84,18 @@ const EditJob = () => {
   }, [textData]);
 
   console.log("Este es el job que voy a editar: ", job);
+
+  useEffect(() => {
+    if (job) {
+      setTextData((prevData) => ({
+        ...prevData,
+        launchPeriod: job.launchPeriod || "",
+        linktoUrl: job.linkToUrl || "",
+        linkToGitHub: job.linkToGitHub || "",
+        category: job.category || [],
+      }));
+    }
+  }, [job]);
 
   const handleTextOnChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -72,11 +119,45 @@ const EditJob = () => {
     }
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(resetEditJobBasics());
+    await dispatch(
+      updateJobBasicsThunk({ jobId: job._id, formData: textData })
+    );
+  };
+
+  const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    if (successMessage) {
+      setAlertMessage("");
+      dispatch(resetEditJobBasics());
+      dispatch(resetJobDetail());
+      navigate(toEditPage);
+    } else {
+      setAlertMessage("");
+      dispatch(resetEditJobBasics());
+    }
+  };
+
+  const handleToEditPage = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    dispatch(resetJobDetail());
+    dispatch(resetEditJobBasics());
+    navigate(toEditPage);
+  };
 
   return (
     <main className="edit__job__form">
       <h1>{t("admin.edit_job")}</h1>
+      {alertMessage && (
+        <CustomAlert
+          type={error ? "error" : "success"}
+          onClick={handleCloseAlert}
+        >
+          {alertMessage}
+        </CustomAlert>
+      )}
       {job && (
         <>
           <h2>{job.versions[0].title}</h2>
@@ -196,20 +277,28 @@ const EditJob = () => {
                 </select>
               </div>
             </fieldset>
-
-            <RegularButton
-              className="btn form__button"
-              type="submit"
-            >
-              {isLoading ? (
-                <CustomPulseLoader
-                  isLoading={isLoading}
-                  $customHeight="100%"
-                />
-              ) : (
-                "Submit"
-              )}
-            </RegularButton>
+            <div className="form__submit__cancel__buttons">
+              <RegularButton
+                className="btn form__button"
+                type="submit"
+              >
+                {isLoading ? (
+                  <CustomPulseLoader
+                    isLoading={isLoading}
+                    $customHeight="100%"
+                  />
+                ) : (
+                  t("submit")
+                )}
+              </RegularButton>
+              <RegularButton
+                className="btn form__button"
+                skin="danger"
+                onClick={handleToEditPage}
+              >
+                {t("cancel")}
+              </RegularButton>
+            </div>
           </form>
         </>
       )}
