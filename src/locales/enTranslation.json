@@ -40,7 +40,7 @@
     "video2": "Video 2",
     "main_audio": "Main audio",
     "audio2": "Audio 2",
-    "delete_old_file": "Delete former file"
+    "delete_current_file": "Delete current file"
   },
   "generic": {
     "empty_section": "This section is empty",

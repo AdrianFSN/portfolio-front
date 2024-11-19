@@ -68,14 +68,17 @@ const EditJob = () => {
     },
   ];
   const [textData, setTextData] = useState({
-    title: "",
-    technologies: [],
     launchPeriod: "",
-    info: "",
     linkToUrl: "",
     linkToGitHub: "",
-    customer: "",
     category: [],
+  });
+
+  const [versionsData, setVersionsData] = useState({
+    title: "",
+    technologies: [],
+    info: "",
+    customer: "",
     versionId: "",
   });
 
@@ -120,17 +123,38 @@ const EditJob = () => {
     console.log("Esto es picturesData: ", picturesData);
     console.log("Esto es videosData: ", videosData);
     console.log("Esto es audiosData: ", audiosData);
-  }, [textData, picturesData, audiosData, videosData]);
+    console.log("Esto es versionsData: ", versionsData);
+  }, [textData, versionsData, picturesData, audiosData, videosData]);
 
   console.log("Este es el job que voy a editar: ", job);
 
   const handleTextOnChange = (
-    event: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name } = event.target;
-    setTextData((prevFormData) => ({
+
+    if (event.target instanceof HTMLSelectElement) {
+      const selectedValues = Array.from(event.target.options)
+        .filter((option) => option.selected)
+        .map((option) => option.value);
+
+      setTextData((prevFormData) => ({
+        ...prevFormData,
+        [name]: selectedValues,
+      }));
+    } else {
+      setTextData((prevFormData) => ({
+        ...prevFormData,
+        [name]: event.target.value,
+      }));
+    }
+  };
+
+  const handleVersionsOnChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name } = event.target;
+    setVersionsData((prevFormData) => ({
       ...prevFormData,
       [name]: event.target.value,
       versionId: job.versions[0]._id,
@@ -220,18 +244,20 @@ const EditJob = () => {
               <input
                 className="form__input"
                 type="text"
-                value={textData.title}
-                onChange={handleTextOnChange}
+                value={versionsData.title}
+                onChange={handleVersionsOnChange}
                 name="title"
                 id="title"
-                placeholder={t("admin.job_title")}
+                placeholder={
+                  job.versions[0].title
+                    ? job.versions[0].title
+                    : t("admin.job_title")
+                }
                 max-length={TITLE_MAX_LENGTH}
               />
-              <p>{`${
-                textData.title
-                  ? textData.title.length
-                  : job.versions[0].title.length
-              } / ${TITLE_MAX_LENGTH} ${t("generic.characters")}`}</p>
+              <p>{`${versionsData.title.length} / ${TITLE_MAX_LENGTH} ${t(
+                "generic.characters"
+              )}`}</p>
             </div>
             <div className="login__fieldset__field">
               <label
@@ -242,18 +268,20 @@ const EditJob = () => {
               </label>
               <textarea
                 className="form__input"
-                value={textData.info}
-                onChange={handleTextOnChange}
+                value={versionsData.info}
+                onChange={handleVersionsOnChange}
                 name="info"
                 id="excerpt"
-                placeholder={t("admin.job_excerpt")}
+                placeholder={
+                  job.versions[0].info
+                    ? job.versions[0].info
+                    : t("admin.job_excerpt")
+                }
                 max-length={EXCERPT_MAX_LENGTH}
               />
-              <p>{`${
-                textData.info
-                  ? textData.info.length
-                  : job.versions[0].info.length
-              } / ${EXCERPT_MAX_LENGTH} ${t("generic.characters")}`}</p>
+              <p>{`${versionsData.info.length} / ${EXCERPT_MAX_LENGTH} ${t(
+                "generic.characters"
+              )}`}</p>
             </div>
           </fieldset>
           <fieldset className="form__fieldset">
@@ -274,7 +302,9 @@ const EditJob = () => {
                 onChange={handleTextOnChange}
                 name="launchPeriod"
                 id="launchPeriod"
-                placeholder={t("admin.launch_period")}
+                placeholder={
+                  job.launchPeriod ? job.launchPeriod : t("admin.launch_period")
+                }
               />
             </div>
             <div className="login__fieldset__field">
@@ -287,11 +317,15 @@ const EditJob = () => {
               <input
                 className="form__input"
                 type="text"
-                value={textData.customer}
-                onChange={handleTextOnChange}
+                value={versionsData.customer}
+                onChange={handleVersionsOnChange}
                 name="customer"
                 id="customer"
-                placeholder={t("admin.customer")}
+                placeholder={
+                  job.versions[0].customer
+                    ? job.versions[0].customer
+                    : t("admin.customer")
+                }
               />
             </div>
             <div className="login__fieldset__field">
@@ -306,9 +340,11 @@ const EditJob = () => {
                 type="text"
                 value={textData.linkToUrl}
                 onChange={handleTextOnChange}
-                name="LinToUrl"
+                name="linkToUrl"
                 id="linkToUrl"
-                placeholder={t("admin.link_to_url")}
+                placeholder={
+                  job.linkToUrl ? job.linkToUrl : t("admin.link_to_url")
+                }
               />
             </div>
             <div className="login__fieldset__field">
@@ -323,9 +359,13 @@ const EditJob = () => {
                 type="text"
                 value={textData.linkToGitHub}
                 onChange={handleTextOnChange}
-                name="linkToGithub"
-                id="linkToGithub"
-                placeholder={t("admin.link_to_github")}
+                name="linkToGitHub"
+                id="linkToGitHub"
+                placeholder={
+                  job.linkToGitHub
+                    ? job.linkToGitHub
+                    : t("admin.link_to_github")
+                }
               />
             </div>
           </fieldset>
@@ -368,11 +408,19 @@ const EditJob = () => {
               <input
                 className="form__input"
                 type="text"
-                value={textData.technologies}
-                onChange={handleTextOnChange}
+                value={
+                  Array.isArray(versionsData.technologies)
+                    ? versionsData.technologies.join(", ")
+                    : versionsData.technologies
+                }
+                onChange={handleVersionsOnChange}
                 name="technologies"
                 id="technologies"
-                placeholder={t("admin.technologies")}
+                placeholder={
+                  Array.isArray(job.versions[0].technologies)
+                    ? job.versions[0].technologies.join(", ")
+                    : job.versions[0].technologies || t("admin.technologies")
+                }
               />
             </div>
           </fieldset>
@@ -414,7 +462,7 @@ const EditJob = () => {
                               }
                             }}
                           />
-                          {t("admin.delete_old_file")}
+                          {t("admin.delete_current_file")}
                         </span>
                       </>
                     )}
