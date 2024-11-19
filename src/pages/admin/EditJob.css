@@ -7,6 +7,12 @@
   text-align: center;
   padding-right: 0;
 }
+.edit__job__form h2 {
+  margin-top: 0;
+  background: var(--main-text-color);
+  color: var(--secondary-text-color);
+  font-size: 2rem;
+}
 
 .edit__job__form p {
   margin-left: 2rem;
@@ -49,7 +55,7 @@
   margin: 1rem;
 }
 
-.login__fieldset__field {
+.form__fieldset__field {
   display: flex;
   flex-direction: column;
   padding: 0 2rem;
@@ -79,7 +85,7 @@
   font-weight: bold;
 }
 
-.login__fieldset__field .file__section__container {
+.form__fieldset__field .file__section__container {
   display: flex;
   flex-direction: column;
 }
