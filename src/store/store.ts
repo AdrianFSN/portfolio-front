@@ -4,6 +4,7 @@ import jobsCarousselReducer from "./slices/jobsCarousselSlice";
 import jobDetailReducer from "./slices/jobDetailSlice";
 import loginReducer from "./slices/loginSlice";
 import editJobBasicsReducer from "./slices/jobBasicsSlice";
+import jobPicturesReducer from "./slices/jobPicturesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     jobDetail: jobDetailReducer,
     login: loginReducer,
     editJobBasics: editJobBasicsReducer,
+    jobPictures: jobPicturesReducer,
   },
   devTools: import.meta.env.VITE_USER_NODE_ENV !== "production",
 });
