@@ -46,7 +46,7 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
   const [confirmDeletion, setConfirmDeletion] = useState(false);
   const [jobToDelete, setJobToDelete] = useState("");
   const [jobToEdit, setJobToEdit] = useState("");
-  const toEditForm = `${EDIT_ROUTES_PATH}/${jobToEdit}`;
+  const toEditForm = `${EDIT_ROUTES_PATH}/job/${jobToEdit}`;
 
   useEffect(() => {
     if (!error && successMessage) {

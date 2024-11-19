@@ -8,14 +8,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { getJobDetailSelector } from "../../store/selectors/JobExamplesSelectors/jobDetailSelectors";
 import { getJobDetailThunk } from "../../store/thunks/jobDetailThunk";
 import { AppDispatch } from "../../store/store";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditJobVersions = () => {
   const { t } = useTranslation();
   const { jobId } = useParams();
+  const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const isLoading = false;
   const job = useSelector(getJobDetailSelector);
+  const [toEditJobPictures, setToEditJobPictures] = useState("");
+  const [toEditJob, setToEditJob] = useState("");
+  const [toEditJobVideos, setToEditJobVideos] = useState("");
+  const [toEditJobAudios, setToEditJobAudios] = useState("");
 
   const [versionsData, setVersionsData] = useState({
     title: "",
@@ -24,6 +29,15 @@ const EditJobVersions = () => {
     customer: "",
     versionId: "",
   });
+
+  useEffect(() => {
+    if (job) {
+      setToEditJobPictures(`/edit/job/${job._id}/pictures/${job.pictures._id}`);
+      setToEditJob(`/edit/job/${job._id}`);
+      setToEditJobVideos(`/edit/job/${job._id}/videos/${job.videos._id}`);
+      setToEditJobAudios(`/edit/job/${job._id}/audios/${job.audios._id}`);
+    }
+  }, [job]);
 
   useEffect(() => {
     if (jobId) {
@@ -57,6 +71,18 @@ const EditJobVersions = () => {
       {job && (
         <>
           <h2>{job.versions[0].title}</h2>
+          <div className="job__edit__navigate__links">
+            <p onClick={() => navigate(toEditJob)}>{t("admin.edit_job")}</p>
+            <p onClick={() => navigate(toEditJobPictures)}>
+              {t("admin.edit_job_pictures")}
+            </p>
+            <p onClick={() => navigate(toEditJobVideos)}>
+              {t("admin.edit_job_videos")}
+            </p>
+            <p onClick={() => navigate(toEditJobAudios)}>
+              {t("admin.edit_job_audios")}
+            </p>
+          </div>
           <form
             className="job__form"
             noValidate

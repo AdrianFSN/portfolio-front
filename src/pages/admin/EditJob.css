@@ -1,5 +1,26 @@
+.job__edit__navigate__links {
+  display: grid;
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.job__edit__navigate__links p:hover {
+  cursor: pointer;
+  color: var(--main-brand-color);
+  transition: border-bottom 0.5s ease-in-out;
+}
+
+@media (hover: hover) {
+  .job__edit__navigate__links p:hover {
+    border-bottom: 5px solid var(--main-brand-color);
+  }
+}
+
 .edit__job__form {
-  width: 100%;
+  width: 100dvw;
+  height: 100%;
   text-align: center;
 }
 

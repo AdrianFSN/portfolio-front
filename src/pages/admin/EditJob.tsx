@@ -8,14 +8,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { getJobDetailSelector } from "../../store/selectors/JobExamplesSelectors/jobDetailSelectors";
 import { getJobDetailThunk } from "../../store/thunks/jobDetailThunk";
 import { AppDispatch } from "../../store/store";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditJob = () => {
   const { t } = useTranslation();
   const { jobId } = useParams();
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const isLoading = false;
   const job = useSelector(getJobDetailSelector);
+  const [toLocalizeJob, setToLocalizeJob] = useState("");
+  const [toEditJobImages, setToEditJobImages] = useState("");
+  const [toEditJobVideos, setToEditJobVideos] = useState("");
+  const [toEditJobAudios, setToEditJobAudios] = useState("");
 
   const [textData, setTextData] = useState({
     launchPeriod: "",
@@ -29,6 +34,15 @@ const EditJob = () => {
       dispatch(getJobDetailThunk({ jobId }));
     }
   }, [jobId, dispatch]);
+
+  useEffect(() => {
+    if (job) {
+      setToLocalizeJob(`/edit/job/${job._id}/version/${job.versions[0]._id}`);
+      setToEditJobImages(`/edit/job/${job._id}/pictures/${job.pictures._id}`);
+      setToEditJobVideos(`/edit/job/${job._id}/videos/${job.videos._id}`);
+      setToEditJobAudios(`/edit/job/${job._id}/audios/${job.audios._id}`);
+    }
+  }, [job]);
 
   useEffect(() => {
     console.log("Esto es textData: ", textData);
@@ -66,6 +80,20 @@ const EditJob = () => {
       {job && (
         <>
           <h2>{job.versions[0].title}</h2>
+          <div className="job__edit__navigate__links">
+            <p onClick={() => navigate(toLocalizeJob)}>
+              {t("admin.edit_job_version")}
+            </p>
+            <p onClick={() => navigate(toEditJobImages)}>
+              {t("admin.edit_job_pictures")}
+            </p>
+            <p onClick={() => navigate(toEditJobVideos)}>
+              {t("admin.edit_job_videos")}
+            </p>
+            <p onClick={() => navigate(toEditJobAudios)}>
+              {t("admin.edit_job_audios")}
+            </p>
+          </div>
           <form
             className="job__form"
             noValidate
