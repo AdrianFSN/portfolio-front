@@ -80,12 +80,6 @@ const EditJob = () => {
   }, [job]);
 
   useEffect(() => {
-    console.log("Esto es textData: ", textData);
-  }, [textData]);
-
-  console.log("Este es el job que voy a editar: ", job);
-
-  useEffect(() => {
     if (job) {
       setTextData((prevData) => ({
         ...prevData,
@@ -288,7 +282,7 @@ const EditJob = () => {
                     $customHeight="100%"
                   />
                 ) : (
-                  t("submit")
+                  t("generic.submit")
                 )}
               </RegularButton>
               <RegularButton
@@ -296,7 +290,7 @@ const EditJob = () => {
                 skin="danger"
                 onClick={handleToEditPage}
               >
-                {t("cancel")}
+                {t("generic.cancel")}
               </RegularButton>
             </div>
           </form>

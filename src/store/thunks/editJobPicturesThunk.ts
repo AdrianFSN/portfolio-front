@@ -17,7 +17,11 @@ export const updateJobPicturesThunk = createAsyncThunk<
   async ({ picturesId, formData }, { rejectWithValue }) => {
     try {
       const url = `${PICTURES_COLLECTION_API_URI}/${picturesId}`;
-      const response = await client.put(url, formData);
+      const response = await client.put(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return response;
     } catch (error) {
       return rejectWithValue((error as AxiosError).message);

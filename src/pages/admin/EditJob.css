@@ -36,7 +36,11 @@
 }
 
 .edit__job__form p {
-  margin-left: 2rem;
+  text-align: center;
+}
+
+.edit__job__form label {
+  padding: 0;
 }
 
 .job__form {
@@ -85,7 +89,8 @@
 .form__fieldset__field {
   display: flex;
   flex-direction: column;
-  padding: 0 2rem;
+  justify-content: center;
+  padding: 0;
   margin: 0 1rem 1.5rem;
 }
 
@@ -112,9 +117,12 @@
   font-weight: bold;
 }
 
-.form__fieldset__field .file__section__container {
+.file__section__container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 0;
 }
 
 .delete__former__file {
@@ -134,6 +142,25 @@
   background: var(--body-color);
   border: 1px dotted var(--main-brand-color);
   border-radius: 3px;
+  padding: 0.5rem;
+  font-weight: 900;
+}
+
+.form__file__is__uploaded {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.form__cancel__upload {
+  cursor: pointer;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 700;
+  color: var(--main-brand-color);
 }
 
 .form__button {

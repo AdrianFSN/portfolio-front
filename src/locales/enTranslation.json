@@ -54,6 +54,9 @@
     "characters": "characters",
     "no_file_chosen": "No file chosen",
     "choose_a_file": "Choose a file",
-    "current": "Current"
+    "current": "Current",
+    "submit": "Submit",
+    "uploaded_file": "You are saving this new file",
+    "cancel_upload": "Cancel upload"
   }
 }
