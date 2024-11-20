@@ -2,6 +2,8 @@ export const CATEGORY_FILTER_URI = `?category=`;
 
 export const JOB_EXAMPLES_API_URI = "/api/job-examples";
 export const PICTURES_COLLECTION_API_URI = "/api/pictures-collection";
+export const VIDEOS_COLLECTION_API_URI = "/api/videos-collection";
+export const AUDIOS_COLLECTION_API_URI = "/api/audios-collection";
 
 export const IMAGES_DB_PATH = `${
   import.meta.env.VITE_API_BASE_URL
