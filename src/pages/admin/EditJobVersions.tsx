@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import RegularButton from "../../components/shared/buttons/RegularButton";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import {
+  DESCRIPTION_MAX_LENGTH,
   EDIT_ROUTES_PATH,
   EXCERPT_MAX_LENGTH,
   TITLE_MAX_LENGTH,
@@ -43,6 +44,7 @@ const EditJobVersions = () => {
     title: string;
     technologies: string[];
     info: string;
+    description: string;
     customer: string;
     versionId: string;
     language: string;
@@ -53,6 +55,7 @@ const EditJobVersions = () => {
     technologies: [],
     info: "",
     customer: "",
+    description: "",
     versionId: "",
     language: "",
   });
@@ -93,6 +96,7 @@ const EditJobVersions = () => {
         title: job.versions[0].title || "",
         technologies: job.versions[0].technologies || [],
         info: job.versions[0].info || "",
+        description: job.versions[0].description || "",
         customer: job.versions[0].customer || "",
         versionId: job.versions[0]._id || "",
         language: job.versions[0].language || "",
@@ -105,18 +109,6 @@ const EditJobVersions = () => {
   }, [versionsData]);
 
   console.log("Este es el job que voy a editar: ", job);
-
-  /*   const handleVersionsOnChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name } = event.target;
-
-    setVersionsData((prevFormData) => ({
-      ...prevFormData,
-      [name]: event.target.value,
-      versionId: job.versions[0]._id,
-    }));
-  }; */
 
   const handleVersionsOnChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -251,6 +243,30 @@ const EditJobVersions = () => {
                 <p>{`${versionsData.info.length} / ${EXCERPT_MAX_LENGTH} ${t(
                   "generic.characters"
                 )}`}</p>
+              </div>
+              <div className="form__fieldset__field">
+                <label
+                  className="form__label"
+                  htmlFor="description"
+                >
+                  <h4>{t("admin.job_description")}</h4>
+                </label>
+                <textarea
+                  className="form__input"
+                  value={versionsData.description}
+                  onChange={handleVersionsOnChange}
+                  name="description"
+                  id="description"
+                  placeholder={
+                    job.versions[0].description
+                      ? job.versions[0].description
+                      : t("admin.job_description")
+                  }
+                  max-length={DESCRIPTION_MAX_LENGTH}
+                />
+                <p>{`${
+                  versionsData.description?.length
+                } / ${DESCRIPTION_MAX_LENGTH} ${t("generic.characters")}`}</p>
               </div>
             </fieldset>
             <fieldset className="form__fieldset">

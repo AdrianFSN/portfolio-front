@@ -44,7 +44,8 @@
     "edit_job_version": "Edit job version",
     "edit_job_pictures": "Edit job pictures",
     "edit_job_videos": "Edit job videos",
-    "edit_job_audios": "Edit job audios"
+    "edit_job_audios": "Edit job audios",
+    "job_description": "Job description"
   },
   "generic": {
     "empty_section": "This section is empty",

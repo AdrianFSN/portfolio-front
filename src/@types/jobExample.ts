@@ -4,6 +4,7 @@ export interface JobExampleVersion {
   title: string;
   technologies: string[];
   info: string;
+  description: string;
   customer: string;
 }
 

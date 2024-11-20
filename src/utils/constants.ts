@@ -60,5 +60,6 @@ export const VALID_CATEGORIES = [
 
 // Job detail
 export const EDIT_ROUTES_PATH = "/edit";
-export const TITLE_MAX_LENGTH = 60;
-export const EXCERPT_MAX_LENGTH = 200;
+export const TITLE_MAX_LENGTH = 50;
+export const EXCERPT_MAX_LENGTH = 140;
+export const DESCRIPTION_MAX_LENGTH = 500;

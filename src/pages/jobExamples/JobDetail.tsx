@@ -69,6 +69,7 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
           </div>
           <div className="job__detail__text__section">
             <p>{jobVersion?.info}</p>
+            <p>{jobVersion?.description}</p>
             <ul className="job__detail__list">
               <li className={job.linkToUrl ? "" : "hidden"}>
                 <a
