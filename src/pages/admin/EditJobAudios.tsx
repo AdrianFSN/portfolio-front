@@ -98,12 +98,6 @@ const EditJobAudios = () => {
   }, [jobId, dispatch]);
 
   useEffect(() => {
-    console.log("Esto es videosData: ", audiosData);
-  }, [audiosData]);
-
-  console.log("Este es el job que voy a editar: ", job);
-
-  useEffect(() => {
     if (audiosData.mainAudio) {
       setAudiosData((prevData) => ({
         ...prevData,
@@ -233,7 +227,7 @@ const EditJobAudios = () => {
                       htmlFor={fileItem.key}
                     >
                       <h4>{fileItem.title}</h4>
-                      {fileItem.current && (
+                      {fileItem.current && !fileNames[fileItem.key] && (
                         <>
                           <audio
                             controls
