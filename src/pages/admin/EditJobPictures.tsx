@@ -122,12 +122,6 @@ const EditJobPictures = () => {
   }, [jobId, dispatch]);
 
   useEffect(() => {
-    console.log("Esto es picturesData: ", picturesData);
-  }, [picturesData]);
-
-  console.log("Este es el job que voy a editar: ", job);
-
-  useEffect(() => {
     if (picturesData.mainPicture) {
       setPicturesData((prevData) => ({
         ...prevData,

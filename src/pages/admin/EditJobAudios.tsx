@@ -8,13 +8,28 @@ import { getJobDetailSelector } from "../../store/selectors/JobExamplesSelectors
 import { getJobDetailThunk } from "../../store/thunks/jobDetailThunk";
 import { AppDispatch } from "../../store/store";
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  AUDIOS_DB_PATH,
+  EDIT_ROUTES_PATH,
+  ORIGIN,
+} from "../../utils/constants";
+import {
+  getJobAudiosErrorSelector,
+  getJobAudiosLoadingSelector,
+  getJobAudiosMessageSelector,
+} from "../../store/selectors/editJobsSelectors/editJobAudiosSelectors";
+import { resetJobAudios } from "../../store/slices/jobAudiosSlice";
+import { updateJobAudiosThunk } from "../../store/thunks/editJobAudiosThunk";
+import { resetJobDetail } from "../../store/slices/jobDetailSlice";
+import CustomAlert from "../../components/shared/alert/CustomAlert";
 
 const EditJobAudios = () => {
   const { t } = useTranslation();
   const { jobId } = useParams();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  const isLoading = false;
+  const toEditPage = EDIT_ROUTES_PATH;
+  const origin = ORIGIN;
   const job = useSelector(getJobDetailSelector);
   const jobAudios = [
     {
@@ -33,6 +48,14 @@ const EditJobAudios = () => {
   const [toEditJob, setToEditJob] = useState("");
   const [toEditJobVideos, setToEditJobVideos] = useState("");
   const [toEditJobPictures, setToEditJobPictures] = useState("");
+  const error = useSelector(getJobAudiosErrorSelector);
+  const successMessage = useSelector(getJobAudiosMessageSelector);
+  const isLoading = useSelector(getJobAudiosLoadingSelector);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [fileNames, setFileNames] = useState<Record<string, string | null>>({
+    mainAudio: null,
+    audio2: null,
+  });
 
   const [audiosData, setAudiosData] = useState({
     mainAudio: null,
@@ -41,6 +64,23 @@ const EditJobAudios = () => {
     deleteAudio2: false,
     collectionId: "",
   });
+
+  useEffect(() => {
+    if (job) {
+      setAudiosData((prevValues) => ({
+        ...prevValues,
+        collectionId: job.audios._id,
+      }));
+    }
+  }, [job]);
+
+  useEffect(() => {
+    if (!error && successMessage) {
+      setAlertMessage(successMessage);
+    } else {
+      setAlertMessage(error as string);
+    }
+  }, [successMessage, error]);
 
   useEffect(() => {
     if (job) {
@@ -93,14 +133,71 @@ const EditJobAudios = () => {
         [name]: files?.[0] || null,
         collectionId: job.audios._id,
       }));
+      setFileNames((prevFileNames) => ({
+        ...prevFileNames,
+        [name]: files?.[0]?.name || null,
+      }));
     }
   };
 
-  const handleSubmit = () => {};
+  const handleResetUploadFile = (
+    event: React.MouseEvent<HTMLParagraphElement>
+  ) => {
+    const name = (event.target as HTMLParagraphElement).dataset.name; // Obtén el atributo "name"
+    if (name) {
+      setAudiosData((prevFormData) => ({
+        ...prevFormData,
+        [name]: null,
+      }));
+      setFileNames((prevFileNames) => ({
+        ...prevFileNames,
+        [name]: null,
+      }));
+    }
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(resetJobAudios());
+    await dispatch(
+      updateJobAudiosThunk({
+        audiosId: job.audios._id,
+        formData: audiosData,
+      })
+    );
+  };
+
+  const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    if (successMessage) {
+      setAlertMessage("");
+      dispatch(resetJobAudios());
+      dispatch(resetJobDetail());
+      navigate(toEditPage);
+    } else {
+      setAlertMessage("");
+      dispatch(resetJobAudios());
+    }
+  };
+
+  const handleToEditPage = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    dispatch(resetJobDetail());
+    dispatch(resetJobAudios());
+    navigate(toEditPage);
+  };
 
   return (
     <main className="edit__job__form">
       <h1>{t("admin.edit_job")}</h1>
+      {alertMessage && (
+        <CustomAlert
+          type={error ? "error" : "success"}
+          onClick={handleCloseAlert}
+        >
+          {alertMessage}
+        </CustomAlert>
+      )}
       {job && (
         <>
           <h2>{job.versions[0].title}</h2>
@@ -138,6 +235,11 @@ const EditJobAudios = () => {
                       <h4>{fileItem.title}</h4>
                       {fileItem.current && (
                         <>
+                          <audio
+                            controls
+                            src={`${AUDIOS_DB_PATH}${fileItem.current}`}
+                            crossOrigin={origin}
+                          ></audio>
                           <p>{`${t("generic.current")}: ${
                             fileItem.current
                           }`}</p>
@@ -152,6 +254,20 @@ const EditJobAudios = () => {
                             {t("admin.delete_current_file")}
                           </span>
                         </>
+                      )}
+                      {fileNames[fileItem.key] && (
+                        <div className="form__file__is__uploaded">
+                          <p>{`${t("generic.uploaded_file")}: ${
+                            fileNames[fileItem.key]
+                          }`}</p>
+                          <p
+                            data-name={fileItem.key}
+                            onClick={handleResetUploadFile}
+                            className="form__cancel__upload"
+                          >
+                            {t("generic.cancel_upload")}
+                          </p>
+                        </div>
                       )}
                     </label>
 
@@ -174,19 +290,28 @@ const EditJobAudios = () => {
               ))}
             </fieldset>
 
-            <RegularButton
-              className="btn form__button"
-              type="submit"
-            >
-              {isLoading ? (
-                <CustomPulseLoader
-                  isLoading={isLoading}
-                  $customHeight="100%"
-                />
-              ) : (
-                "Submit"
-              )}
-            </RegularButton>
+            <div className="form__submit__cancel__buttons">
+              <RegularButton
+                className="btn form__button"
+                type="submit"
+              >
+                {isLoading ? (
+                  <CustomPulseLoader
+                    isLoading={isLoading}
+                    $customHeight="100%"
+                  />
+                ) : (
+                  t("generic.submit")
+                )}
+              </RegularButton>
+              <RegularButton
+                className="btn form__button"
+                skin="danger"
+                onClick={handleToEditPage}
+              >
+                {t("generic.cancel")}
+              </RegularButton>
+            </div>
           </form>
         </>
       )}
