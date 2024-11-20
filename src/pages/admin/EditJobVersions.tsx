@@ -38,7 +38,6 @@ const EditJobVersions = () => {
   const successMessage = useSelector(getJobVersionMessageSelector);
   const isLoading = useSelector(getJobVersionLoadingSelector);
   const [alertMessage, setAlertMessage] = useState("");
-  const [lang, setLang] = useState("");
 
   interface VersionDataInterface {
     title: string;
@@ -107,7 +106,7 @@ const EditJobVersions = () => {
 
   console.log("Este es el job que voy a editar: ", job);
 
-  const handleVersionsOnChange = (
+  /*   const handleVersionsOnChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name } = event.target;
@@ -117,6 +116,25 @@ const EditJobVersions = () => {
       [name]: event.target.value,
       versionId: job.versions[0]._id,
     }));
+  }; */
+
+  const handleVersionsOnChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+
+    setVersionsData((prevFormData) => {
+      if (name === "technologies") {
+        return {
+          ...prevFormData,
+          [name]: value.split(",").map((tech) => tech.trim()), // Divide por comas y elimina espacios
+        };
+      }
+      return {
+        ...prevFormData,
+        [name]: value,
+      };
+    });
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
