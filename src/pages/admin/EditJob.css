@@ -43,6 +43,14 @@
   padding: 0;
 }
 
+.edit__job__form video {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block; /* Opcional para eliminar espacios blancos no deseados */
+}
+
 .job__form {
   background: var(--bg-color);
   display: flex;

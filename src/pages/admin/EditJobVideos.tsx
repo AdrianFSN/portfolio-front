@@ -8,13 +8,28 @@ import { getJobDetailSelector } from "../../store/selectors/JobExamplesSelectors
 import { getJobDetailThunk } from "../../store/thunks/jobDetailThunk";
 import { AppDispatch } from "../../store/store";
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  EDIT_ROUTES_PATH,
+  ORIGIN,
+  VIDEOS_DB_PATH,
+} from "../../utils/constants";
+import {
+  getJobVideosErrorSelector,
+  getJobVideosLoadingSelector,
+  getJobVideosMessageSelector,
+} from "../../store/selectors/editJobsSelectors/editJobVideosSelectors";
+import { resetJobVideos } from "../../store/slices/jobVideosSlice";
+import { updateJobVideosThunk } from "../../store/thunks/editJobVideosThunk";
+import { resetJobDetail } from "../../store/slices/jobDetailSlice";
+import CustomAlert from "../../components/shared/alert/CustomAlert";
 
 const EditJobVideos = () => {
   const { t } = useTranslation();
   const { jobId } = useParams();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  const isLoading = false;
+  const toEditPage = EDIT_ROUTES_PATH;
+  const origin = ORIGIN;
   const job = useSelector(getJobDetailSelector);
   const jobVideos = [
     {
@@ -33,6 +48,14 @@ const EditJobVideos = () => {
   const [toEditJob, setToEditJob] = useState("");
   const [toEditJobPictures, setToEditJobPictures] = useState("");
   const [toEditJobAudios, setToEditJobAudios] = useState("");
+  const error = useSelector(getJobVideosErrorSelector);
+  const successMessage = useSelector(getJobVideosMessageSelector);
+  const isLoading = useSelector(getJobVideosLoadingSelector);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [fileNames, setFileNames] = useState<Record<string, string | null>>({
+    mainVideo: null,
+    video2: null,
+  });
 
   const [videosData, setVideosData] = useState({
     mainVideo: null,
@@ -41,6 +64,23 @@ const EditJobVideos = () => {
     deleteVideo2: false,
     collectionId: "",
   });
+
+  useEffect(() => {
+    if (job) {
+      setVideosData((prevValues) => ({
+        ...prevValues,
+        collectionId: job.videos._id,
+      }));
+    }
+  }, [job]);
+
+  useEffect(() => {
+    if (!error && successMessage) {
+      setAlertMessage(successMessage);
+    } else {
+      setAlertMessage(error as string);
+    }
+  }, [successMessage, error]);
 
   useEffect(() => {
     if (job) {
@@ -93,14 +133,71 @@ const EditJobVideos = () => {
         [name]: files?.[0] || null,
         collectionId: job.videos._id,
       }));
+      setFileNames((prevFileNames) => ({
+        ...prevFileNames,
+        [name]: files?.[0]?.name || null,
+      }));
     }
   };
 
-  const handleSubmit = () => {};
+  const handleResetUploadFile = (
+    event: React.MouseEvent<HTMLParagraphElement>
+  ) => {
+    const name = (event.target as HTMLParagraphElement).dataset.name; // Obtén el atributo "name"
+    if (name) {
+      setVideosData((prevFormData) => ({
+        ...prevFormData,
+        [name]: null,
+      }));
+      setFileNames((prevFileNames) => ({
+        ...prevFileNames,
+        [name]: null,
+      }));
+    }
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(resetJobVideos());
+    await dispatch(
+      updateJobVideosThunk({
+        videosId: job.videos._id,
+        formData: videosData,
+      })
+    );
+  };
+
+  const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    if (successMessage) {
+      setAlertMessage("");
+      dispatch(resetJobVideos());
+      dispatch(resetJobDetail());
+      navigate(toEditPage);
+    } else {
+      setAlertMessage("");
+      dispatch(resetJobVideos());
+    }
+  };
+
+  const handleToEditPage = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    dispatch(resetJobDetail());
+    dispatch(resetJobVideos());
+    navigate(toEditPage);
+  };
 
   return (
     <main className="edit__job__form">
       <h1>{t("admin.edit_job")}</h1>
+      {alertMessage && (
+        <CustomAlert
+          type={error ? "error" : "success"}
+          onClick={handleCloseAlert}
+        >
+          {alertMessage}
+        </CustomAlert>
+      )}
       {job && (
         <>
           <h2>{job.versions[0].title}</h2>
@@ -136,8 +233,13 @@ const EditJobVideos = () => {
                       htmlFor={fileItem.key}
                     >
                       <h4>{fileItem.title}</h4>
-                      {fileItem.current && (
+                      {fileItem.current && !fileNames[fileItem.key] && (
                         <>
+                          <video
+                            controls
+                            src={`${VIDEOS_DB_PATH}${fileItem.current}`}
+                            crossOrigin={origin}
+                          ></video>
                           <p>{`${t("generic.current")}: ${
                             fileItem.current
                           }`}</p>
@@ -152,6 +254,20 @@ const EditJobVideos = () => {
                             {t("admin.delete_current_file")}
                           </span>
                         </>
+                      )}
+                      {fileNames[fileItem.key] && (
+                        <div className="form__file__is__uploaded">
+                          <p>{`${t("generic.uploaded_file")}: ${
+                            fileNames[fileItem.key]
+                          }`}</p>
+                          <p
+                            data-name={fileItem.key}
+                            onClick={handleResetUploadFile}
+                            className="form__cancel__upload"
+                          >
+                            {t("generic.cancel_upload")}
+                          </p>
+                        </div>
                       )}
                     </label>
 
@@ -174,19 +290,28 @@ const EditJobVideos = () => {
               ))}
             </fieldset>
 
-            <RegularButton
-              className="btn form__button"
-              type="submit"
-            >
-              {isLoading ? (
-                <CustomPulseLoader
-                  isLoading={isLoading}
-                  $customHeight="100%"
-                />
-              ) : (
-                "Submit"
-              )}
-            </RegularButton>
+            <div className="form__submit__cancel__buttons">
+              <RegularButton
+                className="btn form__button"
+                type="submit"
+              >
+                {isLoading ? (
+                  <CustomPulseLoader
+                    isLoading={isLoading}
+                    $customHeight="100%"
+                  />
+                ) : (
+                  t("generic.submit")
+                )}
+              </RegularButton>
+              <RegularButton
+                className="btn form__button"
+                skin="danger"
+                onClick={handleToEditPage}
+              >
+                {t("generic.cancel")}
+              </RegularButton>
+            </div>
           </form>
         </>
       )}

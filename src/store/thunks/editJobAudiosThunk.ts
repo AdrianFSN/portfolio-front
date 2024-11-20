@@ -13,7 +13,7 @@ export const updateJobAudiosThunk = createAsyncThunk<
   AxiosResponse<StandardResponseInterface>,
   FetchJobAudiosCollectionParams
 >(
-  "jobVideos/updateJobVideos",
+  "jobAudios/updateJobAudios",
   async ({ audiosId, formData }, { rejectWithValue }) => {
     try {
       const url = `${AUDIOS_COLLECTION_API_URI}/${audiosId}`;
