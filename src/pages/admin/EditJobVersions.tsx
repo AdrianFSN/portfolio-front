@@ -3,39 +3,80 @@ import "./EditJob.css";
 import { useTranslation } from "react-i18next";
 import RegularButton from "../../components/shared/buttons/RegularButton";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
-import { EXCERPT_MAX_LENGTH, TITLE_MAX_LENGTH } from "../../utils/constants";
+import {
+  EDIT_ROUTES_PATH,
+  EXCERPT_MAX_LENGTH,
+  TITLE_MAX_LENGTH,
+} from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobDetailSelector } from "../../store/selectors/JobExamplesSelectors/jobDetailSelectors";
 import { getJobDetailThunk } from "../../store/thunks/jobDetailThunk";
 import { AppDispatch } from "../../store/store";
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  getJobVersionErrorSelector,
+  getJobVersionLoadingSelector,
+  getJobVersionMessageSelector,
+} from "../../store/selectors/editJobsSelectors/editJobVersionSelectors";
+import { resetEditJobVersion } from "../../store/slices/jobVersionSlice";
+import { updateJobVersionThunk } from "../../store/thunks/editJobVersionThunk";
+import { resetJobDetail } from "../../store/slices/jobDetailSlice";
+import CustomAlert from "../../components/shared/alert/CustomAlert";
 
 const EditJobVersions = () => {
   const { t } = useTranslation();
   const { jobId } = useParams();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  const isLoading = false;
+  const toEditPage = EDIT_ROUTES_PATH;
   const job = useSelector(getJobDetailSelector);
   const [toEditJobPictures, setToEditJobPictures] = useState("");
   const [toEditJob, setToEditJob] = useState("");
   const [toEditJobVideos, setToEditJobVideos] = useState("");
   const [toEditJobAudios, setToEditJobAudios] = useState("");
+  const error = useSelector(getJobVersionErrorSelector);
+  const successMessage = useSelector(getJobVersionMessageSelector);
+  const isLoading = useSelector(getJobVersionLoadingSelector);
+  const [alertMessage, setAlertMessage] = useState("");
 
-  const [versionsData, setVersionsData] = useState({
+  interface VersionDataInterface {
+    title: string;
+    technologies: string[];
+    info: string;
+    customer: string;
+    versionId: string;
+    language: string;
+  }
+
+  const [versionsData, setVersionsData] = useState<VersionDataInterface>({
     title: "",
     technologies: [],
     info: "",
     customer: "",
     versionId: "",
+    language: "",
   });
 
   useEffect(() => {
+    if (!error && successMessage) {
+      setAlertMessage(successMessage);
+    } else {
+      setAlertMessage(error as string);
+    }
+  }, [successMessage, error]);
+
+  useEffect(() => {
     if (job) {
-      setToEditJobPictures(`/edit/job/${job._id}/pictures/${job.pictures._id}`);
-      setToEditJob(`/edit/job/${job._id}`);
-      setToEditJobVideos(`/edit/job/${job._id}/videos/${job.videos._id}`);
-      setToEditJobAudios(`/edit/job/${job._id}/audios/${job.audios._id}`);
+      setToEditJobPictures(
+        `${EDIT_ROUTES_PATH}/job/${job._id}/pictures/${job.pictures._id}`
+      );
+      setToEditJob(`${EDIT_ROUTES_PATH}/job/${job._id}`);
+      setToEditJobVideos(
+        `${EDIT_ROUTES_PATH}/job/${job._id}/videos/${job.videos._id}`
+      );
+      setToEditJobAudios(
+        `${EDIT_ROUTES_PATH}/job/${job._id}/audios/${job.audios._id}`
+      );
     }
   }, [job]);
 
@@ -44,6 +85,19 @@ const EditJobVersions = () => {
       dispatch(getJobDetailThunk({ jobId }));
     }
   }, [jobId, dispatch]);
+
+  useEffect(() => {
+    if (job) {
+      setVersionsData((prevData) => ({
+        ...prevData,
+        title: job.versions[0].title || "",
+        technologies: job.versions[0].technologies || [],
+        info: job.versions[0].info || "",
+        customer: job.versions[0].customer || "",
+        versionId: job.versions[0]._id || "",
+      }));
+    }
+  }, [job]);
 
   useEffect(() => {
     console.log("Esto es versionsData: ", versionsData);
@@ -60,14 +114,52 @@ const EditJobVersions = () => {
       ...prevFormData,
       [name]: event.target.value,
       versionId: job.versions[0]._id,
+      language: "en",
     }));
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(resetEditJobVersion());
+    await dispatch(
+      updateJobVersionThunk({
+        versionId: job.versions[0]._id,
+        formData: versionsData,
+      })
+    );
+  };
+
+  const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    if (successMessage) {
+      setAlertMessage("");
+      dispatch(resetEditJobVersion());
+      dispatch(resetJobDetail());
+      navigate(toEditPage);
+    } else {
+      setAlertMessage("");
+      dispatch(resetEditJobVersion());
+    }
+  };
+
+  const handleToEditPage = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    dispatch(resetJobDetail());
+    dispatch(resetEditJobVersion());
+    navigate(toEditPage);
+  };
 
   return (
     <main className="edit__job__form">
       <h1>{t("admin.edit_job")}</h1>
+      {alertMessage && (
+        <CustomAlert
+          type={error ? "error" : "success"}
+          onClick={handleCloseAlert}
+        >
+          {alertMessage}
+        </CustomAlert>
+      )}
       {job && (
         <>
           <h2>{job.versions[0].title}</h2>
@@ -199,19 +291,28 @@ const EditJobVersions = () => {
               </div>
             </fieldset>
 
-            <RegularButton
-              className="btn form__button"
-              type="submit"
-            >
-              {isLoading ? (
-                <CustomPulseLoader
-                  isLoading={isLoading}
-                  $customHeight="100%"
-                />
-              ) : (
-                "Submit"
-              )}
-            </RegularButton>
+            <div className="form__submit__cancel__buttons">
+              <RegularButton
+                className="btn form__button"
+                type="submit"
+              >
+                {isLoading ? (
+                  <CustomPulseLoader
+                    isLoading={isLoading}
+                    $customHeight="100%"
+                  />
+                ) : (
+                  t("generic.submit")
+                )}
+              </RegularButton>
+              <RegularButton
+                className="btn form__button"
+                skin="danger"
+                onClick={handleToEditPage}
+              >
+                {t("generic.cancel")}
+              </RegularButton>
+            </div>
           </form>
         </>
       )}
