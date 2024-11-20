@@ -38,6 +38,7 @@ const EditJobVersions = () => {
   const successMessage = useSelector(getJobVersionMessageSelector);
   const isLoading = useSelector(getJobVersionLoadingSelector);
   const [alertMessage, setAlertMessage] = useState("");
+  const [lang, setLang] = useState("");
 
   interface VersionDataInterface {
     title: string;
@@ -95,6 +96,7 @@ const EditJobVersions = () => {
         info: job.versions[0].info || "",
         customer: job.versions[0].customer || "",
         versionId: job.versions[0]._id || "",
+        language: job.versions[0].language || "",
       }));
     }
   }, [job]);
@@ -114,7 +116,6 @@ const EditJobVersions = () => {
       ...prevFormData,
       [name]: event.target.value,
       versionId: job.versions[0]._id,
-      language: "en",
     }));
   };
 
