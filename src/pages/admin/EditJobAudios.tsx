@@ -26,13 +26,7 @@ import { resetJobAudios } from "../../store/slices/jobAudiosSlice";
 import { updateJobAudiosThunk } from "../../store/thunks/editJobAudiosThunk";
 import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
-
-interface FileInterface {
-  key: string;
-  current: string;
-  preview: string;
-  title: string;
-}
+import FileInterface from "../../@types/FileInterface";
 
 const EditJobAudios = () => {
   const { t } = useTranslation();
@@ -132,30 +126,37 @@ const EditJobAudios = () => {
   }, [audiosData.mainAudio, audiosData.audio2]);
 
   const handleAudiosOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name } = event.target;
+    const { name, type } = event.target;
 
-    const files = (event.target as HTMLInputElement).files;
-
-    if (files?.[0]) {
-      const file = files[0];
-      const previewURL = file.type.startsWith("image/")
-        ? URL.createObjectURL(file)
-        : file.type.startsWith("video/") || file.type.startsWith("audio/")
-        ? URL.createObjectURL(file)
-        : "";
-
+    if (type === "checkbox") {
       setAudiosData((prevFormData) => ({
         ...prevFormData,
-        [name]: file,
+        [name]: (event.target as HTMLInputElement).checked,
       }));
+    } else if (type === "file") {
+      const files = (event.target as HTMLInputElement).files;
 
-      setJobAudios((prevJobAudios) =>
-        prevJobAudios.map((fileItem) =>
-          fileItem.key === name
-            ? { ...fileItem, preview: previewURL }
-            : fileItem
-        )
-      );
+      if (files?.[0]) {
+        const file = files[0];
+        const previewURL = file.type.startsWith("image/")
+          ? URL.createObjectURL(file)
+          : file.type.startsWith("video/") || file.type.startsWith("audio/")
+          ? URL.createObjectURL(file)
+          : "";
+
+        setAudiosData((prevFormData) => ({
+          ...prevFormData,
+          [name]: file,
+        }));
+
+        setJobAudios((prevJobAudios) =>
+          prevJobAudios.map((fileItem) =>
+            fileItem.key === name
+              ? { ...fileItem, preview: previewURL }
+              : fileItem
+          )
+        );
+      }
     }
   };
 
@@ -284,9 +285,7 @@ const EditJobAudios = () => {
                             controls
                             src={fileItem.preview}
                           ></audio>
-                          <p>{`${t("generic.uploaded_file")}: ${
-                            fileItem.preview
-                          }`}</p>
+                          <p>{t("generic.uploaded_file")}</p>
                           <p
                             data-name={fileItem.key}
                             onClick={handleResetUploadFile}

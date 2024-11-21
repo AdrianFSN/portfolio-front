@@ -16,12 +16,17 @@ import {
   getJobPicturesMessageSelector,
 } from "../../store/selectors/editJobsSelectors/editJobPicturesSelectors";
 import {
+  AUDIOS_ROUTES_URI,
   EDIT_ROUTES_PATH,
   IMG_THUMBNAILS_DB_PATH,
+  JOB_ROUTES_URI,
   ORIGIN,
+  VERSION_ROUTES_URI,
+  VIDEOS_ROUTES_URI,
 } from "../../utils/constants";
 import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
+import FileInterface from "../../@types/FileInterface";
 
 const EditJobPictures = () => {
   const { t } = useTranslation();
@@ -31,33 +36,38 @@ const EditJobPictures = () => {
   const toEditPage = EDIT_ROUTES_PATH;
   const origin = ORIGIN;
   const job = useSelector(getJobDetailSelector);
-  const jobPictures = [
+  const [jobPictures, setJobPictures] = useState<FileInterface[]>([
     {
       key: "mainPicture",
       current: job && job.pictures.mainPicture ? job.pictures.mainPicture : "",
+      preview: "",
       title: t("admin.main_picture"),
     },
     {
       key: "picture2",
       current: job && job.pictures.picture2 ? job.pictures.picture2 : "",
+      preview: "",
       title: t("admin.picture2"),
     },
     {
       key: "picture3",
       current: job && job.pictures.picture3 ? job.pictures.picture3 : "",
+      preview: "",
       title: t("admin.picture3"),
     },
     {
       key: "picture4",
       current: job && job.pictures.picture4 ? job.pictures.picture4 : "",
+      preview: "",
       title: t("admin.picture4"),
     },
     {
       key: "picture5",
       current: job && job.pictures.picture5 ? job.pictures.picture5 : "",
+      preview: "",
       title: t("admin.picture5"),
     },
-  ];
+  ]);
 
   const [toLocalizeJob, setToLocalizeJob] = useState("");
   const [toEditJob, setToEditJob] = useState("");
@@ -67,13 +77,13 @@ const EditJobPictures = () => {
   const successMessage = useSelector(getJobPicturesMessageSelector);
   const isLoading = useSelector(getJobPicturesLoadingSelector);
   const [alertMessage, setAlertMessage] = useState("");
-  const [fileNames, setFileNames] = useState<Record<string, string | null>>({
+  const fileNames: Record<string, string | null> = {
     mainPicture: null,
     picture2: null,
     picture3: null,
     picture4: null,
     picture5: null,
-  });
+  };
 
   const [picturesData, setPicturesData] = useState({
     mainPicture: null,
@@ -108,10 +118,16 @@ const EditJobPictures = () => {
 
   useEffect(() => {
     if (job) {
-      setToLocalizeJob(`/edit/job/${job._id}/version/${job.versions[0]._id}`);
-      setToEditJob(`/edit/job/${job._id}`);
-      setToEditJobVideos(`/edit/job/${job._id}/videos/${job.videos._id}`);
-      setToEditJobAudios(`/edit/job/${job._id}/audios/${job.audios._id}`);
+      setToLocalizeJob(
+        `${EDIT_ROUTES_PATH}/${JOB_ROUTES_URI}/${job._id}/${VERSION_ROUTES_URI}/${job.versions[0]._id}`
+      );
+      setToEditJob(`${EDIT_ROUTES_PATH}/${JOB_ROUTES_URI}/${job._id}`);
+      setToEditJobVideos(
+        `${EDIT_ROUTES_PATH}/${JOB_ROUTES_URI}/${job._id}/${VIDEOS_ROUTES_URI}/${job.videos._id}`
+      );
+      setToEditJobAudios(
+        `${EDIT_ROUTES_PATH}/${JOB_ROUTES_URI}/${job._id}/${AUDIOS_ROUTES_URI}/${job.audios._id}`
+      );
     }
   }, [job]);
 
@@ -169,15 +185,27 @@ const EditJobPictures = () => {
       }));
     } else if (type === "file") {
       const files = (event.target as HTMLInputElement).files;
-      setPicturesData((prevFormData) => ({
-        ...prevFormData,
-        [name]: files?.[0] || null,
-        collectionId: job.pictures._id,
-      }));
-      setFileNames((prevFileNames) => ({
-        ...prevFileNames,
-        [name]: files?.[0]?.name || null,
-      }));
+      if (files?.[0]) {
+        const file = files[0];
+        const previewURL = file.type.startsWith("image/")
+          ? URL.createObjectURL(file)
+          : file.type.startsWith("video/") || file.type.startsWith("audio/")
+          ? URL.createObjectURL(file)
+          : "";
+
+        setPicturesData((prevFormData) => ({
+          ...prevFormData,
+          [name]: file,
+        }));
+
+        setJobPictures((prevJobPictures) =>
+          prevJobPictures.map((fileItem) =>
+            fileItem.key === name
+              ? { ...fileItem, preview: previewURL }
+              : fileItem
+          )
+        );
+      }
     }
   };
 
@@ -188,12 +216,13 @@ const EditJobPictures = () => {
     if (name) {
       setPicturesData((prevFormData) => ({
         ...prevFormData,
-        [name]: null, // Resetea el campo correspondiente
+        [name]: null,
       }));
-      setFileNames((prevFileNames) => ({
-        ...prevFileNames,
-        [name]: null, // Resetea el nombre del archivo
-      }));
+      setJobPictures((prevJobFiles) =>
+        prevJobFiles.map((file) =>
+          file.key === name ? { ...file, preview: "" } : file
+        )
+      );
     }
   };
 
@@ -274,32 +303,34 @@ const EditJobPictures = () => {
                       htmlFor={fileItem.key}
                     >
                       <h4>{fileItem.title}</h4>
-                      {fileItem.current && !fileNames[fileItem.key] && (
-                        <>
-                          <img
-                            src={`${IMG_THUMBNAILS_DB_PATH}${fileItem.current}`}
-                            crossOrigin={origin}
-                          />
-                          <p>{`${t("generic.current")}: ${
-                            fileItem.current
-                          }`}</p>
-                          <span className="delete__former__file">
-                            <input
-                              type="checkbox"
-                              name={`delete${fileItem.key
-                                .charAt(0)
-                                .toUpperCase()}${fileItem.key.slice(1)}`}
-                              onChange={handlePicturesOnChange}
+                      {!fileItem.preview &&
+                        fileItem.current &&
+                        !fileNames[fileItem.key] && (
+                          <>
+                            <img
+                              src={`${IMG_THUMBNAILS_DB_PATH}${fileItem.current}`}
+                              crossOrigin={origin}
                             />
-                            {t("admin.delete_current_file")}
-                          </span>
-                        </>
-                      )}
-                      {fileNames[fileItem.key] && (
-                        <div className="form__file__is__uploaded">
-                          <p>{`${t("generic.uploaded_file")}: ${
-                            fileNames[fileItem.key]
-                          }`}</p>
+                            <p>{`${t("generic.current")}: ${
+                              fileItem.current
+                            }`}</p>
+                            <span className="delete__former__file">
+                              <input
+                                type="checkbox"
+                                name={`delete${fileItem.key
+                                  .charAt(0)
+                                  .toUpperCase()}${fileItem.key.slice(1)}`}
+                                onChange={handlePicturesOnChange}
+                              />
+                              {t("admin.delete_current_file")}
+                            </span>
+                          </>
+                        )}
+
+                      {fileItem.preview && (
+                        <>
+                          <img src={fileItem.preview}></img>
+                          <p>{t("generic.uploaded_file")}</p>
                           <p
                             data-name={fileItem.key}
                             onClick={handleResetUploadFile}
@@ -307,7 +338,7 @@ const EditJobPictures = () => {
                           >
                             {t("generic.cancel_upload")}
                           </p>
-                        </div>
+                        </>
                       )}
                     </label>
 
@@ -345,7 +376,7 @@ const EditJobPictures = () => {
               </RegularButton>
               <RegularButton
                 className="btn form__button"
-                skin="danger"
+                $skin="danger"
                 onClick={handleToEditPage}
               >
                 {t("generic.cancel")}
