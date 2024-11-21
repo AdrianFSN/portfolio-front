@@ -5,17 +5,33 @@ import RegularButton from "../../components/shared/buttons/RegularButton";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import {
   DESCRIPTION_MAX_LENGTH,
+  EDIT_ROUTES_PATH,
   EXCERPT_MAX_LENGTH,
   TITLE_MAX_LENGTH,
   VALID_CATEGORIES,
 } from "../../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
+import { createJobThunk } from "../../store/thunks/createJobThunk ";
+import { useNavigate } from "react-router-dom";
+import {
+  getCreateJobErrorSelector,
+  getCreateJobLoadingSelector,
+  getCreateJobMessageSelector,
+} from "../../store/selectors/editJobsSelectors/createJobSelectors";
+import { resetCreateJob } from "../../store/slices/createJobSlice";
+import CustomAlert from "../../components/shared/alert/CustomAlert";
 
 const CreateJob = () => {
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
-  const isLoading = false;
+  const navigate = useNavigate();
+  const toEditPage = EDIT_ROUTES_PATH;
+  const error = useSelector(getCreateJobErrorSelector);
+  const successMessage = useSelector(getCreateJobMessageSelector);
+  const isLoading = useSelector(getCreateJobLoadingSelector);
+  const [alertMessage, setAlertMessage] = useState("");
+
   const [jobFiles, setJobFiles] = useState([
     {
       key: "mainPicture",
@@ -73,7 +89,7 @@ const CreateJob = () => {
     },
   ]);
 
-  const [fileNames, setFileNames] = useState<Record<string, string | null>>({
+  /*   const [fileNames, setFileNames] = useState<Record<string, string | null>>({
     mainPicture: null,
     picture2: null,
     picture3: null,
@@ -83,7 +99,7 @@ const CreateJob = () => {
     video2: null,
     mainAudio: null,
     audio2: null,
-  });
+  }); */
 
   interface CreateJobInterface {
     launchPeriod: string;
@@ -131,6 +147,14 @@ const CreateJob = () => {
     console.log("Esto es formData: ", formData);
   }, [formData]);
 
+  useEffect(() => {
+    if (!error && successMessage) {
+      setAlertMessage(successMessage);
+    } else {
+      setAlertMessage(error as string);
+    }
+  }, [successMessage, error]);
+
   const handleFormOnChange = (
     event: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -168,10 +192,10 @@ const CreateJob = () => {
           [name]: file,
         }));
 
-        setFileNames((prevFileNames) => ({
+        /* setFileNames((prevFileNames) => ({
           ...prevFileNames,
           [name]: file.name,
-        }));
+        })); */
 
         setJobFiles((prevJobFiles) =>
           prevJobFiles.map((fileItem) =>
@@ -198,10 +222,10 @@ const CreateJob = () => {
         ...prevFormData,
         [name]: null,
       }));
-      setFileNames((prevFileNames) => ({
+      /* setFileNames((prevFileNames) => ({
         ...prevFileNames,
         [name]: null,
-      }));
+      })); */
       setJobFiles((prevJobFiles) =>
         prevJobFiles.map((file) =>
           file.key === name ? { ...file, current: "", preview: "" } : file
@@ -210,12 +234,45 @@ const CreateJob = () => {
     }
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(resetCreateJob());
+    await dispatch(
+      createJobThunk({
+        formData,
+      })
+    );
+  };
+
+  const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    if (successMessage) {
+      setAlertMessage("");
+      dispatch(resetCreateJob());
+      navigate(toEditPage);
+    } else {
+      setAlertMessage("");
+      dispatch(resetCreateJob());
+    }
+  };
+
+  const handleToEditPage = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    dispatch(resetCreateJob());
+    navigate(toEditPage);
+  };
 
   return (
-    <div className="edit__job__form">
+    <main className="edit__job__form">
       <h1>{t("admin.create_job")}</h1>
-
+      {alertMessage && (
+        <CustomAlert
+          type={error ? "error" : "success"}
+          onClick={handleCloseAlert}
+        >
+          {alertMessage}
+        </CustomAlert>
+      )}
       <form
         className="job__form"
         noValidate
@@ -482,21 +539,30 @@ const CreateJob = () => {
           ))}
         </fieldset>
 
-        <RegularButton
-          className="btn form__button"
-          type="submit"
-        >
-          {isLoading ? (
-            <CustomPulseLoader
-              isLoading={isLoading}
-              $customHeight="100%"
-            />
-          ) : (
-            "Submit"
-          )}
-        </RegularButton>
+        <div className="form__submit__cancel__buttons">
+          <RegularButton
+            className="btn form__button"
+            type="submit"
+          >
+            {isLoading ? (
+              <CustomPulseLoader
+                isLoading={isLoading}
+                $customHeight="100%"
+              />
+            ) : (
+              t("generic.submit")
+            )}
+          </RegularButton>
+          <RegularButton
+            className="btn form__button"
+            $skin="danger"
+            onClick={handleToEditPage}
+          >
+            {t("generic.cancel")}
+          </RegularButton>
+        </div>
       </form>
-    </div>
+    </main>
   );
 };
 

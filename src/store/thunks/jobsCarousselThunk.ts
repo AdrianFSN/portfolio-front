@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { client } from "../../api/client";
 import {
   CATEGORY_FILTER_URI,
@@ -14,10 +14,17 @@ interface FetchJobsCarousselParams {
 export const getJobsCarousselThunk = createAsyncThunk<
   AxiosResponse<StandardResponseInterface>,
   FetchJobsCarousselParams
->("jobsCaroussel/getJobsCarousselList", async ({ category }) => {
-  const url = category
-    ? `${JOB_EXAMPLES_API_URI}${CATEGORY_FILTER_URI}${category}`
-    : `${JOB_EXAMPLES_API_URI}`;
-  const response = await client.get(url);
-  return response;
-});
+>(
+  "jobsCaroussel/getJobsCarousselList",
+  async ({ category }, { rejectWithValue }) => {
+    try {
+      const url = category
+        ? `${JOB_EXAMPLES_API_URI}${CATEGORY_FILTER_URI}${category}`
+        : `${JOB_EXAMPLES_API_URI}`;
+      const response = await client.get(url);
+      return response;
+    } catch (error) {
+      return rejectWithValue((error as AxiosError).message);
+    }
+  }
+);
