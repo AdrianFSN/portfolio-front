@@ -132,10 +132,6 @@ const CreateJob = () => {
   });
 
   useEffect(() => {
-    console.log("Esto es formData: ", formData);
-  }, [formData]);
-
-  useEffect(() => {
     if (!error && successMessage) {
       setAlertMessage(successMessage);
     } else {

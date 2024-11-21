@@ -11,7 +11,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   AUDIOS_DB_PATH,
   EDIT_ROUTES_PATH,
+  JOB_ROUTES_URI,
   ORIGIN,
+  PICTURES_ROUTES_URI,
+  VERSION_ROUTES_URI,
+  VIDEOS_ROUTES_URI,
 } from "../../utils/constants";
 import {
   getJobAudiosErrorSelector,
@@ -23,6 +27,13 @@ import { updateJobAudiosThunk } from "../../store/thunks/editJobAudiosThunk";
 import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
 
+interface FileInterface {
+  key: string;
+  current: string;
+  preview: string;
+  title: string;
+}
+
 const EditJobAudios = () => {
   const { t } = useTranslation();
   const { jobId } = useParams();
@@ -31,18 +42,20 @@ const EditJobAudios = () => {
   const toEditPage = EDIT_ROUTES_PATH;
   const origin = ORIGIN;
   const job = useSelector(getJobDetailSelector);
-  const jobAudios = [
+  const [jobAudios, setJobAudios] = useState<FileInterface[]>([
     {
       key: "mainAudio",
       current: job && job.audios.mainAudio ? job.audios.mainAudio : "",
+      preview: "",
       title: t("admin.main_audio"),
     },
     {
       key: "audio2",
       current: job && job.audios.audio2 ? job.audios.audio2 : "",
+      preview: "",
       title: t("admin.audio2"),
     },
-  ];
+  ]);
 
   const [toLocalizeJob, setToLocalizeJob] = useState("");
   const [toEditJob, setToEditJob] = useState("");
@@ -52,10 +65,11 @@ const EditJobAudios = () => {
   const successMessage = useSelector(getJobAudiosMessageSelector);
   const isLoading = useSelector(getJobAudiosLoadingSelector);
   const [alertMessage, setAlertMessage] = useState("");
-  const [fileNames, setFileNames] = useState<Record<string, string | null>>({
+
+  const fileNames: Record<string, string | null> = {
     mainAudio: null,
     audio2: null,
-  });
+  };
 
   const [audiosData, setAudiosData] = useState({
     mainAudio: null,
@@ -84,10 +98,16 @@ const EditJobAudios = () => {
 
   useEffect(() => {
     if (job) {
-      setToLocalizeJob(`/edit/job/${job._id}/version/${job.versions[0]._id}`);
-      setToEditJob(`/edit/job/${job._id}`);
-      setToEditJobVideos(`/edit/job/${job._id}/videos/${job.videos._id}`);
-      setToEditJobPictures(`/edit/job/${job._id}/pictures/${job.pictures._id}`);
+      setToLocalizeJob(
+        `${EDIT_ROUTES_PATH}/${JOB_ROUTES_URI}/${job._id}/${VERSION_ROUTES_URI}/${job.versions[0]._id}`
+      );
+      setToEditJob(`${EDIT_ROUTES_PATH}/${JOB_ROUTES_URI}/${job._id}`);
+      setToEditJobVideos(
+        `${EDIT_ROUTES_PATH}/${JOB_ROUTES_URI}/${job._id}/${VIDEOS_ROUTES_URI}/${job.videos._id}`
+      );
+      setToEditJobPictures(
+        `${EDIT_ROUTES_PATH}/${JOB_ROUTES_URI}/${job._id}/${PICTURES_ROUTES_URI}/${job.pictures._id}`
+      );
     }
   }, [job]);
 
@@ -112,25 +132,30 @@ const EditJobAudios = () => {
   }, [audiosData.mainAudio, audiosData.audio2]);
 
   const handleAudiosOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, type } = event.target;
+    const { name } = event.target;
 
-    if (type === "checkbox") {
+    const files = (event.target as HTMLInputElement).files;
+
+    if (files?.[0]) {
+      const file = files[0];
+      const previewURL = file.type.startsWith("image/")
+        ? URL.createObjectURL(file)
+        : file.type.startsWith("video/") || file.type.startsWith("audio/")
+        ? URL.createObjectURL(file)
+        : "";
+
       setAudiosData((prevFormData) => ({
         ...prevFormData,
-        [name]: (event.target as HTMLInputElement).checked,
-        collectionId: job.audios._id,
+        [name]: file,
       }));
-    } else if (type === "file") {
-      const files = (event.target as HTMLInputElement).files;
-      setAudiosData((prevFormData) => ({
-        ...prevFormData,
-        [name]: files?.[0] || null,
-        collectionId: job.audios._id,
-      }));
-      setFileNames((prevFileNames) => ({
-        ...prevFileNames,
-        [name]: files?.[0]?.name || null,
-      }));
+
+      setJobAudios((prevJobAudios) =>
+        prevJobAudios.map((fileItem) =>
+          fileItem.key === name
+            ? { ...fileItem, preview: previewURL }
+            : fileItem
+        )
+      );
     }
   };
 
@@ -143,10 +168,11 @@ const EditJobAudios = () => {
         ...prevFormData,
         [name]: null,
       }));
-      setFileNames((prevFileNames) => ({
-        ...prevFileNames,
-        [name]: null,
-      }));
+      setJobAudios((prevJobFiles) =>
+        prevJobFiles.map((file) =>
+          file.key === name ? { ...file, preview: "" } : file
+        )
+      );
     }
   };
 
@@ -227,32 +253,39 @@ const EditJobAudios = () => {
                       htmlFor={fileItem.key}
                     >
                       <h4>{fileItem.title}</h4>
-                      {fileItem.current && !fileNames[fileItem.key] && (
+                      {!fileItem.preview &&
+                        fileItem.current &&
+                        !fileNames[fileItem.key] && (
+                          <>
+                            <audio
+                              controls
+                              src={`${AUDIOS_DB_PATH}${fileItem.current}`}
+                              crossOrigin={origin}
+                            ></audio>
+                            <p>{`${t("generic.current")}: ${
+                              fileItem.current
+                            }`}</p>
+                            <span className="delete__former__file">
+                              <input
+                                type="checkbox"
+                                name={`delete${fileItem.key
+                                  .charAt(0)
+                                  .toUpperCase()}${fileItem.key.slice(1)}`}
+                                onChange={handleAudiosOnChange}
+                              />
+                              {t("admin.delete_current_file")}
+                            </span>
+                          </>
+                        )}
+
+                      {fileItem.preview && (
                         <>
                           <audio
                             controls
-                            src={`${AUDIOS_DB_PATH}${fileItem.current}`}
-                            crossOrigin={origin}
+                            src={fileItem.preview}
                           ></audio>
-                          <p>{`${t("generic.current")}: ${
-                            fileItem.current
-                          }`}</p>
-                          <span className="delete__former__file">
-                            <input
-                              type="checkbox"
-                              name={`delete${fileItem.key
-                                .charAt(0)
-                                .toUpperCase()}${fileItem.key.slice(1)}`}
-                              onChange={handleAudiosOnChange}
-                            />
-                            {t("admin.delete_current_file")}
-                          </span>
-                        </>
-                      )}
-                      {fileNames[fileItem.key] && (
-                        <div className="form__file__is__uploaded">
                           <p>{`${t("generic.uploaded_file")}: ${
-                            fileNames[fileItem.key]
+                            fileItem.preview
                           }`}</p>
                           <p
                             data-name={fileItem.key}
@@ -261,7 +294,7 @@ const EditJobAudios = () => {
                           >
                             {t("generic.cancel_upload")}
                           </p>
-                        </div>
+                        </>
                       )}
                     </label>
 
