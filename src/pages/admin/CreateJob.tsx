@@ -89,18 +89,6 @@ const CreateJob = () => {
     },
   ]);
 
-  /*   const [fileNames, setFileNames] = useState<Record<string, string | null>>({
-    mainPicture: null,
-    picture2: null,
-    picture3: null,
-    picture4: null,
-    picture5: null,
-    mainVideo: null,
-    video2: null,
-    mainAudio: null,
-    audio2: null,
-  }); */
-
   interface CreateJobInterface {
     launchPeriod: string;
     linkToUrl: string;
@@ -192,11 +180,6 @@ const CreateJob = () => {
           [name]: file,
         }));
 
-        /* setFileNames((prevFileNames) => ({
-          ...prevFileNames,
-          [name]: file.name,
-        })); */
-
         setJobFiles((prevJobFiles) =>
           prevJobFiles.map((fileItem) =>
             fileItem.key === name
@@ -222,10 +205,7 @@ const CreateJob = () => {
         ...prevFormData,
         [name]: null,
       }));
-      /* setFileNames((prevFileNames) => ({
-        ...prevFileNames,
-        [name]: null,
-      })); */
+
       setJobFiles((prevJobFiles) =>
         prevJobFiles.map((file) =>
           file.key === name ? { ...file, current: "", preview: "" } : file
