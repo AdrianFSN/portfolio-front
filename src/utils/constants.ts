@@ -60,6 +60,15 @@ export const VALID_CATEGORIES = [
 
 // Job detail
 export const EDIT_ROUTES_PATH = "/edit";
+export const AUTH_ROUTES_PATH = "/session";
+export const DEVELOPMENT_ROUTES_PATH = "/development";
+export const ABOUT_ME_ROUTES_PATH = "/bio";
+export const CREATE_ROUTES_URI = "create";
+export const JOB_ROUTES_URI = "job";
+export const VERSION_ROUTES_URI = "version";
+export const PICTURES_ROUTES_URI = "pictures";
+export const VIDEOS_ROUTES_URI = "videos";
+export const AUDIOS_ROUTES_URI = "audios";
 export const TITLE_MAX_LENGTH = 50;
-export const EXCERPT_MAX_LENGTH = 140;
+export const EXCERPT_MAX_LENGTH = 100;
 export const DESCRIPTION_MAX_LENGTH = 500;

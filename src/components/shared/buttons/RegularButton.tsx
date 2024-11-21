@@ -3,14 +3,14 @@ import styled from "styled-components";
 interface ButtonInterface
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  skin?: "danger";
+  $skin?: "danger";
 }
 
 const StyledButton: React.FC<ButtonInterface> = styled.button`
-  background-color: ${({ skin }) =>
-    skin === "danger" ? "var(--main-brand-color)" : "var(--main-text-color)"};
-  color: ${({ skin }) =>
-    skin === "danger"
+  background-color: ${({ $skin }) =>
+    $skin === "danger" ? "var(--main-brand-color)" : "var(--main-text-color)"};
+  color: ${({ $skin }) =>
+    $skin === "danger"
       ? "var(--main-text-color)"
       : "var(--secondary-text-color)"};
   text-decoration: none;

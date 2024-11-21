@@ -9,30 +9,43 @@ import EditJobVersions from "../pages/admin/EditJobVersions";
 import EditJobPictures from "../pages/admin/EditJobPictures";
 import EditJobVideos from "../pages/admin/EditJobVideos";
 import EditJobAudios from "../pages/admin/EditJobAudios";
+import {
+  ABOUT_ME_ROUTES_PATH,
+  AUDIOS_ROUTES_URI,
+  AUTH_ROUTES_PATH,
+  CREATE_ROUTES_URI,
+  DEVELOPMENT_ROUTES_PATH,
+  EDIT_ROUTES_PATH,
+  JOB_ROUTES_URI,
+  PICTURES_ROUTES_URI,
+  VERSION_ROUTES_URI,
+  VIDEOS_ROUTES_URI,
+} from "../utils/constants";
+import CreateJob from "../pages/admin/CreateJob";
 const RootRouter = () => {
   return (
     <Routes>
       {/** Public Routes */}
       <Route
-        path="/bio"
+        path={ABOUT_ME_ROUTES_PATH}
         element={<Bio />}
       />
       <Route
-        path="/development"
+        path={DEVELOPMENT_ROUTES_PATH}
         element={<Development category="development" />}
       />
       <Route
-        path="/job/:id"
+        path={`/${JOB_ROUTES_URI}/:id`}
         element={<Job />}
       />
       <Route
-        path="/session"
+        path={AUTH_ROUTES_PATH}
         element={<Login />}
       />
 
       {/** Private Routes */}
       <Route
-        path="/edit"
+        path={EDIT_ROUTES_PATH}
         element={<Outlet />}
       >
         <Route
@@ -40,23 +53,27 @@ const RootRouter = () => {
           element={<Admin />}
         />
         <Route
-          path="job/:jobId"
+          path={CREATE_ROUTES_URI}
+          element={<CreateJob />}
+        />
+        <Route
+          path={`${JOB_ROUTES_URI}/:jobId`}
           element={<EditJob />}
         />
         <Route
-          path="job/:jobId/version/:versionId"
+          path={`${JOB_ROUTES_URI}/:jobId/${VERSION_ROUTES_URI}/:versionId`}
           element={<EditJobVersions />}
         />
         <Route
-          path="job/:jobId/pictures/:collectionId"
+          path={`${JOB_ROUTES_URI}/:jobId/${PICTURES_ROUTES_URI}/:collectionId`}
           element={<EditJobPictures />}
         />
         <Route
-          path="job/:jobId/videos/:collectionId"
+          path={`${JOB_ROUTES_URI}/:jobId/${VIDEOS_ROUTES_URI}/:collectionId`}
           element={<EditJobVideos />}
         />
         <Route
-          path="job/:jobId/audios/:collectionId"
+          path={`${JOB_ROUTES_URI}/:jobId/${AUDIOS_ROUTES_URI}/:collectionId`}
           element={<EditJobAudios />}
         />
       </Route>

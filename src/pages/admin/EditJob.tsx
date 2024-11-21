@@ -287,7 +287,7 @@ const EditJob = () => {
               </RegularButton>
               <RegularButton
                 className="btn form__button"
-                skin="danger"
+                $skin="danger"
                 onClick={handleToEditPage}
               >
                 {t("generic.cancel")}

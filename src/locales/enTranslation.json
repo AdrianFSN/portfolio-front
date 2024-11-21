@@ -45,7 +45,9 @@
     "edit_job_pictures": "Edit job pictures",
     "edit_job_videos": "Edit job videos",
     "edit_job_audios": "Edit job audios",
-    "job_description": "Job description"
+    "job_description": "Job description",
+    "create_job": "Create a job",
+    "new_job_intro": "Have a new job ready? Promote it!"
   },
   "generic": {
     "empty_section": "This section is empty",

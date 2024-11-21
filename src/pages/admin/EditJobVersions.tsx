@@ -108,8 +108,6 @@ const EditJobVersions = () => {
     console.log("Esto es versionsData: ", versionsData);
   }, [versionsData]);
 
-  console.log("Este es el job que voy a editar: ", job);
-
   const handleVersionsOnChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -342,7 +340,7 @@ const EditJobVersions = () => {
               </RegularButton>
               <RegularButton
                 className="btn form__button"
-                skin="danger"
+                $skin="danger"
                 onClick={handleToEditPage}
               >
                 {t("generic.cancel")}

@@ -1,0 +1,474 @@
+import { useEffect, useState } from "react";
+import "./EditJob.css";
+import { useTranslation } from "react-i18next";
+import RegularButton from "../../components/shared/buttons/RegularButton";
+import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
+import {
+  DESCRIPTION_MAX_LENGTH,
+  EXCERPT_MAX_LENGTH,
+  TITLE_MAX_LENGTH,
+  VALID_CATEGORIES,
+} from "../../utils/constants";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store/store";
+
+const CreateJob = () => {
+  const { t } = useTranslation();
+  const dispatch: AppDispatch = useDispatch();
+  const isLoading = false;
+  const [jobFiles, setJobFiles] = useState([
+    {
+      key: "mainPicture",
+      current: "",
+      preview: "",
+      title: t("admin.main_picture"),
+    },
+    {
+      key: "picture2",
+      current: "",
+      preview: "",
+      title: t("admin.picture2"),
+    },
+    {
+      key: "picture3",
+      current: "",
+      preview: "",
+      title: t("admin.picture3"),
+    },
+    {
+      key: "picture4",
+      current: "",
+      preview: "",
+      title: t("admin.picture4"),
+    },
+    {
+      key: "picture5",
+      current: "",
+      preview: "",
+      title: t("admin.picture5"),
+    },
+    {
+      key: "mainVideo",
+      current: "",
+      preview: "",
+      title: t("admin.main_video"),
+    },
+    {
+      key: "video2",
+      current: "",
+      preview: "",
+      title: t("admin.video2"),
+    },
+    {
+      key: "mainAudio",
+      current: "",
+      preview: "",
+      title: t("admin.main_audio"),
+    },
+    {
+      key: "audio2",
+      current: "",
+      preview: "",
+      title: t("admin.audio2"),
+    },
+  ]);
+
+  const [fileNames, setFileNames] = useState<Record<string, string | null>>({
+    mainPicture: null,
+    picture2: null,
+    picture3: null,
+    picture4: null,
+    picture5: null,
+    mainVideo: null,
+    video2: null,
+    mainAudio: null,
+    audio2: null,
+  });
+
+  interface CreateJobInterface {
+    launchPeriod: string;
+    linkToUrl: string;
+    linkToGitHub: string;
+    category: string[];
+    title: string;
+    technologies: string[];
+    info: string;
+    description: string;
+    customer: string;
+    mainPicture: null;
+    picture2: null;
+    picture3: null;
+    picture4: null;
+    picture5: null;
+    mainAudio: null;
+    audio2: null;
+    mainVideo: null;
+    video2: null;
+  }
+
+  const [formData, setFormData] = useState<CreateJobInterface>({
+    launchPeriod: "",
+    linkToUrl: "",
+    linkToGitHub: "",
+    category: [],
+    title: "",
+    technologies: [],
+    info: "",
+    description: "",
+    customer: "",
+    mainPicture: null,
+    picture2: null,
+    picture3: null,
+    picture4: null,
+    picture5: null,
+    mainVideo: null,
+    video2: null,
+    mainAudio: null,
+    audio2: null,
+  });
+
+  useEffect(() => {
+    console.log("Esto es formData: ", formData);
+  }, [formData]);
+
+  const handleFormOnChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value, type } = event.target;
+
+    if (event.target instanceof HTMLSelectElement) {
+      const selectedValues = Array.from(event.target.options)
+        .filter((option) => option.selected)
+        .map((option) => option.value);
+
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: selectedValues,
+      }));
+    } else if (name === "technologies") {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value.split(",").map((tech) => tech.trim()),
+      }));
+    } else if (type === "file") {
+      const files = (event.target as HTMLInputElement).files;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: files?.[0] || null,
+      }));
+      setFileNames((prevFileNames) => ({
+        ...prevFileNames,
+        [name]: files?.[0]?.name || null,
+      }));
+      setJobFiles((prevJobFiles) =>
+        prevJobFiles.map((file) =>
+          file.key === name
+            ? { ...file, current: files?.[0]?.name || "" }
+            : file
+        )
+      );
+    } else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: event.target.value,
+      }));
+    }
+  };
+
+  const handleResetUploadFile = (
+    event: React.MouseEvent<HTMLParagraphElement>
+  ) => {
+    const name = (event.target as HTMLParagraphElement).dataset.name; // Obtén el atributo "name"
+    if (name) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: null,
+      }));
+      setFileNames((prevFileNames) => ({
+        ...prevFileNames,
+        [name]: null,
+      }));
+      setJobFiles((prevJobFiles) =>
+        prevJobFiles.map((file) =>
+          file.key === name ? { ...file, current: "" } : file
+        )
+      );
+    }
+  };
+
+  const handleSubmit = () => {};
+
+  return (
+    <main className="edit__job__form">
+      <h1>{t("admin.create_job")}</h1>
+
+      <form
+        className="job__form"
+        noValidate
+        onSubmit={handleSubmit}
+      >
+        <fieldset className="form__fieldset">
+          <legend>
+            <h3>{t("admin.descriptive_info")}</h3>
+          </legend>
+          <div className="form__fieldset__field">
+            <label
+              className="form__label"
+              htmlFor="title"
+            >
+              <h4>{t("admin.job_title")}</h4>
+            </label>
+            <input
+              className="form__input"
+              type="text"
+              value={formData.title}
+              onChange={handleFormOnChange}
+              name="title"
+              id="title"
+              placeholder={t("admin.job_title")}
+              max-length={TITLE_MAX_LENGTH}
+            />
+            <p>{`${formData.title.length} / ${TITLE_MAX_LENGTH} ${t(
+              "generic.characters"
+            )}`}</p>
+          </div>
+          <div className="form__fieldset__field">
+            <label
+              className="form__label"
+              htmlFor="excerpt"
+            >
+              <h4>{t("admin.job_excerpt")}</h4>
+            </label>
+            <textarea
+              className="form__input"
+              value={formData.info}
+              onChange={handleFormOnChange}
+              name="info"
+              id="excerpt"
+              placeholder={t("admin.job_excerpt")}
+              max-length={EXCERPT_MAX_LENGTH}
+            />
+            <p>{`${formData.info.length} / ${EXCERPT_MAX_LENGTH} ${t(
+              "generic.characters"
+            )}`}</p>
+          </div>
+          <div className="form__fieldset__field">
+            <label
+              className="form__label"
+              htmlFor="description"
+            >
+              <h4>{t("admin.job_description")}</h4>
+            </label>
+            <textarea
+              className="form__input"
+              value={formData.description}
+              onChange={handleFormOnChange}
+              name="description"
+              id="description"
+              placeholder={t("admin.job_description")}
+              max-length={DESCRIPTION_MAX_LENGTH}
+            />
+            <p>{`${formData.description.length} / ${DESCRIPTION_MAX_LENGTH} ${t(
+              "generic.characters"
+            )}`}</p>
+          </div>
+        </fieldset>
+        <fieldset className="form__fieldset">
+          <legend>
+            <h3>{t("admin.context_info")}</h3>
+          </legend>
+          <div className="form__fieldset__field">
+            <label
+              className="form__label"
+              htmlFor="launchPeriod"
+            >
+              <h4>{t("admin.launch_period")}</h4>
+            </label>
+            <input
+              className="form__input"
+              type="text"
+              value={formData.launchPeriod}
+              onChange={handleFormOnChange}
+              name="launchPeriod"
+              id="launchPeriod"
+              placeholder={t("admin.launch_period")}
+            />
+          </div>
+          <div className="form__fieldset__field">
+            <label
+              className="form__label"
+              htmlFor="customer"
+            >
+              <h4>{t("admin.customer")}</h4>
+            </label>
+            <input
+              className="form__input"
+              type="text"
+              value={formData.customer}
+              onChange={handleFormOnChange}
+              name="customer"
+              id="customer"
+              placeholder={t("admin.customer")}
+            />
+          </div>
+          <div className="form__fieldset__field">
+            <label
+              className="form__label"
+              htmlFor="linkToUrl"
+            >
+              <h4>{t("admin.link_to_url")}</h4>
+            </label>
+            <input
+              className="form__input"
+              type="text"
+              value={formData.linkToUrl}
+              onChange={handleFormOnChange}
+              name="linkToUrl"
+              id="linkToUrl"
+              placeholder={t("admin.link_to_url")}
+            />
+          </div>
+          <div className="form__fieldset__field">
+            <label
+              className="form__label"
+              htmlFor="linkToGitHub"
+            >
+              <h4>{t("admin.link_to_github")}</h4>
+            </label>
+            <input
+              className="form__input"
+              type="text"
+              value={formData.linkToGitHub}
+              onChange={handleFormOnChange}
+              name="linkToGitHub"
+              id="linkToGitHub"
+              placeholder={t("admin.link_to_github")}
+            />
+          </div>
+        </fieldset>
+        <fieldset className="form__fieldset">
+          <legend>
+            <h3>{t("admin.job_type")}</h3>
+          </legend>
+          <div className="form__fieldset__field">
+            <label
+              className="form__label"
+              htmlFor="category"
+            >
+              <h4>{t("admin.category")}</h4>
+            </label>
+            <select
+              className="form__select"
+              value={formData.category}
+              onChange={handleFormOnChange}
+              name="category"
+              id="category"
+              multiple
+            >
+              {VALID_CATEGORIES.map((category) => (
+                <option
+                  key={category}
+                  value={category}
+                >
+                  {t(`admin.${category}`)}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="form__fieldset__field">
+            <label
+              className="form__label"
+              htmlFor="technologies"
+            >
+              <h4>{t("admin.technologies")}</h4>
+            </label>
+            <input
+              className="form__input"
+              type="text"
+              value={
+                Array.isArray(formData.technologies)
+                  ? formData.technologies.join(", ")
+                  : formData.technologies
+              }
+              onChange={handleFormOnChange}
+              name="technologies"
+              id="technologies"
+              placeholder={t("admin.technologies")}
+            />
+          </div>
+        </fieldset>
+        <fieldset className="form__fieldset">
+          <legend>
+            <h3>{t("admin.job_files")}</h3>
+          </legend>
+          {jobFiles.map((fileItem) => (
+            <div
+              className="form__fieldset__field "
+              key={fileItem.key}
+            >
+              <div className="file__section__container">
+                <label
+                  className="form__label"
+                  htmlFor={fileItem.key}
+                >
+                  <h4>{fileItem.title}</h4>
+                  {fileNames[fileItem.key] && (
+                    <div className="form__file__is__uploaded">
+                      <p>{`${t("generic.uploaded_file")}: ${
+                        fileNames[fileItem.key]
+                      }`}</p>
+                      <p
+                        data-name={fileItem.key}
+                        onClick={handleResetUploadFile}
+                        className="form__cancel__upload"
+                      >
+                        {t("generic.cancel_upload")}
+                      </p>
+                    </div>
+                  )}
+                </label>
+
+                {!fileItem.current && (
+                  <>
+                    <input
+                      className="form__input form__file"
+                      type="file"
+                      id={fileItem.key}
+                      onChange={handleFormOnChange}
+                      name={fileItem.key}
+                      style={{ display: "none" }}
+                    />
+                    <label
+                      htmlFor={fileItem.key}
+                      className="file-upload-label form__file__button"
+                    >
+                      {t("generic.choose_a_file")}
+                    </label>
+                  </>
+                )}
+              </div>
+            </div>
+          ))}
+        </fieldset>
+
+        <RegularButton
+          className="btn form__button"
+          type="submit"
+        >
+          {isLoading ? (
+            <CustomPulseLoader
+              isLoading={isLoading}
+              $customHeight="100%"
+            />
+          ) : (
+            "Submit"
+          )}
+        </RegularButton>
+      </form>
+    </main>
+  );
+};
+
+export default CreateJob;
