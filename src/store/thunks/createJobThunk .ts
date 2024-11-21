@@ -14,7 +14,11 @@ export const createJobThunk = createAsyncThunk<
 >("jobDetail/createJob", async ({ formData }, { rejectWithValue }) => {
   try {
     const url = JOB_EXAMPLES_API_URI;
-    const response = await client.post(url, formData);
+    const response = await client.post(url, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response;
   } catch (error) {
     return rejectWithValue((error as AxiosError).message);
