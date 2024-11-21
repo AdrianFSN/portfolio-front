@@ -154,21 +154,33 @@ const CreateJob = () => {
       }));
     } else if (type === "file") {
       const files = (event.target as HTMLInputElement).files;
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [name]: files?.[0] || null,
-      }));
-      setFileNames((prevFileNames) => ({
-        ...prevFileNames,
-        [name]: files?.[0]?.name || null,
-      }));
-      setJobFiles((prevJobFiles) =>
-        prevJobFiles.map((file) =>
-          file.key === name
-            ? { ...file, current: files?.[0]?.name || "" }
-            : file
-        )
-      );
+
+      if (files?.[0]) {
+        const file = files[0];
+        const previewURL = file.type.startsWith("image/")
+          ? URL.createObjectURL(file)
+          : file.type.startsWith("video/") || file.type.startsWith("audio/")
+          ? URL.createObjectURL(file)
+          : "";
+
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: file,
+        }));
+
+        setFileNames((prevFileNames) => ({
+          ...prevFileNames,
+          [name]: file.name,
+        }));
+
+        setJobFiles((prevJobFiles) =>
+          prevJobFiles.map((fileItem) =>
+            fileItem.key === name
+              ? { ...fileItem, current: file.name, preview: previewURL }
+              : fileItem
+          )
+        );
+      }
     } else {
       setFormData((prevFormData) => ({
         ...prevFormData,
@@ -192,7 +204,7 @@ const CreateJob = () => {
       }));
       setJobFiles((prevJobFiles) =>
         prevJobFiles.map((file) =>
-          file.key === name ? { ...file, current: "" } : file
+          file.key === name ? { ...file, current: "", preview: "" } : file
         )
       );
     }
@@ -201,7 +213,7 @@ const CreateJob = () => {
   const handleSubmit = () => {};
 
   return (
-    <main className="edit__job__form">
+    <div className="edit__job__form">
       <h1>{t("admin.create_job")}</h1>
 
       <form
@@ -414,11 +426,28 @@ const CreateJob = () => {
                   htmlFor={fileItem.key}
                 >
                   <h4>{fileItem.title}</h4>
-                  {fileNames[fileItem.key] && (
+                  {fileItem.preview && (
                     <div className="form__file__is__uploaded">
-                      <p>{`${t("generic.uploaded_file")}: ${
-                        fileNames[fileItem.key]
-                      }`}</p>
+                      {fileItem.preview.startsWith("blob:") &&
+                      fileItem.current &&
+                      fileItem.current.endsWith(".mp4") ? (
+                        <video
+                          controls
+                          src={fileItem.preview}
+                        />
+                      ) : fileItem.preview.startsWith("blob:") &&
+                        fileItem.current &&
+                        fileItem.current.endsWith(".mp3") ? (
+                        <audio
+                          controls
+                          src={fileItem.preview}
+                        />
+                      ) : (
+                        <img
+                          src={fileItem.preview}
+                          alt={`${fileItem.title} preview`}
+                        />
+                      )}
                       <p
                         data-name={fileItem.key}
                         onClick={handleResetUploadFile}
@@ -467,7 +496,7 @@ const CreateJob = () => {
           )}
         </RegularButton>
       </form>
-    </main>
+    </div>
   );
 };
 

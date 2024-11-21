@@ -48,7 +48,7 @@
   max-width: 100%;
   height: auto;
   object-fit: cover;
-  display: block; /* Opcional para eliminar espacios blancos no deseados */
+  display: block;
 }
 
 .job__form {
@@ -161,6 +161,16 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
+}
+
+.form__file__is__uploaded img {
+  width: 100%;
+  max-width: 50%;
+  margin: 0 auto;
+  padding: 0;
+  height: auto;
+  object-fit: cover;
+  display: block;
 }
 
 .form__cancel__upload {
