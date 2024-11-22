@@ -8,16 +8,17 @@ import {
   getJobDetailLoadingSelector,
   getJobDetailSelector,
 } from "../../store/selectors/JobExamplesSelectors/jobDetailSelectors";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import JobDetail from "./JobDetail";
+import RegularButton from "../../components/shared/buttons/RegularButton";
 
 const Job = () => {
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const jobId = useParams().id;
   const job = useSelector(getJobDetailSelector);
-
   const isLoading = useSelector(getJobDetailLoadingSelector);
   const error = useSelector(getJobDetailErrorSelector);
 
@@ -46,7 +47,17 @@ const Job = () => {
         )
       ) : (
         <main className="porfolio">
-          <div className="not__found">{t("job.job_not_found")}</div>
+          <div className="not__found">
+            {t("job.job_not_found")}
+
+            <RegularButton
+              $skin="danger"
+              onClick={() => navigate(-1)}
+              className="back__button"
+            >
+              {t("generic.back")}
+            </RegularButton>
+          </div>
         </main>
       )}
     </>

@@ -60,7 +60,8 @@
     "current": "Current",
     "submit": "Submit",
     "uploaded_file": "You are saving this new file",
-    "cancel_upload": "Cancel upload"
+    "cancel_upload": "Cancel upload",
+    "back": "Back"
   },
   "job": {
     "job_not_found": "Could not find the job you requested"
