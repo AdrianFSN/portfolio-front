@@ -43,6 +43,13 @@ const Job = () => {
               jobId={jobId}
               job={job}
             />
+            <RegularButton
+              $skin="danger"
+              onClick={() => navigate(-1)}
+              className="back__button"
+            >
+              {t("generic.back")}
+            </RegularButton>
           </main>
         )
       ) : (
