@@ -10,6 +10,16 @@
   margin: 0;
 }
 
+.not__found {
+  display: flex;
+  background: var(--main-text-color);
+  color: var(--secondary-text-color);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 60dvh;
+}
+
 .porfolio__main .examples__showcase {
   display: block;
   width: 90%;

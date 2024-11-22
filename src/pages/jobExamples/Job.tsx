@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
@@ -12,24 +13,19 @@ import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader
 import JobDetail from "./JobDetail";
 
 const Job = () => {
+  const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
   const jobId = useParams().id;
   const job = useSelector(getJobDetailSelector);
-  const [error, setError] = useState("");
+
   const isLoading = useSelector(getJobDetailLoadingSelector);
-  const isError = useSelector(getJobDetailErrorSelector);
+  const error = useSelector(getJobDetailErrorSelector);
 
   useEffect(() => {
     if (jobId) {
       dispatch(getJobDetailThunk({ jobId }));
     }
   }, [jobId, dispatch]);
-
-  useEffect(() => {
-    if (isError) {
-      setError(isError);
-    }
-  }, [isError]);
 
   return (
     <>
@@ -39,16 +35,18 @@ const Job = () => {
           $customHeight="100px"
         />
       )}
-      {jobId && job && !isError ? (
-        <main className="porfolio">
-          <JobDetail
-            jobId={jobId}
-            job={job}
-          />
-        </main>
+      {jobId && job ? (
+        !error && (
+          <main className="porfolio">
+            <JobDetail
+              jobId={jobId}
+              job={job}
+            />
+          </main>
+        )
       ) : (
         <main className="porfolio">
-          <div>{error}</div>
+          <div className="not__found">{t("job.job_not_found")}</div>
         </main>
       )}
     </>
