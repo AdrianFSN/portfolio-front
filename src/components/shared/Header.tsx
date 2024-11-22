@@ -1,5 +1,6 @@
 import "./Header.css";
 import logo from "../../assets/logos/Logo_A_Ese_Light.png";
+import LanguageSwitcher from "./localization/LanguageSwitcher";
 
 const Header = () => {
   return (
@@ -26,6 +27,12 @@ const Header = () => {
       </label>
       <nav className="header__nav">
         <ul className="header__nav__list">
+          <li className="lang__switcher">
+            <LanguageSwitcher
+              className="lang__content"
+              flag={true}
+            />
+          </li>
           <li className="header__nav__list__item">
             <a
               className="header__link"

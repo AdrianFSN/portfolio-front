@@ -104,6 +104,21 @@
   gap: 30px;
 }
 
+.lang__switcher .lang__content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  gap: 2rem;
+}
+.header__nav__list .lang__switcher img {
+  width: auto;
+  min-height: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
 .header .header__mask {
   position: absolute;
   top: 0;

@@ -46,6 +46,11 @@ export const PICTURES_COLLECTION_FIELDS = [
 export const VIDEOS_COLLECTION_FIELDS = ["mainVideo", "video2"];
 export const AUDIOS_COLLECTION_FIELDS = ["mainAudio", "audio2"];
 export const LOCALIZABLE_LANGUAGES = ["en", "es", "fr"];
+export const LANGUAGE_CODES: Record<string, string> = {
+  en: "GB",
+  es: "ES",
+  fr: "FR",
+};
 
 // Valdiation lists
 export const VALID_CATEGORIES = [
