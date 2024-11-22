@@ -29,8 +29,6 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
     }
   }, [pictures, videos, audios, job]);
 
-  console.log("Esto es jobFiles: ", jobFiles);
-
   return (
     <main className="porfolio__main">
       <section key={jobId}>

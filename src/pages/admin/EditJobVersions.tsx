@@ -104,10 +104,6 @@ const EditJobVersions = () => {
     }
   }, [job]);
 
-  useEffect(() => {
-    console.log("Esto es versionsData: ", versionsData);
-  }, [versionsData]);
-
   const handleVersionsOnChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {

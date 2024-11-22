@@ -111,10 +111,6 @@ const EditJobVideos = () => {
   }, [jobId, dispatch]);
 
   useEffect(() => {
-    console.log("Esto es videosData: ", videosData);
-  }, [videosData]);
-
-  useEffect(() => {
     if (videosData.mainVideo) {
       setVideosData((prevData) => ({
         ...prevData,
