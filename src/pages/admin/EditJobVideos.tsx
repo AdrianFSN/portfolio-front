@@ -9,9 +9,13 @@ import { getJobDetailThunk } from "../../store/thunks/jobDetailThunk";
 import { AppDispatch } from "../../store/store";
 import { useNavigate, useParams } from "react-router-dom";
 import {
+  AUDIOS_ROUTES_URI,
   EDIT_ROUTES_PATH,
+  JOB_ROUTES_URI,
   ORIGIN,
+  VERSION_ROUTES_URI,
   VIDEOS_DB_PATH,
+  VIDEOS_ROUTES_URI,
 } from "../../utils/constants";
 import {
   getJobVideosErrorSelector,
@@ -22,6 +26,7 @@ import { resetJobVideos } from "../../store/slices/jobVideosSlice";
 import { updateJobVideosThunk } from "../../store/thunks/editJobVideosThunk";
 import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
+import FileInterface from "../../@types/FileInterface";
 
 const EditJobVideos = () => {
   const { t } = useTranslation();
@@ -31,18 +36,20 @@ const EditJobVideos = () => {
   const toEditPage = EDIT_ROUTES_PATH;
   const origin = ORIGIN;
   const job = useSelector(getJobDetailSelector);
-  const jobVideos = [
+  const [jobVideos, setJobVideos] = useState<FileInterface[]>([
     {
       key: "mainVideo",
       current: job && job.videos.mainVideo ? job.videos.mainVideo : "",
+      preview: "",
       title: t("admin.main_video"),
     },
     {
       key: "video2",
       current: job && job.videos.video2 ? job.videos.video2 : "",
+      preview: "",
       title: t("admin.video2"),
     },
-  ];
+  ]);
 
   const [toLocalizeJob, setToLocalizeJob] = useState("");
   const [toEditJob, setToEditJob] = useState("");
@@ -52,10 +59,10 @@ const EditJobVideos = () => {
   const successMessage = useSelector(getJobVideosMessageSelector);
   const isLoading = useSelector(getJobVideosLoadingSelector);
   const [alertMessage, setAlertMessage] = useState("");
-  const [fileNames, setFileNames] = useState<Record<string, string | null>>({
+  const fileNames: Record<string, string | null> = {
     mainVideo: null,
     video2: null,
-  });
+  };
 
   const [videosData, setVideosData] = useState({
     mainVideo: null,
@@ -84,10 +91,16 @@ const EditJobVideos = () => {
 
   useEffect(() => {
     if (job) {
-      setToLocalizeJob(`/edit/job/${job._id}/version/${job.versions[0]._id}`);
-      setToEditJob(`/edit/job/${job._id}`);
-      setToEditJobPictures(`/edit/job/${job._id}/pictures/${job.pictures._id}`);
-      setToEditJobAudios(`/edit/job/${job._id}/audios/${job.audios._id}`);
+      setToLocalizeJob(
+        `${EDIT_ROUTES_PATH}/${JOB_ROUTES_URI}/${job._id}/${VERSION_ROUTES_URI}/${job.versions[0]._id}`
+      );
+      setToEditJob(`${EDIT_ROUTES_PATH}/${JOB_ROUTES_URI}/${job._id}`);
+      setToEditJobPictures(
+        `${EDIT_ROUTES_PATH}/${JOB_ROUTES_URI}/${job._id}/${VIDEOS_ROUTES_URI}/${job.videos._id}`
+      );
+      setToEditJobAudios(
+        `${EDIT_ROUTES_PATH}/${JOB_ROUTES_URI}/${job._id}/${AUDIOS_ROUTES_URI}/${job.audios._id}`
+      );
     }
   }, [job]);
 
@@ -100,8 +113,6 @@ const EditJobVideos = () => {
   useEffect(() => {
     console.log("Esto es videosData: ", videosData);
   }, [videosData]);
-
-  console.log("Este es el job que voy a editar: ", job);
 
   useEffect(() => {
     if (videosData.mainVideo) {
@@ -128,15 +139,27 @@ const EditJobVideos = () => {
       }));
     } else if (type === "file") {
       const files = (event.target as HTMLInputElement).files;
-      setVideosData((prevFormData) => ({
-        ...prevFormData,
-        [name]: files?.[0] || null,
-        collectionId: job.videos._id,
-      }));
-      setFileNames((prevFileNames) => ({
-        ...prevFileNames,
-        [name]: files?.[0]?.name || null,
-      }));
+      if (files?.[0]) {
+        const file = files[0];
+        const previewURL = file.type.startsWith("image/")
+          ? URL.createObjectURL(file)
+          : file.type.startsWith("video/") || file.type.startsWith("audio/")
+          ? URL.createObjectURL(file)
+          : "";
+
+        setVideosData((prevFormData) => ({
+          ...prevFormData,
+          [name]: file,
+        }));
+
+        setJobVideos((prevJobPictures) =>
+          prevJobPictures.map((fileItem) =>
+            fileItem.key === name
+              ? { ...fileItem, preview: previewURL }
+              : fileItem
+          )
+        );
+      }
     }
   };
 
@@ -149,10 +172,11 @@ const EditJobVideos = () => {
         ...prevFormData,
         [name]: null,
       }));
-      setFileNames((prevFileNames) => ({
-        ...prevFileNames,
-        [name]: null,
-      }));
+      setJobVideos((prevJobFiles) =>
+        prevJobFiles.map((file) =>
+          file.key === name ? { ...file, preview: "" } : file
+        )
+      );
     }
   };
 
@@ -233,33 +257,37 @@ const EditJobVideos = () => {
                       htmlFor={fileItem.key}
                     >
                       <h4>{fileItem.title}</h4>
-                      {fileItem.current && !fileNames[fileItem.key] && (
+                      {!fileItem.preview &&
+                        fileItem.current &&
+                        !fileNames[fileItem.key] && (
+                          <>
+                            <video
+                              controls
+                              src={`${VIDEOS_DB_PATH}${fileItem.current}`}
+                              crossOrigin={origin}
+                            ></video>
+                            <p>{`${t("generic.current")}: ${
+                              fileItem.current
+                            }`}</p>
+                            <span className="delete__former__file">
+                              <input
+                                type="checkbox"
+                                name={`delete${fileItem.key
+                                  .charAt(0)
+                                  .toUpperCase()}${fileItem.key.slice(1)}`}
+                                onChange={handleVideosOnChange}
+                              />
+                              {t("admin.delete_current_file")}
+                            </span>
+                          </>
+                        )}
+                      {fileItem.preview && (
                         <>
                           <video
                             controls
-                            src={`${VIDEOS_DB_PATH}${fileItem.current}`}
-                            crossOrigin={origin}
+                            src={fileItem.preview}
                           ></video>
-                          <p>{`${t("generic.current")}: ${
-                            fileItem.current
-                          }`}</p>
-                          <span className="delete__former__file">
-                            <input
-                              type="checkbox"
-                              name={`delete${fileItem.key
-                                .charAt(0)
-                                .toUpperCase()}${fileItem.key.slice(1)}`}
-                              onChange={handleVideosOnChange}
-                            />
-                            {t("admin.delete_current_file")}
-                          </span>
-                        </>
-                      )}
-                      {fileNames[fileItem.key] && (
-                        <div className="form__file__is__uploaded">
-                          <p>{`${t("generic.uploaded_file")}: ${
-                            fileNames[fileItem.key]
-                          }`}</p>
+                          <p>{t("generic.uploaded_file")}</p>
                           <p
                             data-name={fileItem.key}
                             onClick={handleResetUploadFile}
@@ -267,7 +295,7 @@ const EditJobVideos = () => {
                           >
                             {t("generic.cancel_upload")}
                           </p>
-                        </div>
+                        </>
                       )}
                     </label>
 
@@ -306,7 +334,7 @@ const EditJobVideos = () => {
               </RegularButton>
               <RegularButton
                 className="btn form__button"
-                skin="danger"
+                $skin="danger"
                 onClick={handleToEditPage}
               >
                 {t("generic.cancel")}
