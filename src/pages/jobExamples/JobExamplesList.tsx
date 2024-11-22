@@ -1,31 +1,54 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  getJobsListErrorSelector,
   getJobsListLoadingSelector,
   getJobsListMessageSelector,
-  getJobsListStateSelector,
 } from "../../store/selectors/selectors";
 import JobExamplesListProps from "../../@types/jobExamplesListProps";
-import { ORIGIN, IMG_THUMBNAILS_DB_PATH } from "../../utils/constants";
+import {
+  ORIGIN,
+  IMG_THUMBNAILS_DB_PATH,
+  JOB_ROUTES_URI,
+} from "../../utils/constants";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import convertStringToIcon from "../../utils/convertStringToIcon";
 import icons from "../../utils/icons";
 import imgNotAvailable from "../../assets/img_not_available.jpg";
+import { useNavigate } from "react-router-dom";
+import CustomAlert from "../../components/shared/alert/CustomAlert";
+import { resetJobExamples } from "../../store/slices/jobExamplesSlice";
 
 const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
+  const dispatch = useDispatch();
   const origin = ORIGIN;
-  const jobsMessage = useSelector(getJobsListMessageSelector);
-  const jobsState = useSelector(getJobsListStateSelector);
-  const [isError, setIsError] = useState(false);
+  const successMessage = useSelector(getJobsListMessageSelector);
+  const error = useSelector(getJobsListErrorSelector);
   const isLoading = useSelector(getJobsListLoadingSelector);
-
+  const [alertMessage, setAlertMessage] = useState("");
+  const [isEmptyList, setIsEmptyList] = useState(false);
+  const navigate = useNavigate();
   const imgUrlPath = `${IMG_THUMBNAILS_DB_PATH}`;
 
   useEffect(() => {
-    if (jobsState === "error") {
-      setIsError(true);
+    if (jobs && jobs.length === 0) {
+      setIsEmptyList(true);
+    } else {
+      setIsEmptyList(false);
     }
-  }, [jobsState]);
+  }, [jobs, jobs?.length]);
+
+  useEffect(() => {
+    if (error) {
+      setAlertMessage(error as string);
+    }
+  }, [successMessage, error]);
+
+  const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setAlertMessage("");
+    dispatch(resetJobExamples());
+  };
 
   return (
     <>
@@ -35,13 +58,26 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
           $customHeight="100px"
         />
       )}
-      {!isError ? (
+      {alertMessage && (
+        <CustomAlert
+          type={error ? "error" : "success"}
+          onClick={handleCloseAlert}
+        >
+          {alertMessage}
+        </CustomAlert>
+      )}
+      {!isEmptyList ? (
         <section className="porfolio__grid">
           <div className="porfolio__grid__panel">
             <ul className="porfolio__grid__panel__item__list">
               {jobs?.map((jobExample) => (
                 <li key={jobExample._id}>
-                  <picture className="porfolio__item__picture">
+                  <picture
+                    className="porfolio__item__picture"
+                    onClick={() =>
+                      navigate(`/${JOB_ROUTES_URI}/${jobExample._id}`)
+                    }
+                  >
                     <source
                       media="(max-width: 767px)"
                       srcSet={
@@ -113,7 +149,7 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
           </div>
         </section>
       ) : (
-        <div>{jobsMessage}</div>
+        <div>{successMessage}</div>
       )}
     </>
   );

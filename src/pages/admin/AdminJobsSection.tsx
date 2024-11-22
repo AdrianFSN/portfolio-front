@@ -150,7 +150,7 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
                 {t("generic.cancel")}
               </RegularButton>{" "}
               <RegularButton
-                skin="danger"
+                $skin="danger"
                 onClick={() => handleDeleteJob(jobToDelete)}
               >
                 {t("generic.yes")}
