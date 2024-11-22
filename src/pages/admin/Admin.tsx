@@ -20,7 +20,7 @@ import RegularButton from "../../components/shared/buttons/RegularButton";
 import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const toCreateJob = `${EDIT_ROUTES_PATH}/${CREATE_ROUTES_URI}`;
@@ -31,7 +31,7 @@ const Admin = () => {
 
   useEffect(() => {
     dispatch(getJobExamplesListThunk({ limit: limit }));
-  }, [dispatch]);
+  }, [dispatch, i18n.language]);
 
   return (
     <main className="main__admin">
