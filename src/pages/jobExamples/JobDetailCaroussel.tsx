@@ -4,7 +4,7 @@ import {
   ORIGIN,
   VIDEOS_DB_PATH,
 } from "../../utils/constants";
-import useCarousel from "../../hooks/useCarousel";
+import useCaroussel from "../../hooks/useCarousel";
 import "../../components/shared/caroussel/caroussel.css";
 import "./JobDetail.css";
 import { useEffect, useState } from "react";
@@ -25,11 +25,8 @@ const JobDetailCaroussel: React.FC<JobDetailCarousselProps> = ({
   const [show, setShow] = useState(true);
   const [displayImg, setDisplayImg] = useState(false);
 
-  const { currentItem, currentIndex, animationClass, next, prev } = useCarousel(
-    items,
-    3000,
-    autoPlay
-  );
+  const { currentItem, currentIndex, animationClass, next, prev } =
+    useCaroussel(items, 3000, autoPlay);
 
   const currentItemAsString = currentItem as string;
 

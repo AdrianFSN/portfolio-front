@@ -1,8 +1,9 @@
 import { JobExample } from "../../@types/jobExample";
-import { IMAGES_DB_PATH, ORIGIN } from "../../utils/constants";
-import useCarousel from "../../hooks/useCarousel";
+import { IMAGES_DB_PATH, JOB_ROUTES_URI, ORIGIN } from "../../utils/constants";
+import useCaroussel from "../../hooks/useCarousel";
 import "../../components/shared/caroussel/caroussel.css";
 import imgNotAvailable from "../../assets/img_not_available.jpg";
+import { useNavigate } from "react-router-dom";
 
 interface JobsCarousselProps {
   items: JobExample[];
@@ -11,10 +12,11 @@ interface JobsCarousselProps {
 
 const JobsCaroussel: React.FC<JobsCarousselProps> = ({ items, autoPlay }) => {
   const origin = ORIGIN;
+  const navigate = useNavigate();
   const imgUrlPath = IMAGES_DB_PATH;
-  const { currentItem, currentIndex, animationClass } = useCarousel(
+  const { currentItem, currentIndex, animationClass } = useCaroussel(
     items,
-    5000,
+    3000,
     autoPlay
   );
 
@@ -24,7 +26,12 @@ const JobsCaroussel: React.FC<JobsCarousselProps> = ({ items, autoPlay }) => {
         key={(currentItem as JobExample)._id}
         className={`caroussel__screen__item ${animationClass}`}
       >
-        <picture className="caroussel__item__picture">
+        <picture
+          className="caroussel__item__picture"
+          onClick={() =>
+            navigate(`/${JOB_ROUTES_URI}/${(currentItem as JobExample)._id}`)
+          }
+        >
           <source
             media="(max-width: 767px)"
             srcSet={

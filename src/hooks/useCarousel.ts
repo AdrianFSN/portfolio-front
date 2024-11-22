@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function useCarousel(
+function useCaroussel(
   items: unknown[],
   interval: number = 3000,
   autoPlay = true
@@ -49,4 +49,4 @@ function useCarousel(
   };
 }
 
-export default useCarousel;
+export default useCaroussel;
