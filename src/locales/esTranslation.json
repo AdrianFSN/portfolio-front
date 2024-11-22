@@ -6,7 +6,65 @@
     "goal": "Mi objetivo es comprender todos los perfiles desde los que afrontar el desarrollo de un contenido; y así, lograr que funcione para el fin por el que se ha diseñado: el plan de negocio de una empresa, arte, entretenimiento... Las motivaciones son infinitas. ¿Cuál es la tuya?"
   },
   "login": {
-    "login": "Inicia sesión",
-    "already_signed_in": "Te has conectado como {{username}}"
+    "login": "Iniciar sesión",
+    "already_signed_in": "Estás conectado como {{username}}"
+  },
+  "admin": {
+    "title": "Admin",
+    "development": "Desarrollo",
+    "audio": "Audio",
+    "liveOps": "Operaciones en vivo",
+    "design": "Diseño",
+    "photography": "Fotografía",
+    "video": "Vídeo",
+    "writing": "Escritura",
+    "edit_job": "Editar trabajo",
+    "job_title": "Título del trabajo",
+    "job_excerpt": "Extracto del trabajo",
+    "descriptive_info": "Info descriptiva",
+    "context_info": "Contexto",
+    "launch_period": "Periodo de lanzamiento",
+    "customer": "Cliente",
+    "link_to_url": "URL del proyecto",
+    "link_to_github": "Enlace a Github",
+    "job_type": "Tipo de trabajo",
+    "category": "Categoría",
+    "technologies": "Tecnologías",
+    "job_files": "Archivos del trabajo",
+    "main_picture": "Imagen principal",
+    "picture2": "Imagen 2",
+    "picture3": "Imagen 3",
+    "picture4": "Imagen 4",
+    "picture5": "Imagen 5",
+    "main_video": "Vídeo principal",
+    "video2": "Vídeo 2",
+    "main_audio": "Audio principal",
+    "audio2": "Audio 2",
+    "delete_current_file": "Borrar archivo actual",
+    "edit_job_version": "Traducir versión",
+    "edit_job_pictures": "Editar imágenes",
+    "edit_job_videos": "Editar vídeos",
+    "edit_job_audios": "Editar audios",
+    "job_description": "Descripción",
+    "create_job": "Crear un trabajo",
+    "new_job_intro": "¿Tienes un nuevo ejemplo preparado? ¡Promociónalo!"
+  },
+  "generic": {
+    "empty_section": "Esta sección está vacía",
+    "confirm_deletion": "¿Seguro que quieres borrar esto?",
+    "cancel": "Cancelar",
+    "yes": "Sí",
+    "characters": "caracteres",
+    "no_file_chosen": "No has seleccionado ningún archivo",
+    "choose_a_file": "Selecciona un archivo",
+    "current": "Actual",
+    "submit": "Enviar",
+    "uploaded_file": "Estás guardando este nuevo archivo",
+    "cancel_upload": "Cancelar subida",
+    "back": "Volver",
+    "switch_language_to": "Cambiar idioma a"
+  },
+  "job": {
+    "job_not_found": "No hemos encontrado el trabajo que buscas"
   }
 }
