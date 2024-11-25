@@ -4,11 +4,17 @@ import { useTranslation } from "react-i18next";
 import RegularButton from "../../components/shared/buttons/RegularButton";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import {
+  ALLOWED_AUDIO_TYPES,
+  ALLOWED_PICTURES_TYPES,
+  ALLOWED_VIDEO_TYPES,
+  AUDIOS_COLLECTION_FIELDS,
   DESCRIPTION_MAX_LENGTH,
   EDIT_ROUTES_PATH,
   EXCERPT_MAX_LENGTH,
+  PICTURES_COLLECTION_FIELDS,
   TITLE_MAX_LENGTH,
   VALID_CATEGORIES,
+  VIDEOS_COLLECTION_FIELDS,
 } from "../../utils/constants";
 import { useNavigate } from "react-router-dom";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
@@ -16,6 +22,7 @@ import { createJob } from "./adminService";
 import { AxiosError } from "axios";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
+import fileUploadValidator from "../../utils/filesUploadVallidator";
 
 const CreateJob = () => {
   const { t } = useTranslation();
@@ -150,6 +157,45 @@ const CreateJob = () => {
 
       if (files?.[0]) {
         const file = files[0];
+
+        if (PICTURES_COLLECTION_FIELDS.includes(name)) {
+          const validationMessage = fileUploadValidator({
+            validators: ALLOWED_PICTURES_TYPES,
+            file,
+            message: t("errors.not_valid_picture_file"),
+          });
+
+          if (validationMessage) {
+            setAlertMessage(validationMessage);
+            setError(new Error() as AxiosError);
+            return;
+          }
+        } else if (VIDEOS_COLLECTION_FIELDS.includes(name)) {
+          const validationMessage = fileUploadValidator({
+            validators: ALLOWED_VIDEO_TYPES,
+            file,
+            message: t("errors.not_valid_video_file"),
+          });
+
+          if (validationMessage) {
+            setAlertMessage(validationMessage);
+            setError(new Error() as AxiosError);
+            return;
+          }
+        } else if (AUDIOS_COLLECTION_FIELDS.includes(name)) {
+          const validationMessage = fileUploadValidator({
+            validators: ALLOWED_AUDIO_TYPES,
+            file,
+            message: t("errors.not_valid_audio_file"),
+          });
+
+          if (validationMessage) {
+            setAlertMessage(validationMessage);
+            setError(new Error() as AxiosError);
+            return;
+          }
+        }
+
         const previewURL = file.type.startsWith("image/")
           ? URL.createObjectURL(file)
           : file.type.startsWith("video/") || file.type.startsWith("audio/")

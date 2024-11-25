@@ -9,6 +9,7 @@ import { getJobDetailThunk } from "../../store/thunks/jobDetailThunk";
 import { AppDispatch } from "../../store/store";
 import { useNavigate, useParams } from "react-router-dom";
 import {
+  ALLOWED_AUDIO_TYPES,
   AUDIOS_DB_PATH,
   EDIT_ROUTES_PATH,
   JOB_ROUTES_URI,
@@ -23,6 +24,7 @@ import { AxiosError } from "axios";
 import { updateJobAudios } from "./adminService";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
+import fileUploadValidator from "../../utils/filesUploadVallidator";
 
 const EditJobAudios = () => {
   const { t } = useTranslation();
@@ -125,6 +127,18 @@ const EditJobAudios = () => {
 
       if (files?.[0]) {
         const file = files[0];
+        const validationMessage = fileUploadValidator({
+          validators: ALLOWED_AUDIO_TYPES,
+          file,
+          message: t("errors.not_valid_audio_file"),
+        });
+
+        if (validationMessage) {
+          setAlertMessage(validationMessage);
+          setError(new Error() as AxiosError);
+          return;
+        }
+
         const previewURL = file.type.startsWith("image/")
           ? URL.createObjectURL(file)
           : file.type.startsWith("video/") || file.type.startsWith("audio/")
@@ -185,6 +199,7 @@ const EditJobAudios = () => {
   const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     setAlertMessage("");
+    setError(null);
     if (!error) {
       navigate(toEditPage);
     }

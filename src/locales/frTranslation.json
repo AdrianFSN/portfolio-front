@@ -66,5 +66,11 @@
   },
   "job": {
     "job_not_found": "On n'a pas trouvé le job que tu cherches"
+  },
+  "errors": {
+    "not_valid_audio_file": "Les fichiers audio ne peuvent être que des mp3",
+    "not_valid_picture_file": "Les fichiers image ne peuvent être que des jpg, jpeg, png ou gif",
+    "not_valid_video_file": "Les fichiers vidéo ne peuvent être que des mp4",
+    "not_valid_file": "Les images ne peuvent être que des jpg, jpeg, png ou gif. Les audios, uniquement en mp3, et les vidéos, seulement en mp4"
   }
 }

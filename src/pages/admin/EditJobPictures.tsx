@@ -9,6 +9,7 @@ import { getJobDetailThunk } from "../../store/thunks/jobDetailThunk";
 import { AppDispatch } from "../../store/store";
 import { useNavigate, useParams } from "react-router-dom";
 import {
+  ALLOWED_PICTURES_TYPES,
   AUDIOS_ROUTES_URI,
   EDIT_ROUTES_PATH,
   IMG_THUMBNAILS_DB_PATH,
@@ -23,6 +24,7 @@ import { AxiosError } from "axios";
 import { updateJobPictures } from "./adminService";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
+import fileUploadValidator from "../../utils/filesUploadVallidator";
 
 const EditJobPictures = () => {
   const { t } = useTranslation();
@@ -175,6 +177,19 @@ const EditJobPictures = () => {
       const files = (event.target as HTMLInputElement).files;
       if (files?.[0]) {
         const file = files[0];
+
+        const validationMessage = fileUploadValidator({
+          validators: ALLOWED_PICTURES_TYPES,
+          file,
+          message: t("errors.not_valid_picture_file"),
+        });
+
+        if (validationMessage) {
+          setAlertMessage(validationMessage);
+          setError(new Error() as AxiosError);
+          return;
+        }
+
         const previewURL = file.type.startsWith("image/")
           ? URL.createObjectURL(file)
           : file.type.startsWith("video/") || file.type.startsWith("audio/")

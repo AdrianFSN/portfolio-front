@@ -70,7 +70,6 @@ export const createJob = async (
   formData: FetchFormDataParams
 ): Promise<AxiosResponse<StandardResponseInterface>> => {
   try {
-    console.log("Esto es formdata en service: ", formData);
     const url = JOB_EXAMPLES_API_URI;
     const response = await client.post(url, formData, {
       headers: {
