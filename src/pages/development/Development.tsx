@@ -1,4 +1,5 @@
 import "../jobExamples/jobExamples.css";
+import { useTranslation } from "react-i18next";
 import JobPagesProps from "../../@types/JobPages";
 import { AppDispatch } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +22,7 @@ import { updateLimitByScreenSize } from "../../utils/updateLimitByScreenSize";
 import { getJobsCarousselThunk } from "../../store/thunks/jobsCarousselThunk";
 
 const Development: React.FC<JobPagesProps> = ({ category }) => {
+  const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
   const jobsCaroussel = useSelector(getjobsCarousselSelector);
   const jobs: JobExample[] | undefined = useSelector(
@@ -66,7 +68,7 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
 
   return (
     <main className="porfolio__main">
-      <h1>Development</h1>
+      <h1>{t("admin.development")}</h1>
       {jobsCaroussel && jobsCaroussel.length > 0 ? (
         <section className="caroussel">
           <JobsCaroussel
@@ -83,7 +85,7 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
       {jobs && jobs.length > 0 ? (
         <>
           <section className="jobs__collection__title">
-            <h2>Jobs Collection</h2>
+            <h2>{t("generic.jobs_collection")}</h2>
           </section>
           <section className="examples__showcase">
             <PageController

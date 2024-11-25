@@ -66,7 +66,8 @@
     "customer": "Client",
     "date": "Date",
     "page": "Page",
-    "of": "de"
+    "of": "de",
+    "jobs_collection": "Travaux réalisés"
   },
   "job": {
     "job_not_found": "On n'a pas trouvé le job que tu cherches"
