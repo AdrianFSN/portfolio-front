@@ -17,16 +17,12 @@ import {
   VERSION_ROUTES_URI,
   VIDEOS_ROUTES_URI,
 } from "../../utils/constants";
-import {
-  getJobAudiosErrorSelector,
-  getJobAudiosLoadingSelector,
-  getJobAudiosMessageSelector,
-} from "../../store/selectors/editJobsSelectors/editJobAudiosSelectors";
-import { resetJobAudios } from "../../store/slices/jobAudiosSlice";
-import { updateJobAudiosThunk } from "../../store/thunks/editJobAudiosThunk";
-import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
 import FileInterface from "../../@types/FileInterface";
+import { AxiosError } from "axios";
+import { updateJobAudios } from "./adminService";
+import StandardResponseInterface from "../../@types/StandardResponse";
+import extractErrorMessage from "../../utils/extractErrorMessage";
 
 const EditJobAudios = () => {
   const { t } = useTranslation();
@@ -55,9 +51,8 @@ const EditJobAudios = () => {
   const [toEditJob, setToEditJob] = useState("");
   const [toEditJobVideos, setToEditJobVideos] = useState("");
   const [toEditJobPictures, setToEditJobPictures] = useState("");
-  const error = useSelector(getJobAudiosErrorSelector);
-  const successMessage = useSelector(getJobAudiosMessageSelector);
-  const isLoading = useSelector(getJobAudiosLoadingSelector);
+  const [error, setError] = useState<AxiosError | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
   const fileNames: Record<string, string | null> = {
@@ -81,14 +76,6 @@ const EditJobAudios = () => {
       }));
     }
   }, [job]);
-
-  useEffect(() => {
-    if (!error && successMessage) {
-      setAlertMessage(successMessage);
-    } else {
-      setAlertMessage(error as string);
-    }
-  }, [successMessage, error]);
 
   useEffect(() => {
     if (job) {
@@ -168,6 +155,7 @@ const EditJobAudios = () => {
       setAudiosData((prevFormData) => ({
         ...prevFormData,
         [name]: null,
+        [`delete${name.charAt(0).toUpperCase()}${name.slice(1)}`]: false,
       }));
       setJobAudios((prevJobFiles) =>
         prevJobFiles.map((file) =>
@@ -179,32 +167,31 @@ const EditJobAudios = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(resetJobAudios());
-    await dispatch(
-      updateJobAudiosThunk({
-        audiosId: job.audios._id,
-        formData: audiosData,
-      })
-    );
+    setError(null);
+    try {
+      setIsLoading(true);
+      const response = await updateJobAudios(job.audios._id, audiosData);
+      setAlertMessage(
+        (response as unknown as StandardResponseInterface).message
+      );
+    } catch (error) {
+      setError(error as AxiosError);
+      setAlertMessage(extractErrorMessage(error, t));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
-    if (successMessage) {
-      setAlertMessage("");
-      dispatch(resetJobAudios());
-      dispatch(resetJobDetail());
+    setAlertMessage("");
+    if (!error) {
       navigate(toEditPage);
-    } else {
-      setAlertMessage("");
-      dispatch(resetJobAudios());
     }
   };
 
   const handleToEditPage = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    dispatch(resetJobDetail());
-    dispatch(resetJobAudios());
     navigate(toEditPage);
   };
 

@@ -17,16 +17,12 @@ import {
   VIDEOS_DB_PATH,
   VIDEOS_ROUTES_URI,
 } from "../../utils/constants";
-import {
-  getJobVideosErrorSelector,
-  getJobVideosLoadingSelector,
-  getJobVideosMessageSelector,
-} from "../../store/selectors/editJobsSelectors/editJobVideosSelectors";
-import { resetJobVideos } from "../../store/slices/jobVideosSlice";
-import { updateJobVideosThunk } from "../../store/thunks/editJobVideosThunk";
-import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
 import FileInterface from "../../@types/FileInterface";
+import { AxiosError } from "axios";
+import StandardResponseInterface from "../../@types/StandardResponse";
+import extractErrorMessage from "../../utils/extractErrorMessage";
+import { updateJobVideos } from "./adminService";
 
 const EditJobVideos = () => {
   const { t } = useTranslation();
@@ -55,10 +51,10 @@ const EditJobVideos = () => {
   const [toEditJob, setToEditJob] = useState("");
   const [toEditJobPictures, setToEditJobPictures] = useState("");
   const [toEditJobAudios, setToEditJobAudios] = useState("");
-  const error = useSelector(getJobVideosErrorSelector);
-  const successMessage = useSelector(getJobVideosMessageSelector);
-  const isLoading = useSelector(getJobVideosLoadingSelector);
+  const [error, setError] = useState<AxiosError | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+
   const fileNames: Record<string, string | null> = {
     mainVideo: null,
     video2: null,
@@ -80,14 +76,6 @@ const EditJobVideos = () => {
       }));
     }
   }, [job]);
-
-  useEffect(() => {
-    if (!error && successMessage) {
-      setAlertMessage(successMessage);
-    } else {
-      setAlertMessage(error as string);
-    }
-  }, [successMessage, error]);
 
   useEffect(() => {
     if (job) {
@@ -167,6 +155,7 @@ const EditJobVideos = () => {
       setVideosData((prevFormData) => ({
         ...prevFormData,
         [name]: null,
+        [`delete${name.charAt(0).toUpperCase()}${name.slice(1)}`]: false,
       }));
       setJobVideos((prevJobFiles) =>
         prevJobFiles.map((file) =>
@@ -178,32 +167,31 @@ const EditJobVideos = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(resetJobVideos());
-    await dispatch(
-      updateJobVideosThunk({
-        videosId: job.videos._id,
-        formData: videosData,
-      })
-    );
+    setError(null);
+    try {
+      setIsLoading(true);
+      const response = await updateJobVideos(job.videos._id, videosData);
+      setAlertMessage(
+        (response as unknown as StandardResponseInterface).message
+      );
+    } catch (error) {
+      setError(error as AxiosError);
+      setAlertMessage(extractErrorMessage(error, t));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
-    if (successMessage) {
-      setAlertMessage("");
-      dispatch(resetJobVideos());
-      dispatch(resetJobDetail());
+    setAlertMessage("");
+    if (!error) {
       navigate(toEditPage);
-    } else {
-      setAlertMessage("");
-      dispatch(resetJobVideos());
     }
   };
 
   const handleToEditPage = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    dispatch(resetJobDetail());
-    dispatch(resetJobVideos());
     navigate(toEditPage);
   };
 

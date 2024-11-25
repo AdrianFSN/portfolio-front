@@ -215,11 +215,9 @@ const CreateJob = () => {
 
   const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
+    setAlertMessage("");
     if (!error) {
-      setAlertMessage("");
       navigate(toEditPage);
-    } else {
-      setAlertMessage("");
     }
   };
 

@@ -8,13 +8,6 @@ import { getJobDetailSelector } from "../../store/selectors/JobExamplesSelectors
 import { getJobDetailThunk } from "../../store/thunks/jobDetailThunk";
 import { AppDispatch } from "../../store/store";
 import { useNavigate, useParams } from "react-router-dom";
-import { resetJobPictures } from "../../store/slices/jobPicturesSlice";
-import { updateJobPicturesThunk } from "../../store/thunks/editJobPicturesThunk";
-import {
-  getJobPicturesErrorSelector,
-  getJobPicturesLoadingSelector,
-  getJobPicturesMessageSelector,
-} from "../../store/selectors/editJobsSelectors/editJobPicturesSelectors";
 import {
   AUDIOS_ROUTES_URI,
   EDIT_ROUTES_PATH,
@@ -24,9 +17,12 @@ import {
   VERSION_ROUTES_URI,
   VIDEOS_ROUTES_URI,
 } from "../../utils/constants";
-import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
 import FileInterface from "../../@types/FileInterface";
+import { AxiosError } from "axios";
+import { updateJobPictures } from "./adminService";
+import StandardResponseInterface from "../../@types/StandardResponse";
+import extractErrorMessage from "../../utils/extractErrorMessage";
 
 const EditJobPictures = () => {
   const { t } = useTranslation();
@@ -73,10 +69,10 @@ const EditJobPictures = () => {
   const [toEditJob, setToEditJob] = useState("");
   const [toEditJobVideos, setToEditJobVideos] = useState("");
   const [toEditJobAudios, setToEditJobAudios] = useState("");
-  const error = useSelector(getJobPicturesErrorSelector);
-  const successMessage = useSelector(getJobPicturesMessageSelector);
-  const isLoading = useSelector(getJobPicturesLoadingSelector);
+  const [error, setError] = useState<AxiosError | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+
   const fileNames: Record<string, string | null> = {
     mainPicture: null,
     picture2: null,
@@ -107,14 +103,6 @@ const EditJobPictures = () => {
       }));
     }
   }, [job]);
-
-  useEffect(() => {
-    if (!error && successMessage) {
-      setAlertMessage(successMessage);
-    } else {
-      setAlertMessage(error as string);
-    }
-  }, [successMessage, error]);
 
   useEffect(() => {
     if (job) {
@@ -217,6 +205,7 @@ const EditJobPictures = () => {
       setPicturesData((prevFormData) => ({
         ...prevFormData,
         [name]: null,
+        [`delete${name.charAt(0).toUpperCase()}${name.slice(1)}`]: false,
       }));
       setJobPictures((prevJobFiles) =>
         prevJobFiles.map((file) =>
@@ -228,32 +217,31 @@ const EditJobPictures = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(resetJobPictures());
-    await dispatch(
-      updateJobPicturesThunk({
-        picturesId: job.pictures._id,
-        formData: picturesData,
-      })
-    );
+    setError(null);
+    try {
+      setIsLoading(true);
+      const response = await updateJobPictures(job.pictures._id, picturesData);
+      setAlertMessage(
+        (response as unknown as StandardResponseInterface).message
+      );
+    } catch (error) {
+      setError(error as AxiosError);
+      setAlertMessage(extractErrorMessage(error, t));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
-    if (successMessage) {
-      setAlertMessage("");
-      dispatch(resetJobPictures());
-      dispatch(resetJobDetail());
+    setAlertMessage("");
+    if (!error) {
       navigate(toEditPage);
-    } else {
-      setAlertMessage("");
-      dispatch(resetJobPictures());
     }
   };
 
   const handleToEditPage = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    dispatch(resetJobDetail());
-    dispatch(resetJobPictures());
     navigate(toEditPage);
   };
 
