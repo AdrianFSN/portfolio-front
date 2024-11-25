@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./EditJob.css";
 import { useTranslation } from "react-i18next";
 import RegularButton from "../../components/shared/buttons/RegularButton";
@@ -10,26 +10,18 @@ import {
   TITLE_MAX_LENGTH,
   VALID_CATEGORIES,
 } from "../../utils/constants";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../store/store";
-import { createJobThunk } from "../../store/thunks/createJobThunk ";
 import { useNavigate } from "react-router-dom";
-import {
-  getCreateJobErrorSelector,
-  getCreateJobLoadingSelector,
-  getCreateJobMessageSelector,
-} from "../../store/selectors/editJobsSelectors/createJobSelectors";
-import { resetCreateJob } from "../../store/slices/createJobSlice";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
+import { createJob } from "./adminService";
+import { AxiosError } from "axios";
+import StandardResponseInterface from "../../@types/StandardResponse";
 
 const CreateJob = () => {
   const { t } = useTranslation();
-  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const toEditPage = EDIT_ROUTES_PATH;
-  const error = useSelector(getCreateJobErrorSelector);
-  const successMessage = useSelector(getCreateJobMessageSelector);
-  const isLoading = useSelector(getCreateJobLoadingSelector);
+  const [error, setError] = useState<AxiosError | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
   const [jobFiles, setJobFiles] = useState([
@@ -131,14 +123,6 @@ const CreateJob = () => {
     audio2: null,
   });
 
-  useEffect(() => {
-    if (!error && successMessage) {
-      setAlertMessage(successMessage);
-    } else {
-      setAlertMessage(error as string);
-    }
-  }, [successMessage, error]);
-
   const handleFormOnChange = (
     event: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -212,29 +196,51 @@ const CreateJob = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(resetCreateJob());
-    await dispatch(
-      createJobThunk({
-        formData,
-      })
-    );
+
+    try {
+      setIsLoading(true);
+      const response = await createJob(formData);
+      setAlertMessage(
+        (response as unknown as StandardResponseInterface).message
+      );
+      setError(null);
+    } catch (error) {
+      setError(error as AxiosError);
+      if (
+        typeof error === "object" &&
+        error !== null &&
+        "validationErrors" in error
+      ) {
+        const validationErrors = error.validationErrors;
+
+        if (Array.isArray(validationErrors)) {
+          const errorMessages = validationErrors.join("\n");
+          setAlertMessage(errorMessages);
+        }
+      } else if (
+        typeof error === "object" &&
+        error !== null &&
+        "message" in error
+      ) {
+        setAlertMessage((error as { message: string }).message);
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
-    if (successMessage) {
+    if (!error) {
       setAlertMessage("");
-      dispatch(resetCreateJob());
       navigate(toEditPage);
     } else {
       setAlertMessage("");
-      dispatch(resetCreateJob());
     }
   };
 
   const handleToEditPage = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    dispatch(resetCreateJob());
     navigate(toEditPage);
   };
 
