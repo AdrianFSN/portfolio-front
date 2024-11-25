@@ -4,6 +4,7 @@ import {
   AUDIOS_COLLECTION_API_URI,
   JOB_EXAMPLES_API_URI,
   PICTURES_COLLECTION_API_URI,
+  VERSION_API_URI,
   VIDEOS_COLLECTION_API_URI,
 } from "../../utils/constants";
 import StandardResponseInterface from "../../@types/StandardResponse";
@@ -64,6 +65,16 @@ interface FetchJobPictures {
   deletePicture4: boolean;
   deletePicture5: boolean;
   collectionId: string;
+}
+
+interface FetchJobVersion {
+  title: string;
+  technologies: string[];
+  info: string;
+  description: string;
+  customer: string;
+  versionId: string;
+  language: string;
 }
 
 export const createJob = async (
@@ -142,6 +153,19 @@ export const updateJobPictures = async (
         "Content-Type": "multipart/form-data",
       },
     });
+    return response;
+  } catch (error) {
+    throw error as AxiosError;
+  }
+};
+
+export const updateJobVersion = async (
+  versionId: string,
+  formData: FetchJobVersion
+) => {
+  try {
+    const url = `${VERSION_API_URI}/${versionId}`;
+    const response = await client.put(url, formData);
     return response;
   } catch (error) {
     throw error as AxiosError;

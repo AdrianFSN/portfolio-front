@@ -14,15 +14,11 @@ import { getJobDetailSelector } from "../../store/selectors/JobExamplesSelectors
 import { getJobDetailThunk } from "../../store/thunks/jobDetailThunk";
 import { AppDispatch } from "../../store/store";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  getJobVersionErrorSelector,
-  getJobVersionLoadingSelector,
-  getJobVersionMessageSelector,
-} from "../../store/selectors/editJobsSelectors/editJobVersionSelectors";
-import { resetEditJobVersion } from "../../store/slices/jobVersionSlice";
-import { updateJobVersionThunk } from "../../store/thunks/editJobVersionThunk";
-import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
+import { AxiosError } from "axios";
+import { updateJobVersion } from "./adminService";
+import StandardResponseInterface from "../../@types/StandardResponse";
+import extractErrorMessage from "../../utils/extractErrorMessage";
 
 const EditJobVersions = () => {
   const { t } = useTranslation();
@@ -35,9 +31,8 @@ const EditJobVersions = () => {
   const [toEditJob, setToEditJob] = useState("");
   const [toEditJobVideos, setToEditJobVideos] = useState("");
   const [toEditJobAudios, setToEditJobAudios] = useState("");
-  const error = useSelector(getJobVersionErrorSelector);
-  const successMessage = useSelector(getJobVersionMessageSelector);
-  const isLoading = useSelector(getJobVersionLoadingSelector);
+  const [error, setError] = useState<AxiosError | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
   interface VersionDataInterface {
@@ -59,14 +54,6 @@ const EditJobVersions = () => {
     versionId: "",
     language: "",
   });
-
-  useEffect(() => {
-    if (!error && successMessage) {
-      setAlertMessage(successMessage);
-    } else {
-      setAlertMessage(error as string);
-    }
-  }, [successMessage, error]);
 
   useEffect(() => {
     if (job) {
@@ -125,32 +112,34 @@ const EditJobVersions = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(resetEditJobVersion());
-    await dispatch(
-      updateJobVersionThunk({
-        versionId: job.versions[0]._id,
-        formData: versionsData,
-      })
-    );
+    setError(null);
+    try {
+      setIsLoading(true);
+      const response = await updateJobVersion(
+        job.versions[0]._id,
+        versionsData
+      );
+      setAlertMessage(
+        (response as unknown as StandardResponseInterface).message
+      );
+    } catch (error) {
+      setError(error as AxiosError);
+      setAlertMessage(extractErrorMessage(error, t));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
-    if (successMessage) {
-      setAlertMessage("");
-      dispatch(resetEditJobVersion());
-      dispatch(resetJobDetail());
+    setAlertMessage("");
+    if (!error) {
       navigate(toEditPage);
-    } else {
-      setAlertMessage("");
-      dispatch(resetEditJobVersion());
     }
   };
 
   const handleToEditPage = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    dispatch(resetJobDetail());
-    dispatch(resetEditJobVersion());
     navigate(toEditPage);
   };
 
