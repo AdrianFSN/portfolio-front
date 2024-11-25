@@ -9,15 +9,11 @@ import { getJobDetailSelector } from "../../store/selectors/JobExamplesSelectors
 import { getJobDetailThunk } from "../../store/thunks/jobDetailThunk";
 import { AppDispatch } from "../../store/store";
 import { useNavigate, useParams } from "react-router-dom";
-import { updateJobBasicsThunk } from "../../store/thunks/editJobBasicsThunk";
-import { resetEditJobBasics } from "../../store/slices/jobBasicsSlice";
-import {
-  getEditJobBasicsErrorSelector,
-  getEditJobBasicsLoadingSelector,
-  getEditJobBasicsMessageSelector,
-} from "../../store/selectors/editJobsSelectors/editJobsSelectors";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
-import { resetJobDetail } from "../../store/slices/jobDetailSlice";
+import { AxiosError } from "axios";
+import { updateJobBasics } from "./adminService";
+import StandardResponseInterface from "../../@types/StandardResponse";
+import extractErrorMessage from "../../utils/extractErrorMessage";
 
 const EditJob = () => {
   const { t } = useTranslation();
@@ -30,9 +26,8 @@ const EditJob = () => {
   const [toEditJobImages, setToEditJobImages] = useState("");
   const [toEditJobVideos, setToEditJobVideos] = useState("");
   const [toEditJobAudios, setToEditJobAudios] = useState("");
-  const error = useSelector(getEditJobBasicsErrorSelector);
-  const successMessage = useSelector(getEditJobBasicsMessageSelector);
-  const isLoading = useSelector(getEditJobBasicsLoadingSelector);
+  const [error, setError] = useState<AxiosError | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
   interface TextDataInterface {
@@ -47,14 +42,6 @@ const EditJob = () => {
     linkToGitHub: "",
     category: [],
   });
-
-  useEffect(() => {
-    if (!error && successMessage) {
-      setAlertMessage(successMessage);
-    } else {
-      setAlertMessage(error as string);
-    }
-  }, [successMessage, error]);
 
   useEffect(() => {
     if (jobId) {
@@ -115,29 +102,34 @@ const EditJob = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(resetEditJobBasics());
-    await dispatch(
-      updateJobBasicsThunk({ jobId: job._id, formData: textData })
-    );
+
+    try {
+      setIsLoading(true);
+      const response = await updateJobBasics(job._id, textData);
+      setAlertMessage(
+        (response as unknown as StandardResponseInterface).message
+      );
+      setError(null);
+    } catch (error) {
+      setError(error as AxiosError);
+      setAlertMessage(extractErrorMessage(error, t));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
-    if (successMessage) {
+    if (!error) {
       setAlertMessage("");
-      dispatch(resetEditJobBasics());
-      dispatch(resetJobDetail());
       navigate(toEditPage);
     } else {
       setAlertMessage("");
-      dispatch(resetEditJobBasics());
     }
   };
 
   const handleToEditPage = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    dispatch(resetJobDetail());
-    dispatch(resetEditJobBasics());
     navigate(toEditPage);
   };
 

@@ -4,7 +4,6 @@ import { JOB_EXAMPLES_API_URI } from "../../utils/constants";
 import StandardResponseInterface from "../../@types/StandardResponse";
 
 interface FetchFormDataParams {
-  //formData: object;
   launchPeriod: string;
   linkToUrl: string;
   linkToGitHub: string;
@@ -25,6 +24,13 @@ interface FetchFormDataParams {
   video2: null;
 }
 
+interface FetchJobBasicsParams {
+  launchPeriod: string;
+  linkToUrl: string;
+  linkToGitHub: string;
+  category: string[];
+}
+
 export const createJob = async (
   formData: FetchFormDataParams
 ): Promise<AxiosResponse<StandardResponseInterface>> => {
@@ -36,10 +42,25 @@ export const createJob = async (
         "Content-Type": "multipart/form-data",
       },
     });
+    return response;
+  } catch (error) {
+    throw error as AxiosError;
+  }
+};
+
+export const updateJobBasics = async (
+  jobId: string,
+  formData: FetchJobBasicsParams
+): Promise<AxiosResponse<StandardResponseInterface>> => {
+  try {
+    const url = `${JOB_EXAMPLES_API_URI}/${jobId}`;
+    const response = await client.put(url, formData);
     console.log("Esto es response en adminservice: ", response);
+
     return response;
   } catch (error) {
     console.error("Esto es error en admin service: ", error);
+
     throw error as AxiosError;
   }
 };

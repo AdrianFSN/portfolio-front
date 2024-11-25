@@ -3,7 +3,6 @@ import jobExamplesListReducer from "./slices/jobExamplesSlice";
 import jobsCarousselReducer from "./slices/jobsCarousselSlice";
 import jobDetailReducer from "./slices/jobDetailSlice";
 import loginReducer from "./slices/loginSlice";
-import editJobBasicsReducer from "./slices/jobBasicsSlice";
 import jobPicturesReducer from "./slices/jobPicturesSlice";
 import jobAudiosReducer from "./slices/jobAudiosSlice";
 import jobVideosReducer from "./slices/jobVideosSlice";
@@ -15,7 +14,6 @@ export const store = configureStore({
     jobsCaroussel: jobsCarousselReducer,
     jobDetail: jobDetailReducer,
     login: loginReducer,
-    editJobBasics: editJobBasicsReducer,
     jobPictures: jobPicturesReducer,
     jobVideos: jobVideosReducer,
     jobAudios: jobAudiosReducer,

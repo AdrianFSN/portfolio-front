@@ -15,6 +15,7 @@ import CustomAlert from "../../components/shared/alert/CustomAlert";
 import { createJob } from "./adminService";
 import { AxiosError } from "axios";
 import StandardResponseInterface from "../../@types/StandardResponse";
+import extractErrorMessage from "../../utils/extractErrorMessage";
 
 const CreateJob = () => {
   const { t } = useTranslation();
@@ -206,24 +207,7 @@ const CreateJob = () => {
       setError(null);
     } catch (error) {
       setError(error as AxiosError);
-      if (
-        typeof error === "object" &&
-        error !== null &&
-        "validationErrors" in error
-      ) {
-        const validationErrors = error.validationErrors;
-
-        if (Array.isArray(validationErrors)) {
-          const errorMessages = validationErrors.join("\n");
-          setAlertMessage(errorMessages);
-        }
-      } else if (
-        typeof error === "object" &&
-        error !== null &&
-        "message" in error
-      ) {
-        setAlertMessage((error as { message: string }).message);
-      }
+      setAlertMessage(extractErrorMessage(error, t));
     } finally {
       setIsLoading(false);
     }
