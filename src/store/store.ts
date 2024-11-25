@@ -8,7 +8,6 @@ import jobPicturesReducer from "./slices/jobPicturesSlice";
 import jobAudiosReducer from "./slices/jobAudiosSlice";
 import jobVideosReducer from "./slices/jobVideosSlice";
 import jobVersionReducer from "./slices/jobVersionSlice";
-import createJobReducer from "./slices/createJobSlice";
 
 export const store = configureStore({
   reducer: {
@@ -21,7 +20,6 @@ export const store = configureStore({
     jobVideos: jobVideosReducer,
     jobAudios: jobAudiosReducer,
     jobVersion: jobVersionReducer,
-    createJob: createJobReducer,
   },
   devTools: import.meta.env.VITE_USER_NODE_ENV !== "production",
 });
