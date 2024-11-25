@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,8 +19,10 @@ import imgNotAvailable from "../../assets/img_not_available.jpg";
 import { useNavigate } from "react-router-dom";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
 import { resetJobExamples } from "../../store/slices/jobExamplesSlice";
+import launchPeriodFormatter from "../../utils/launchPeriodFormatter";
 
 const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const origin = ORIGIN;
   const successMessage = useSelector(getJobsListMessageSelector);
@@ -137,10 +140,12 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
                     </a>
                   </p>
                   <p>
-                    <strong>Customer:</strong> {jobExample.versions[0].customer}
+                    <strong>{t("generic.customer")}:</strong>{" "}
+                    {jobExample.versions[0].customer}
                   </p>
                   <p>
-                    <strong>Date: </strong> {jobExample.launchPeriod}
+                    <strong>{t("generic.date")} </strong>{" "}
+                    {launchPeriodFormatter(jobExample.launchPeriod)}
                   </p>
                   <p>{jobExample.versions[0].info}</p>
                 </li>

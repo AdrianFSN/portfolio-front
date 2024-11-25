@@ -62,7 +62,11 @@
     "uploaded_file": "Tu es en train de sauvegarder ce nouveau fichier",
     "cancel_upload": "Annuler l'envoi",
     "back": "Retour",
-    "switch_language_to": "Changer la langue en"
+    "switch_language_to": "Changer la langue en",
+    "customer": "Client",
+    "date": "Date",
+    "page": "Page",
+    "of": "de"
   },
   "job": {
     "job_not_found": "On n'a pas trouvé le job que tu cherches"

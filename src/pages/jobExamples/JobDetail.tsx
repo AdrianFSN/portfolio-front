@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import "./JobDetail.css";
 import {
@@ -10,6 +11,7 @@ import icons from "../../utils/icons";
 import { useEffect, useState } from "react";
 import { JobExample } from "../../@types/jobExample";
 import JobDetailCaroussel from "./JobDetailCaroussel";
+import launchPeriodFormatter from "../../utils/launchPeriodFormatter";
 
 interface JobDetailProps {
   jobId: string;
@@ -17,6 +19,7 @@ interface JobDetailProps {
 }
 
 const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
+  const { t } = useTranslation();
   const pictures = useSelector(getJobDetailImagesSelector);
   const audios = useSelector(getJobDetailAudiosSelector);
   const videos = useSelector(getJobDetailVideosSelector);
@@ -88,12 +91,12 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
                 </a>
               </li>
               <li className={jobVersion?.customer ? "" : "hidden"}>
-                <strong>Customer: </strong>
+                <strong>{t("generic.customer")}: </strong>
                 {jobVersion?.customer}
               </li>
               <li>
-                <strong>Date: </strong>
-                {job.launchPeriod}
+                <strong>{t("generic.date")}: </strong>
+                {launchPeriodFormatter(job.launchPeriod)}
               </li>
             </ul>
           </div>

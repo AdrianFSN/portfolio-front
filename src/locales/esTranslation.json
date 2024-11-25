@@ -62,7 +62,11 @@
     "uploaded_file": "Estás guardando este nuevo archivo",
     "cancel_upload": "Cancelar subida",
     "back": "Volver",
-    "switch_language_to": "Cambiar idioma a"
+    "switch_language_to": "Cambiar idioma a",
+    "customer": "Cliente",
+    "date": "Fecha",
+    "page": "Página",
+    "of": "de"
   },
   "job": {
     "job_not_found": "No hemos encontrado el trabajo que buscas"

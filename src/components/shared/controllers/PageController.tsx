@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import "./PageController.css";
 
 interface PageControllerProps {
@@ -17,6 +18,7 @@ const PageController: React.FC<PageControllerProps> = ({
   currentPage,
   totalPages,
 }) => {
+  const { t } = useTranslation();
   const handlePrevPage = () => {
     if (currentPage > 1) {
       prev();
@@ -45,7 +47,9 @@ const PageController: React.FC<PageControllerProps> = ({
       ></i>
       <div>
         {children}
-        <span>{`Page ${currentPage} of ${totalPages}`}</span>
+        <span>{`${t("generic.page")} ${currentPage} ${t(
+          "generic.of"
+        )} ${totalPages}`}</span>
       </div>
       <i
         className="page__controller__controls fa-solid fa-chevron-right"

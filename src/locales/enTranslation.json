@@ -62,7 +62,11 @@
     "uploaded_file": "You are saving this new file",
     "cancel_upload": "Cancel upload",
     "back": "Back",
-    "switch_language_to": "Switch language to"
+    "switch_language_to": "Switch language to",
+    "customer": "Customer",
+    "date": "Date",
+    "page": "Page",
+    "of": "of"
   },
   "job": {
     "job_not_found": "Could not find the job you requested"
