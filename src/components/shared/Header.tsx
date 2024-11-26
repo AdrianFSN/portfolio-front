@@ -15,13 +15,16 @@ const Header = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [showBurgerBars, setShowBurgerBars] = useState(true);
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
         setShowBurgerBars(false);
+        setWindowSize(768);
       } else {
         setShowBurgerBars(true);
+        setWindowSize(425);
       }
     };
 
@@ -68,7 +71,11 @@ const Header = () => {
           ></i>
         )}
       </div>
-      <nav className={showBurgerBars ? "hidden" : "header__nav"}>
+      <nav
+        className={
+          showBurgerBars && windowSize < 768 ? "hidden" : "header__nav"
+        }
+      >
         <ul className="header__nav__list">
           <li className="lang__switcher">
             <LanguageSwitcher

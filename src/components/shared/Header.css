@@ -98,11 +98,11 @@
 .header .header__mask {
   position: absolute;
   top: 0;
-  height: 13rem;
+  height: 14rem;
   width: 100%;
   background-color: var(--bg-color);
   z-index: -1;
-  /* box-shadow: 0px 0px 11px 0px #CFCC98; */
+  box-shadow: 0px 0px 11px 0px #cfcc98;
 }
 
 .header__nav__list__item .header__link:hover {
