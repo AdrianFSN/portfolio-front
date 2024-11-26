@@ -9,16 +9,27 @@ import {
   DEVELOPMENT_ROUTES_PATH,
 } from "../../utils/constants";
 import RegularButton from "./buttons/RegularButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [showBurgerBars, setShowBurgerBars] = useState(true);
-  /* const [showXClose, setShowXClose] = useState(false);
-  const [showBurgerList, setShowBurgerList] = useState(false);
-  const [showNavList, setShowNavList] = useState(true);
- */
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setShowBurgerBars(false);
+      } else {
+        setShowBurgerBars(true);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleOpenBurgerMenu = (event: React.MouseEvent) => {
     event.preventDefault();
