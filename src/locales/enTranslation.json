@@ -70,7 +70,8 @@
     "of": "of",
     "jobs_collection": "Jobs Collection",
     "contact": "Contact",
-    "page_not_found": "Page not found"
+    "page_not_found": "Page not found",
+    "language": "Language"
   },
   "job": {
     "job_not_found": "Could not find the job you requested"

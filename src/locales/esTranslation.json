@@ -70,7 +70,8 @@
     "jobs_collection": "Trabajos realizados",
     "contact": "Contacto",
     "logout": "Logout",
-    "page_not_found": "Página no encontrada"
+    "page_not_found": "Página no encontrada",
+    "language": "Idioma"
   },
   "job": {
     "job_not_found": "No hemos encontrado el trabajo que buscas"

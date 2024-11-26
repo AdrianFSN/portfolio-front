@@ -1,9 +1,16 @@
 .header__nav__list .lang__switcher__button {
-  background: red;
+  background: transparent;
+  max-width: 2rem;
+  max-height: 2rem;
   padding: 0;
   margin: 0;
+  color: var(--main-text-color);
 }
 .header__nav__list .lang__switcher__button img {
+  max-width: 2.5rem;
+  max-height: 2.5rem;
   padding: 0;
   margin-bottom: 0;
+  object-fit: cover;
+  object-position: center;
 }

@@ -64,6 +64,8 @@
   display: flex;
   position: absolute;
   background: var(--body-color);
+  justify-content: center;
+  width: 90%;
   top: 14rem;
   z-index: -2;
   animation: show__burger__list 0.5s ease-in-out;
@@ -85,7 +87,14 @@
   flex-direction: row;
   width: 100%;
   height: auto;
-  gap: 2rem;
+  gap: 1.5rem;
+}
+.lang__switcher .lang__content__text {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  gap: 1rem;
 }
 .header__nav__list .lang__switcher img {
   width: auto;

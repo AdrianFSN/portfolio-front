@@ -23,6 +23,7 @@ const Header = () => {
   const [showBurgerBars, setShowBurgerBars] = useState(true);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [showLogout, setShowLogout] = useState(false);
+  const [showLanguageList, setShowLanguageList] = useState(false);
   const isLoggedIn = useSelector(getIsLoggedSelector);
 
   useEffect(() => {
@@ -70,6 +71,12 @@ const Header = () => {
     dispatch(resetLogin());
   };
 
+  const handleShowLangFlags = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setShowLanguageList(!showLanguageList);
+    setShowBurgerBars(true);
+  };
+
   return (
     <header className="header">
       <div className="header__mask"></div>
@@ -100,10 +107,16 @@ const Header = () => {
       >
         <ul className="header__nav__list">
           <li className="lang__switcher">
-            <LanguageSwitcher
-              className="lang__content"
-              flag={true}
-            />
+            {!showLanguageList ? (
+              <div onClick={handleShowLangFlags}> {t("generic.language")}</div>
+            ) : (
+              <div onClick={handleShowLangFlags}>
+                <LanguageSwitcher
+                  className="lang__content"
+                  flag={true}
+                />
+              </div>
+            )}
           </li>
           <li className="header__nav__list__item">
             <p
