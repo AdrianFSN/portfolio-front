@@ -130,6 +130,16 @@
   }
 }
 
+.portfolio__select {
+  background: var(--bg-color);
+  border: none;
+  font-weight: bold;
+}
+.portfolio__select option {
+  font-size: 0.5rem;
+  font-weight: bold;
+}
+
 .header__nav__list__item .btn:hover {
   color: var(--secondary-text-color);
 }

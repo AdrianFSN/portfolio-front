@@ -71,7 +71,8 @@
     "jobs_collection": "Jobs Collection",
     "contact": "Contact",
     "page_not_found": "Page not found",
-    "language": "Language"
+    "language": "Language",
+    "select_portfolio_subject": "Portfolio"
   },
   "job": {
     "job_not_found": "Could not find the job you requested"

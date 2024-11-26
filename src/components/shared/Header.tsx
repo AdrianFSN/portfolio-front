@@ -7,6 +7,8 @@ import {
   ABOUT_ME_ROUTES_PATH,
   AUTH_ROUTES_PATH,
   DEVELOPMENT_ROUTES_PATH,
+  LIVEOPS_ROUTES_PATH,
+  WRITING_ROUTES_PATH,
 } from "../../utils/constants";
 import RegularButton from "./buttons/RegularButton";
 import { useEffect, useState } from "react";
@@ -25,6 +27,20 @@ const Header = () => {
   const [showLogout, setShowLogout] = useState(false);
   const [showLanguageList, setShowLanguageList] = useState(false);
   const isLoggedIn = useSelector(getIsLoggedSelector);
+  const portfolioSubjects = [
+    {
+      subject: t("admin.development"),
+      url: DEVELOPMENT_ROUTES_PATH,
+    },
+    {
+      subject: t("admin.liveOps"),
+      url: LIVEOPS_ROUTES_PATH,
+    },
+    {
+      subject: t("admin.writing"),
+      url: WRITING_ROUTES_PATH,
+    },
+  ];
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -69,6 +85,15 @@ const Header = () => {
     event.preventDefault();
     logout();
     dispatch(resetLogin());
+  };
+
+  const handlePortfolioChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const selectedUrl = event.target.value;
+    if (selectedUrl) {
+      navigate(selectedUrl);
+    }
   };
 
   const handleShowLangFlags = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -127,12 +152,26 @@ const Header = () => {
             </p>
           </li>
           <li className="header__nav__list__item">
-            <p
-              className="header__link"
-              onClick={() => handleNavigateTo(DEVELOPMENT_ROUTES_PATH)}
+            <select
+              className="portfolio__select"
+              onChange={handlePortfolioChange}
+              defaultValue=""
             >
-              {t("admin.development")}
-            </p>
+              <option
+                value=""
+                disabled
+              >
+                {t("generic.select_portfolio_subject")}
+              </option>
+              {portfolioSubjects.map((item, index) => (
+                <option
+                  key={index}
+                  value={item.url}
+                >
+                  {item.subject}
+                </option>
+              ))}
+            </select>
           </li>
 
           <li className="header__nav__list__item">
