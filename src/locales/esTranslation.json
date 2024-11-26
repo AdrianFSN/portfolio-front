@@ -69,7 +69,8 @@
     "of": "de",
     "jobs_collection": "Trabajos realizados",
     "contact": "Contacto",
-    "logout": "Logout"
+    "logout": "Logout",
+    "page_not_found": "Página no encontrada"
   },
   "job": {
     "job_not_found": "No hemos encontrado el trabajo que buscas"

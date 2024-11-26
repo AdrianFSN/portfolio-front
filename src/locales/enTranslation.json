@@ -69,7 +69,8 @@
     "page": "Page",
     "of": "of",
     "jobs_collection": "Jobs Collection",
-    "contact": "Contact"
+    "contact": "Contact",
+    "page_not_found": "Page not found"
   },
   "job": {
     "job_not_found": "Could not find the job you requested"

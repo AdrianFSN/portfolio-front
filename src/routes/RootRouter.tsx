@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Bio from "../pages/bio/Bio";
 import Development from "../pages/development/Development";
 import Job from "../pages/jobExamples/Job";
@@ -23,6 +23,7 @@ import {
 } from "../utils/constants";
 import CreateJob from "../pages/admin/CreateJob";
 import RequireAuth from "../components/RequireAuth";
+import NotFound from "../components/shared/NotFound";
 const RootRouter = () => {
   return (
     <Routes>
@@ -42,6 +43,15 @@ const RootRouter = () => {
       <Route
         path={AUTH_ROUTES_PATH}
         element={<Login />}
+      />
+
+      <Route
+        path="/404"
+        element={<NotFound />}
+      />
+      <Route
+        path="*"
+        element={<Navigate to="/404" />}
       />
 
       {/** Private Routes */}
