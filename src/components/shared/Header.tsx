@@ -112,6 +112,7 @@ const Header = () => {
   ) => {
     const selectedUrl = event.target.value;
     if (selectedUrl) {
+      setShowBurgerBars(true);
       navigate(selectedUrl);
     }
   };

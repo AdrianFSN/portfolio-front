@@ -21,7 +21,7 @@ import { LIMIT_DEFAULT } from "../../utils/constants";
 import { updateLimitByScreenSize } from "../../utils/updateLimitByScreenSize";
 import { getJobsCarousselThunk } from "../../store/thunks/jobsCarousselThunk";
 
-const Development: React.FC<JobPagesProps> = ({ category }) => {
+const PortfolioSubject: React.FC<JobPagesProps> = ({ category }) => {
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
   const jobsCaroussel = useSelector(getjobsCarousselSelector);
@@ -68,7 +68,7 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
 
   return (
     <main className="porfolio__main">
-      <h1>{t("admin.development")}</h1>
+      <h1>{t(`admin.${category}`)}</h1>
       {jobsCaroussel && jobsCaroussel.length > 0 ? (
         <section className="caroussel">
           <JobsCaroussel
@@ -109,4 +109,4 @@ const Development: React.FC<JobPagesProps> = ({ category }) => {
   );
 };
 
-export default Development;
+export default PortfolioSubject;
