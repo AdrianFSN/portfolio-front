@@ -14,7 +14,7 @@ import JobDetail from "./JobDetail";
 import RegularButton from "../../components/shared/buttons/RegularButton";
 
 const Job = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const jobId = useParams().id;
@@ -26,7 +26,7 @@ const Job = () => {
     if (jobId) {
       dispatch(getJobDetailThunk({ jobId }));
     }
-  }, [jobId, dispatch]);
+  }, [jobId, dispatch, i18n.language]);
 
   return (
     <>

@@ -22,7 +22,7 @@ import { updateLimitByScreenSize } from "../../utils/updateLimitByScreenSize";
 import { getJobsCarousselThunk } from "../../store/thunks/jobsCarousselThunk";
 
 const PortfolioSubject: React.FC<JobPagesProps> = ({ category }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
   const jobsCaroussel = useSelector(getjobsCarousselSelector);
   const jobs: JobExample[] | undefined = useSelector(
@@ -57,7 +57,7 @@ const PortfolioSubject: React.FC<JobPagesProps> = ({ category }) => {
     } else {
       dispatch(getJobExamplesListThunk({ page: page?.toString(), limit }));
     }
-  }, [category, dispatch, page, limit]);
+  }, [category, dispatch, page, limit, i18n.language]);
 
   const handleNextPage = () => {
     setPage(((page as number) % jobsTotalPages) + 1);
