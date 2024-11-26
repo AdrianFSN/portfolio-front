@@ -166,6 +166,7 @@
     top: 0;
     justify-items: space-between;
     box-shadow: none;
+    animation: none;
   }
 
   .header .header__nav .header__nav__list {
