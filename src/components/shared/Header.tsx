@@ -119,7 +119,12 @@ const Header = () => {
 
   const handleShowLangFlags = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
-    setShowLanguageList(!showLanguageList);
+    setShowLanguageList(true);
+    setShowBurgerBars(false);
+  };
+  const handleHideLangFlags = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setShowLanguageList(false);
     setShowBurgerBars(true);
   };
 
@@ -156,7 +161,7 @@ const Header = () => {
             {!showLanguageList ? (
               <div onClick={handleShowLangFlags}> {t("generic.language")}</div>
             ) : (
-              <div onClick={handleShowLangFlags}>
+              <div onClick={handleHideLangFlags}>
                 <LanguageSwitcher
                   className="lang__content"
                   flag={true}
