@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import "./EditJob.css";
 import { useTranslation } from "react-i18next";
 import RegularButton from "../../components/shared/buttons/RegularButton";
@@ -110,6 +112,16 @@ const EditJobVersions = () => {
     });
   };
 
+  const handleQuillChange = (
+    field: keyof VersionDataInterface,
+    value: string
+  ) => {
+    setVersionsData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
@@ -210,11 +222,12 @@ const EditJobVersions = () => {
                 >
                   <h4>{t("admin.job_excerpt")}</h4>
                 </label>
-                <textarea
+                <ReactQuill
+                  theme="snow"
                   className="form__input"
                   value={versionsData.info}
-                  onChange={handleVersionsOnChange}
-                  name="info"
+                  onChange={(value) => handleQuillChange("info", value)}
+                  /* name="info" */
                   id="excerpt"
                   placeholder={
                     job.versions[0].info
@@ -234,11 +247,11 @@ const EditJobVersions = () => {
                 >
                   <h4>{t("admin.job_description")}</h4>
                 </label>
-                <textarea
+                <ReactQuill
                   className="form__input"
                   value={versionsData.description}
-                  onChange={handleVersionsOnChange}
-                  name="description"
+                  onChange={(value) => handleQuillChange("description", value)}
+                  /*  name="description" */
                   id="description"
                   placeholder={
                     job.versions[0].description

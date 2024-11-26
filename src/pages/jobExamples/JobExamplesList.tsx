@@ -1,3 +1,5 @@
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -147,7 +149,9 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
                     <strong>{t("generic.date")} </strong>{" "}
                     {launchPeriodFormatter(jobExample.launchPeriod)}
                   </p>
-                  <p>{jobExample.versions[0].info}</p>
+                  <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                    {jobExample.versions[0].info}
+                  </ReactMarkdown>
                 </li>
               ))}
             </ul>

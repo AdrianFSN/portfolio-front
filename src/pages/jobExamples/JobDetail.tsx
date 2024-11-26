@@ -1,3 +1,5 @@
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import "./JobDetail.css";
@@ -69,8 +71,12 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
             </div>
           </div>
           <div className="job__detail__text__section">
-            <p>{jobVersion?.info}</p>
-            <p>{jobVersion?.description}</p>
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+              {jobVersion?.info}
+            </ReactMarkdown>
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+              {jobVersion?.description}
+            </ReactMarkdown>
             <ul className="job__detail__list">
               <li className={job.linkToUrl ? "" : "hidden"}>
                 <a
