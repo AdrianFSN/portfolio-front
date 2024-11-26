@@ -22,6 +22,7 @@ import {
   VIDEOS_ROUTES_URI,
 } from "../utils/constants";
 import CreateJob from "../pages/admin/CreateJob";
+import RequireAuth from "../components/RequireAuth";
 const RootRouter = () => {
   return (
     <Routes>
@@ -46,7 +47,11 @@ const RootRouter = () => {
       {/** Private Routes */}
       <Route
         path={EDIT_ROUTES_PATH}
-        element={<Outlet />}
+        element={
+          <RequireAuth>
+            <Outlet />
+          </RequireAuth>
+        }
       >
         <Route
           index
