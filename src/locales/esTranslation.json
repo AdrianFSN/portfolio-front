@@ -67,7 +67,8 @@
     "date": "Fecha",
     "page": "Página",
     "of": "de",
-    "jobs_collection": "Trabajos realizados"
+    "jobs_collection": "Trabajos realizados",
+    "contact": "Contacto"
   },
   "job": {
     "job_not_found": "No hemos encontrado el trabajo que buscas"

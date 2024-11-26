@@ -1,31 +1,63 @@
 import "./Header.css";
+import { useTranslation } from "react-i18next";
 import logo from "../../assets/logos/Logo_A_Ese_Light.png";
 import LanguageSwitcher from "./localization/LanguageSwitcher";
+import { useNavigate } from "react-router-dom";
+import {
+  ABOUT_ME_ROUTES_PATH,
+  AUTH_ROUTES_PATH,
+  DEVELOPMENT_ROUTES_PATH,
+} from "../../utils/constants";
+import RegularButton from "./buttons/RegularButton";
+import { useState } from "react";
 
 const Header = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [showBurgerBars, setShowBurgerBars] = useState(true);
+  /* const [showXClose, setShowXClose] = useState(false);
+  const [showBurgerList, setShowBurgerList] = useState(false);
+  const [showNavList, setShowNavList] = useState(true);
+ */
+
+  const handleOpenBurgerMenu = (event: React.MouseEvent) => {
+    event.preventDefault();
+    setShowBurgerBars(false);
+  };
+  const handleCloseBurgerMenu = (event: React.MouseEvent) => {
+    event.preventDefault();
+    setShowBurgerBars(true);
+  };
+
+  const handleNavigateTo = (route: string) => {
+    setShowBurgerBars(true);
+    navigate(route);
+  };
+
   return (
     <header className="header">
       <div className="header__mask"></div>
       <figure className="header__image">
-        <a href="./index.html">
-          <img
-            src={logo}
-            alt="Logo ¡A Ese!"
-          />
-        </a>
+        <img
+          src={logo}
+          alt="Logo ¡A Ese!"
+          onClick={() => navigate("/")}
+        />
       </figure>
-      <input
-        type="checkbox"
-        id="show__burger__menu"
-      />
-      <label
-        htmlFor="show__burger__menu"
-        className="burger"
-      >
-        <i className="fa-solid fa-bars"></i>
-        <i className="fa-solid fa-xmark"></i>
-      </label>
-      <nav className="header__nav">
+      <div className="burger">
+        {showBurgerBars ? (
+          <i
+            className="fa-solid fa-bars"
+            onClick={handleOpenBurgerMenu}
+          ></i>
+        ) : (
+          <i
+            className="fa-solid fa-xmark"
+            onClick={handleCloseBurgerMenu}
+          ></i>
+        )}
+      </div>
+      <nav className={showBurgerBars ? "hidden" : "header__nav"}>
         <ul className="header__nav__list">
           <li className="lang__switcher">
             <LanguageSwitcher
@@ -34,36 +66,30 @@ const Header = () => {
             />
           </li>
           <li className="header__nav__list__item">
-            <a
+            <p
               className="header__link"
-              href="../index.html"
+              onClick={() => handleNavigateTo(ABOUT_ME_ROUTES_PATH)}
             >
-              Bio
-            </a>
+              {t("bio.title")}
+            </p>
           </li>
           <li className="header__nav__list__item">
-            <a
+            <p
               className="header__link"
-              href="../vistas/porfolio.html"
+              onClick={() => handleNavigateTo(DEVELOPMENT_ROUTES_PATH)}
             >
-              Porfolio
-            </a>
+              {t("admin.development")}
+            </p>
           </li>
+
           <li className="header__nav__list__item">
-            <a
-              className="header__link"
-              href="../index.html#banner"
-            >
-              Banner
-            </a>
-          </li>
-          <li className="header__nav__list__item">
-            <a
+            <RegularButton
               className="btn"
-              href="../vistas/contacto.html"
+              $skin="danger"
+              onClick={() => handleNavigateTo(AUTH_ROUTES_PATH)}
             >
-              CONTACTO
-            </a>
+              {t("generic.contact")}
+            </RegularButton>
           </li>
         </ul>
       </nav>

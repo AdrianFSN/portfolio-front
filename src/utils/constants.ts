@@ -43,6 +43,15 @@ export const PICTURES_COLLECTION_FIELDS = [
   "picture5",
 ];
 
+export const VIDEOS_COLLECTION_FIELDS = ["mainVideo", "video2"];
+export const AUDIOS_COLLECTION_FIELDS = ["mainAudio", "audio2"];
+export const LOCALIZABLE_LANGUAGES = ["en", "es", "fr"];
+export const LANGUAGE_CODES: Record<string, string> = {
+  en: "GB",
+  es: "ES",
+  fr: "FR",
+};
+
 export const ALLOWED_AUDIO_TYPES = ["audio/mpeg"];
 export const ALLOWED_VIDEO_TYPES = ["video/mp4"];
 export const ALLOWED_PICTURES_TYPES = ["image/jpeg", "image/png", "image/gif"];
@@ -53,15 +62,6 @@ export const ALLOWED_FILES_TYPES = [
   "audio/mpeg",
   "video/mp4",
 ];
-
-export const VIDEOS_COLLECTION_FIELDS = ["mainVideo", "video2"];
-export const AUDIOS_COLLECTION_FIELDS = ["mainAudio", "audio2"];
-export const LOCALIZABLE_LANGUAGES = ["en", "es", "fr"];
-export const LANGUAGE_CODES: Record<string, string> = {
-  en: "GB",
-  es: "ES",
-  fr: "FR",
-};
 
 // Valdiation lists
 export const VALID_CATEGORIES = [
