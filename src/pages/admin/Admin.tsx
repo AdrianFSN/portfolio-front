@@ -61,8 +61,6 @@ const Admin = () => {
         <div>{t("generic.empty_section")}</div>
       )}
       {error && <p>{error}</p>}
-      Aquí tienen que ir varias listas de jobs separadas por categorías. A esta
-      página solo se puede acceder si estás logueado
     </main>
   );
 };
