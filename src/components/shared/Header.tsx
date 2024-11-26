@@ -10,12 +10,28 @@ import {
 } from "../../utils/constants";
 import RegularButton from "./buttons/RegularButton";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getIsLoggedSelector } from "../../store/selectors/AuthSelectors/authSelectors";
+import { logout } from "../../api/client";
+import { AppDispatch } from "../../store/store";
+import { resetLogin } from "../../store/slices/loginSlice";
 
 const Header = () => {
   const { t } = useTranslation();
+  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const [showBurgerBars, setShowBurgerBars] = useState(true);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [showLogout, setShowLogout] = useState(false);
+  const isLoggedIn = useSelector(getIsLoggedSelector);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      setShowLogout(true);
+    } else {
+      setShowLogout(false);
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -46,6 +62,12 @@ const Header = () => {
   const handleNavigateTo = (route: string) => {
     setShowBurgerBars(true);
     navigate(route);
+  };
+
+  const handleLogout = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    logout();
+    dispatch(resetLogin());
   };
 
   return (
@@ -102,13 +124,19 @@ const Header = () => {
 
           <li className="header__nav__list__item">
             <RegularButton
-              className="btn"
               $skin="danger"
               onClick={() => handleNavigateTo(AUTH_ROUTES_PATH)}
             >
               {t("generic.contact")}
             </RegularButton>
           </li>
+          {showLogout && (
+            <li className="header__nav__list__item">
+              <RegularButton onClick={handleLogout}>
+                {t("admin.logout")}
+              </RegularButton>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

@@ -47,7 +47,8 @@
     "edit_job_audios": "Edit job audios",
     "job_description": "Job description",
     "create_job": "Create a job",
-    "new_job_intro": "Have a new job ready? Promote it!"
+    "new_job_intro": "Have a new job ready? Promote it!",
+    "logout": "Logout"
   },
   "generic": {
     "empty_section": "This section is empty",
