@@ -5,9 +5,13 @@ import LanguageSwitcher from "./localization/LanguageSwitcher";
 import { useNavigate } from "react-router-dom";
 import {
   ABOUT_ME_ROUTES_PATH,
+  AUDIO_ROUTES_PATH,
   AUTH_ROUTES_PATH,
+  DESIGN_ROUTES_PATH,
   DEVELOPMENT_ROUTES_PATH,
   LIVEOPS_ROUTES_PATH,
+  PHOTOGRAPHY_ROUTES_PATH,
+  VIDEO_ROUTES_PATH,
   WRITING_ROUTES_PATH,
 } from "../../utils/constants";
 import RegularButton from "./buttons/RegularButton";
@@ -39,6 +43,22 @@ const Header = () => {
     {
       subject: t("admin.writing"),
       url: WRITING_ROUTES_PATH,
+    },
+    {
+      subject: t("admin.audio"),
+      url: AUDIO_ROUTES_PATH,
+    },
+    {
+      subject: t("admin.video"),
+      url: VIDEO_ROUTES_PATH,
+    },
+    {
+      subject: t("admin.design"),
+      url: DESIGN_ROUTES_PATH,
+    },
+    {
+      subject: t("admin.photography"),
+      url: PHOTOGRAPHY_ROUTES_PATH,
     },
   ];
 
