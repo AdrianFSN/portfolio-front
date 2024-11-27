@@ -159,7 +159,14 @@ const Header = () => {
         <ul className="header__nav__list">
           <li className="lang__switcher">
             {!showLanguageList ? (
-              <div onClick={handleShowLangFlags}> {t("generic.language")}</div>
+              <div className="header__nav__list__item">
+                <div
+                  className="header__link"
+                  onClick={handleShowLangFlags}
+                >
+                  {t("generic.language")}
+                </div>
+              </div>
             ) : (
               <div onClick={handleHideLangFlags}>
                 <LanguageSwitcher
@@ -178,26 +185,28 @@ const Header = () => {
             </p>
           </li>
           <li className="header__nav__list__item">
-            <select
-              className="portfolio__select"
-              onChange={handlePortfolioChange}
-              defaultValue=""
-            >
-              <option
-                value=""
-                disabled
+            <div className="header__link">
+              <select
+                className="portfolio__select"
+                onChange={handlePortfolioChange}
+                defaultValue=""
               >
-                {t("generic.select_portfolio_subject")}
-              </option>
-              {portfolioSubjects.map((item, index) => (
                 <option
-                  key={index}
-                  value={item.url}
+                  value=""
+                  disabled
                 >
-                  {item.subject}
+                  {t("generic.select_portfolio_subject")}
                 </option>
-              ))}
-            </select>
+                {portfolioSubjects.map((item, index) => (
+                  <option
+                    key={index}
+                    value={item.url}
+                  >
+                    {item.subject}
+                  </option>
+                ))}
+              </select>
+            </div>
           </li>
 
           <li className="header__nav__list__item">

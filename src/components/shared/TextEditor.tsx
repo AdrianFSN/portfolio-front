@@ -51,9 +51,24 @@ const TextEditor = ({ value, onChange }: TextEditorProps) => {
   return (
     <div>
       <div className="toolbar">
-        <button onClick={toggleBold}>B</button>
-        <button onClick={toggleItalic}>I</button>
-        <button onClick={toggleUnderline}>U</button>
+        <button
+          type="button"
+          onClick={toggleBold}
+        >
+          B
+        </button>
+        <button
+          type="button"
+          onClick={toggleItalic}
+        >
+          I
+        </button>
+        <button
+          type="button"
+          onClick={toggleUnderline}
+        >
+          U
+        </button>
       </div>
 
       <EditorContent

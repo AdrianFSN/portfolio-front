@@ -115,6 +115,7 @@
 }
 
 .header__nav__list__item .header__link:hover {
+  cursor: pointer;
   border-bottom: 1px solid var(--main-brand-color);
   border-bottom-width: 4px;
   animation: header__line 0.5s ease-in-out;
