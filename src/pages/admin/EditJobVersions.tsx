@@ -21,8 +21,6 @@ import { updateJobVersion } from "./adminService";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
 import TextEditor from "../../components/shared/TextEditor";
-import { resetJobDetail } from "../../store/slices/jobDetailSlice";
-import { resetJobExamples } from "../../store/slices/jobExamplesSlice";
 
 const EditJobVersions = () => {
   const { t } = useTranslation();
@@ -57,10 +55,6 @@ const EditJobVersions = () => {
     description: "",
     versionId: "",
     language: "",
-  });
-
-  useEffect(() => {
-    console.log("Esto es versionsData: ", versionsData);
   });
 
   useEffect(() => {
