@@ -21,6 +21,7 @@ import { updateJobVersion } from "./adminService";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
 import TextEditor from "../../components/shared/TextEditor";
+import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 
 const EditJobVersions = () => {
   const { t } = useTranslation();
@@ -136,6 +137,7 @@ const EditJobVersions = () => {
     event.preventDefault();
     setAlertMessage("");
     if (!error) {
+      dispatch(resetJobDetail());
       navigate(toEditPage);
     }
   };
