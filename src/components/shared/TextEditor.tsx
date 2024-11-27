@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 interface TextEditorProps {
   value: string;
   onChange: (value: string) => void;
+  name?: string;
 }
 
 const TextEditor = ({ value, onChange }: TextEditorProps) => {

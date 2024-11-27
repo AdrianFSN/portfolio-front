@@ -21,6 +21,8 @@ import { updateJobVersion } from "./adminService";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
 import TextEditor from "../../components/shared/TextEditor";
+import { resetJobDetail } from "../../store/slices/jobDetailSlice";
+import { resetJobExamples } from "../../store/slices/jobExamplesSlice";
 
 const EditJobVersions = () => {
   const { t } = useTranslation();
@@ -221,7 +223,7 @@ const EditJobVersions = () => {
                   onChange={(value) => {
                     setVersionsData((prev) => ({ ...prev, info: value }));
                   }}
-                  /* name="info" */
+                  name="info"
                   max-length={EXCERPT_MAX_LENGTH}
                 />
                 <p>{`${versionsData.info.length} / ${EXCERPT_MAX_LENGTH} ${t(
@@ -240,7 +242,7 @@ const EditJobVersions = () => {
                   onChange={(value) =>
                     setVersionsData((prev) => ({ ...prev, description: value }))
                   }
-                  /*  name="description" */
+                  name="description"
                   max-length={DESCRIPTION_MAX_LENGTH}
                 />
                 <p>{`${
