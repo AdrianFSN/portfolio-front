@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+
 import "./EditJob.css";
 import { useTranslation } from "react-i18next";
 import RegularButton from "../../components/shared/buttons/RegularButton";
@@ -21,6 +20,7 @@ import { AxiosError } from "axios";
 import { updateJobVersion } from "./adminService";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
+import TextEditor from "../../components/shared/TextEditor";
 
 const EditJobVersions = () => {
   const { t } = useTranslation();
@@ -55,6 +55,10 @@ const EditJobVersions = () => {
     description: "",
     versionId: "",
     language: "",
+  });
+
+  useEffect(() => {
+    console.log("Esto es versionsData: ", versionsData);
   });
 
   useEffect(() => {
@@ -110,16 +114,6 @@ const EditJobVersions = () => {
         [name]: value,
       };
     });
-  };
-
-  const handleQuillChange = (
-    field: keyof VersionDataInterface,
-    value: string
-  ) => {
-    setVersionsData((prevData) => ({
-      ...prevData,
-      [field]: value,
-    }));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -222,18 +216,12 @@ const EditJobVersions = () => {
                 >
                   <h4>{t("admin.job_excerpt")}</h4>
                 </label>
-                <ReactQuill
-                  theme="snow"
-                  className="form__input"
+                <TextEditor
                   value={versionsData.info}
-                  onChange={(value) => handleQuillChange("info", value)}
+                  onChange={(value) => {
+                    setVersionsData((prev) => ({ ...prev, info: value }));
+                  }}
                   /* name="info" */
-                  id="excerpt"
-                  placeholder={
-                    job.versions[0].info
-                      ? job.versions[0].info
-                      : t("admin.job_excerpt")
-                  }
                   max-length={EXCERPT_MAX_LENGTH}
                 />
                 <p>{`${versionsData.info.length} / ${EXCERPT_MAX_LENGTH} ${t(
@@ -247,17 +235,12 @@ const EditJobVersions = () => {
                 >
                   <h4>{t("admin.job_description")}</h4>
                 </label>
-                <ReactQuill
-                  className="form__input"
+                <TextEditor
                   value={versionsData.description}
-                  onChange={(value) => handleQuillChange("description", value)}
-                  /*  name="description" */
-                  id="description"
-                  placeholder={
-                    job.versions[0].description
-                      ? job.versions[0].description
-                      : t("admin.job_description")
+                  onChange={(value) =>
+                    setVersionsData((prev) => ({ ...prev, description: value }))
                   }
+                  /*  name="description" */
                   max-length={DESCRIPTION_MAX_LENGTH}
                 />
                 <p>{`${

@@ -18,7 +18,7 @@ const loginSlice = createSlice({
       state.loggedInState = action.payload;
     },
     resetLogin: (state) => {
-      state.loggedInState = loginInitialState.loggedInState;
+      state.loggedInState = false;
       state.message = loginInitialState.message;
       state.state = loginInitialState.state;
       state.loading = false;
