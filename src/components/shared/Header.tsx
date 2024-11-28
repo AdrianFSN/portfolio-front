@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import {
   ABOUT_ME_ROUTES_PATH,
   AUDIO_ROUTES_PATH,
-  AUTH_ROUTES_PATH,
+  CONTACT_ROUTES_PATH,
   DESIGN_ROUTES_PATH,
   DEVELOPMENT_ROUTES_PATH,
   LIVEOPS_ROUTES_PATH,
@@ -105,6 +105,7 @@ const Header = () => {
     event.preventDefault();
     logout();
     dispatch(resetLogin());
+    setShowBurgerBars(true);
   };
 
   const handlePortfolioChange = (
@@ -212,7 +213,7 @@ const Header = () => {
           <li className="header__nav__list__item">
             <RegularButton
               $skin="danger"
-              onClick={() => handleNavigateTo(AUTH_ROUTES_PATH)}
+              onClick={() => handleNavigateTo(CONTACT_ROUTES_PATH)}
             >
               {t("generic.contact")}
             </RegularButton>

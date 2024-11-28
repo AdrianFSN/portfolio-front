@@ -240,7 +240,7 @@ const EditJob = () => {
                   className="form__label"
                   htmlFor="category"
                 >
-                  <h4>{t("admin.category")}</h4>
+                  <h4>{t("generic.category")}</h4>
                 </label>
                 <select
                   className="form__select"
@@ -255,7 +255,7 @@ const EditJob = () => {
                       key={category}
                       value={category}
                     >
-                      {t(`admin.${category}`)}
+                      {t(`generic.${category}`)}
                     </option>
                   ))}
                 </select>

@@ -1,37 +1,29 @@
-import { useState } from "react";
-import "./EditJob.css";
+import { useEffect, useState } from "react";
+import "./ContactForm.css";
 import { useTranslation } from "react-i18next";
 import RegularButton from "../../components/shared/buttons/RegularButton";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import {
-  ALLOWED_AUDIO_TYPES,
-  ALLOWED_PICTURES_TYPES,
-  ALLOWED_VIDEO_TYPES,
-  AUDIOS_COLLECTION_FIELDS,
-  DESCRIPTION_MAX_LENGTH,
-  EDIT_ROUTES_PATH,
-  EXCERPT_MAX_LENGTH,
-  PICTURES_COLLECTION_FIELDS,
-  TITLE_MAX_LENGTH,
+  EMAIL_MAX_LENGTH,
+  MESSAGE_MAX_LENGTH,
+  NAME_MAX_LENGTH,
   VALID_CATEGORIES,
-  VIDEOS_COLLECTION_FIELDS,
 } from "../../utils/constants";
 import { useNavigate } from "react-router-dom";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
-import { createJob } from "../admin/adminService";
 import { AxiosError } from "axios";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
-import fileUploadValidator from "../../utils/filesUploadVallidator";
-import TextEditor from "../../components/shared/TextEditor";
+import { createNewMessage } from "../admin/contactMesagesService";
 
-const CreateJob = () => {
+const CreateNewMessage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const toEditPage = EDIT_ROUTES_PATH;
+  const toBackPage = -1;
   const [error, setError] = useState<AxiosError | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [disableSubmit, setDisableSubmit] = useState(true);
 
   interface ContactFormInterface {
     name: string;
@@ -53,12 +45,25 @@ const CreateJob = () => {
     answered: false,
   });
 
+  useEffect(() => {
+    if (
+      formData.name &&
+      formData.email &&
+      formData.opt_in &&
+      formData.content
+    ) {
+      setDisableSubmit(false);
+    } else {
+      setDisableSubmit(true);
+    }
+  }, [formData.name, formData.email, formData.opt_in, formData.content]);
+
   const handleFormOnChange = (
     event: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
-    const { name, value, type } = event.target;
+    const { name, type } = event.target;
 
     if (event.target instanceof HTMLSelectElement) {
       const selectedValues = Array.from(event.target.options)
@@ -68,6 +73,11 @@ const CreateJob = () => {
       setFormData((prevFormData) => ({
         ...prevFormData,
         [name]: selectedValues,
+      }));
+    } else if (type === "checkbox") {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: (event.target as HTMLInputElement).checked,
       }));
     } else {
       setFormData((prevFormData) => ({
@@ -82,7 +92,7 @@ const CreateJob = () => {
 
     try {
       setIsLoading(true);
-      const response = await createJob(formData);
+      const response = await createNewMessage(formData);
       setAlertMessage(
         (response as unknown as StandardResponseInterface).message
       );
@@ -98,19 +108,16 @@ const CreateJob = () => {
   const handleCloseAlert = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     setAlertMessage("");
-    if (!error) {
-      navigate(toEditPage);
-    }
   };
 
-  const handleToEditPage = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleToBackPage = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    navigate(toEditPage);
+    navigate(toBackPage);
   };
 
   return (
     <main className="edit__job__form">
-      <h1>{t("admin.create_job")}</h1>
+      <h1>{t("contact.write_a_message_title")}</h1>
       {alertMessage && (
         <CustomAlert
           type={error ? "error" : "success"}
@@ -126,158 +133,82 @@ const CreateJob = () => {
       >
         <fieldset className="form__fieldset">
           <legend>
-            <h3>{t("admin.descriptive_info")}</h3>
+            <h3>{t("contact.your_data")}</h3>
           </legend>
           <div className="form__fieldset__field">
             <label
               className="form__label"
-              htmlFor="title"
+              htmlFor="name"
             >
-              <h4>{t("admin.job_title")}</h4>
+              <h4>{t("contact.name")}</h4>
             </label>
             <input
               className="form__input"
               type="text"
-              value={formData.title}
+              value={formData.name}
               onChange={handleFormOnChange}
-              name="title"
-              id="title"
-              placeholder={t("admin.job_title")}
-              max-length={TITLE_MAX_LENGTH}
+              name="name"
+              id="name"
+              placeholder={t("contact.your_name")}
+              max-length={NAME_MAX_LENGTH}
             />
-            <p>{`${formData.title.length} / ${TITLE_MAX_LENGTH} ${t(
-              "generic.characters"
-            )}`}</p>
           </div>
           <div className="form__fieldset__field">
             <label
               className="form__label"
-              htmlFor="excerpt"
+              htmlFor="email"
             >
-              <h4>{t("admin.job_excerpt")}</h4>
+              <h4>{t("contact.email")}</h4>
             </label>
-            <TextEditor
-              value={formData.info}
-              onChange={(value) => {
-                setFormData((prev) => ({ ...prev, info: value }));
-              }}
-              name="info"
-              max-length={EXCERPT_MAX_LENGTH}
+            <input
+              className="form__input"
+              type="text"
+              value={formData.email}
+              onChange={handleFormOnChange}
+              name="email"
+              id="email"
+              placeholder={t("contact.your_email")}
+              max-length={EMAIL_MAX_LENGTH}
             />
-            <p>{`${formData.info.length} / ${EXCERPT_MAX_LENGTH} ${t(
-              "generic.characters"
-            )}`}</p>
           </div>
           <div className="form__fieldset__field">
             <label
               className="form__label"
-              htmlFor="description"
+              htmlFor="content"
             >
-              <h4>{t("admin.job_description")}</h4>
+              <h4>{t("contact.message")}</h4>
             </label>
-            <TextEditor
-              value={formData.description}
-              onChange={(value) =>
-                setFormData((prev) => ({ ...prev, description: value }))
-              }
-              name="description"
-              max-length={DESCRIPTION_MAX_LENGTH}
+            <textarea
+              className="form__textarea"
+              value={formData.content}
+              onChange={handleFormOnChange}
+              name="content"
+              id="content"
+              placeholder={t("contact.your_message")}
+              max-length={MESSAGE_MAX_LENGTH}
             />
-            <p>{`${formData.description.length} / ${DESCRIPTION_MAX_LENGTH} ${t(
+            <p>{`${formData.content.length} / ${MESSAGE_MAX_LENGTH} ${t(
               "generic.characters"
             )}`}</p>
           </div>
         </fieldset>
         <fieldset className="form__fieldset">
           <legend>
-            <h3>{t("admin.context_info")}</h3>
+            <h3>{t("contact.subject_of_the_message")}</h3>
           </legend>
           <div className="form__fieldset__field">
             <label
               className="form__label"
-              htmlFor="launchPeriod"
+              htmlFor="subject"
             >
-              <h4>{t("admin.launch_period")}</h4>
-            </label>
-            <input
-              className="form__input"
-              type="text"
-              value={formData.launchPeriod}
-              onChange={handleFormOnChange}
-              name="launchPeriod"
-              id="launchPeriod"
-              placeholder={t("admin.launch_period")}
-            />
-          </div>
-          <div className="form__fieldset__field">
-            <label
-              className="form__label"
-              htmlFor="customer"
-            >
-              <h4>{t("admin.customer")}</h4>
-            </label>
-            <input
-              className="form__input"
-              type="text"
-              value={formData.customer}
-              onChange={handleFormOnChange}
-              name="customer"
-              id="customer"
-              placeholder={t("admin.customer")}
-            />
-          </div>
-          <div className="form__fieldset__field">
-            <label
-              className="form__label"
-              htmlFor="linkToUrl"
-            >
-              <h4>{t("admin.link_to_url")}</h4>
-            </label>
-            <input
-              className="form__input"
-              type="text"
-              value={formData.linkToUrl}
-              onChange={handleFormOnChange}
-              name="linkToUrl"
-              id="linkToUrl"
-              placeholder={t("admin.link_to_url")}
-            />
-          </div>
-          <div className="form__fieldset__field">
-            <label
-              className="form__label"
-              htmlFor="linkToGitHub"
-            >
-              <h4>{t("admin.link_to_github")}</h4>
-            </label>
-            <input
-              className="form__input"
-              type="text"
-              value={formData.linkToGitHub}
-              onChange={handleFormOnChange}
-              name="linkToGitHub"
-              id="linkToGitHub"
-              placeholder={t("admin.link_to_github")}
-            />
-          </div>
-        </fieldset>
-        <fieldset className="form__fieldset">
-          <legend>
-            <h3>{t("admin.job_type")}</h3>
-          </legend>
-          <div className="form__fieldset__field">
-            <label
-              className="form__label"
-              htmlFor="category"
-            >
-              <h4>{t("admin.category")}</h4>
+              <h4>{t("generic.category")}</h4>
             </label>
             <select
               className="form__select"
-              value={formData.category}
+              value={formData.subject}
               onChange={handleFormOnChange}
-              name="category"
-              id="category"
+              name="subject"
+              id="subject"
               multiple
             >
               {VALID_CATEGORIES.map((category) => (
@@ -285,108 +216,32 @@ const CreateJob = () => {
                   key={category}
                   value={category}
                 >
-                  {t(`admin.${category}`)}
+                  {t(`generic.${category}`)}
                 </option>
               ))}
             </select>
           </div>
-          <div className="form__fieldset__field">
-            <label
-              className="form__label"
-              htmlFor="technologies"
-            >
-              <h4>{t("admin.technologies")}</h4>
-            </label>
+        </fieldset>
+        <div className="form__accept">
+          <label
+            className="form__label"
+            htmlFor="opt_in"
+          >
             <input
-              className="form__input"
-              type="text"
-              value={
-                Array.isArray(formData.technologies)
-                  ? formData.technologies.join(", ")
-                  : formData.technologies
-              }
+              type="checkbox"
+              name="opt_in"
+              id="opt_in"
               onChange={handleFormOnChange}
-              name="technologies"
-              id="technologies"
-              placeholder={t("admin.technologies")}
             />
-          </div>
-        </fieldset>
-        <fieldset className="form__fieldset">
-          <legend>
-            <h3>{t("admin.job_files")}</h3>
-          </legend>
-          {jobFiles.map((fileItem) => (
-            <div
-              className="form__fieldset__field "
-              key={fileItem.key}
-            >
-              <div className="file__section__container">
-                <label
-                  className="form__label"
-                  htmlFor={fileItem.key}
-                >
-                  <h4>{fileItem.title}</h4>
-                  {fileItem.preview && (
-                    <div className="form__file__is__uploaded">
-                      {fileItem.preview.startsWith("blob:") &&
-                      fileItem.current &&
-                      fileItem.current.endsWith(".mp4") ? (
-                        <video
-                          controls
-                          src={fileItem.preview}
-                        />
-                      ) : fileItem.preview.startsWith("blob:") &&
-                        fileItem.current &&
-                        fileItem.current.endsWith(".mp3") ? (
-                        <audio
-                          controls
-                          src={fileItem.preview}
-                        />
-                      ) : (
-                        <img
-                          src={fileItem.preview}
-                          alt={`${fileItem.title} preview`}
-                        />
-                      )}
-                      <p
-                        data-name={fileItem.key}
-                        onClick={handleResetUploadFile}
-                        className="form__cancel__upload"
-                      >
-                        {t("generic.cancel_upload")}
-                      </p>
-                    </div>
-                  )}
-                </label>
-
-                {!fileItem.current && (
-                  <>
-                    <input
-                      className="form__input form__file"
-                      type="file"
-                      id={fileItem.key}
-                      onChange={handleFormOnChange}
-                      name={fileItem.key}
-                      style={{ display: "none" }}
-                    />
-                    <label
-                      htmlFor={fileItem.key}
-                      className="file-upload-label form__file__button"
-                    >
-                      {t("generic.choose_a_file")}
-                    </label>
-                  </>
-                )}
-              </div>
-            </div>
-          ))}
-        </fieldset>
+            <p>{t("contact.accept_save_contact_data")}</p>
+          </label>
+        </div>
 
         <div className="form__submit__cancel__buttons">
           <RegularButton
             className="btn form__button"
             type="submit"
+            disabled={disableSubmit}
           >
             {isLoading ? (
               <CustomPulseLoader
@@ -399,10 +254,11 @@ const CreateJob = () => {
           </RegularButton>
           <RegularButton
             className="btn form__button"
+            type="button"
             $skin="danger"
-            onClick={handleToEditPage}
+            onClick={handleToBackPage}
           >
-            {t("generic.cancel")}
+            {t("generic.back")}
           </RegularButton>
         </div>
       </form>
@@ -410,4 +266,4 @@ const CreateJob = () => {
   );
 };
 
-export default CreateJob;
+export default CreateNewMessage;

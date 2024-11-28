@@ -64,7 +64,7 @@ export const ALLOWED_FILES_TYPES = [
   "video/mp4",
 ];
 
-// Valdiation lists
+// Validation lists
 export const VALID_CATEGORIES = [
   "development",
   "audio",
@@ -95,3 +95,11 @@ export const AUDIOS_ROUTES_URI = "audios";
 export const TITLE_MAX_LENGTH = 50;
 export const EXCERPT_MAX_LENGTH = 100;
 export const DESCRIPTION_MAX_LENGTH = 500;
+
+//Messages forms
+export const NAME_MAX_LENGTH = 50;
+export const EMAIL_MAX_LENGTH = 50;
+export const MESSAGE_MAX_LENGTH = 500;
+
+//Contact paths and URI:
+export const CONTACT_ROUTES_PATH = "/contact";

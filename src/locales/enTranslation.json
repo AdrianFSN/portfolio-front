@@ -11,13 +11,6 @@
   },
   "admin": {
     "title": "Admin",
-    "development": "Development",
-    "audio": "Audio",
-    "liveOps": "LiveOps",
-    "design": "Design",
-    "photography": "Photography",
-    "video": "Video",
-    "writing": "Writing",
     "edit_job": "Edit Job",
     "job_title": "Job Title",
     "job_excerpt": "Job Excerpt",
@@ -28,7 +21,6 @@
     "link_to_url": "Project's URL",
     "link_to_github": "Link to Github",
     "job_type": "Job type",
-    "category": "Category",
     "technologies": "Technologies",
     "job_files": "Job files",
     "main_picture": "Main Picture",
@@ -72,7 +64,15 @@
     "contact": "Contact",
     "page_not_found": "Page not found",
     "language": "Language",
-    "select_portfolio_subject": "Portfolio"
+    "select_portfolio_subject": "Portfolio",
+    "category": "Category",
+    "development": "Development",
+    "audio": "Audio",
+    "liveOps": "LiveOps",
+    "design": "Design",
+    "photography": "Photography",
+    "video": "Video",
+    "writing": "Writing"
   },
   "job": {
     "job_not_found": "Could not find the job you requested"
@@ -82,5 +82,16 @@
     "not_valid_picture_file": "Image files can only be jpg, jpeg, png or gif",
     "not_valid_video_file": "Video files can only be mp4",
     "not_valid_file": "Images can only be jpg, jpeg, png or gif. Audios, only mp3, and videos, just mp4"
+  },
+  "contact": {
+    "write_a_message_title": "Write a message",
+    "your_data": "Your data",
+    "name": "Name",
+    "your_name": "Your name",
+    "email": "Email",
+    "your_email": "Your email",
+    "message": "Message",
+    "your_message": "Your message",
+    "subject_of_the_message": "Subject of your message"
   }
 }

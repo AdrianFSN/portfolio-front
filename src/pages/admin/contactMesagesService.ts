@@ -13,6 +13,11 @@ interface FetchFormDataParams {
   answered: boolean;
 }
 
+interface FetchUpdateMessageStatusParams {
+  read: boolean;
+  answered: boolean;
+}
+
 export const createNewMessage = async (
   formData: FetchFormDataParams
 ): Promise<AxiosResponse<StandardResponseInterface>> => {
@@ -39,7 +44,7 @@ export const getAllMessages = async (): Promise<
 
 export const updateMessageStatus = async (
   messageId: string,
-  formData: FetchFormDataParams
+  formData: FetchUpdateMessageStatusParams
 ): Promise<AxiosResponse<StandardResponseInterface>> => {
   try {
     const url = `${MESSAGES_API_URI}/${messageId}`;

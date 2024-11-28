@@ -435,7 +435,7 @@ const CreateJob = () => {
               className="form__label"
               htmlFor="category"
             >
-              <h4>{t("admin.category")}</h4>
+              <h4>{t("generic.category")}</h4>
             </label>
             <select
               className="form__select"
@@ -450,7 +450,7 @@ const CreateJob = () => {
                   key={category}
                   value={category}
                 >
-                  {t(`admin.${category}`)}
+                  {t(`generic.${category}`)}
                 </option>
               ))}
             </select>

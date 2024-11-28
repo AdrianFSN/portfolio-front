@@ -13,6 +13,7 @@ import {
   AUDIO_ROUTES_PATH,
   AUDIOS_ROUTES_URI,
   AUTH_ROUTES_PATH,
+  CONTACT_ROUTES_PATH,
   CREATE_ROUTES_URI,
   DESIGN_ROUTES_PATH,
   DEVELOPMENT_ROUTES_PATH,
@@ -31,6 +32,7 @@ import CreateJob from "../pages/admin/CreateJob";
 import RequireAuth from "../components/RequireAuth";
 import NotFound from "../components/shared/NotFound";
 import PortfolioSubject from "../pages/PortfolioSubject/PortfolioSubject";
+import CreateNewMessage from "../pages/contact/ContactForm";
 const subjectsPaths = [
   DEVELOPMENT_ROUTES_PATH,
   AUDIO_ROUTES_PATH,
@@ -48,6 +50,10 @@ const RootRouter = () => {
       <Route
         path={ABOUT_ME_ROUTES_PATH}
         element={<Bio />}
+      />
+      <Route
+        path={CONTACT_ROUTES_PATH}
+        element={<CreateNewMessage />}
       />
 
       {VALID_CATEGORIES.map((category, index) => {
