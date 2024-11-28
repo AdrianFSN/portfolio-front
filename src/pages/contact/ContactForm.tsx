@@ -15,6 +15,7 @@ import { AxiosError } from "axios";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
 import { createNewMessage } from "../admin/contactMesagesService";
+import TextEditor from "../../components/shared/TextEditor";
 
 const CreateNewMessage = () => {
   const { t } = useTranslation();
@@ -178,13 +179,12 @@ const CreateNewMessage = () => {
             >
               <h4>{t("contact.message")}</h4>
             </label>
-            <textarea
-              className="form__textarea"
+            <TextEditor
               value={formData.content}
-              onChange={handleFormOnChange}
+              onChange={(value) => {
+                setFormData((prev) => ({ ...prev, content: value }));
+              }}
               name="content"
-              id="content"
-              placeholder={t("contact.your_message")}
               max-length={MESSAGE_MAX_LENGTH}
             />
             <p>{`${formData.content.length} / ${MESSAGE_MAX_LENGTH} ${t(
