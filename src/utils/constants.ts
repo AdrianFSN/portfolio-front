@@ -103,3 +103,4 @@ export const MESSAGE_MAX_LENGTH = 500;
 
 //Contact paths and URI:
 export const CONTACT_ROUTES_PATH = "/contact";
+export const MESSAGES_ROUTES_PATH = "/messages";

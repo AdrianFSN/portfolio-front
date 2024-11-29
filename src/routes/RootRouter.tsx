@@ -20,6 +20,7 @@ import {
   EDIT_ROUTES_PATH,
   JOB_ROUTES_URI,
   LIVEOPS_ROUTES_PATH,
+  MESSAGES_ROUTES_PATH,
   PHOTOGRAPHY_ROUTES_PATH,
   PICTURES_ROUTES_URI,
   VALID_CATEGORIES,
@@ -33,6 +34,7 @@ import RequireAuth from "../components/RequireAuth";
 import NotFound from "../components/shared/NotFound";
 import PortfolioSubject from "../pages/PortfolioSubject/PortfolioSubject";
 import CreateNewMessage from "../pages/contact/ContactForm";
+import MessagesList from "../pages/admin/GetMessages";
 const subjectsPaths = [
   DEVELOPMENT_ROUTES_PATH,
   AUDIO_ROUTES_PATH,
@@ -123,6 +125,19 @@ const RootRouter = () => {
         <Route
           path={`${JOB_ROUTES_URI}/:jobId/${AUDIOS_ROUTES_URI}/:collectionId`}
           element={<EditJobAudios />}
+        />
+      </Route>
+      <Route
+        path={MESSAGES_ROUTES_PATH}
+        element={
+          <RequireAuth>
+            <Outlet />
+          </RequireAuth>
+        }
+      >
+        <Route
+          index
+          element={<MessagesList />}
         />
       </Route>
     </Routes>

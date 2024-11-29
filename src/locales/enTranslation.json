@@ -92,6 +92,9 @@
     "your_email": "Your email",
     "message": "Message",
     "your_message": "Your message",
-    "subject_of_the_message": "Subject of your message"
+    "subject_of_the_message": "Subject of your message",
+    "read_messages_intro": "Check your messages",
+    "read_mmesages": "Read messages",
+    "mailbox": "Mailbox"
   }
 }
