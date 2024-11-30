@@ -49,7 +49,7 @@ export const updateMessageStatus = async (
   try {
     const url = `${MESSAGES_API_URI}/${messageId}`;
     const response = await client.put(url, formData);
-
+    console.log("Esto es formData en update Message que mando: ", formData);
     return response;
   } catch (error) {
     throw error as AxiosError;

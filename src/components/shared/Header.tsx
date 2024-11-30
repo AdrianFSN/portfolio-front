@@ -10,6 +10,7 @@ import {
   DESIGN_ROUTES_PATH,
   DEVELOPMENT_ROUTES_PATH,
   LIVEOPS_ROUTES_PATH,
+  MESSAGES_ROUTES_PATH,
   PHOTOGRAPHY_ROUTES_PATH,
   VIDEO_ROUTES_PATH,
   WRITING_ROUTES_PATH,
@@ -29,6 +30,7 @@ const Header = () => {
   const [showBurgerBars, setShowBurgerBars] = useState(true);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [showLogout, setShowLogout] = useState(false);
+  const [showReadMessages, setShowReadMessages] = useState(false);
   const [showLanguageList, setShowLanguageList] = useState(false);
   const isLoggedIn = useSelector(getIsLoggedSelector);
   const portfolioSubjects = [
@@ -65,8 +67,10 @@ const Header = () => {
   useEffect(() => {
     if (isLoggedIn) {
       setShowLogout(true);
+      setShowReadMessages(true);
     } else {
       setShowLogout(false);
+      setShowReadMessages(false);
     }
   }, [isLoggedIn]);
 
@@ -105,6 +109,11 @@ const Header = () => {
     event.preventDefault();
     logout();
     dispatch(resetLogin());
+    setShowBurgerBars(true);
+  };
+  const handleToMessages = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(MESSAGES_ROUTES_PATH);
     setShowBurgerBars(true);
   };
 
@@ -222,6 +231,13 @@ const Header = () => {
             <li className="header__nav__list__item">
               <RegularButton onClick={handleLogout}>
                 {t("admin.logout")}
+              </RegularButton>
+            </li>
+          )}
+          {showReadMessages && (
+            <li className="header__nav__list__item">
+              <RegularButton onClick={handleToMessages}>
+                {t("admin.read")}
               </RegularButton>
             </li>
           )}

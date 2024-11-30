@@ -21,6 +21,9 @@
 .unchecked {
   color: var(--main-brand-color);
 }
+.checked {
+  color: green;
+}
 
 .message_check_list_container {
   display: flex;
