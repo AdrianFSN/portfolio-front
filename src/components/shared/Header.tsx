@@ -35,31 +35,31 @@ const Header = () => {
   const isLoggedIn = useSelector(getIsLoggedSelector);
   const portfolioSubjects = [
     {
-      subject: t("admin.development"),
+      subject: t("generic.development"),
       url: DEVELOPMENT_ROUTES_PATH,
     },
     {
-      subject: t("admin.liveOps"),
+      subject: t("generic.liveOps"),
       url: LIVEOPS_ROUTES_PATH,
     },
     {
-      subject: t("admin.writing"),
+      subject: t("generic.writing"),
       url: WRITING_ROUTES_PATH,
     },
     {
-      subject: t("admin.audio"),
+      subject: t("generic.audio"),
       url: AUDIO_ROUTES_PATH,
     },
     {
-      subject: t("admin.video"),
+      subject: t("generic.video"),
       url: VIDEO_ROUTES_PATH,
     },
     {
-      subject: t("admin.design"),
+      subject: t("generic.design"),
       url: DESIGN_ROUTES_PATH,
     },
     {
-      subject: t("admin.photography"),
+      subject: t("generic.photography"),
       url: PHOTOGRAPHY_ROUTES_PATH,
     },
   ];

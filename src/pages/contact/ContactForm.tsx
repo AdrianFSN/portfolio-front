@@ -98,6 +98,15 @@ const CreateNewMessage = () => {
         (response as unknown as StandardResponseInterface).message
       );
       setError(null);
+      setFormData({
+        name: "",
+        email: "",
+        subject: [],
+        content: "",
+        opt_in: false,
+        read: false,
+        answered: false,
+      });
     } catch (error) {
       setError(error as AxiosError);
       setAlertMessage(extractErrorMessage(error, t));
@@ -232,6 +241,7 @@ const CreateNewMessage = () => {
               name="opt_in"
               id="opt_in"
               onChange={handleFormOnChange}
+              checked={formData.opt_in}
             />
             <p>{t("contact.accept_save_contact_data")}</p>
           </label>

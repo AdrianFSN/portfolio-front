@@ -1,3 +1,4 @@
+import "./TextEditor.css";
 import { Editor, EditorContent } from "@tiptap/react";
 import Underline from "@tiptap/extension-underline";
 import StarterKit from "@tiptap/starter-kit";
@@ -41,10 +42,6 @@ const TextEditor = ({ value, onChange }: TextEditorProps) => {
     editor?.chain().focus().toggleBold().run();
   };
 
-  const toggleItalic = () => {
-    editor?.chain().focus().toggleItalic().run();
-  };
-
   const toggleUnderline = () => {
     editor?.chain().focus().toggleUnderline().run();
   };
@@ -52,24 +49,22 @@ const TextEditor = ({ value, onChange }: TextEditorProps) => {
   return (
     <div>
       <div className="toolbar">
-        <button
-          type="button"
-          onClick={toggleBold}
-        >
-          B
-        </button>
-        <button
-          type="button"
-          onClick={toggleItalic}
-        >
-          I
-        </button>
-        <button
-          type="button"
-          onClick={toggleUnderline}
-        >
-          U
-        </button>
+        <div className="toolbar__buttons__container">
+          <button
+            className="toolbar__button"
+            type="button"
+            onClick={toggleBold}
+          >
+            B
+          </button>
+          <button
+            className="toolbar__button"
+            type="button"
+            onClick={toggleUnderline}
+          >
+            U
+          </button>
+        </div>
       </div>
 
       <EditorContent

@@ -40,7 +40,8 @@
     "job_description": "Job description",
     "create_job": "Create a job",
     "new_job_intro": "Have a new job ready? Promote it!",
-    "logout": "Logout"
+    "logout": "Logout",
+    "read": "Read mail"
   },
   "generic": {
     "empty_section": "This section is empty",
@@ -95,6 +96,7 @@
     "subject_of_the_message": "Subject of your message",
     "read_messages_intro": "Check your messages",
     "read_mmesages": "Read messages",
-    "mailbox": "Mailbox"
+    "mailbox": "Mailbox",
+    "accept_save_contact_data": "You agree on saving your name, email and content of your message for the use of the service"
   }
 }

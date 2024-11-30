@@ -1,36 +1,28 @@
 {
   "bio": {
     "title": "Bio",
-    "introduction": "Je m'appelle Adrián Sotés, d'où A S, pour finir par 'A ese!' Parce que je veux que vous me choisissiez pour travailler ensemble sur vos projets. Je suis créateur de contenu, développeur web full stack junior et expert en ludification.",
-    "career": "J'ai consacré une grande partie de ma carrière professionnelle à développer des communautés virtuelles. Je suis titulaire d'un diplôme en Communication Audiovisuelle. Mon désir de continuer à grandir professionnellement dans tous les domaines créatifs m'a amené à étudier le design, le community management, le son, l'harmonie moderne et, maintenant, la programmation et le développement web.",
-    "goal": "Mon objectif est de comprendre tous les profils à partir desquels aborder le développement d'un contenu ; ainsi, parvenir à ce qu'il fonctionne pour le but pour lequel il a été conçu : le plan d'affaires d'une entreprise, l'art, le divertissement... Les motivations sont infinies. Quelle est la vôtre ?"
+    "introduction": "Je m'appelle Adrián Sotés, d'où A S, pour arriver à 'A ese!' Parce que je veux que tu me choisisses pour qu'on travaille ensemble sur tes projets. Je suis créateur de contenu, développeur web full stack junior, et expert en gamification.",
+    "career": "J'ai consacré une grande partie de ma carrière professionnelle au développement de communautés virtuelles. J'ai un diplôme en Communication Audiovisuelle. Mon envie de continuer à grandir professionnellement dans toutes sortes de domaines créatifs m'a amené à étudier le design, la gestion de communauté, le son, l'harmonie moderne, et maintenant, la programmation et le développement web.",
+    "goal": "Mon objectif est de comprendre tous les profils à partir desquels on peut aborder le développement de contenu, afin d'obtenir une fonctionnalité adaptée au but pour lequel il a été conçu : un plan d'affaires, de l'art, du divertissement... Les motivations sont infinies. Quelle est la tienne ?"
   },
   "login": {
-    "login": "Se connecter",
-    "already_signed_in": "Tu es connecté en tant que {{username}}"
+    "login": "Connexion",
+    "already_signed_in": "Tu es connecté(e) en tant que {{username}}"
   },
   "admin": {
     "title": "Admin",
-    "development": "Développement",
-    "audio": "Audio",
-    "liveOps": "Opérations en direct",
-    "design": "Design",
-    "photography": "Photographie",
-    "video": "Vidéo",
-    "writing": "Écriture",
-    "edit_job": "Modifier le job",
-    "job_title": "Titre du job",
-    "job_excerpt": "Extrait du job",
+    "edit_job": "Modifier le projet",
+    "job_title": "Titre du projet",
+    "job_excerpt": "Extrait du projet",
     "descriptive_info": "Infos descriptives",
     "context_info": "Contexte",
     "launch_period": "Période de lancement",
-    "customer": "Client",
+    "customer": "client",
     "link_to_url": "URL du projet",
     "link_to_github": "Lien vers Github",
-    "job_type": "Type de job",
-    "category": "Catégorie",
+    "job_type": "Type de projet",
     "technologies": "Technologies",
-    "job_files": "Fichiers du job",
+    "job_files": "Fichiers du projet",
     "main_picture": "Image principale",
     "picture2": "Image 2",
     "picture3": "Image 3",
@@ -41,17 +33,19 @@
     "main_audio": "Audio principal",
     "audio2": "Audio 2",
     "delete_current_file": "Supprimer le fichier actuel",
-    "edit_job_version": "Modifier la version du job",
-    "edit_job_pictures": "Modifier les images du job",
-    "edit_job_videos": "Modifier les vidéos du job",
-    "edit_job_audios": "Modifier les audios du job",
-    "job_description": "Description du job",
-    "create_job": "Créer un job",
-    "new_job_intro": "Un nouveau job prêt ? Fais-en la promo !"
+    "edit_job_version": "Modifier la version du projet",
+    "edit_job_pictures": "Modifier les images du projet",
+    "edit_job_videos": "Modifier les vidéos du projet",
+    "edit_job_audios": "Modifier les audios du projet",
+    "job_description": "Description du projet",
+    "create_job": "Créer un projet",
+    "new_job_intro": "Tu as un nouveau projet prêt ? Fais-en la promo !",
+    "logout": "Déconnexion",
+    "read": "Lire les mails"
   },
   "generic": {
     "empty_section": "Cette section est vide",
-    "confirm_deletion": "T'es sûr de vouloir supprimer ça ?",
+    "confirm_deletion": "Es-tu sûr(e) de vouloir supprimer ça ?",
     "cancel": "Annuler",
     "yes": "Oui",
     "characters": "caractères",
@@ -59,7 +53,7 @@
     "choose_a_file": "Choisis un fichier",
     "current": "Actuel",
     "submit": "Envoyer",
-    "uploaded_file": "Tu es en train de sauvegarder ce nouveau fichier",
+    "uploaded_file": "Tu es en train d'enregistrer ce nouveau fichier",
     "cancel_upload": "Annuler l'envoi",
     "back": "Retour",
     "switch_language_to": "Changer la langue en",
@@ -67,19 +61,42 @@
     "date": "Date",
     "page": "Page",
     "of": "de",
-    "jobs_collection": "Travaux réalisés",
+    "jobs_collection": "Collection de projets",
     "contact": "Contact",
-    "logout": "Logout",
     "page_not_found": "Page non trouvée",
-    "language": "Langue"
+    "language": "Langue",
+    "select_portfolio_subject": "Portfolio",
+    "category": "Catégorie",
+    "development": "Développement",
+    "audio": "Audio",
+    "liveOps": "LiveOps",
+    "design": "Design",
+    "photography": "Photographie",
+    "video": "Vidéo",
+    "writing": "Écriture"
   },
   "job": {
-    "job_not_found": "On n'a pas trouvé le job que tu cherches"
+    "job_not_found": "Impossible de trouver le projet demandé"
   },
   "errors": {
-    "not_valid_audio_file": "Les fichiers audio ne peuvent être que des mp3",
-    "not_valid_picture_file": "Les fichiers image ne peuvent être que des jpg, jpeg, png ou gif",
-    "not_valid_video_file": "Les fichiers vidéo ne peuvent être que des mp4",
-    "not_valid_file": "Les images ne peuvent être que des jpg, jpeg, png ou gif. Les audios, uniquement en mp3, et les vidéos, seulement en mp4"
+    "not_valid_audio_file": "Les fichiers audio doivent être au format mp3",
+    "not_valid_picture_file": "Les images doivent être au format jpg, jpeg, png ou gif",
+    "not_valid_video_file": "Les vidéos doivent être au format mp4",
+    "not_valid_file": "Les images doivent être au format jpg, jpeg, png ou gif. Les audios uniquement en mp3, et les vidéos seulement en mp4"
+  },
+  "contact": {
+    "write_a_message_title": "Écris un message",
+    "your_data": "Tes infos",
+    "name": "Nom",
+    "your_name": "Ton nom",
+    "email": "Email",
+    "your_email": "Ton email",
+    "message": "Message",
+    "your_message": "Ton message",
+    "subject_of_the_message": "Sujet de ton message",
+    "read_messages_intro": "Vérifie tes messages",
+    "read_mmesages": "Lire les messages",
+    "mailbox": "Boîte de réception",
+    "accept_save_contact_data": "Tu acceptes que ton nom, ton email et le contenu de ton message soient enregistrés pour l'utilisation du service"
   }
 }

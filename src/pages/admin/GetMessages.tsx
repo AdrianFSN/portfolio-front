@@ -23,9 +23,6 @@ const MessagesList = () => {
   const [alertMessage, setAlertMessage] = useState("");
 
   const [refreshList, setRefreshList] = useState(true);
-  useEffect(() => {
-    console.log("Esto es refreshList: ", refreshList);
-  }, [refreshList]);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -69,7 +66,7 @@ const MessagesList = () => {
       {isLoading && (
         <CustomPulseLoader
           isLoading={isLoading}
-          $customHeight="100%"
+          $customHeight="200px"
         />
       )}
       {isLogged && messagesList && messagesList.length > 0 ? (
@@ -90,6 +87,7 @@ const MessagesList = () => {
         <RegularButton
           $skin="danger"
           onClick={() => navigate(toBackPage)}
+          className="mail_box_back"
         >
           {t("generic.back")}
         </RegularButton>
