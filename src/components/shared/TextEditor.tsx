@@ -12,6 +12,8 @@ interface TextEditorProps {
 
 const TextEditor = ({ value, onChange }: TextEditorProps) => {
   const [editor, setEditor] = useState<Editor | null>(null);
+  const [focusB, setFocusB] = useState(false);
+  const [focusU, setFocusU] = useState(false);
 
   useEffect(() => {
     const newEditor = new Editor({
@@ -51,16 +53,22 @@ const TextEditor = ({ value, onChange }: TextEditorProps) => {
       <div className="toolbar">
         <div className="toolbar__buttons__container">
           <button
-            className="toolbar__button"
+            className={`toolbar__button ${focusB ? "focused" : ""}`}
             type="button"
-            onClick={toggleBold}
+            onClick={() => {
+              setFocusB(!focusB);
+              toggleBold();
+            }}
           >
             B
           </button>
           <button
-            className="toolbar__button"
+            className={`toolbar__button ${focusU ? "focused" : ""}`}
             type="button"
-            onClick={toggleUnderline}
+            onClick={() => {
+              setFocusU(!focusU);
+              toggleUnderline();
+            }}
           >
             U
           </button>

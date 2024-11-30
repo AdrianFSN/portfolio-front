@@ -3,6 +3,14 @@
   border: 1px dotted var(--main-text-color);
   font-weight: bolder;
 }
+.toolbar__button.focused {
+  background: var(--main-text-color);
+  color: var(--secondary-text-color);
+}
+.toolbar__button:active {
+  background: var(--main-text-color);
+  color: var(--secondary-text-color);
+}
 
 .toolbar__buttons__container {
   display: flex;
