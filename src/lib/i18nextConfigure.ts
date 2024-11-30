@@ -5,7 +5,7 @@ import enTranslations from "../locales/enTranslation.json";
 import esTranslations from "../locales/esTranslation.json";
 import frTranslations from "../locales/frTranslation.json";
 
-const languageCookie = Cookies.get("portfolio-AS-locale") || "en";
+const languageCookie = Cookies.get("X-portfolio-AS-locale") || "en";
 
 i18n.use(initReactI18next).init({
   resources: {
