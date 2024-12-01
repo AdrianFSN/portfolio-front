@@ -47,7 +47,7 @@ const PortfolioSubject: React.FC<JobPagesProps> = ({ category }) => {
 
   useEffect(() => {
     dispatch(getJobsCarousselThunk({ category }));
-  }, [category, dispatch]);
+  }, [category, dispatch, i18n.language]);
 
   useEffect(() => {
     if (category) {
@@ -68,7 +68,7 @@ const PortfolioSubject: React.FC<JobPagesProps> = ({ category }) => {
 
   return (
     <main className="porfolio__main">
-      <h1>{t(`admin.${category}`)}</h1>
+      <h1>{t(`generic.${category}`)}</h1>
       {jobsCaroussel && jobsCaroussel.length > 0 ? (
         <section className="caroussel">
           <JobsCaroussel

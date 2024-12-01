@@ -1,5 +1,3 @@
-import ReactMarkdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
 import { resetJobExamples } from "../../store/slices/jobExamplesSlice";
 import launchPeriodFormatter from "../../utils/launchPeriodFormatter";
+import TextReader from "../../components/shared/TextReader";
 
 const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
   const { t } = useTranslation();
@@ -149,9 +148,7 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
                     <strong>{t("generic.date")} </strong>{" "}
                     {launchPeriodFormatter(jobExample.launchPeriod)}
                   </p>
-                  <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-                    {jobExample.versions[0].info}
-                  </ReactMarkdown>
+                  <TextReader value={jobExample.versions[0].info} />
                 </li>
               ))}
             </ul>
