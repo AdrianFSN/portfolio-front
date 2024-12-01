@@ -73,7 +73,8 @@
     "design": "Design",
     "photography": "Photography",
     "video": "Video",
-    "writing": "Writing"
+    "writing": "Writing",
+    "empty_list": "This list is empty"
   },
   "job": {
     "job_not_found": "Could not find the job you requested"

@@ -73,7 +73,8 @@
     "design": "Design",
     "photography": "Photographie",
     "video": "Vidéo",
-    "writing": "Écriture"
+    "writing": "Écriture",
+    "empty_list": "Cette liste est vide"
   },
   "job": {
     "job_not_found": "Impossible de trouver le projet demandé"
