@@ -35,3 +35,25 @@
 .mail_box_back {
   margin-left: 2rem;
 }
+
+.messages__list__page__controller {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
+  margin-left: -1rem;
+  align-items: center;
+  text-align: left;
+}
+
+.messages__list__page__controller div {
+  width: 100%;
+  padding-left: 1rem;
+}
+
+.messages__list__page__controller span {
+  display: flex;
+  width: 100%;
+  text-align: right !important;
+}

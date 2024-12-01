@@ -2,6 +2,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import { client } from "../../api/client";
 import { MESSAGES_API_URI } from "../../utils/constants";
 import StandardResponseInterface from "../../@types/StandardResponse";
+import MessageInterface from "../../@types/Message";
 
 interface FetchFormDataParams {
   name: string;
@@ -18,6 +19,16 @@ interface FetchUpdateMessageStatusParams {
   answered: boolean;
 }
 
+interface MessagesResponseInterface {
+  messagesList: MessageInterface[];
+  totalPages: number;
+  currentPage: number;
+  totalMessages: number;
+  state: string;
+  message: string;
+  data: object;
+}
+
 export const createNewMessage = async (
   formData: FetchFormDataParams
 ): Promise<AxiosResponse<StandardResponseInterface>> => {
@@ -30,11 +41,12 @@ export const createNewMessage = async (
   }
 };
 
-export const getAllMessages = async (): Promise<
-  AxiosResponse<StandardResponseInterface>
-> => {
+export const getAllMessages = async (
+  page: string,
+  limit: string
+): Promise<AxiosResponse<MessagesResponseInterface>> => {
   try {
-    const url = MESSAGES_API_URI;
+    const url = `${MESSAGES_API_URI}?page=${page}&limit=${limit}`;
     const response = await client.get(url);
     return response;
   } catch (error) {

@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import "./PageController.css";
 
 interface PageControllerProps {
+  className?: string;
   children: React.ReactNode;
   page?: number;
   limit?: string;
@@ -17,6 +18,7 @@ const PageController: React.FC<PageControllerProps> = ({
   next,
   currentPage,
   totalPages,
+  className = "page__controller",
 }) => {
   const { t } = useTranslation();
   const handlePrevPage = () => {
@@ -32,7 +34,7 @@ const PageController: React.FC<PageControllerProps> = ({
   };
 
   return (
-    <section className="page__controller">
+    <section className={className}>
       <i
         className="page__controller__controls fa-solid fa-chevron-left"
         onClick={handlePrevPage}
@@ -47,9 +49,11 @@ const PageController: React.FC<PageControllerProps> = ({
       ></i>
       <div>
         {children}
-        <span>{`${t("generic.page")} ${currentPage} ${t(
-          "generic.of"
-        )} ${totalPages}`}</span>
+        <span>
+          <p>{`${t("generic.page")} ${currentPage} ${t(
+            "generic.of"
+          )} ${totalPages}`}</p>
+        </span>
       </div>
       <i
         className="page__controller__controls fa-solid fa-chevron-right"
