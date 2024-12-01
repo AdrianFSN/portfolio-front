@@ -108,14 +108,14 @@ const Login = () => {
             >
               <fieldset className="form__fieldset">
                 <legend>
-                  <h3>Credentials</h3>
+                  <h3>{t("login.credentials")}</h3>
                 </legend>
                 <div className="login__fieldset__field">
                   <label
                     className="form__label"
                     htmlFor="email"
                   >
-                    <h4>Email</h4>
+                    <h4>{t("generic.email")}</h4>
                   </label>
                   <input
                     className="form__input"
@@ -124,7 +124,7 @@ const Login = () => {
                     onChange={(e) => setInputEmail(e.target.value)}
                     name="Email"
                     id="email"
-                    placeholder="Your email"
+                    placeholder={t("generic.your_email")}
                     required
                   />
                 </div>
@@ -133,7 +133,7 @@ const Login = () => {
                     className="form__label"
                     htmlFor="password"
                   >
-                    <h4>Password</h4>
+                    <h4>{t("generic.password")}</h4>
                   </label>
                   <input
                     className="form__input"
@@ -142,7 +142,7 @@ const Login = () => {
                     onChange={(e) => setInputPassword(e.target.value)}
                     name="Password"
                     id="password"
-                    placeholder="Your password"
+                    placeholder={t("generic.your_password")}
                     required
                   />
                 </div>
@@ -158,7 +158,7 @@ const Login = () => {
                     $customHeight="100%"
                   />
                 ) : (
-                  "Submit"
+                  t("generic.submit")
                 )}
               </RegularButton>
             </form>

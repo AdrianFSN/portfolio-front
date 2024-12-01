@@ -7,7 +7,8 @@
   },
   "login": {
     "login": "Login",
-    "already_signed_in": "You are signed in as {{username}}"
+    "already_signed_in": "You are signed in as {{username}}",
+    "credentials": "Credentials"
   },
   "admin": {
     "title": "Admin",
@@ -74,7 +75,11 @@
     "photography": "Photography",
     "video": "Video",
     "writing": "Writing",
-    "empty_list": "This list is empty"
+    "empty_list": "This list is empty",
+    "email": "Email",
+    "password": "Password",
+    "your_email": "Your email",
+    "your_password": "Your password"
   },
   "job": {
     "job_not_found": "Could not find the job you requested"
@@ -90,8 +95,7 @@
     "your_data": "Your data",
     "name": "Name",
     "your_name": "Your name",
-    "email": "Email",
-    "your_email": "Your email",
+
     "message": "Message",
     "your_message": "Your message",
     "subject_of_the_message": "Subject of your message",

@@ -7,7 +7,8 @@
   },
   "login": {
     "login": "Iniciar sesión",
-    "already_signed_in": "Estás conectado como {{username}}"
+    "already_signed_in": "Estás conectado como {{username}}",
+    "credentials": "Tus datos"
   },
   "admin": {
     "title": "Admin",
@@ -74,7 +75,11 @@
     "photography": "Fotografía",
     "video": "Vídeo",
     "writing": "Escritura",
-    "empty_list": "Esta lista está vacía"
+    "empty_list": "Esta lista está vacía",
+    "email": "Email",
+    "password": "Contraseña",
+    "your_email": "Tu correo electrónico",
+    "your_password": "Tu contraseña"
   },
   "job": {
     "job_not_found": "No se ha podido encontrar el proyecto que pediste"
@@ -91,7 +96,7 @@
     "name": "Nombre",
     "your_name": "Tu nombre",
     "email": "Correo electrónico",
-    "your_email": "Tu correo",
+
     "message": "Mensaje",
     "your_message": "Tu mensaje",
     "subject_of_the_message": "Asunto de tu mensaje",
