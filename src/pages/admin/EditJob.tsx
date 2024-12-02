@@ -14,7 +14,7 @@ import { AxiosError } from "axios";
 import { updateJobBasics } from "./adminService";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
-import { setAllowSwitchLanguage } from "../../store/slices/allowSwitchLanguageSlice";
+import { resetAllowSwitchLanguage } from "../../store/slices/allowSwitchLanguageSlice";
 
 const EditJob = () => {
   const { t } = useTranslation();
@@ -45,7 +45,7 @@ const EditJob = () => {
   });
 
   useEffect(() => {
-    dispatch(setAllowSwitchLanguage(true));
+    dispatch(resetAllowSwitchLanguage());
   }, [dispatch]);
 
   useEffect(() => {

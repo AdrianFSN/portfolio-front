@@ -25,7 +25,7 @@ import { updateJobAudios } from "./adminService";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
 import fileUploadValidator from "../../utils/filesUploadVallidator";
-import { setAllowSwitchLanguage } from "../../store/slices/allowSwitchLanguageSlice";
+import { resetAllowSwitchLanguage } from "../../store/slices/allowSwitchLanguageSlice";
 
 const EditJobAudios = () => {
   const { t } = useTranslation();
@@ -72,7 +72,7 @@ const EditJobAudios = () => {
   });
 
   useEffect(() => {
-    dispatch(setAllowSwitchLanguage(true));
+    dispatch(resetAllowSwitchLanguage());
   }, [dispatch]);
 
   useEffect(() => {

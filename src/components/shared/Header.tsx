@@ -24,6 +24,7 @@ import { logout } from "../../api/client";
 import { AppDispatch } from "../../store/store";
 import { resetLogin } from "../../store/slices/loginSlice";
 import { getAllowSwitchLanguageSelector } from "../../store/selectors/selectors";
+import { resetAllowSwitchLanguage } from "../../store/slices/allowSwitchLanguageSlice";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -98,6 +99,8 @@ const Header = () => {
 
   const handleNavigateTo = (route: string) => {
     setShowBurgerBars(true);
+    setShowLanguageList(false);
+    dispatch(resetAllowSwitchLanguage());
     navigate(route);
   };
 
@@ -113,6 +116,8 @@ const Header = () => {
   ) => {
     const selectedUrl = event.target.value;
     if (selectedUrl) {
+      dispatch(resetAllowSwitchLanguage());
+      setShowLanguageList(false);
       setShowBurgerBars(true);
       navigate(selectedUrl);
     }
@@ -188,7 +193,9 @@ const Header = () => {
           <li className="header__nav__list__item">
             <p
               className="header__link"
-              onClick={() => handleNavigateTo(ABOUT_ME_ROUTES_PATH)}
+              onClick={() => {
+                handleNavigateTo(ABOUT_ME_ROUTES_PATH);
+              }}
             >
               {t("bio.title")}
             </p>

@@ -25,7 +25,7 @@ import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
 import { updateJobVideos } from "./adminService";
 import fileUploadValidator from "../../utils/filesUploadVallidator";
-import { setAllowSwitchLanguage } from "../../store/slices/allowSwitchLanguageSlice";
+import { resetAllowSwitchLanguage } from "../../store/slices/allowSwitchLanguageSlice";
 
 const EditJobVideos = () => {
   const { t } = useTranslation();
@@ -72,7 +72,7 @@ const EditJobVideos = () => {
   });
 
   useEffect(() => {
-    dispatch(setAllowSwitchLanguage(true));
+    dispatch(resetAllowSwitchLanguage());
   }, [dispatch]);
 
   useEffect(() => {
