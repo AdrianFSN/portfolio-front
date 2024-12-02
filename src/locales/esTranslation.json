@@ -42,7 +42,8 @@
     "create_job": "Crear un proyecto",
     "new_job_intro": "¿Tienes un nuevo proyecto listo? ¡Promociónalo!",
     "logout": "Cerrar sesión",
-    "read": "Leer correos"
+    "read": "Leer correos",
+    "to_admin_section": "Admin"
   },
   "generic": {
     "empty_section": "Esta sección está vacía",

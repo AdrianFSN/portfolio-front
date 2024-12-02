@@ -17,7 +17,7 @@ import {
 } from "../../store/selectors/selectors";
 import JobExamplesList from "../jobExamples/JobExamplesList";
 import PageController from "../../components/shared/controllers/PageController";
-import { LIMIT_DEFAULT } from "../../utils/constants";
+import { LIMIT_DEFAULT, PAGE_DEFAULT } from "../../utils/constants";
 import { updateLimitByScreenSize } from "../../utils/updateLimitByScreenSize";
 import { getJobsCarousselThunk } from "../../store/thunks/jobsCarousselThunk";
 
@@ -32,7 +32,7 @@ const PortfolioSubject: React.FC<JobPagesProps> = ({ category }) => {
   const jobsCurrentPage = useSelector(getJobsListCurrentPageSelector);
   const jobsTotalPages = useSelector(getJobsListTotalPagesSelector);
   const carousselMessages = useSelector(getjobsCarousselMessageSelector);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(PAGE_DEFAULT);
   const [limit, setLimit] = useState(LIMIT_DEFAULT);
 
   useEffect(() => {

@@ -42,7 +42,8 @@
     "create_job": "Create a job",
     "new_job_intro": "Have a new job ready? Promote it!",
     "logout": "Logout",
-    "read": "Read mail"
+    "read": "Read mail",
+    "to_admin_section": "To admin"
   },
   "generic": {
     "empty_section": "This section is empty",
