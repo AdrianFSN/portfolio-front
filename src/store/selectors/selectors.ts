@@ -52,3 +52,5 @@ export const getjobsCarousselMessageSelector = (state: RootState) => {
   const jobsCaroussel = state.jobsCaroussel.data as Jobs;
   return jobsCaroussel.message;
 };
+export const getAllowSwitchLanguageSelector = (state: RootState) =>
+  state.allowSwitchLanguage.allowSwitch;

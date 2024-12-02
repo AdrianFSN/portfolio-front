@@ -22,6 +22,7 @@ import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
 import TextEditor from "../../components/shared/TextEditor";
 import { resetJobDetail } from "../../store/slices/jobDetailSlice";
+import { setAllowSwitchLanguage } from "../../store/slices/allowSwitchLanguageSlice";
 
 const EditJobVersions = () => {
   const { t } = useTranslation();
@@ -57,6 +58,10 @@ const EditJobVersions = () => {
     versionId: "",
     language: "",
   });
+
+  useEffect(() => {
+    dispatch(setAllowSwitchLanguage(false));
+  }, [dispatch]);
 
   useEffect(() => {
     if (job) {

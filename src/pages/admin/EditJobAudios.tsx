@@ -25,6 +25,7 @@ import { updateJobAudios } from "./adminService";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
 import fileUploadValidator from "../../utils/filesUploadVallidator";
+import { setAllowSwitchLanguage } from "../../store/slices/allowSwitchLanguageSlice";
 
 const EditJobAudios = () => {
   const { t } = useTranslation();
@@ -69,6 +70,10 @@ const EditJobAudios = () => {
     deleteAudio2: false,
     collectionId: "",
   });
+
+  useEffect(() => {
+    dispatch(setAllowSwitchLanguage(true));
+  }, [dispatch]);
 
   useEffect(() => {
     if (job) {

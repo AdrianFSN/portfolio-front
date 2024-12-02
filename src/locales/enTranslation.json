@@ -80,7 +80,8 @@
     "email": "Email",
     "password": "Password",
     "your_email": "Your email",
-    "your_password": "Your password"
+    "your_password": "Your password",
+    "allow_switch_language_disabled": "Language is disabled"
   },
   "job": {
     "job_not_found": "Could not find the job you requested"

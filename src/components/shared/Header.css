@@ -141,6 +141,11 @@
   font-weight: bold;
 }
 
+.lang__is__disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .header__nav__list__item .btn:hover {
   color: var(--secondary-text-color);
 }

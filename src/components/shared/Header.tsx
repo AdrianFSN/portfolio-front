@@ -23,11 +23,14 @@ import { getIsLoggedSelector } from "../../store/selectors/AuthSelectors/authSel
 import { logout } from "../../api/client";
 import { AppDispatch } from "../../store/store";
 import { resetLogin } from "../../store/slices/loginSlice";
+import { getAllowSwitchLanguageSelector } from "../../store/selectors/selectors";
 
 const Header = () => {
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
+  const allowSwitchLanguage = useSelector(getAllowSwitchLanguageSelector);
+  const [enableLangSwitcher, setEnableLangSwitcher] = useState(true);
   const [showBurgerBars, setShowBurgerBars] = useState(true);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [showLanguageList, setShowLanguageList] = useState(false);
@@ -79,6 +82,10 @@ const Header = () => {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    setEnableLangSwitcher(allowSwitchLanguage);
+  }, [allowSwitchLanguage]);
 
   const handleOpenBurgerMenu = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -151,25 +158,33 @@ const Header = () => {
         }
       >
         <ul className="header__nav__list">
-          <li className="lang__switcher">
-            {!showLanguageList ? (
-              <div className="header__nav__list__item">
-                <div
-                  className="header__link"
-                  onClick={handleShowLangFlags}
-                >
-                  {t("generic.language")}
+          {enableLangSwitcher ? (
+            <li className="lang__switcher">
+              {!showLanguageList ? (
+                <div className="header__nav__list__item">
+                  <div
+                    className="header__link"
+                    onClick={handleShowLangFlags}
+                  >
+                    {t("generic.language")}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div onClick={handleHideLangFlags}>
-                <LanguageSwitcher
-                  className="lang__content"
-                  flag={true}
-                />
-              </div>
-            )}
-          </li>
+              ) : (
+                <div onClick={handleHideLangFlags}>
+                  <LanguageSwitcher
+                    className="lang__content"
+                    flag={true}
+                  />
+                </div>
+              )}
+            </li>
+          ) : (
+            <li className="header__nav__list__item">
+              <p className="lang__is__disabled">
+                {t("generic.allow_switch_language_disabled")}
+              </p>
+            </li>
+          )}
           <li className="header__nav__list__item">
             <p
               className="header__link"

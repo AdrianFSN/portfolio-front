@@ -80,7 +80,8 @@
     "email": "E-mail",
     "password": "Mot de passe",
     "your_email": "Ton e-mail",
-    "your_password": "Ton mot de passe"
+    "your_password": "Ton mot de passe",
+    "allow_switch_language_disabled": "Langue deactivée"
   },
   "job": {
     "job_not_found": "Impossible de trouver le projet demandé"
