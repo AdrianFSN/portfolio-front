@@ -1,13 +1,22 @@
+import React, { Suspense } from "react";
+
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Bio from "../pages/bio/Bio";
 import Job from "../pages/jobExamples/Job";
 import Login from "../pages/auth/Login";
-import Admin from "../pages/admin/Admin";
-import EditJob from "../pages/admin/EditJob";
-import EditJobVersions from "../pages/admin/EditJobVersions";
-import EditJobPictures from "../pages/admin/EditJobPictures";
-import EditJobVideos from "../pages/admin/EditJobVideos";
-import EditJobAudios from "../pages/admin/EditJobAudios";
+const Admin = React.lazy(() => import("../pages/admin/Admin"));
+const CreateJob = React.lazy(() => import("../pages/admin/CreateJob"));
+const EditJob = React.lazy(() => import("../pages/admin/EditJob"));
+const EditJobVersions = React.lazy(
+  () => import("../pages/admin/EditJobVersions")
+);
+const EditJobPictures = React.lazy(
+  () => import("../pages/admin/EditJobPictures")
+);
+const EditJobVideos = React.lazy(() => import("../pages/admin/EditJobVideos"));
+const EditJobAudios = React.lazy(() => import("../pages/admin/EditJobAudios"));
+const MessagesList = React.lazy(() => import("../pages/admin/GetMessages"));
+
 import {
   ABOUT_ME_ROUTES_PATH,
   AUDIO_ROUTES_PATH,
@@ -29,12 +38,13 @@ import {
   VIDEOS_ROUTES_URI,
   WRITING_ROUTES_PATH,
 } from "../utils/constants";
-import CreateJob from "../pages/admin/CreateJob";
+//import CreateJob from "../pages/admin/CreateJob";
 import RequireAuth from "../components/RequireAuth";
 import NotFound from "../components/shared/NotFound";
 import PortfolioSubject from "../pages/PortfolioSubject/PortfolioSubject";
 import CreateNewMessage from "../pages/contact/ContactForm";
-import MessagesList from "../pages/admin/GetMessages";
+import CustomPulseLoader from "../components/shared/spinner/CustomPulseLoader";
+//import MessagesList from "../pages/admin/GetMessages";
 const subjectsPaths = [
   DEVELOPMENT_ROUTES_PATH,
   AUDIO_ROUTES_PATH,
@@ -47,100 +57,102 @@ const subjectsPaths = [
 
 const RootRouter = () => {
   return (
-    <Routes>
-      {/** Public Routes */}
-      <Route
-        path={ABOUT_ME_ROUTES_PATH}
-        element={<Bio />}
-      />
-      <Route
-        path={CONTACT_ROUTES_PATH}
-        element={<CreateNewMessage />}
-      />
+    <Suspense fallback={<CustomPulseLoader isLoading={true} />}>
+      <Routes>
+        {/** Public Routes */}
+        <Route
+          path={ABOUT_ME_ROUTES_PATH}
+          element={<Bio />}
+        />
+        <Route
+          path={CONTACT_ROUTES_PATH}
+          element={<CreateNewMessage />}
+        />
 
-      {VALID_CATEGORIES.map((category, index) => {
-        const path = subjectsPaths[index];
-        return (
-          path && (
-            <Route
-              key={category}
-              path={path}
-              element={<PortfolioSubject category={category} />}
-            />
-          )
-        );
-      })}
+        {VALID_CATEGORIES.map((category, index) => {
+          const path = subjectsPaths[index];
+          return (
+            path && (
+              <Route
+                key={category}
+                path={path}
+                element={<PortfolioSubject category={category} />}
+              />
+            )
+          );
+        })}
 
-      <Route
-        path={`/${JOB_ROUTES_URI}/:id`}
-        element={<Job />}
-      />
-      <Route
-        path={AUTH_ROUTES_PATH}
-        element={<Login />}
-      />
+        <Route
+          path={`/${JOB_ROUTES_URI}/:id`}
+          element={<Job />}
+        />
+        <Route
+          path={AUTH_ROUTES_PATH}
+          element={<Login />}
+        />
 
-      <Route
-        path="/404"
-        element={<NotFound />}
-      />
-      <Route
-        path="*"
-        element={<Navigate to="/404" />}
-      />
+        <Route
+          path="/404"
+          element={<NotFound />}
+        />
+        <Route
+          path="*"
+          element={<Navigate to="/404" />}
+        />
 
-      {/** Private Routes */}
-      <Route
-        path={EDIT_ROUTES_PATH}
-        element={
-          <RequireAuth>
-            <Outlet />
-          </RequireAuth>
-        }
-      >
+        {/** Private Routes */}
         <Route
-          index
-          element={<Admin />}
-        />
+          path={EDIT_ROUTES_PATH}
+          element={
+            <RequireAuth>
+              <Outlet />
+            </RequireAuth>
+          }
+        >
+          <Route
+            index
+            element={<Admin />}
+          />
+          <Route
+            path={CREATE_ROUTES_URI}
+            element={<CreateJob />}
+          />
+          <Route
+            path={`${JOB_ROUTES_URI}/:jobId`}
+            element={<EditJob />}
+          />
+          <Route
+            path={`${JOB_ROUTES_URI}/:jobId/${VERSION_ROUTES_URI}/:versionId`}
+            element={<EditJobVersions />}
+          />
+          <Route
+            path={`${JOB_ROUTES_URI}/:jobId/${PICTURES_ROUTES_URI}/:collectionId`}
+            element={<EditJobPictures />}
+          />
+          <Route
+            path={`${JOB_ROUTES_URI}/:jobId/${VIDEOS_ROUTES_URI}/:collectionId`}
+            element={<EditJobVideos />}
+          />
+          <Route
+            path={`${JOB_ROUTES_URI}/:jobId/${AUDIOS_ROUTES_URI}/:collectionId`}
+            element={<EditJobAudios />}
+          />
+        </Route>
         <Route
-          path={CREATE_ROUTES_URI}
-          element={<CreateJob />}
-        />
-        <Route
-          path={`${JOB_ROUTES_URI}/:jobId`}
-          element={<EditJob />}
-        />
-        <Route
-          path={`${JOB_ROUTES_URI}/:jobId/${VERSION_ROUTES_URI}/:versionId`}
-          element={<EditJobVersions />}
-        />
-        <Route
-          path={`${JOB_ROUTES_URI}/:jobId/${PICTURES_ROUTES_URI}/:collectionId`}
-          element={<EditJobPictures />}
-        />
-        <Route
-          path={`${JOB_ROUTES_URI}/:jobId/${VIDEOS_ROUTES_URI}/:collectionId`}
-          element={<EditJobVideos />}
-        />
-        <Route
-          path={`${JOB_ROUTES_URI}/:jobId/${AUDIOS_ROUTES_URI}/:collectionId`}
-          element={<EditJobAudios />}
-        />
-      </Route>
-      <Route
-        path={MESSAGES_ROUTES_PATH}
-        element={
-          <RequireAuth>
-            <Outlet />
-          </RequireAuth>
-        }
-      >
-        <Route
-          index
-          element={<MessagesList />}
-        />
-      </Route>
-    </Routes>
+          path={MESSAGES_ROUTES_PATH}
+          element={
+            <RequireAuth>
+              <Outlet />
+            </RequireAuth>
+          }
+        >
+          <Route
+            index
+            element={<MessagesList />}
+          />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 };
 
