@@ -105,5 +105,11 @@
     "read_mmesages": "Read messages",
     "mailbox": "Mailbox",
     "accept_save_contact_data": "You agree on saving your name, email and content of your message for the use of the service"
+  },
+  "skill": {
+    "creativity": "Creativity",
+    "strategy": "Strategy",
+    "communication": "Communication",
+    "multicultural_team_player": "Multicultural Team Player"
   }
 }

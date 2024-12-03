@@ -108,3 +108,23 @@ export const MESSAGE_MAX_LENGTH = 500;
 //Contact paths and URI:
 export const CONTACT_ROUTES_PATH = "/contact";
 export const MESSAGES_ROUTES_PATH = "/messages";
+
+//Skills lists
+export const SOFT_SKILLS_LIST = [
+  {
+    title: "creativity",
+    amount: 97,
+  },
+  {
+    title: "strategy",
+    amount: 95,
+  },
+  {
+    title: "communication",
+    amount: 96,
+  },
+  {
+    title: "multicultural_team_player",
+    amount: 94,
+  },
+];

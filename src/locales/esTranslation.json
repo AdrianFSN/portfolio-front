@@ -106,5 +106,11 @@
     "read_mmesages": "Leer mensajes",
     "mailbox": "Bandeja de entrada",
     "accept_save_contact_data": "Aceptas guardar tu nombre, correo y contenido de tu mensaje para el uso del servicio"
+  },
+  "skill": {
+    "creativity": "Creatividad",
+    "strategy": "Estrategia",
+    "communication": "Comunicación",
+    "multicultural_team_player": "Equipos multiculturales"
   }
 }

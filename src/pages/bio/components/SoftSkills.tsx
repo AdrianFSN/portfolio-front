@@ -1,33 +1,20 @@
+import { SOFT_SKILLS_LIST } from "../../../utils/constants";
 import "../Bio.css";
+import { useTranslation } from "react-i18next";
 import Skill from "./Skill";
 
 const SoftSkills = () => {
+  const { t } = useTranslation();
   return (
     <ul className="main__section__skills">
-      <li>
-        <Skill
-          title="Creativity"
-          amount={97}
-        />
-      </li>
-      <li>
-        <Skill
-          title="Strategy"
-          amount={95}
-        />
-      </li>
-      <li>
-        <Skill
-          title="Communication"
-          amount={96}
-        />
-      </li>
-      <li>
-        <Skill
-          title="Multicultural Team Player"
-          amount={94}
-        />
-      </li>
+      {SOFT_SKILLS_LIST.map((skill) => (
+        <li>
+          <Skill
+            title={`${t(`skill.${skill.title}`)}`}
+            amount={skill.amount}
+          />
+        </li>
+      ))}
     </ul>
   );
 };
