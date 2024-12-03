@@ -132,92 +132,11 @@
   }
 }
 
-.progress__bar__strategy {
-  animation: progress__bar__strategy 2s ease-in;
-}
-
-@keyframes progress__bar__strategy {
-  0% {
-    width: 0%;
-    background-color: var(--bg-color);
-  }
-
-  80% {
-    width: 99%;
-  }
-
-  90% {
-    width: 93%;
-  }
-
-  95% {
-    width: 98%;
-  }
-
-  100% {
-    width: 95%;
-  }
-}
-
-.progress__bar__python {
-  animation: progress__bar__python 2s ease-in;
-}
-
-@keyframes progress__bar__python {
-  0% {
-    width: 0;
-    background-color: var(--bg-color);
-  }
-
-  80% {
-    width: 79%;
-  }
-
-  90% {
-    width: 74%;
-  }
-
-  95% {
-    width: 77%;
-  }
-
-  100% {
-    width: 75%;
-  }
-}
-
-.progress__bar__javascript {
-  animation: progress__bar__javascript 2s ease-in;
-}
-
-@keyframes progress__bar__javascript {
-  0% {
-    width: 0%;
-    background-color: var(--bg-color);
-  }
-
-  80% {
-    width: 62%;
-  }
-
-  90% {
-    width: 59%;
-  }
-
-  95% {
-    width: 61%;
-  }
-
-  100% {
-    width: 60%;
-  }
-}
-
 .main .main__section__skills .main__section__skills__container h2 {
   text-align: left;
 }
 
-@media (width > 768px) {
+@media (width >= 768px) {
   .main .main__section__bio {
     text-align: left;
   }

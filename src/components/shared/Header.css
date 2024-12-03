@@ -63,7 +63,7 @@
 .header__nav {
   display: flex;
   position: absolute;
-  background: var(--body-color);
+  background: var(--bg-color);
   justify-content: center;
   width: 90%;
   top: 14rem;
