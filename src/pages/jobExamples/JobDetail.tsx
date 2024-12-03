@@ -1,5 +1,3 @@
-import ReactMarkdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import "./JobDetail.css";
@@ -14,6 +12,7 @@ import { useEffect, useState } from "react";
 import { JobExample } from "../../@types/jobExample";
 import JobDetailCaroussel from "./JobDetailCaroussel";
 import launchPeriodFormatter from "../../utils/launchPeriodFormatter";
+import TextReader from "../../components/shared/TextReader";
 
 interface JobDetailProps {
   jobId: string;
@@ -71,12 +70,8 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
             </div>
           </div>
           <div className="job__detail__text__section">
-            <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-              {jobVersion?.info}
-            </ReactMarkdown>
-            <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-              {jobVersion?.description}
-            </ReactMarkdown>
+            <TextReader value={jobVersion?.info as string} />
+            <TextReader value={jobVersion?.description as string} />
             <ul className="job__detail__list">
               <li className={job.linkToUrl ? "" : "hidden"}>
                 <a
