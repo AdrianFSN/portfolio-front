@@ -24,6 +24,7 @@
 
 .back__button {
   width: 7rem;
+  margin-bottom: 2rem;
 }
 .porfolio .not__found .back__button {
   width: 7rem;
@@ -137,6 +138,7 @@
 }
 
 .porfolio__icons__tech .porfolio__icon {
+  margin: 0 0 1rem 0;
   font-size: 3rem;
 }
 

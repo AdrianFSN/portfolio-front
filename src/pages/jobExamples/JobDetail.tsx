@@ -54,24 +54,26 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
                 : "hidden"
             }
           >
-            <div className="porfolio__icons__tech">
+            <section className="porfolio__icons__tech">
               {jobVersion?.technologies.map((tech) => {
                 const iconClass = convertStringToIcon(tech, icons);
 
                 return iconClass ? (
-                  <span
+                  <p
                     key={tech}
                     className={`porfolio__icon ${iconClass}`}
                   />
                 ) : (
-                  <span key={tech}> {tech}</span>
+                  <p key={tech}> {tech}</p>
                 );
               })}
-            </div>
+            </section>
           </div>
-          <div className="job__detail__text__section">
-            <TextReader value={jobVersion?.info as string} />
-            <TextReader value={jobVersion?.description as string} />
+          <section className="job__detail__text__section">
+            <section className="info__and__description">
+              <TextReader value={jobVersion?.info as string} />
+              <TextReader value={jobVersion?.description as string} />
+            </section>
             <ul className="job__detail__list">
               <li className={job.linkToUrl ? "" : "hidden"}>
                 <a
@@ -100,7 +102,7 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
                 {launchPeriodFormatter(job.launchPeriod)}
               </li>
             </ul>
-          </div>
+          </section>
         </section>
       </section>
     </main>
