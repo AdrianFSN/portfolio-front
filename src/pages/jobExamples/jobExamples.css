@@ -14,49 +14,32 @@
 }
 
 .jobs__collection__title {
-  padding: 2rem;
+  width: 100%;
+  padding: 0;
   margin: 0;
   text-align: center;
 }
-
 .jobs__collection__title h2 {
-  width: 80%;
-  margin: 0 auto;
+  background: var(--bg-color);
+  width: 100%;
   text-align: center;
   font-size: 2.5rem;
-  border-bottom: 0.5rem dashed var(--main-text-color);
 }
 
 @media (min-width: 768px) {
   .jobs__messages {
     height: 60dvh;
   }
-
-  .jobs__collection__title h2 {
-    width: 50%;
-  }
 }
 
 @media (min-width: 1024px) {
-  .jobs__collection__title h2 {
-    font-size: 3rem;
-    width: 50%;
-  }
-}
-
-@media (min-width: 1440px) {
-  .jobs__collection__title h2 {
-    font-size: 5rem;
-    width: 40%;
-  }
 }
 
 @media (min-width: 2500px) {
   .jobs__messages {
     height: 50dvh;
   }
-  .jobs__collection__title h2 {
-    font-size: 5rem;
-    width: 30%;
+  .porfolio__main .jobs__collection__title h2 {
+    font-size: 4rem;
   }
 }
