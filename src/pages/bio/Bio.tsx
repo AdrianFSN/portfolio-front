@@ -8,15 +8,18 @@ const Bio = () => {
   return (
     <main className="main">
       <h1> {t("bio.title")}</h1>
-      <section
-        className="main__section__bio"
-        id="bio"
-      >
-        <BioDescription />
+      <section className="intro__and__picture">
+        <section
+          className="main__section__bio"
+          id="bio"
+        >
+          <BioDescription />
+        </section>
+        <section className="main__section__bio">
+          <BioPicture />
+        </section>
       </section>
-      <section className="main__section__bio">
-        <BioPicture />
-      </section>
+      <h2>{t("bio.soft_skills")}</h2>
       <section className="main__section__skills__intro">
         <SoftSkills />
       </section>

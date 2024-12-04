@@ -112,8 +112,24 @@ export const MESSAGES_ROUTES_PATH = "/messages";
 //Skills lists
 export const SOFT_SKILLS_LIST = [
   {
+    title: "constructivity",
+    amount: 99,
+  },
+  {
+    title: "proactivity",
+    amount: 96,
+  },
+  {
     title: "creativity",
     amount: 97,
+  },
+  {
+    title: "collaborative",
+    amount: 98,
+  },
+  {
+    title: "resilience",
+    amount: 95,
   },
   {
     title: "strategy",

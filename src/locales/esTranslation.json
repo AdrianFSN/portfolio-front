@@ -3,7 +3,8 @@
     "title": "Bio",
     "introduction": "Me llamo Adrián Sotés, de ahí A S, para acabar en '¡A ese!' Porque quiero que me elijas para trabajar juntos en tus proyectos. Soy creador de contenido, desarrollador web full stack junior y experto en gamificación.",
     "career": "He dedicado una gran parte de mi carrera profesional al desarrollo de comunidades virtuales. Soy licenciado en Comunicación Audiovisual. Mi deseo de seguir creciendo profesionalmente en todo tipo de áreas creativas me ha llevado a estudiar diseño, gestión de comunidades, sonido, armonía moderna y ahora, programación y desarrollo web.",
-    "goal": "Mi objetivo es entender todos los perfiles desde los que se puede abordar el desarrollo de contenido, logrando así una funcionalidad para el fin para el que ha sido diseñado: un plan de negocio, arte, entretenimiento... Las motivaciones son infinitas. ¿Cuál es la tuya?"
+    "goal": "Mi objetivo es entender todos los perfiles desde los que se puede abordar el desarrollo de contenido, logrando así una funcionalidad para el fin para el que ha sido diseñado: un plan de negocio, arte, entretenimiento... Las motivaciones son infinitas. ¿Cuál es la tuya?",
+    "soft_skills": "Habilidades blandas"
   },
   "login": {
     "login": "Iniciar sesión",
@@ -108,9 +109,13 @@
     "accept_save_contact_data": "Aceptas guardar tu nombre, correo y contenido de tu mensaje para el uso del servicio"
   },
   "skill": {
+    "constructivity": "Constructividad",
+    "proactivity": "Proactividad",
     "creativity": "Creatividad",
+    "collaborative": "Colaborativo",
+    "resilience": "Resiliencia",
     "strategy": "Estrategia",
     "communication": "Comunicación",
-    "multicultural_team_player": "Equipos multiculturales"
+    "multicultural_team_player": "Eq. multiculturales"
   }
 }

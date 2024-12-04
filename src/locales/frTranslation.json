@@ -3,7 +3,8 @@
     "title": "Bio",
     "introduction": "Je m'appelle Adrián Sotés, d'où A S, pour arriver à 'A ese!' Parce que je veux que tu me choisisses pour qu'on travaille ensemble sur tes projets. Je suis créateur de contenu, développeur web full stack junior, et expert en gamification.",
     "career": "J'ai consacré une grande partie de ma carrière professionnelle au développement de communautés virtuelles. J'ai un diplôme en Communication Audiovisuelle. Mon envie de continuer à grandir professionnellement dans toutes sortes de domaines créatifs m'a amené à étudier le design, la gestion de communauté, le son, l'harmonie moderne, et maintenant, la programmation et le développement web.",
-    "goal": "Mon objectif est de comprendre tous les profils à partir desquels on peut aborder le développement de contenu, afin d'obtenir une fonctionnalité adaptée au but pour lequel il a été conçu : un plan d'affaires, de l'art, du divertissement... Les motivations sont infinies. Quelle est la tienne ?"
+    "goal": "Mon objectif est de comprendre tous les profils à partir desquels on peut aborder le développement de contenu, afin d'obtenir une fonctionnalité adaptée au but pour lequel il a été conçu : un plan d'affaires, de l'art, du divertissement... Les motivations sont infinies. Quelle est la tienne ?",
+    "soft_skills": "Soft Skills"
   },
   "login": {
     "login": "Connexion",
@@ -108,9 +109,13 @@
     "accept_save_contact_data": "Tu acceptes que ton nom, ton email et le contenu de ton message soient enregistrés pour l'utilisation du service"
   },
   "skill": {
+    "constructivity": "Constructivité",
+    "proactivity": "Proactivité",
     "creativity": "Créativité",
+    "collaborative": "Collaboratif",
+    "resilience": "Résilience",
     "strategy": "Stratégie",
     "communication": "Communication",
-    "multicultural_team_player": "Équipes multiculturelles"
+    "multicultural_team_player": "Éq. multiculturelles"
   }
 }
