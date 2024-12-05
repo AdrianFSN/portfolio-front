@@ -26,6 +26,11 @@
   font-size: 2.5rem;
 }
 
+.job__list__job__info {
+  width: 90%;
+  margin: 0 auto;
+}
+
 @media (min-width: 768px) {
   .jobs__messages {
     height: 60dvh;

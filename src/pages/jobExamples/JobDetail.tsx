@@ -64,7 +64,13 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
                     className={`porfolio__icon ${iconClass}`}
                   />
                 ) : (
-                  <p key={tech}> {tech}</p>
+                  <p
+                    className="tech__text"
+                    key={tech}
+                  >
+                    {" "}
+                    {tech}
+                  </p>
                 );
               })}
             </section>

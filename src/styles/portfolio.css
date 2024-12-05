@@ -88,12 +88,16 @@
   display: grid;
   list-style: none;
   width: 100%;
-  padding: 0;
   grid-template-columns: 1fr;
   margin-bottom: 0;
+  padding-left: 0;
+  gap: 1rem;
 }
 
 .porfolio__grid__panel__item__list li {
+  background: var(--bg-color);
+  border-radius: 3px;
+  padding: 2rem 1rem;
   margin-top: 3rem;
 }
 
@@ -129,6 +133,9 @@
   margin: 0;
 }
 
+.techs {
+  width: 80%;
+}
 .techs ul {
   list-style: none;
   padding: 1rem;
@@ -146,6 +153,28 @@
 }
 .porfolio__icons__tech .tech__text {
   margin: 1.5rem 0;
+  font-size: 1.5rem;
+}
+
+.techs.job__examples {
+  width: 100%;
+  margin: 0 auto;
+}
+.techs.job__examples ul {
+  width: 100%;
+  margin: 0 auto;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+.techs.job__examples li {
+  padding: 0;
+}
+
+.techs.job__examples .porfolio__icons__tech .porfolio__icon {
+  font-size: 3rem;
+}
+.techs.job__examples .porfolio__icons__tech .tech__text {
   font-size: 1.5rem;
 }
 
@@ -209,5 +238,33 @@
     margin-bottom: 0;
     margin: 0 auto;
     width: 35%;
+  }
+  .techs.job__examples ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (width >= 2500px) {
+  .porfolio__img__caption h3 {
+    font-size: 3rem;
+  }
+  .porfolio__icons__tech .porfolio__icon {
+    margin: 1rem 0;
+    font-size: 4.5rem;
+  }
+  .porfolio__icons__tech .tech__text {
+    margin: 1.5rem 0;
+    font-size: 2.5rem;
+  }
+
+  .techs.job__examples ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .techs.job__examples .porfolio__icons__tech .porfolio__icon {
+    font-size: 5rem;
+  }
+  .techs.job__examples .porfolio__icons__tech .tech__text {
+    font-size: 2.5rem;
   }
 }

@@ -22,51 +22,57 @@ const JobsCaroussel: React.FC<JobsCarousselProps> = ({ items, autoPlay }) => {
 
   return (
     <>
-      <div
-        key={(currentItem as JobExample)._id}
-        className={`caroussel__screen__item ${animationClass}`}
-      >
-        <picture
-          className="caroussel__item__picture"
-          onClick={() =>
-            navigate(`/${JOB_ROUTES_URI}/${(currentItem as JobExample)._id}`)
-          }
-        >
-          <source
-            media="(max-width: 767px)"
-            srcSet={
-              (currentItem as JobExample).pictures.mainPicture
-                ? `${imgUrlPath}${encodeURIComponent(
-                    (currentItem as JobExample).pictures.mainPicture
-                  )}`
-                : imgNotAvailable
-            }
-          />
-          <img
-            className="caroussel__img__fade"
-            src={
-              (currentItem as JobExample).pictures.mainPicture
-                ? `${imgUrlPath}${encodeURIComponent(
-                    (currentItem as JobExample).pictures.mainPicture
-                  )}`
-                : imgNotAvailable
-            }
-            alt={(currentItem as JobExample).versions[0].title}
-            crossOrigin={origin}
-          />
-        </picture>
-        <h3>{(currentItem as JobExample).versions[0].title}</h3>
-      </div>
+      {currentItem && (
+        <>
+          <div
+            key={(currentItem as JobExample)._id}
+            className={`caroussel__screen__item ${animationClass}`}
+          >
+            <picture
+              className="caroussel__item__picture"
+              onClick={() =>
+                navigate(
+                  `/${JOB_ROUTES_URI}/${(currentItem as JobExample)._id}`
+                )
+              }
+            >
+              <source
+                media="(max-width: 767px)"
+                srcSet={
+                  (currentItem as JobExample).pictures.mainPicture
+                    ? `${imgUrlPath}${encodeURIComponent(
+                        (currentItem as JobExample).pictures.mainPicture
+                      )}`
+                    : imgNotAvailable
+                }
+              />
+              <img
+                className="caroussel__img__fade"
+                src={
+                  (currentItem as JobExample).pictures.mainPicture
+                    ? `${imgUrlPath}${encodeURIComponent(
+                        (currentItem as JobExample).pictures.mainPicture
+                      )}`
+                    : imgNotAvailable
+                }
+                alt={(currentItem as JobExample).versions[0].title}
+                crossOrigin={origin}
+              />
+            </picture>
+            <h3>{(currentItem as JobExample).versions[0].title}</h3>
+          </div>
 
-      <span
-        className={
-          autoPlay ? "caroussel__controls__hidden" : "caroussel__controls"
-        }
-      >
-        <i className="fa-solid fa-chevron-left"></i>
-        {currentIndex + 1} / {items.length}
-        <i className="fa-solid fa-chevron-right"></i>
-      </span>
+          <span
+            className={
+              autoPlay ? "caroussel__controls__hidden" : "caroussel__controls"
+            }
+          >
+            <i className="fa-solid fa-chevron-left"></i>
+            {currentIndex + 1} / {items.length}
+            <i className="fa-solid fa-chevron-right"></i>
+          </span>
+        </>
+      )}
     </>
   );
 };

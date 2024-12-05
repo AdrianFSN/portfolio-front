@@ -108,7 +108,7 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
                   <div className="porfolio__img__caption">
                     <h3>{jobExample.versions[0].title}</h3>
                   </div>
-                  <section className="techs">
+                  <section className="techs job__examples">
                     <ul className="porfolio__icons__tech">
                       {jobExample.versions[0].technologies.map((tech) => {
                         const iconClass = convertStringToIcon(tech, icons);
@@ -123,7 +123,6 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
                             key={tech}
                             className="tech__text"
                           >
-                            {" "}
                             {tech}
                           </li>
                         );
@@ -156,7 +155,9 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
                     <strong>{t("generic.date")} </strong>{" "}
                     {launchPeriodFormatter(jobExample.launchPeriod)}
                   </p>
-                  <TextReader value={jobExample.versions[0].info} />
+                  <section className="job__list__job__info">
+                    <TextReader value={jobExample.versions[0].info} />
+                  </section>
                 </li>
               ))}
             </ul>
