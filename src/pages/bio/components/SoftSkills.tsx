@@ -8,7 +8,7 @@ const SoftSkills = () => {
   return (
     <ul className="main__section__skills">
       {SOFT_SKILLS_LIST.map((skill) => (
-        <li>
+        <li key={skill.title}>
           <Skill
             title={`${t(`skill.${skill.title}`)}`}
             amount={skill.amount}
