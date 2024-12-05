@@ -108,20 +108,28 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
                   <div className="porfolio__img__caption">
                     <h3>{jobExample.versions[0].title}</h3>
                   </div>
-                  <div className="porfolio__icons__tech">
-                    {jobExample.versions[0].technologies.map((tech) => {
-                      const iconClass = convertStringToIcon(tech, icons);
+                  <section className="techs">
+                    <ul className="porfolio__icons__tech">
+                      {jobExample.versions[0].technologies.map((tech) => {
+                        const iconClass = convertStringToIcon(tech, icons);
 
-                      return iconClass ? (
-                        <span
-                          key={tech}
-                          className={`porfolio__icon ${iconClass}`}
-                        />
-                      ) : (
-                        <span key={tech}> {tech}</span>
-                      );
-                    })}
-                  </div>
+                        return iconClass ? (
+                          <li
+                            key={tech}
+                            className={`porfolio__icon ${iconClass}`}
+                          />
+                        ) : (
+                          <li
+                            key={tech}
+                            className="tech__text"
+                          >
+                            {" "}
+                            {tech}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </section>
                   <p className={jobExample.linkToUrl ? "" : "hidden"}>
                     <a
                       href={jobExample.linkToUrl}
