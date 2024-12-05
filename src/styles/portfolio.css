@@ -164,12 +164,6 @@
 }
 
 @media (min-width: 768px) {
-  .porfolio .porfolio__intro__video .video__small {
-    padding: 2rem;
-    border-radius: 2.5rem;
-    width: 70%;
-  }
-
   .porfolio__item__picture {
     display: block;
     margin: 0 auto;

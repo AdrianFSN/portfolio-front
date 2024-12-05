@@ -82,15 +82,6 @@
     text-align: justify;
   }
 
-  .job__detail .porfolio__icons__tech {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    /* flex-direction: row;
-    justify-content: left; */
-    gap: 1rem;
-    align-items: center;
-  }
-
   .job__detail__picture {
     width: 80%;
   }
@@ -121,13 +112,24 @@
 
   .job__detail__text__section ul {
     padding: 1rem 3rem;
-    margin: 0 6rem;
+    margin: 1rem 6rem;
   }
 }
 
 @media (min-width: 1440px) {
   .job__detail__picture {
     width: 50%;
+  }
+  .job__detail .porfolio__icons__tech {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+    gap: 0;
+    align-items: center;
+  }
+  .job__detail__text__section ul {
+    width: 20%;
   }
 }
 
@@ -139,6 +141,7 @@
   }
 
   .job__detail__text__section ul {
+    width: 10%;
     padding: 1rem 3rem;
     margin-left: 5rem;
     border-radius: 5px;
