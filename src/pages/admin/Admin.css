@@ -24,9 +24,17 @@
 
 .main__admin li {
   display: flex;
-  justify-content: flex-start;
+  width: 100%;
+  justify-content: space-between;
   align-items: center;
   text-align: left;
+  gap: 1rem;
+}
+
+.admin__edit__icons_container {
+  display: flex;
+  padding-right: 0;
+  flex-direction: row;
   gap: 1rem;
 }
 
@@ -81,10 +89,24 @@
 .create__button__container {
   display: flex;
   margin: 1rem 0;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 }
 .create__button {
   margin: 1rem;
   padding: 0.5rem !important;
+}
+
+@media (width >= 768px) {
+  .main__admin li {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+@media (width >= 1440px) {
+  .main__admin li {
+    width: 50%;
+    margin: 0 auto;
+  }
 }

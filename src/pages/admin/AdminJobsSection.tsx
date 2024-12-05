@@ -124,14 +124,16 @@ const AdminJobsSection: React.FC<AdminJobsSectionProps> = ({
                   />
                 </picture>
                 <p>{jobExample.versions[0].title}</p>
-                <i
-                  className="fa-solid fa-pen-to-square"
-                  onClick={() => handleEditJob(jobExample._id)}
-                ></i>
-                <i
-                  className="fa-solid fa-trash"
-                  onClick={() => handleConfirmDeleteJob(jobExample._id)}
-                ></i>
+                <section className="admin__edit__icons_container">
+                  <i
+                    className="fa-solid fa-pen-to-square"
+                    onClick={() => handleEditJob(jobExample._id)}
+                  ></i>
+                  <i
+                    className="fa-solid fa-trash"
+                    onClick={() => handleConfirmDeleteJob(jobExample._id)}
+                  ></i>
+                </section>
               </li>
             ))}
           </ul>
