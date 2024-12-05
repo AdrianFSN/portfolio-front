@@ -75,24 +75,6 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
               <TextReader value={jobVersion?.description as string} />
             </section>
             <ul className="job__detail__list">
-              <li className={job.linkToUrl ? "" : "hidden"}>
-                <a
-                  href={job.linkToUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {job.linkToUrl}
-                </a>
-              </li>
-              <li className={job.linkToGitHub ? "" : "hidden"}>
-                <a
-                  href={job.linkToGitHub}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {job.linkToGitHub}
-                </a>
-              </li>
               <li className={jobVersion?.customer ? "" : "hidden"}>
                 <strong>{t("generic.customer")}: </strong>
                 {jobVersion?.customer}
@@ -100,6 +82,34 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
               <li>
                 <strong>{t("generic.date")}: </strong>
                 {launchPeriodFormatter(job.launchPeriod)}
+              </li>
+              <li>
+                <strong>{t("generic.url")}: </strong>
+                {job.linkToUrl ? (
+                  <a
+                    href={job.linkToUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {job.linkToUrl}
+                  </a>
+                ) : (
+                  t("generic.not_available")
+                )}
+              </li>
+              <li>
+                <strong>{t("generic.git_url")}: </strong>
+                {job.linkToGitHub ? (
+                  <a
+                    href={job.linkToGitHub}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {job.linkToGitHub}
+                  </a>
+                ) : (
+                  t("generic.not_available")
+                )}
               </li>
             </ul>
           </section>

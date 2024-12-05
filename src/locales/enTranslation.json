@@ -82,7 +82,9 @@
     "password": "Password",
     "your_email": "Your email",
     "your_password": "Your password",
-    "allow_switch_language_disabled": "Language is disabled"
+    "allow_switch_language_disabled": "Language is disabled",
+    "url": "Web",
+    "git_url": "GitHub"
   },
   "job": {
     "job_not_found": "Could not find the job you requested"
