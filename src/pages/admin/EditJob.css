@@ -2,6 +2,7 @@
   display: grid;
   width: 80%;
   margin: 0 auto;
+
   text-align: center;
   grid-template-columns: repeat(2, 1fr);
 }
@@ -19,8 +20,8 @@
 }
 
 .edit__job__form {
+  background: var(--bg-color);
   width: 100dvw;
-  height: 100%;
   text-align: center;
 }
 
@@ -100,6 +101,10 @@
   justify-content: center;
   padding: 0;
   margin: 0;
+}
+
+.form__fieldset__field.last__input {
+  margin-bottom: 2rem;
 }
 
 .form__input {
@@ -229,12 +234,16 @@
 
 @media (min-width: 768px) {
   .edit__job__form {
-    height: 60dvh;
+    height: 100%;
   }
 
   .edit__job__form h1 {
     text-align: right;
     padding-right: 2rem;
+  }
+
+  .form__submit__cancel__buttons {
+    margin-top: 3rem;
   }
 
   .form__button {
@@ -244,17 +253,25 @@
 
 @media (min-width: 1024px) {
   .edit__job__form {
-    height: 70dvh;
+    height: 100%;
+  }
+  .form__fieldset {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .form__fieldset.last__fieldset {
+    margin-top: 2rem;
   }
 }
 
 @media (min-width: 1440px) {
   .edit__job__form {
-    height: 60dvh;
+    height: 100%;
   }
 
-  .form__fieldset {
-    padding: 0 25rem 2rem;
+  .form__fieldset.last__fieldset {
+    margin-top: 3rem;
   }
   .form__button {
     width: 30%;
@@ -263,13 +280,14 @@
 
 @media (min-width: 2500px) {
   .edit__job__form {
-    height: 55dvh;
+    height: 100%;
   }
 
-  .form__fieldset {
-    padding: 0 45rem 2rem;
-  }
   .form__button {
     width: 30%;
+  }
+
+  .form__fieldset.last__fieldset {
+    margin-top: 3rem;
   }
 }

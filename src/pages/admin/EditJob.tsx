@@ -30,6 +30,7 @@ const EditJob = () => {
   const [error, setError] = useState<AxiosError | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [disabled, setDisabled] = useState(true);
 
   interface TextDataInterface {
     launchPeriod: string;
@@ -43,6 +44,14 @@ const EditJob = () => {
     linkToGitHub: "",
     category: [],
   });
+
+  useEffect(() => {
+    if (textData.launchPeriod) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [textData.launchPeriod]);
 
   useEffect(() => {
     dispatch(resetAllowSwitchLanguage());
@@ -214,7 +223,7 @@ const EditJob = () => {
                   }
                 />
               </div>
-              <div className="form__fieldset__field">
+              <div className="form__fieldset__field last__input">
                 <label
                   className="form__label"
                   htmlFor="linkToGitHub"
@@ -236,7 +245,7 @@ const EditJob = () => {
                 />
               </div>
             </fieldset>
-            <fieldset className="form__fieldset">
+            <fieldset className="form__fieldset last__fieldset">
               <legend>
                 <h3>{t("admin.job_type")}</h3>
               </legend>
@@ -268,8 +277,10 @@ const EditJob = () => {
             </fieldset>
             <div className="form__submit__cancel__buttons">
               <RegularButton
-                className="btn form__button"
+                className="form__button"
+                $skin="danger"
                 type="submit"
+                disabled={disabled}
               >
                 {isLoading ? (
                   <CustomPulseLoader

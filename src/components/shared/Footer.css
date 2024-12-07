@@ -66,10 +66,12 @@
   color: var(--main-text-color);
 }
 
-@media (width > 768px) {
-  .footer .footer__section {
-    width: 65%;
-    margin: 0 auto;
+@media (width >= 768px) {
+  .footer {
+    position: static;
+    bottom: 0;
+    left: 0;
+    height: auto;
   }
 
   .footer .footer__section .footer__brand__logo {
