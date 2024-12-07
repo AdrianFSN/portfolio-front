@@ -1,3 +1,9 @@
+.tiptap__editor {
+  max-width: 100%;
+}
+.tiptap__editor p {
+  max-width: 80%;
+}
 .toolbar__button {
   background: var(--bg-color);
   border: 1px dotted var(--main-text-color);

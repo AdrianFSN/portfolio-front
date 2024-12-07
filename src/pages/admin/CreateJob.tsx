@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./EditJob.css";
 import { useTranslation } from "react-i18next";
 import RegularButton from "../../components/shared/buttons/RegularButton";
@@ -32,7 +32,7 @@ const CreateJob = () => {
   const [error, setError] = useState<AxiosError | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-
+  const [disableSubmit, setDisableSubmit] = useState(false);
   const [jobFiles, setJobFiles] = useState([
     {
       key: "mainPicture",
@@ -131,6 +131,38 @@ const CreateJob = () => {
     mainAudio: null,
     audio2: null,
   });
+
+  useEffect(() => {
+    if (
+      formData.title.length > TITLE_MAX_LENGTH ||
+      formData.info.length > EXCERPT_MAX_LENGTH ||
+      formData.description.length > DESCRIPTION_MAX_LENGTH
+    ) {
+      setDisableSubmit(true);
+    } else {
+      setDisableSubmit(false);
+    }
+  }, [formData.info, formData.title, formData.description]);
+
+  useEffect(() => {
+    if (formData.info.length > EXCERPT_MAX_LENGTH) {
+      setError(new Error("error de length de excerpt") as AxiosError);
+    } else if (formData.title.length > TITLE_MAX_LENGTH) {
+      setError(new Error("Error de length de title") as AxiosError);
+    } else if (formData.description.length > DESCRIPTION_MAX_LENGTH) {
+      setError(new Error("Error de length de description") as AxiosError);
+    } else {
+      setError(null);
+    }
+  }, [formData.info, formData.title, formData.description]);
+
+  useEffect(() => {
+    if (error) {
+      setAlertMessage(error.message);
+    } else {
+      setAlertMessage("");
+    }
+  }, [error]);
 
   const handleFormOnChange = (
     event: React.ChangeEvent<
@@ -327,7 +359,7 @@ const CreateJob = () => {
                 setFormData((prev) => ({ ...prev, info: value }));
               }}
               name="info"
-              max-length={EXCERPT_MAX_LENGTH}
+              maxLength={EXCERPT_MAX_LENGTH}
             />
             <p>{`${formData.info.length} / ${EXCERPT_MAX_LENGTH} ${t(
               "generic.characters"
@@ -552,6 +584,7 @@ const CreateJob = () => {
           <RegularButton
             className="btn form__button"
             type="submit"
+            disabled={disableSubmit}
           >
             {isLoading ? (
               <CustomPulseLoader
