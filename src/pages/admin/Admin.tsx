@@ -48,7 +48,7 @@ const Admin = () => {
           {t("admin.create_job")}
         </RegularButton>
       </div>
-      <div className="create__button__container">
+      <div className="read__button__container">
         <p>{t("contact.read_messages_intro")}</p>
         <RegularButton
           className="create__button"
