@@ -21,9 +21,15 @@ const StyledButton: React.FC<ButtonInterface> = styled.button`
   transition: background-color 0.7s linear, color 0.7s linear;
 
   @media (hover: hover) {
-    &hover {
-      background-color: var(--main-text-color);
-      color: var(--secondary-text-color);
+    &:hover {
+      background-color: ${({ $skin }) =>
+        $skin === "danger"
+          ? "var(--main-text-color)"
+          : "var(--main-brand-color)"};
+      color: ${({ $skin }) =>
+        $skin === "danger"
+          ? "var(--secondary-text-color)"
+          : "var(--main-text-color)"};
     }
   }
 `;

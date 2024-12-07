@@ -157,7 +157,7 @@ const EditJob = () => {
         </CustomAlert>
       )}
       {job && (
-        <>
+        <section className="section__edit__job">
           <h2>{job.versions[0].title}</h2>
           <div className="job__edit__navigate__links">
             <p onClick={() => navigate(toLocalizeJob)}>
@@ -278,7 +278,6 @@ const EditJob = () => {
             <div className="form__submit__cancel__buttons">
               <RegularButton
                 className="form__button"
-                $skin="danger"
                 type="submit"
                 disabled={disabled}
               >
@@ -292,7 +291,7 @@ const EditJob = () => {
                 )}
               </RegularButton>
               <RegularButton
-                className="btn form__button"
+                className="form__button"
                 $skin="danger"
                 onClick={handleToEditPage}
               >
@@ -300,7 +299,7 @@ const EditJob = () => {
               </RegularButton>
             </div>
           </form>
-        </>
+        </section>
       )}
     </main>
   );

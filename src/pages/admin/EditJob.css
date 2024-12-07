@@ -52,6 +52,12 @@
   display: block;
 }
 
+.section__edit__job .job__form {
+  width: 80%;
+  margin: 0 auto;
+  display: block;
+  justify-content: center;
+}
 .job__form {
   background: var(--bg-color);
   display: flex;
@@ -66,68 +72,12 @@
   color: var(--main-text-color);
 }
 
-.form__submit__cancel__buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.job__form .form__fieldset {
+  width: 100%;
+  margin: 0 auto;
 }
-
-.form__fieldset {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  padding: 0;
-  margin: 2rem 0 1rem;
-  border: 1px dotted var(--main-text-color);
-  border-radius: 3px;
-}
-
-.form__fieldset h3 {
-  margin: 0;
-}
-
-.form__fieldset legend {
-  padding: 0;
-}
-
-.form__fieldset h4 {
-  margin: 1rem;
-}
-
-.form__fieldset__field {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0;
-  margin: 0;
-}
-
-.form__fieldset__field.last__input {
-  margin-bottom: 2rem;
-}
-
-.form__input {
-  padding: 1rem;
-  background: var(--body-color);
-  color: var(--main-text-color);
-  border: 1px dotted var(--main-text-color);
-  border-radius: 3px;
-  text-align: center;
-}
-
-.form__input::placeholder {
-  color: var(--main-text-color);
-  text-align: center;
-}
-
-.form__select {
-  background: var(--body-color);
-}
-
-.form__select option:checked {
-  background-color: var(--main-brand-color);
-  font-weight: bold;
+.job__form .form__fieldset.last__fieldset {
+  margin-top: 2rem;
 }
 
 .file__section__container {
@@ -197,41 +147,6 @@
   color: var(--main-brand-color);
 }
 
-.form__button {
-  background-color: var(--main-text-color);
-  color: var(--secondary-text-color);
-  width: 85%;
-  text-decoration: none;
-  font-weight: bold;
-  border: none;
-  border-radius: 3px;
-  padding: 1rem;
-  margin: 0 auto;
-  transition: background-color 0.2s linear, color 0.2s linear;
-}
-
-.form__button:disabled {
-  background: rgba(0, 0, 0, 0.3);
-  color: var(--secondary-text-color);
-}
-
-@media (hover: hover) {
-  .form__button:hover {
-    background-color: var(--main-brand-color);
-    color: var(--main-text-color);
-  }
-  .form__button:disabled {
-    background: rgba(0, 0, 0, 0.3);
-    color: var(--secondary-text-color);
-    cursor: not-allowed;
-  }
-}
-@media (max-width: 375px) {
-  .form__fieldset {
-    margin: 1rem 0;
-  }
-}
-
 @media (min-width: 768px) {
   .edit__job__form {
     height: 100%;
@@ -241,27 +156,15 @@
     text-align: right;
     padding-right: 2rem;
   }
-
-  .form__submit__cancel__buttons {
-    margin-top: 3rem;
-  }
-
-  .form__button {
-    width: 80%;
+  .edit__job__form h2 {
+    text-align: left;
+    padding-left: 2rem;
   }
 }
 
 @media (min-width: 1024px) {
   .edit__job__form {
     height: 100%;
-  }
-  .form__fieldset {
-    width: 80%;
-    margin: 0 auto;
-  }
-
-  .form__fieldset.last__fieldset {
-    margin-top: 2rem;
   }
 }
 
@@ -270,11 +173,11 @@
     height: 100%;
   }
 
-  .form__fieldset.last__fieldset {
-    margin-top: 3rem;
+  .job__form .form__fieldset {
+    padding: 0;
   }
-  .form__button {
-    width: 30%;
+  .job__form .form__submit__cancel__buttons .form__button {
+    width: 70%;
   }
 }
 
@@ -282,12 +185,7 @@
   .edit__job__form {
     height: 100%;
   }
-
-  .form__button {
-    width: 30%;
-  }
-
-  .form__fieldset.last__fieldset {
-    margin-top: 3rem;
+  .section__edit__job .job__form {
+    width: 60%;
   }
 }
