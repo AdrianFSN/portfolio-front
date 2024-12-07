@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
 import { resetJobExamples } from "../../store/slices/jobExamplesSlice";
 import launchPeriodFormatter from "../../utils/launchPeriodFormatter";
-import TextReader from "../../components/shared/TextReader";
+import MarkdownRenderer from "../../components/shared/MarkdownRenderer";
 
 const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
   const { t } = useTranslation();
@@ -156,7 +156,7 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
                     {launchPeriodFormatter(jobExample.launchPeriod)}
                   </p>
                   <section className="job__list__job__info">
-                    <TextReader value={jobExample.versions[0].info} />
+                    <MarkdownRenderer content={jobExample.versions[0].info} />
                   </section>
                 </li>
               ))}

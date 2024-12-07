@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { JobExample } from "../../@types/jobExample";
 import JobDetailCaroussel from "./JobDetailCaroussel";
 import launchPeriodFormatter from "../../utils/launchPeriodFormatter";
-import TextReader from "../../components/shared/TextReader";
+import MarkdownRenderer from "../../components/shared/MarkdownRenderer";
 
 interface JobDetailProps {
   jobId: string;
@@ -77,8 +77,8 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
           </div>
           <section className="job__detail__text__section">
             <section className="info__and__description">
-              <TextReader value={jobVersion?.info as string} />
-              <TextReader value={jobVersion?.description as string} />
+              <MarkdownRenderer content={jobVersion?.info as string} />
+              <MarkdownRenderer content={jobVersion?.description as string} />
             </section>
             <ul className="job__detail__list">
               <li className={jobVersion?.customer ? "" : "hidden"}>

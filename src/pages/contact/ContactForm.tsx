@@ -47,6 +47,30 @@ const CreateNewMessage = () => {
   });
 
   useEffect(() => {
+    if (formData.content && formData.content.length > MESSAGE_MAX_LENGTH) {
+      setDisableSubmit(true);
+    } else {
+      setDisableSubmit(false);
+    }
+  }, [formData.content]);
+
+  useEffect(() => {
+    if (formData.content.length > MESSAGE_MAX_LENGTH) {
+      setError(new Error("error de length de excerpt") as AxiosError);
+    } else {
+      setError(null);
+    }
+  }, [formData.content]);
+
+  useEffect(() => {
+    if (error) {
+      setAlertMessage(error.message);
+    } else {
+      setAlertMessage("");
+    }
+  }, [error]);
+
+  useEffect(() => {
     if (
       formData.name &&
       formData.email &&
@@ -188,13 +212,14 @@ const CreateNewMessage = () => {
             >
               <h4>{t("contact.message")}</h4>
             </label>
-            <TextEditor
+            <textarea
+              className="form__textarea"
               value={formData.content}
-              onChange={(value) => {
-                setFormData((prev) => ({ ...prev, content: value }));
-              }}
+              onChange={handleFormOnChange}
               name="content"
+              id="content"
               max-length={MESSAGE_MAX_LENGTH}
+              placeholder={t("contact.your_message")}
             />
             <p>{`${formData.content.length} / ${MESSAGE_MAX_LENGTH} ${t(
               "generic.characters"

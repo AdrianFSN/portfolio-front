@@ -23,7 +23,6 @@ import { AxiosError } from "axios";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
 import fileUploadValidator from "../../utils/filesUploadVallidator";
-import TextEditor from "../../components/shared/TextEditor";
 
 const CreateJob = () => {
   const { t } = useTranslation();
@@ -353,13 +352,13 @@ const CreateJob = () => {
             >
               <h4>{t("admin.job_excerpt")}</h4>
             </label>
-            <TextEditor
+            <textarea
+              className="form__textarea"
               value={formData.info}
-              onChange={(value) => {
-                setFormData((prev) => ({ ...prev, info: value }));
-              }}
+              onChange={handleFormOnChange}
               name="info"
-              maxLength={EXCERPT_MAX_LENGTH}
+              id="info"
+              placeholder={t("admin.job_excerpt")}
             />
             <p>{`${formData.info.length} / ${EXCERPT_MAX_LENGTH} ${t(
               "generic.characters"
@@ -372,12 +371,13 @@ const CreateJob = () => {
             >
               <h4>{t("admin.job_description")}</h4>
             </label>
-            <TextEditor
+            <textarea
+              className="form__textarea"
               value={formData.description}
-              onChange={(value) =>
-                setFormData((prev) => ({ ...prev, description: value }))
-              }
+              onChange={handleFormOnChange}
               name="description"
+              id="description"
+              placeholder={t("admin.job_excerpt")}
               max-length={DESCRIPTION_MAX_LENGTH}
             />
             <p>{`${formData.description.length} / ${DESCRIPTION_MAX_LENGTH} ${t(

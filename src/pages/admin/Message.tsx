@@ -1,12 +1,12 @@
 import "./Messages.css";
 import { useTranslation } from "react-i18next";
-import TextReader from "../../components/shared/TextReader";
 import MessageInterface from "../../@types/Message";
 import { useEffect, useState } from "react";
 import { deleteMessage, updateMessageStatus } from "./contactMesagesService";
 import { AxiosError } from "axios";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import RegularButton from "../../components/shared/buttons/RegularButton";
+import MarkdownRenderer from "../../components/shared/MarkdownRenderer";
 
 interface MessageProps {
   message: MessageInterface;
@@ -80,7 +80,7 @@ const Message: React.FC<MessageProps> = ({ message, setRefreshList }) => {
           <li>{message.email}</li>
           <li>{message.subject.join(", ")}</li>
           <li>
-            <TextReader value={message.content} />
+            <MarkdownRenderer content={message.content} />
           </li>
           <div className="message_check_list_container">
             <i
