@@ -106,19 +106,19 @@ const Login = () => {
               noValidate
               onSubmit={handleSubmit}
             >
-              <fieldset className="form__fieldset">
+              <fieldset className="login__form__fieldset">
                 <legend>
                   <h3>{t("login.credentials")}</h3>
                 </legend>
                 <div className="login__fieldset__field">
                   <label
-                    className="form__label"
+                    className="login__form__label"
                     htmlFor="email"
                   >
                     <h4>{t("generic.email")}</h4>
                   </label>
                   <input
-                    className="form__input"
+                    className="login__form__input"
                     type="text"
                     value={inputEmail}
                     onChange={(e) => setInputEmail(e.target.value)}
@@ -130,13 +130,13 @@ const Login = () => {
                 </div>
                 <div className="login__fieldset__field">
                   <label
-                    className="form__label"
+                    className="login__form__label"
                     htmlFor="password"
                   >
                     <h4>{t("generic.password")}</h4>
                   </label>
                   <input
-                    className="form__input"
+                    className="login__form__input"
                     type="password"
                     value={inputPassword}
                     onChange={(e) => setInputPassword(e.target.value)}
@@ -148,7 +148,7 @@ const Login = () => {
                 </div>
               </fieldset>
               <RegularButton
-                className="btn form__button"
+                className="btn login__form__button"
                 disabled={disableSubmit}
                 type="submit"
               >

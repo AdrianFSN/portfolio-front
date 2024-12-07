@@ -21,7 +21,7 @@
   padding: 1rem;
 }
 
-.form__fieldset {
+.login__form__fieldset {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,15 +32,15 @@
   border-radius: 3px;
 }
 
-.form__fieldset h3 {
+.login__form__fieldset h3 {
   margin: 0;
 }
 
-.form__fieldset legend {
+.login__form__fieldset legend {
   padding: 0;
 }
 
-.form__fieldset h4 {
+.login__form__fieldset h4 {
   margin: 1rem;
 }
 
@@ -51,7 +51,7 @@
   margin: 0 1rem 1.5rem;
 }
 
-.form__input {
+.login__form__input {
   padding: 1rem;
   background: var(--bg-color);
   color: var(--main-text-color);
@@ -60,12 +60,12 @@
   text-align: center;
 }
 
-.form__input::placeholder {
+.login__form__input::placeholder {
   color: var(--main-text-color);
   text-align: center;
 }
 
-.form__button {
+.login__form__button {
   background-color: var(--main-text-color);
   color: var(--secondary-text-color);
   width: 85%;
@@ -78,24 +78,24 @@
   transition: background-color 0.2s linear, color 0.2s linear;
 }
 
-.form__button:disabled {
+.login__form__button:disabled {
   background: rgba(0, 0, 0, 0.3);
   color: var(--secondary-text-color);
 }
 
 @media (hover: hover) {
-  .form__button:hover {
+  .login__form__button:hover {
     background-color: var(--main-brand-color);
     color: var(--main-text-color);
   }
-  .form__button:disabled {
+  .login__form__button:disabled {
     background: rgba(0, 0, 0, 0.3);
     color: var(--secondary-text-color);
     cursor: not-allowed;
   }
 }
 @media (max-width: 375px) {
-  .form__fieldset {
+  .login__form__fieldset {
     margin: 1rem 0;
   }
 }
@@ -110,7 +110,7 @@
     padding-right: 2rem;
   }
 
-  .form__button {
+  .login__form__button {
     width: 80%;
   }
 }
@@ -126,10 +126,10 @@
     height: 60dvh;
   }
 
-  .form__fieldset {
+  .login__form__fieldset {
     padding: 0 25rem 2rem;
   }
-  .form__button {
+  .login__form__button {
     width: 30%;
   }
 }
@@ -139,10 +139,10 @@
     height: 55dvh;
   }
 
-  .form__fieldset {
+  .login__form__fieldset {
     padding: 0 45rem 2rem;
   }
-  .form__button {
+  .login__form__button {
     width: 30%;
   }
 }
