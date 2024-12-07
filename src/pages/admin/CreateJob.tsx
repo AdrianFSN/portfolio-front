@@ -353,7 +353,7 @@ const CreateJob = () => {
             )}`}</p>
           </div>
         </fieldset>
-        <fieldset className="form__fieldset">
+        <fieldset className="form__fieldset last__fieldset">
           <legend>
             <h3>{t("admin.context_info")}</h3>
           </legend>
@@ -426,7 +426,7 @@ const CreateJob = () => {
             />
           </div>
         </fieldset>
-        <fieldset className="form__fieldset">
+        <fieldset className="form__fieldset last__fieldset">
           <legend>
             <h3>{t("admin.job_type")}</h3>
           </legend>
@@ -463,7 +463,7 @@ const CreateJob = () => {
               <h4>{t("admin.technologies")}</h4>
             </label>
             <input
-              className="form__input"
+              className="form__input last__input"
               type="text"
               value={
                 Array.isArray(formData.technologies)
@@ -477,13 +477,13 @@ const CreateJob = () => {
             />
           </div>
         </fieldset>
-        <fieldset className="form__fieldset">
+        <fieldset className="form__fieldset last__fieldset">
           <legend>
             <h3>{t("admin.job_files")}</h3>
           </legend>
           {jobFiles.map((fileItem) => (
             <div
-              className="form__fieldset__field "
+              className="form__fieldset__field last__input "
               key={fileItem.key}
             >
               <div className="file__section__container">

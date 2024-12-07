@@ -104,6 +104,8 @@
 
 .file-upload-label.form__file__button {
   background: var(--body-color);
+  width: 80%;
+  margin: 0 auto;
   border: 1px dotted var(--main-brand-color);
   border-radius: 3px;
   padding: 0.5rem;
