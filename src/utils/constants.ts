@@ -104,6 +104,24 @@ export const DESCRIPTION_MAX_LENGTH = 500;
 export const NAME_MAX_LENGTH = 50;
 export const EMAIL_MAX_LENGTH = 50;
 export const MESSAGE_MAX_LENGTH = 500;
+export const NOT_ALLOWED_HTML_TAGS = [
+  "script", // Para evitar ejecución de scripts maliciosos
+  "iframe", // Evita inserción de iframes maliciosos
+  "embed", // Bloquea contenido multimedia embebido inseguro
+  "object", // Evita ejecución de objetos externos
+  "applet", // Evita ejecución de applets
+  "link", // Bloquea enlaces que podrían cargar estilos inseguros
+  "meta", // Evita manipulación de meta-información
+  "style", // Previene estilos maliciosos
+  "form", // Evita la creación de formularios secundarios
+  "input", // Evita entradas ocultas o manipuladoras
+  "button", // Evita la inserción de botones maliciosos
+  "textarea", // Evita inserción de campos adicionales
+  "select", // Bloquea menús desplegables
+  "option", // Bloquea opciones en menús
+  "svg", // Puede usarse para ataques como XSS
+  "base", // Modifica la URL base del documento, peligroso para redirecciones
+];
 
 //Contact paths and URI:
 export const CONTACT_ROUTES_PATH = "/contact";

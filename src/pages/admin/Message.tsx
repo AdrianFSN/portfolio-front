@@ -79,7 +79,7 @@ const Message: React.FC<MessageProps> = ({ message, setRefreshList }) => {
           </li>
           <li>{message.email}</li>
           <li>{message.subject.join(", ")}</li>
-          <li>
+          <li className="message__content">
             <MarkdownRenderer content={message.content} />
           </li>
           <div className="message_check_list_container">

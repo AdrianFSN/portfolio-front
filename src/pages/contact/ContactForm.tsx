@@ -7,6 +7,7 @@ import {
   EMAIL_MAX_LENGTH,
   MESSAGE_MAX_LENGTH,
   NAME_MAX_LENGTH,
+  NOT_ALLOWED_HTML_TAGS,
   VALID_CATEGORIES,
 } from "../../utils/constants";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +16,7 @@ import { AxiosError } from "axios";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
 import { createNewMessage } from "../admin/contactMesagesService";
+import decodeHtmlEntities from "../../utils/decodedHtmlEntities";
 
 const CreateNewMessage = () => {
   const { t } = useTranslation();
@@ -52,6 +54,26 @@ const CreateNewMessage = () => {
       setError(null);
     }
   }, [formData.content, t]);
+
+  useEffect(() => {
+    const decodedName = decodeHtmlEntities(formData.name);
+    const decodedEmail = decodeHtmlEntities(formData.email);
+    const decodedMessage = decodeHtmlEntities(formData.content);
+    const regex = new RegExp(
+      `</?(${NOT_ALLOWED_HTML_TAGS.join("|")})(\\s|>|/|$)`,
+      "gi"
+    );
+
+    if (
+      regex.test(decodedMessage) ||
+      regex.test(decodedName) ||
+      regex.test(decodedEmail)
+    ) {
+      setError(new Error(`${t("errors.not_allowed_tags")}`) as AxiosError);
+    } else {
+      setError(null);
+    }
+  }, [formData.name, formData.email, formData.content, t]);
 
   useEffect(() => {
     if (error) {
@@ -213,6 +235,7 @@ const CreateNewMessage = () => {
               id="content"
               max-length={MESSAGE_MAX_LENGTH}
               placeholder={t("contact.your_message")}
+              wrap="hard"
             />
             <p>{`${formData.content.length} / ${MESSAGE_MAX_LENGTH} ${t(
               "generic.characters"

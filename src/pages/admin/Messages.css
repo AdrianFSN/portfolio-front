@@ -12,6 +12,12 @@
   padding-right: 1rem;
 }
 
+.message__content {
+  max-width: 40dvw;
+  overflow: auto;
+  margin-bottom: 2rem;
+}
+
 .message__name h2 {
   border-bottom: 3px solid var(--main-brand-color);
   font-size: 2rem;

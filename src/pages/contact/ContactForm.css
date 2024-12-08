@@ -3,6 +3,9 @@
   background: var(--bg-color);
   text-align: center;
 }
+.contact__message__form h1 {
+  margin-bottom: 2rem;
+}
 
 .contact__form {
   background: var(--bg-color);
