@@ -12,7 +12,7 @@ const BioPicture = () => {
       />
       <source
         media="(min-width: 425px) and (max-width: 767px)"
-        srcSet={`${pic200}, ${pic475}, ${pic612}`}
+        srcSet={pic475}
       />
       <source
         media="(min-width: 768px)"
