@@ -18,9 +18,12 @@
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+.messages__list__container p {
+  padding-left: 2rem;
+}
 
 .message__name h2 {
-  border-bottom: 3px solid var(--main-brand-color);
+  border-bottom: 5px solid var(--main-brand-color);
   font-size: 2rem;
   margin-bottom: 0;
 }
@@ -40,7 +43,7 @@
 }
 
 .mail_box_back {
-  margin-left: 2rem;
+  margin: 0 0 2rem 2rem;
 }
 
 .messages__list__page__controller {

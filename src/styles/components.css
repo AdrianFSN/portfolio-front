@@ -77,7 +77,7 @@ input[type="checkbox"] {
 }
 
 .form__textarea {
-  background: var(--body-color);
+  background: var(--bg-color);
   width: 90%;
   height: 15rem;
   margin: 0 auto;
@@ -87,7 +87,7 @@ input[type="checkbox"] {
 }
 
 .form__select {
-  background: var(--body-color);
+  background: var(--bg-color);
   width: 90%;
   margin: 0 auto;
   margin-bottom: 2rem;
@@ -110,7 +110,7 @@ input[type="checkbox"] {
 
 .form__input {
   padding: 1rem;
-  background: var(--body-color);
+  background: var(--bg-color);
   color: var(--main-text-color);
   border: 1px dotted var(--main-text-color);
   border-radius: 3px;

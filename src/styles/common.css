@@ -54,6 +54,7 @@ body {
 
 main {
   text-align: justify;
+  color: var(--main-text-color);
 }
 
 @media (hover: hover) {

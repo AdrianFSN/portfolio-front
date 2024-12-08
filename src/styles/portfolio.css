@@ -96,9 +96,10 @@
 
 .porfolio__grid__panel__item__list li {
   background: var(--bg-color);
-  border-radius: 3px;
+  border-radius: 10px;
   padding: 2rem 1rem;
   margin-top: 3rem;
+  box-shadow: 0 1px 3px #cfcc98;
 }
 
 .porfolio__item__picture {
@@ -150,10 +151,12 @@
 .porfolio__icons__tech .porfolio__icon {
   margin: 1rem 0;
   font-size: 3rem;
+  box-shadow: none;
 }
 .porfolio__icons__tech .tech__text {
   margin: 1.5rem 0;
   font-size: 1.5rem;
+  box-shadow: none;
 }
 
 .techs.job__examples {

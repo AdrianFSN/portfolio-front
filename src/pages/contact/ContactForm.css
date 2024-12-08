@@ -1,6 +1,5 @@
 .contact__message__form {
   width: 100dvw;
-  background: var(--bg-color);
   text-align: center;
 }
 .contact__message__form h1 {
@@ -8,7 +7,6 @@
 }
 
 .contact__form {
-  background: var(--bg-color);
   display: flex;
   flex-direction: column;
   justify-content: center;

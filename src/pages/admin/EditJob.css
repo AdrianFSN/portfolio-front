@@ -2,7 +2,6 @@
   display: grid;
   width: 80%;
   margin: 0 auto;
-
   text-align: center;
   grid-template-columns: repeat(2, 1fr);
 }
@@ -20,7 +19,7 @@
 }
 
 .edit__job__form {
-  background: var(--bg-color);
+  background: var(--body-color);
   width: 100dvw;
   text-align: center;
 }
@@ -59,7 +58,7 @@
   justify-content: center;
 }
 .job__form {
-  background: var(--bg-color);
+  background: var(--body-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -103,11 +102,11 @@
 }
 
 .file-upload-label.form__file__button {
-  background: var(--body-color);
+  background: var(--bg-color);
   width: 80%;
   margin: 0 auto;
   border: 1px dotted var(--main-brand-color);
-  border-radius: 3px;
+  border-radius: 8px;
   padding: 0.5rem;
   font-weight: 900;
 }

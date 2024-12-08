@@ -138,7 +138,7 @@ const MessagesList = () => {
           </PageController>
         </ul>
       ) : (
-        t("generic.empty_list")
+        <p>{t("generic.empty_list")}</p>
       )}
       <div>
         <RegularButton
