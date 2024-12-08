@@ -220,9 +220,12 @@
   }
 }
 
-@media (width > 1024px) {
+@media (width >= 1024px) {
   .header {
     height: 10dvh;
+  }
+  .header__nav {
+    justify-content: flex-end;
   }
   .header .header__image {
     max-width: 15%;

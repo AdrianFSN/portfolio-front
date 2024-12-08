@@ -42,6 +42,9 @@
   padding: 1.5rem 0;
   overflow: hidden;
 }
+.caroussel__section__with__controls i {
+  cursor: pointer;
+}
 
 .caroussel__controls__prev {
   padding-right: 1rem;

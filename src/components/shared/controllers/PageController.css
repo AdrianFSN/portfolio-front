@@ -11,6 +11,9 @@
   color: var(--main-brand-color);
   font-size: 3rem;
 }
+.page__controller__controls i {
+  cursor: pointer;
+}
 
 @media (min-width: 768px) {
   .page__controller__controls {

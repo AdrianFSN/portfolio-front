@@ -1,5 +1,6 @@
 import "./Footer.css";
 import logo from "../../assets/logos/Logo_A_Ese_Light.png";
+import { AS_GIT_HUB, AS_LINKEDIN } from "../../utils/constants";
 
 const Footer = () => {
   return (
@@ -17,10 +18,18 @@ const Footer = () => {
           <ul className="social__icons">
             <li className="footer__social__icon__item">
               <a
-                href="https://www.linkedin.com/in/adriansotes/"
+                href={AS_LINKEDIN}
                 target="_blank"
               >
                 <i className="fa-brands fa-linkedin"></i>
+              </a>
+            </li>
+            <li className="footer__social__icon__item">
+              <a
+                href={AS_GIT_HUB}
+                target="_blank"
+              >
+                <i className="fa-brands fa-github"></i>
               </a>
             </li>
           </ul>

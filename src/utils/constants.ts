@@ -162,3 +162,7 @@ export const SOFT_SKILLS_LIST = [
     amount: 94,
   },
 ];
+
+// External links
+export const AS_LINKEDIN = "https://www.linkedin.com/in/adriansotes/";
+export const AS_GIT_HUB = "https://github.com/AdrianFSN";
