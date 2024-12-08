@@ -13,9 +13,10 @@
 }
 
 .message__content {
-  max-width: 40dvw;
-  overflow: auto;
+  max-width: 70dvw;
   margin-bottom: 2rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .message__name h2 {
@@ -62,4 +63,15 @@
   display: flex;
   width: 100%;
   text-align: right !important;
+}
+
+@media (width <= 375px) {
+  .message__content {
+    max-width: 60dvw;
+  }
+}
+@media (width >= 1440px) {
+  .message__content {
+    max-width: 80dvw;
+  }
 }
