@@ -93,14 +93,15 @@
     "not_valid_audio_file": "Audio files can only be mp3",
     "not_valid_picture_file": "Image files can only be jpg, jpeg, png or gif",
     "not_valid_video_file": "Video files can only be mp4",
-    "not_valid_file": "Images can only be jpg, jpeg, png or gif. Audios, only mp3, and videos, just mp4"
+    "not_valid_file": "Images can only be jpg, jpeg, png or gif. Audios, only mp3, and videos, just mp4",
+    "message_too_long": "Sorry, your message is too long"
   },
   "contact": {
     "write_a_message_title": "Write a message",
     "your_data": "Your data",
     "name": "Name",
     "your_name": "Your name",
-
+    "your_email": "Your email",
     "message": "Message",
     "your_message": "Your message",
     "subject_of_the_message": "Subject of your message",

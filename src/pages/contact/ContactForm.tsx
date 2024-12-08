@@ -15,7 +15,6 @@ import { AxiosError } from "axios";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
 import { createNewMessage } from "../admin/contactMesagesService";
-import TextEditor from "../../components/shared/TextEditor";
 
 const CreateNewMessage = () => {
   const { t } = useTranslation();
@@ -47,24 +46,17 @@ const CreateNewMessage = () => {
   });
 
   useEffect(() => {
-    if (formData.content && formData.content.length > MESSAGE_MAX_LENGTH) {
-      setDisableSubmit(true);
-    } else {
-      setDisableSubmit(false);
-    }
-  }, [formData.content]);
-
-  useEffect(() => {
     if (formData.content.length > MESSAGE_MAX_LENGTH) {
-      setError(new Error("error de length de excerpt") as AxiosError);
+      setError(new Error(`${t("errors.message_too_long")}`) as AxiosError);
     } else {
       setError(null);
     }
-  }, [formData.content]);
+  }, [formData.content, t]);
 
   useEffect(() => {
     if (error) {
       setAlertMessage(error.message);
+      setDisableSubmit(true);
     } else {
       setAlertMessage("");
     }
@@ -75,13 +67,14 @@ const CreateNewMessage = () => {
       formData.name &&
       formData.email &&
       formData.opt_in &&
-      formData.content
+      formData.content &&
+      !error
     ) {
       setDisableSubmit(false);
     } else {
       setDisableSubmit(true);
     }
-  }, [formData.name, formData.email, formData.opt_in, formData.content]);
+  }, [error, formData.name, formData.email, formData.opt_in, formData.content]);
 
   const handleFormOnChange = (
     event: React.ChangeEvent<
@@ -150,7 +143,7 @@ const CreateNewMessage = () => {
   };
 
   return (
-    <main className="edit__job__form">
+    <main className="contact__message__form">
       <h1>{t("contact.write_a_message_title")}</h1>
       {alertMessage && (
         <CustomAlert
@@ -161,7 +154,7 @@ const CreateNewMessage = () => {
         </CustomAlert>
       )}
       <form
-        className="job__form"
+        className="contact__form"
         noValidate
         onSubmit={handleSubmit}
       >
@@ -192,7 +185,7 @@ const CreateNewMessage = () => {
               className="form__label"
               htmlFor="email"
             >
-              <h4>{t("contact.email")}</h4>
+              <h4>{t("generic.email")}</h4>
             </label>
             <input
               className="form__input"
@@ -226,7 +219,7 @@ const CreateNewMessage = () => {
             )}`}</p>
           </div>
         </fieldset>
-        <fieldset className="form__fieldset">
+        <fieldset className="form__fieldset first__fieldset">
           <legend>
             <h3>{t("contact.subject_of_the_message")}</h3>
           </legend>

@@ -101,7 +101,7 @@
     "name": "Nombre",
     "your_name": "Tu nombre",
     "email": "Correo electrónico",
-
+    "your_email": "Tu correo electrónico",
     "message": "Mensaje",
     "your_message": "Tu mensaje",
     "subject_of_the_message": "Asunto de tu mensaje",
