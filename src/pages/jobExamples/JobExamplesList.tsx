@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,11 +18,9 @@ import imgNotAvailable from "../../assets/img_not_available.jpg";
 import { useNavigate } from "react-router-dom";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
 import { resetJobExamples } from "../../store/slices/jobExamplesSlice";
-import launchPeriodFormatter from "../../utils/launchPeriodFormatter";
 import MarkdownRenderer from "../../components/shared/MarkdownRenderer";
 
 const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
-  const { t } = useTranslation();
   const dispatch = useDispatch();
   const origin = ORIGIN;
   const successMessage = useSelector(getJobsListMessageSelector);
@@ -129,32 +126,6 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
                       })}
                     </ul>
                   </section>
-                  <p className={jobExample.linkToUrl ? "" : "hidden"}>
-                    <a
-                      href={jobExample.linkToUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {jobExample.linkToUrl}
-                    </a>
-                  </p>
-                  <p className={jobExample.linkToGitHub ? "" : "hidden"}>
-                    <a
-                      href={jobExample.linkToGitHub}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {jobExample.linkToGitHub}
-                    </a>
-                  </p>
-                  <p>
-                    <strong>{t("generic.customer")}:</strong>{" "}
-                    {jobExample.versions[0].customer}
-                  </p>
-                  <p>
-                    <strong>{t("generic.date")} </strong>{" "}
-                    {launchPeriodFormatter(jobExample.launchPeriod)}
-                  </p>
                   <section className="job__list__job__info">
                     <MarkdownRenderer content={jobExample.versions[0].info} />
                   </section>
