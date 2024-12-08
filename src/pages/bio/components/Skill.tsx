@@ -8,7 +8,7 @@ interface SkillProps {
 }
 
 const SkillContainer = styled.div`
-  background: var(--body-color);
+  background: var(--bg-color);
   padding: 2rem;
   border: 2px solid var(--bg-color);
   border-radius: 10px;

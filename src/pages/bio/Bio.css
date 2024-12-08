@@ -61,7 +61,6 @@
 }
 
 .main .main__section__skills {
-  background: transparent;
   padding: 1rem;
   padding-top: 0;
   padding-bottom: 2rem;
@@ -114,7 +113,7 @@
   }
 
   .main h2 {
-    background: var(--bg-color);
+    background: var(--body-color);
     padding-left: 2rem;
     color: var(--main-text-color);
     text-align: left;

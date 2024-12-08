@@ -16,7 +16,7 @@ const BioPicture = () => {
       />
       <source
         media="(min-width: 768px)"
-        srcSet={`${pic200}, ${pic475}, ${pic612}`}
+        srcSet={pic612}
       />
       <img
         src={pic612}
