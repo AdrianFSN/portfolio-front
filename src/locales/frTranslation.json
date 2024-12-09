@@ -84,7 +84,8 @@
     "your_password": "Ton mot de passe",
     "allow_switch_language_disabled": "Langue deactivée",
     "url": "Web",
-    "git_url": "GitHub"
+    "git_url": "GitHub",
+    "read_more": "En savoir plus >"
   },
   "job": {
     "job_not_found": "Impossible de trouver le projet demandé"

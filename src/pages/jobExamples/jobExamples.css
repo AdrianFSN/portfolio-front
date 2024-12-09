@@ -28,7 +28,21 @@
 .job__list__job__info {
   width: 90%;
   margin: 0 auto;
+  margin-bottom: 5rem;
   text-align: justify;
+}
+.read__more__button {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  transition: border-bottom 0.5s ease-in-out;
+}
+
+@media (hover: hover) {
+  .read__more__button:hover {
+    border-bottom: 5px solid var(--main-brand-color);
+  }
 }
 
 @media (min-width: 768px) {

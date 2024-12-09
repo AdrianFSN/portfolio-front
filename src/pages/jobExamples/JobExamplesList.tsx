@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import {
   getJobsListErrorSelector,
   getJobsListLoadingSelector,
@@ -21,6 +22,7 @@ import { resetJobExamples } from "../../store/slices/jobExamplesSlice";
 import MarkdownRenderer from "../../components/shared/MarkdownRenderer";
 
 const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const origin = ORIGIN;
   const successMessage = useSelector(getJobsListMessageSelector);
@@ -129,6 +131,14 @@ const JobExamplesList: React.FC<JobExamplesListProps> = ({ jobs }) => {
                   <section className="job__list__job__info">
                     <MarkdownRenderer content={jobExample.versions[0].info} />
                   </section>
+                  <p
+                    className="read__more__button"
+                    onClick={() =>
+                      navigate(`/${JOB_ROUTES_URI}/${jobExample._id}`)
+                    }
+                  >
+                    {t("generic.read_more")}
+                  </p>
                 </li>
               ))}
             </ul>

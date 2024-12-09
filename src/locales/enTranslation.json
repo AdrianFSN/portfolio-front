@@ -84,7 +84,8 @@
     "your_password": "Your password",
     "allow_switch_language_disabled": "Language is disabled",
     "url": "Web",
-    "git_url": "GitHub"
+    "git_url": "GitHub",
+    "read_more": "Read more >"
   },
   "job": {
     "job_not_found": "Could not find the job you requested"

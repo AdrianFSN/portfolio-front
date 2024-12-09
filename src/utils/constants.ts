@@ -97,7 +97,7 @@ export const PICTURES_ROUTES_URI = "pictures";
 export const VIDEOS_ROUTES_URI = "videos";
 export const AUDIOS_ROUTES_URI = "audios";
 export const TITLE_MAX_LENGTH = 50;
-export const EXCERPT_MAX_LENGTH = 100;
+export const EXCERPT_MAX_LENGTH = 150;
 export const DESCRIPTION_MAX_LENGTH = 500;
 
 //Messages forms
