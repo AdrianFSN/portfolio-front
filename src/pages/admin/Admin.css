@@ -44,9 +44,11 @@
 
 .main__admin i {
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .main__admin img {
+  width: 120px;
   object-fit: cover;
 }
 
