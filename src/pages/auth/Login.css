@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   width: 100dvw;
-  height: 60dvh;
 }
 
 .main__login h1 {
@@ -17,52 +16,10 @@
 .login__form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  height: 100dvh;
   padding: 1rem;
-}
-
-.login__form__fieldset {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  padding: 0;
-  margin: 2rem 2rem 1rem;
-  border: 1px dotted var(--main-text-color);
-  border-radius: 3px;
-}
-
-.login__form__fieldset h3 {
-  margin: 0;
-}
-
-.login__form__fieldset legend {
-  padding: 0;
-}
-
-.login__form__fieldset h4 {
-  margin: 1rem;
-}
-
-.login__fieldset__field {
-  display: flex;
-  flex-direction: column;
-  padding: 0 2rem;
-  margin: 0 1rem 1.5rem;
-}
-
-.login__form__input {
-  padding: 1rem;
-  background: var(--bg-color);
-  color: var(--main-text-color);
-  border: 1px dotted var(--main-text-color);
-  border-radius: 3px;
-  text-align: center;
-}
-
-.login__form__input::placeholder {
-  color: var(--main-text-color);
-  text-align: center;
+  margin-top: 2rem;
 }
 
 .login__form__button {
@@ -75,6 +32,7 @@
   border-radius: 3px;
   padding: 1rem;
   margin: 0 auto;
+  margin-top: 2rem;
   transition: background-color 0.2s linear, color 0.2s linear;
 }
 
@@ -101,8 +59,11 @@
 }
 
 @media (min-width: 768px) {
-  .main__login {
-    height: 60dvh;
+  /*   .main__login {
+    height: 100dvh;
+  } */
+  .login__form {
+    height: 80dvh;
   }
 
   .main__login h1 {
@@ -116,14 +77,19 @@
 }
 
 @media (min-width: 1024px) {
-  .main__login {
+  /*  .main__login {
     height: 70dvh;
-  }
+  } */
 }
 
 @media (min-width: 1440px) {
-  .main__login {
+  /*   .main__login {
     height: 60dvh;
+  } */
+  .login__form {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 2rem;
   }
 
   .login__form__fieldset {
@@ -135,8 +101,11 @@
 }
 
 @media (min-width: 2500px) {
-  .main__login {
+  /*  .main__login {
     height: 55dvh;
+  } */
+  .login__form {
+    width: 60dvw;
   }
 
   .login__form__fieldset {
