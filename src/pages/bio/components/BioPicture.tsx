@@ -8,7 +8,7 @@ const BioPicture = () => {
       <div className="bio__picture__overlay"></div>
       <source
         media="(max-width: 424px)"
-        srcSet={`${pic200}, ${pic475}, ${pic612}`}
+        srcSet={pic200}
       />
       <source
         media="(min-width: 425px) and (max-width: 767px)"
