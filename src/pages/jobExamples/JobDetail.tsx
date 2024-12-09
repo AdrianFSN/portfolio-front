@@ -54,7 +54,13 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
                 : "hidden"
             }
           >
-            <section className="porfolio__icons__tech">
+            <section
+              className={
+                jobVersion?.technologies && jobVersion?.technologies.length <= 4
+                  ? "porfolio__icons__tech__short"
+                  : "porfolio__icons__tech"
+              }
+            >
               {jobVersion?.technologies.map((tech) => {
                 const iconClass = convertStringToIcon(tech, icons);
 

@@ -146,7 +146,18 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
+.porfolio__icons__tech__short {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
 
+.porfolio__icons__tech__short .porfolio__icon {
+  margin: 1rem 0;
+  font-size: 3rem;
+  box-shadow: none;
+}
 .porfolio__icons__tech .porfolio__icon {
   margin: 1rem 0;
   font-size: 3rem;

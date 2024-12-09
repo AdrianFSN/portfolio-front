@@ -120,6 +120,11 @@
   .job__detail__picture {
     width: 50%;
   }
+  .job__detail,
+  .porfolio .back__button {
+    margin-left: 4rem;
+  }
+
   .job__detail .porfolio__icons__tech {
     display: flex;
     flex-direction: row;
