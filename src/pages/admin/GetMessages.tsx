@@ -36,10 +36,6 @@ const MessagesList = () => {
   const [limit, setLimit] = useState(MESSAGES_LIST_LIMIT_DEFAULT);
 
   useEffect(() => {
-    console.log("Esto es limit: ", limit);
-  }, [limit]);
-
-  useEffect(() => {
     updateLimitByScreenSize(
       setLimit,
       MESSAGES_LIST_LIMIT_UNDER_769,

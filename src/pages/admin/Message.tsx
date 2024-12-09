@@ -4,7 +4,6 @@ import MessageInterface from "../../@types/Message";
 import { useEffect, useState } from "react";
 import { deleteMessage, updateMessageStatus } from "./contactMesagesService";
 import { AxiosError } from "axios";
-import StandardResponseInterface from "../../@types/StandardResponse";
 import RegularButton from "../../components/shared/buttons/RegularButton";
 import MarkdownRenderer from "../../components/shared/MarkdownRenderer";
 
@@ -33,8 +32,8 @@ const Message: React.FC<MessageProps> = ({ message, setRefreshList }) => {
         answered: formData.answered,
       };
       try {
-        const response = await updateMessageStatus(message._id, updatedStatus);
-        console.log((response as unknown as StandardResponseInterface).message);
+        await updateMessageStatus(message._id, updatedStatus);
+
         setRefreshList(true);
       } catch (error) {
         setError(error as AxiosError);
@@ -58,8 +57,7 @@ const Message: React.FC<MessageProps> = ({ message, setRefreshList }) => {
   const handleDelete = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     try {
-      const response = await deleteMessage(message._id);
-      console.log((response as unknown as StandardResponseInterface).message);
+      await deleteMessage(message._id);
       setRefreshList(true);
     } catch (error) {
       setError(error as AxiosError);
