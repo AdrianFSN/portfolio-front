@@ -166,3 +166,6 @@ export const SOFT_SKILLS_LIST = [
 // External links
 export const AS_LINKEDIN = "https://www.linkedin.com/in/adriansotes/";
 export const AS_GIT_HUB = "https://github.com/AdrianFSN";
+
+// Admin session length
+export const ADMIN_SESSION_LENGTH = 2 * 60 * 60 * 1000;

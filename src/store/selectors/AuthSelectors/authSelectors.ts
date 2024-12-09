@@ -4,6 +4,8 @@ export const getAuthResponseSelector = (state: RootState) => state.login;
 
 export const getIsLoggedSelector = (state: RootState) =>
   state.login.loggedInState;
+export const getStartSessionCountdown = (state: RootState) =>
+  state.login.startSessionCountdown;
 
 export const getAuthLoadingSelector = (state: RootState) => state.login.loading;
 

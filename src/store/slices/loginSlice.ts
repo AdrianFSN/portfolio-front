@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginThunk } from "../thunks/loginThunk";
 import storage from "../../utils/storage";
+import StandardResponseInterface from "../../@types/StandardResponse";
 
 export const loginInitialState = {
   message: "",
   state: "",
   loggedInState: !!storage.get("authToken"),
+  startSessionCountdown: false,
   loading: false,
   error: undefined as string | undefined,
 };
@@ -16,9 +18,11 @@ const loginSlice = createSlice({
   reducers: {
     setAuth: (state, action) => {
       state.loggedInState = action.payload;
+      state.startSessionCountdown = true;
     },
     resetLogin: (state) => {
       state.loggedInState = false;
+      state.startSessionCountdown = false;
       state.message = loginInitialState.message;
       state.state = loginInitialState.state;
       state.loading = false;
@@ -30,16 +34,21 @@ const loginSlice = createSlice({
       .addCase(loginThunk.pending, (state) => {
         state.loading = true;
       })
-      .addCase(loginThunk.fulfilled, (state) => {
+      .addCase(loginThunk.fulfilled, (state, action) => {
         state.loading = false;
         state.loggedInState = true;
-        state.message = "Login successful!";
+        state.startSessionCountdown = true;
+        state.message = (
+          action.payload as unknown as StandardResponseInterface
+        ).message;
         state.state = "success";
         state.error = undefined;
       })
       .addCase(loginThunk.rejected, (state, action) => {
         state.loading = false;
-        state.message = "Something went wrong";
+        state.message = (
+          action.payload as unknown as StandardResponseInterface
+        ).message;
         state.state = "error";
         state.error = action.payload as string;
       });
