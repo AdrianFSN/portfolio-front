@@ -145,15 +145,15 @@ const CreateJob = () => {
 
   useEffect(() => {
     if (formData.info.length > EXCERPT_MAX_LENGTH) {
-      setError(new Error("error de length de excerpt") as AxiosError);
+      setError(new Error(`${t("errors.excerpt_too_long")}`) as AxiosError);
     } else if (formData.title.length > TITLE_MAX_LENGTH) {
-      setError(new Error("Error de length de title") as AxiosError);
+      setError(new Error(`${t("errors.title_too_long")}`) as AxiosError);
     } else if (formData.description.length > DESCRIPTION_MAX_LENGTH) {
-      setError(new Error("Error de length de description") as AxiosError);
+      setError(new Error(`${t("errors.description_too_long")}`) as AxiosError);
     } else {
       setError(null);
     }
-  }, [formData.info, formData.title, formData.description]);
+  }, [t, formData.info, formData.title, formData.description]);
 
   useEffect(() => {
     if (error) {

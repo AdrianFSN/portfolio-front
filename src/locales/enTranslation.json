@@ -95,7 +95,10 @@
     "not_valid_picture_file": "Image files can only be jpg, jpeg, png or gif",
     "not_valid_video_file": "Video files can only be mp4",
     "not_valid_file": "Images can only be jpg, jpeg, png or gif. Audios, only mp3, and videos, just mp4",
-    "message_too_long": "Sorry, your message is too long"
+    "message_too_long": "Sorry, your message is too long",
+    "excerpt_too_long": "Sorry, your excerpt is too long",
+    "title_too_long": "Sorry, your title is too long",
+    "description_too_long": "Sorry, your description is too long"
   },
   "contact": {
     "write_a_message_title": "Write a message",
