@@ -95,10 +95,10 @@
     "not_valid_picture_file": "Les images doivent être au format jpg, jpeg, png ou gif",
     "not_valid_video_file": "Les vidéos doivent être au format mp4",
     "not_valid_file": "Les images doivent être au format jpg, jpeg, png ou gif. Les audios uniquement en mp3, et les vidéos seulement en mp4",
-    "message_too_long": "Désolé, votre message est trop long",
-    "excerpt_too_long": "Votre introduction est trop longue",
-    "title_too_long": "Votre titre est trop long",
-    "description_too_long": "Votre description est trop longue"
+    "message_too_long": "Désolé, ton message est trop long",
+    "excerpt_too_long": "Ton introduction est trop longue",
+    "title_too_long": "Ton titre est trop long",
+    "description_too_long": "Ta description est trop longue"
   },
   "contact": {
     "write_a_message_title": "Écris un message",

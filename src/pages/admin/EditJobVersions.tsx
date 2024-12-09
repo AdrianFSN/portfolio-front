@@ -20,7 +20,6 @@ import { AxiosError } from "axios";
 import { updateJobVersion } from "./adminService";
 import StandardResponseInterface from "../../@types/StandardResponse";
 import extractErrorMessage from "../../utils/extractErrorMessage";
-import TextEditor from "../../components/shared/TextEditor";
 import { resetJobDetail } from "../../store/slices/jobDetailSlice";
 import { setAllowSwitchLanguage } from "../../store/slices/allowSwitchLanguageSlice";
 
@@ -38,6 +37,7 @@ const EditJobVersions = () => {
   const [error, setError] = useState<AxiosError | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [disableSubmit, setDisableSubmit] = useState(false);
 
   interface VersionDataInterface {
     title: string;
@@ -98,6 +98,38 @@ const EditJobVersions = () => {
       }));
     }
   }, [job]);
+
+  useEffect(() => {
+    if (
+      versionsData.title.length > TITLE_MAX_LENGTH ||
+      versionsData.info.length > EXCERPT_MAX_LENGTH ||
+      versionsData.description.length > DESCRIPTION_MAX_LENGTH
+    ) {
+      setDisableSubmit(true);
+    } else {
+      setDisableSubmit(false);
+    }
+  }, [versionsData.info, versionsData.title, versionsData.description]);
+
+  useEffect(() => {
+    if (versionsData.info.length > EXCERPT_MAX_LENGTH) {
+      setError(new Error(`${t("errors.excerpt_too_long")}`) as AxiosError);
+    } else if (versionsData.title.length > TITLE_MAX_LENGTH) {
+      setError(new Error(`${t("errors.title_too_long")}`) as AxiosError);
+    } else if (versionsData.description.length > DESCRIPTION_MAX_LENGTH) {
+      setError(new Error(`${t("errors.description_too_long")}`) as AxiosError);
+    } else {
+      setError(null);
+    }
+  }, [t, versionsData.info, versionsData.title, versionsData.description]);
+
+  useEffect(() => {
+    if (error) {
+      setAlertMessage(error.message);
+    } else {
+      setAlertMessage("");
+    }
+  }, [error]);
 
   const handleVersionsOnChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -219,12 +251,12 @@ const EditJobVersions = () => {
                 >
                   <h4>{t("admin.job_excerpt")}</h4>
                 </label>
-                <TextEditor
+                <textarea
+                  className="form__textarea"
                   value={versionsData.info}
-                  onChange={(value) => {
-                    setVersionsData((prev) => ({ ...prev, info: value }));
-                  }}
+                  onChange={handleVersionsOnChange}
                   name="info"
+                  id="info"
                   max-length={EXCERPT_MAX_LENGTH}
                 />
                 <p>{`${versionsData.info.length} / ${EXCERPT_MAX_LENGTH} ${t(
@@ -238,12 +270,12 @@ const EditJobVersions = () => {
                 >
                   <h4>{t("admin.job_description")}</h4>
                 </label>
-                <TextEditor
+                <textarea
+                  className="form__textarea"
                   value={versionsData.description}
-                  onChange={(value) =>
-                    setVersionsData((prev) => ({ ...prev, description: value }))
-                  }
+                  onChange={handleVersionsOnChange}
                   name="description"
+                  id="description"
                   max-length={DESCRIPTION_MAX_LENGTH}
                 />
                 <p>{`${
@@ -312,6 +344,7 @@ const EditJobVersions = () => {
               <RegularButton
                 className="btn form__button"
                 type="submit"
+                disabled={disableSubmit}
               >
                 {isLoading ? (
                   <CustomPulseLoader
