@@ -8,7 +8,7 @@
   },
   "login": {
     "login": "Login",
-    "already_signed_in": "You are signed in as {{username}}",
+    "already_signed_in": "You are already signed in}",
     "credentials": "Credentials"
   },
   "admin": {

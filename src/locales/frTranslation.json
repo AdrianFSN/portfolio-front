@@ -8,7 +8,7 @@
   },
   "login": {
     "login": "Connexion",
-    "already_signed_in": "Tu es connecté(e) en tant que {{username}}",
+    "already_signed_in": "Tu es déjá connecté(e)",
     "credentials": "Identifiants"
   },
   "admin": {

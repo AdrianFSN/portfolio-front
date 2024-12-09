@@ -13,8 +13,6 @@ import {
 } from "../../store/selectors/AuthSelectors/authSelectors";
 import { useNavigate } from "react-router-dom";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
-import storage from "../../utils/storage";
-import decodeToken from "../../utils/getDataFromToken";
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import { resetLogin } from "../../store/slices/loginSlice";
 import { EDIT_ROUTES_PATH } from "../../utils/constants";
@@ -32,18 +30,6 @@ const Login = () => {
   const successMessage = useSelector(getAuthMessageSelector);
   const [alertMessage, setAlertMessage] = useState("");
   const error = useSelector(getAuthErrorSelector);
-  const storedToken = storage.get("authToken");
-  const [decodedToken, setDecodedToken] = useState({
-    username: "",
-  });
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    if (storedToken) {
-      setDecodedToken(decodeToken(storedToken as string));
-      setUsername(decodedToken.username);
-    }
-  }, [decodedToken.username, storedToken]);
 
   useEffect(() => {
     if (!inputEmail || !inputPassword) {
@@ -97,7 +83,7 @@ const Login = () => {
         )}
         {isLogged ? (
           <div>
-            <p>{t("login.already_signed_in", { username })}</p>
+            <p>{t("login.already_signed_in")}</p>
           </div>
         ) : (
           <>
