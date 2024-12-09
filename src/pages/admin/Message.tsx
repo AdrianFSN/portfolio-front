@@ -62,6 +62,7 @@ const Message: React.FC<MessageProps> = ({ message, setRefreshList }) => {
     } catch (error) {
       setError(error as AxiosError);
       console.error((error as AxiosError).message);
+      setConfirmDeletion(false);
     }
   };
 
