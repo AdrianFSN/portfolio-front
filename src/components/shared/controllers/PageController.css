@@ -6,27 +6,29 @@
   align-items: center;
   text-align: center;
 }
+.controllers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+  gap: 2rem;
+}
 
 .page__controller__controls {
   color: var(--main-brand-color);
-  font-size: 3rem;
+  font-size: 2rem;
 }
 .page__controller__controls i {
   cursor: pointer;
 }
 
-@media (min-width: 768px) {
-  .page__controller__controls {
-    font-size: 4rem;
-  }
-}
 @media (min-width: 1024px) {
   .page__controller {
     font-size: 1.2rem;
   }
 
   .page__controller__controls {
-    font-size: 5rem;
+    font-size: 2.2rem;
   }
 }
 @media (min-width: 2500px) {
@@ -34,6 +36,6 @@
     font-size: 2rem;
   }
   .page__controller__controls {
-    font-size: 7rem;
+    font-size: 3rem;
   }
 }

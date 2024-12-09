@@ -56,7 +56,7 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
           >
             <section
               className={
-                jobVersion?.technologies && jobVersion?.technologies.length <= 4
+                jobVersion?.technologies && jobVersion?.technologies.length < 4
                   ? "porfolio__icons__tech__short"
                   : "porfolio__icons__tech"
               }
