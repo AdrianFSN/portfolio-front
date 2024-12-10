@@ -1,0 +1,12 @@
+.home {
+  width: 100dvw;
+  height: 100vh;
+}
+.picture {
+  width: 100%;
+}
+
+.home img {
+  width: 100%;
+  height: auto;
+}

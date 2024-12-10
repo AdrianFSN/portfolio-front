@@ -1,9 +1,8 @@
 .header {
   background: var(--bg-color);
   top: 0;
-  height: 12dvh;
+  height: 15dvh;
   position: sticky;
-  /* justify-content: space-between; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,7 +56,7 @@
   }
 
   100% {
-    top: 15dvh;
+    top: 20dvh;
     opacity: 100%;
   }
 }
@@ -68,7 +67,7 @@
   background: var(--bg-color);
   justify-content: center;
   width: 90%;
-  top: 15dvh;
+  top: 20dvh;
   z-index: -2;
   animation: show__burger__list 0.5s ease-in-out;
 }
@@ -109,7 +108,7 @@
 .header .header__mask {
   position: absolute;
   top: 0;
-  height: 15dvh;
+  height: 22dvh;
   width: 100%;
   background-color: var(--bg-color);
   z-index: -1;

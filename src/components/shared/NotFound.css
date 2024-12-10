@@ -1,3 +1,37 @@
 .page__not__found {
   width: 100dvw;
 }
+
+.not__found {
+  width: 100%;
+  height: 70dvh;
+  margin: 0 auto;
+}
+.not__found img {
+  width: 100%;
+  margin: 0 auto;
+}
+.not__found p {
+  margin: 2rem;
+}
+
+@media (width >=768px) {
+  .not__found {
+    height: 80dvh;
+  }
+}
+@media (width >= 1024px) {
+  .not__found {
+    height: 90dvh;
+  }
+}
+
+@media (width >=1440px) {
+  .not__found {
+    height: 100%;
+  }
+  .not__found img {
+    width: 100%;
+    margin: 0 auto;
+  }
+}

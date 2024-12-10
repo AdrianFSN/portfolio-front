@@ -169,3 +169,12 @@ export const AS_GIT_HUB = "https://github.com/AdrianFSN";
 
 // Admin session length
 export const ADMIN_SESSION_LENGTH = 2 * 60 * 60 * 1000;
+
+// PictureServer
+export const NOT_FOUND_SMALL_PICTURE = "not_found_small.jpg";
+export const NOT_FOUND_MEDIUM_PICTURE = "not_found_medium.jpg";
+export const NOT_FOUND_BIG_PICTURE = "not_found.jpg";
+export const HOME_BIG_PICTURE = "home.jpg";
+
+// Public > assets
+export const PUBLIC_ASSETS = "/assets/";

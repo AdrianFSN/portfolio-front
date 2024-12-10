@@ -43,6 +43,7 @@ import NotFound from "../components/shared/NotFound";
 import PortfolioSubject from "../pages/PortfolioSubject/PortfolioSubject";
 import CreateNewMessage from "../pages/contact/ContactForm";
 import CustomPulseLoader from "../components/shared/spinner/CustomPulseLoader";
+import Home from "../pages/home/Home";
 
 const subjectsPaths = [
   DEVELOPMENT_ROUTES_PATH,
@@ -94,6 +95,12 @@ const RootRouter = () => {
           path="/404"
           element={<NotFound />}
         />
+
+        <Route
+          path="/"
+          element={<Home />}
+        />
+
         <Route
           path="*"
           element={<Navigate to="/404" />}

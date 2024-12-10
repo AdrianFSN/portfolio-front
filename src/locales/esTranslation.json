@@ -124,5 +124,8 @@
     "strategy": "Estrategia",
     "communication": "Comunicación",
     "multicultural_team_player": "Eq. multiculturales"
+  },
+  "not_found": {
+    "explanation": "La página que buscabas parece que no existe. Asegúrate de que has escrito correctamente la URL del enlace que querías visitar. Espero que no se haya roto nada... ¿Te imaginas?"
   }
 }

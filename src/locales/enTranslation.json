@@ -123,5 +123,8 @@
     "strategy": "Strategy",
     "communication": "Communication",
     "multicultural_team_player": "Multicultural Teams"
+  },
+  "not_found": {
+    "explanation": "The page you were looking for doesn't seem to exist. Make sure you typed the URL of the link you wanted to visit correctly. I hope nothing broke... Can you imagine?"
   }
 }
