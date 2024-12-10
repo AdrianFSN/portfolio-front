@@ -44,6 +44,11 @@
     width: 80%;
     margin: 0 auto;
   }
+
+  .contact__message__form {
+    height: 100dvh;
+  }
+
   .contact__message__form h1 {
     text-align: right;
     padding-right: 2rem;

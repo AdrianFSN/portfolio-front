@@ -232,3 +232,14 @@
     margin: 0;
   }
 }
+
+@media (width >= 2500px) {
+  .header__nav {
+    justify-content: flex-end;
+    font-size: 2rem;
+  }
+  .header .header__image {
+    max-width: 15%;
+    margin: 0;
+  }
+}
