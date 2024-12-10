@@ -174,7 +174,9 @@ export const ADMIN_SESSION_LENGTH = 2 * 60 * 60 * 1000;
 export const NOT_FOUND_SMALL_PICTURE = "not_found_small.jpg";
 export const NOT_FOUND_MEDIUM_PICTURE = "not_found_medium.jpg";
 export const NOT_FOUND_BIG_PICTURE = "not_found.jpg";
-export const HOME_BIG_PICTURE = "home.jpg";
+export const HOME_SMALL_PICTURE = "home_small.jpg";
+export const HOME_MEDIUM_PICTURE = "home_medium.jpg";
+export const HOME_BIG_PICTURE = "home_big.jpg";
 
 // Public > assets
 export const PUBLIC_ASSETS = "/assets/";
