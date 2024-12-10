@@ -10,18 +10,6 @@
   margin: 0;
 }
 
-.not__found {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  background: var(--main-text-color);
-  color: var(--secondary-text-color);
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 60dvh;
-}
-
 .back__button {
   width: 7rem;
   margin-bottom: 2rem;

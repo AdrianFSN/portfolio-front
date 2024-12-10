@@ -38,13 +38,12 @@ import {
   VIDEOS_ROUTES_URI,
   WRITING_ROUTES_PATH,
 } from "../utils/constants";
-//import CreateJob from "../pages/admin/CreateJob";
 import RequireAuth from "../components/RequireAuth";
 import NotFound from "../components/shared/NotFound";
 import PortfolioSubject from "../pages/PortfolioSubject/PortfolioSubject";
 import CreateNewMessage from "../pages/contact/ContactForm";
 import CustomPulseLoader from "../components/shared/spinner/CustomPulseLoader";
-//import MessagesList from "../pages/admin/GetMessages";
+
 const subjectsPaths = [
   DEVELOPMENT_ROUTES_PATH,
   AUDIO_ROUTES_PATH,
