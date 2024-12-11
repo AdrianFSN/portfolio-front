@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ORIGIN } from "../../utils/constants";
 
 interface PictureServerProps {
@@ -22,23 +22,6 @@ const PictureServer: React.FC<PictureServerProps> = ({
 }) => {
   const origin = ORIGIN;
 
-  useEffect(() => {
-    console.log(
-      "He recibido este path a smallPic: ",
-      `${imgPath}${smallPic}`,
-      typeof smallPic
-    );
-    console.log(
-      "He recibido esta mediumPic: ",
-      `${imgPath}${mediumPic}`,
-      typeof mediumPic
-    );
-    console.log(
-      "He recibido esta bigPic: ",
-      `${imgPath}${bigPic}`,
-      typeof bigPic
-    );
-  }, [smallPic, mediumPic, bigPic, imgPath]);
   return (
     <picture className={className}>
       <div className={overlayClassName}></div>

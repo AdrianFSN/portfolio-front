@@ -177,6 +177,9 @@ export const NOT_FOUND_BIG_PICTURE = "not_found.jpg";
 export const HOME_SMALL_PICTURE = "home_small.jpg";
 export const HOME_MEDIUM_PICTURE = "home_medium.jpg";
 export const HOME_BIG_PICTURE = "home_big.jpg";
+export const LOGO_LIGHT_PICTURE = "Logo_A_Ese_Light.png";
+export const LOGO_LIGHT_MEDIUM_PICTURE = "Logo_A_Ese_Light_medium.png";
+export const LOGO_LIGHT_SMALL_PICTURE = "Logo_A_Ese_Light_small.png";
 
 // Public > assets
 export const PUBLIC_ASSETS = "/assets/";
