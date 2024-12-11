@@ -1,4 +1,5 @@
 .messages__list__container {
+  background-color: var(--bg-color);
   width: 100dvw;
   min-height: 60dvh;
 }

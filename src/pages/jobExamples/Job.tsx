@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import "./Job.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
@@ -29,7 +30,7 @@ const Job = () => {
   }, [jobId, dispatch, i18n.language]);
 
   return (
-    <>
+    <div className="job__body">
       {isLoading && (
         <CustomPulseLoader
           isLoading={isLoading}
@@ -55,7 +56,7 @@ const Job = () => {
       ) : (
         <main className="porfolio">
           <div className="not__found">
-            {t("job.job_not_found")}
+            <p>{t("job.job_not_found")} </p>
 
             <RegularButton
               $skin="danger"
@@ -67,7 +68,7 @@ const Job = () => {
           </div>
         </main>
       )}
-    </>
+    </div>
   );
 };
 

@@ -1,4 +1,5 @@
 .contact__message__form {
+  background-color: var(--body-color);
   width: 100dvw;
   text-align: center;
 }

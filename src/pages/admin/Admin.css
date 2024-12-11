@@ -1,4 +1,9 @@
+.admin__layout main {
+  padding-bottom: 2rem;
+  margin-bottom: -1rem;
+}
 .main__admin {
+  background-color: var(--body-color);
   width: 100dvw;
   min-height: 60dvh;
 }
@@ -17,6 +22,7 @@
 }
 
 .main__admin ul {
+  background-color: var(--body-color);
   list-style: none;
   margin-right: 2rem;
   margin-left: -1rem;

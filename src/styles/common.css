@@ -50,7 +50,7 @@ a {
 }
 
 body {
-  background: var(--body-color);
+  background: transparent;
 }
 
 main {

@@ -1,5 +1,6 @@
 .main__login {
   display: flex;
+  background-color: var(--body-color);
   flex-direction: column;
   width: 100dvw;
 }
@@ -20,6 +21,10 @@
   height: 100dvh;
   padding: 1rem;
   margin-top: 2rem;
+}
+
+.login__already__signed {
+  height: 100dvh;
 }
 
 .login__form__button {

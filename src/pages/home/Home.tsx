@@ -48,36 +48,43 @@ const Home = () => {
     },
   ];
   return (
-    <main className="home">
-      <section className="home__navigator">
-        <PictureServer
-          smallPic={LOGO_LIGHT_SMALL_PICTURE}
-          mediumPic={LOGO_LIGHT_MEDIUM_PICTURE}
-          bigPic={LOGO_LIGHT_PICTURE}
-          className="home__logo"
-          imgPath={PUBLIC_ASSETS}
-          alt="A Ese logo"
-        ></PictureServer>
-        <ul className="home__navigator__list">
-          {categories.map((category: category) => {
-            return (
-              <li onClick={() => navigate(category.to)}>{category.title}</li>
-            );
-          })}
-        </ul>
-      </section>
-      <section className="picture">
-        <PictureServer
-          smallPic={HOME_SMALL_PICTURE}
-          mediumPic={HOME_MEDIUM_PICTURE}
-          bigPic={HOME_BIG_PICTURE}
-          className=""
-          imgPath={PUBLIC_ASSETS}
-          overlayClassName="home__picture__overlay"
-          alt="AS home picture"
-        />
-      </section>
-    </main>
+    <div className="home__layout">
+      <main className="home">
+        <section className="home__navigator">
+          <PictureServer
+            smallPic={LOGO_LIGHT_SMALL_PICTURE}
+            mediumPic={LOGO_LIGHT_MEDIUM_PICTURE}
+            bigPic={LOGO_LIGHT_PICTURE}
+            className="home__logo"
+            imgPath={PUBLIC_ASSETS}
+            alt="A Ese logo"
+          ></PictureServer>
+          <ul className="home__navigator__list">
+            {categories.map((category: category) => {
+              return (
+                <li
+                  key={category.title}
+                  onClick={() => navigate(category.to)}
+                >
+                  {category.title}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+        <section className="picture">
+          <PictureServer
+            smallPic={HOME_SMALL_PICTURE}
+            mediumPic={HOME_MEDIUM_PICTURE}
+            bigPic={HOME_BIG_PICTURE}
+            className=""
+            imgPath={PUBLIC_ASSETS}
+            overlayClassName="home__picture__overlay"
+            alt="AS home picture"
+          />
+        </section>
+      </main>
+    </div>
   );
 };
 

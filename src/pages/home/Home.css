@@ -1,10 +1,5 @@
-body {
-  background-color: transparent;
-}
-
 .home {
   position: relative;
-  background-color: transparent;
   width: 100dvw;
   height: 100dvh;
 }
@@ -43,7 +38,7 @@ body {
   position: fixed;
   top: -11dvh;
   left: 0;
-  z-index: -2;
+  z-index: -1;
 }
 
 .home img {

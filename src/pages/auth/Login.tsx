@@ -82,7 +82,7 @@ const Login = () => {
           </CustomAlert>
         )}
         {isLogged ? (
-          <div>
+          <div className="login__already__signed">
             <p>{t("login.already_signed_in")}</p>
           </div>
         ) : (

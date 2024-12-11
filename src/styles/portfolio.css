@@ -10,6 +10,10 @@
   margin: 0;
 }
 
+.porfolio body {
+  background-color: var(--bg-color);
+}
+
 .back__button {
   width: 7rem;
   margin-bottom: 2rem;
