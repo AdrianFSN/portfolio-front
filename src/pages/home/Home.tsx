@@ -2,6 +2,7 @@ import "./Home.css";
 import { useTranslation } from "react-i18next";
 import PictureServer from "../../components/shared/PictureServer";
 import {
+  ABOUT_ME_ROUTES_PATH,
   AUDIO_ROUTES_PATH,
   DEVELOPMENT_ROUTES_PATH,
   HOME_BIG_PICTURE,
@@ -45,6 +46,10 @@ const Home = () => {
     {
       title: t("generic.audio"),
       to: AUDIO_ROUTES_PATH,
+    },
+    {
+      title: t("bio.title"),
+      to: ABOUT_ME_ROUTES_PATH,
     },
   ];
   return (
