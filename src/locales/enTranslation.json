@@ -85,7 +85,8 @@
     "allow_switch_language_disabled": "Language is disabled",
     "url": "Web",
     "git_url": "GitHub",
-    "read_more": "Read more >"
+    "read_more": "Read more >",
+    "not_available": "Not available"
   },
   "job": {
     "job_not_found": "Could not find the job you requested"

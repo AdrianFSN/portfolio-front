@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="footer">
       <section className="footer__section footer__logos">
         <figure className="footer__brand__logo">
-          <a href="../index.html#bio">
+          <a href="/">
             <img
               src={logo}
               alt="Logo ¡A Ese!"
