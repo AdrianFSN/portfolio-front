@@ -171,9 +171,9 @@ export const AS_GIT_HUB = "https://github.com/AdrianFSN";
 export const ADMIN_SESSION_LENGTH = 2 * 60 * 60 * 1000;
 
 // PictureServer
-export const NOT_FOUND_SMALL_PICTURE = "not_found_small.jpg";
-export const NOT_FOUND_MEDIUM_PICTURE = "not_found_medium.jpg";
-export const NOT_FOUND_BIG_PICTURE = "not_found.jpg";
+export const NOT_FOUND_SMALL_PICTURE = "404_small.jpg";
+export const NOT_FOUND_MEDIUM_PICTURE = "404_medium.jpg";
+export const NOT_FOUND_BIG_PICTURE = "404_big.jpg";
 export const HOME_SMALL_PICTURE = "home_small.jpg";
 export const HOME_MEDIUM_PICTURE = "home_medium.jpg";
 export const HOME_BIG_PICTURE = "home_big.jpg";

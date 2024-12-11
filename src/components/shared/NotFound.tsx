@@ -22,7 +22,6 @@ const NotFound = () => {
           imgPath={PUBLIC_ASSETS}
           alt="Not found image"
         />
-        <p>{t("not_found.explanation")}</p>
       </section>
     </main>
   );
