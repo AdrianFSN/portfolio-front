@@ -1,4 +1,3 @@
-import Layout from "./components/Layout";
 import "./styles/normalize.css";
 import "./styles/common.css";
 import "./styles/components.css";
@@ -41,9 +40,7 @@ function App() {
 
   return (
     <>
-      <Layout>
-        <RootRouter />
-      </Layout>
+      <RootRouter />
     </>
   );
 }

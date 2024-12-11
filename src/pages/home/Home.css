@@ -1,5 +1,4 @@
 .home {
-  position: relative;
   width: 100dvw;
   height: 100dvh;
 }
@@ -8,12 +7,24 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 20;
 }
 
 .home img {
   width: 100%;
   height: auto;
+}
+
+@media (max-width: 320px) {
+  .picture {
+    width: 150%;
+    top: -15dvh;
+    left: -25dvw;
+  }
+}
+@media (width = 375px) {
+  .picture {
+    width: 110%;
+  }
 }
 
 @media (width >= 1440px) {
@@ -22,6 +33,5 @@
     position: fixed;
     top: -50dvh;
     left: 0;
-    z-index: 20;
   }
 }
