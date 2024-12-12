@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import BioDescription from "./components/BioDescription";
 import BioPicture from "./components/BioPicture";
 import SoftSkills from "./components/SoftSkills";
+import PictureServer from "../../components/shared/PictureServer";
 
 const Bio = () => {
   const { t } = useTranslation();
@@ -16,7 +17,7 @@ const Bio = () => {
           <BioDescription />
         </section>
         <section className="main__section__bio">
-          <BioPicture />
+          <PictureServer />
         </section>
       </section>
       <h2>{t("bio.soft_skills")}</h2>

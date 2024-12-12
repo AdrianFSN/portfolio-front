@@ -183,3 +183,8 @@ export const LOGO_LIGHT_SMALL_PICTURE = "Logo_A_Ese_Light_small.png";
 
 // Public > assets
 export const PUBLIC_ASSETS = "/assets/";
+
+// Bio
+export const BIO_PICTURE_SMALL = "Adrian_T_300.png";
+export const BIO_PICTURE_MEDIUM = "Adrian_T_500.png";
+export const BIO_PICTURE_BIG = "Adrian_T_800.png";
