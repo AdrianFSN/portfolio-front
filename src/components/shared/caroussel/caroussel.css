@@ -9,6 +9,10 @@
   overflow: hidden;
 }
 
+.caroussel p {
+  padding: 2rem;
+}
+
 .caroussel h3 {
   top: 23dvh;
   position: absolute;

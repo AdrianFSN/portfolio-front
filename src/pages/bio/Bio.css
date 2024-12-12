@@ -48,8 +48,18 @@
   position: relative;
   display: block;
   margin: 0 auto;
+  padding-left: 1rem;
   width: 90%;
   z-index: 2;
+}
+
+.main .main__section__bio .main__info__picture .bio__picture__overlay {
+  position: absolute;
+  background: black;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+  z-index: 3;
 }
 
 .main h2 {
@@ -93,7 +103,8 @@
     width: 50%;
   }
   .main .main__section__bio .main__info__picture {
-    width: 100%;
+    width: 80%;
+    margin-top: 2rem;
     border-radius: 3px;
   }
 
@@ -102,6 +113,7 @@
     width: 90%;
     margin: 0 auto;
     margin-top: 2rem;
+    padding-top: 1rem;
   }
 
   .main .main__section__bio .main__info__picture .bio__picture__overlay {
@@ -144,23 +156,17 @@
     width: 100%;
   }
 
-  .main .main__section__bio .main__info__picture img {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
-    margin-top: 2rem;
-  }
-
   .main .intro__and__picture {
     display: grid;
     grid-template-columns: 2fr 1fr;
   }
   .main .main__section__bio .main__info__picture {
-    display: block;
-    padding: 0;
-    margin-right: 2rem;
-    width: 60%;
+    width: 70%;
+    margin-top: 2rem;
+  }
+  .main .main__section__bio .main__info__picture img {
+    width: 100%;
+    margin-top: 2rem;
   }
 
   .main h2 {
