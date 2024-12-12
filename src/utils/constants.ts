@@ -121,6 +121,22 @@ export const NOT_ALLOWED_HTML_TAGS = [
   "option", // Bloquea opciones en menús
   "svg", // Puede usarse para ataques como XSS
   "base", // Modifica la URL base del documento, peligroso para redirecciones
+  "img",
+];
+export const ALLOWED_HTML_TAGS = [
+  "b",
+  "i",
+  "em",
+  "strong",
+  "ul",
+  "ol",
+  "li",
+  "p",
+  "br",
+  "h1",
+  "h2",
+  "h3",
+  "u",
 ];
 
 //Contact paths and URI:
