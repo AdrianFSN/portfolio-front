@@ -10,6 +10,7 @@ const BioDescription = () => {
         <MarkdownRenderer content={t("bio.introduction")} />
         <MarkdownRenderer content={t("bio.career")} />
         <MarkdownRenderer content={t("bio.goal")} />
+        <MarkdownRenderer content={t("bio.location")} />
       </div>
     </div>
   );

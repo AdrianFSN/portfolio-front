@@ -1,9 +1,10 @@
 {
   "bio": {
     "title": "Bio",
-    "introduction": "Je m'appelle Adrián Sotés, d'où A S, pour arriver à 'A ese!' Parce que je veux que tu me choisisses pour qu'on travaille ensemble sur tes projets. Je suis créateur de contenu, développeur web full stack junior, et expert en gamification.",
-    "career": "J'ai consacré une grande partie de ma carrière professionnelle au développement de communautés virtuelles. J'ai un diplôme en Communication Audiovisuelle. Mon envie de continuer à grandir professionnellement dans toutes sortes de domaines créatifs m'a amené à étudier le design, la gestion de communauté, le son, l'harmonie moderne, et maintenant, la programmation et le développement web.",
-    "goal": "Mon objectif est de comprendre tous les profils à partir desquels on peut aborder le développement de contenu, afin d'obtenir une fonctionnalité adaptée au but pour lequel il a été conçu : un plan d'affaires, de l'art, du divertissement... Les motivations sont infinies. Quelle est la tienne ?",
+    "introduction": "Salut ! Moi, c'est <b>Adrián Sotés</b>, d'où A S, et ça donne <b>'¡A ese!'</b> ('Choisis celui-là !'). Pourquoi ? Parce que je veux que tu me choisisses pour bosser sur tes projets. Je suis développeur web full-stack et expert en LiveOps et monétisation via la gamification.",
+    "career": "J'ai passé une grande partie de ma carrière à construire des communautés virtuelles. J'ai une licence en Communication Audiovisuelle. Ma soif d'apprendre et de grandir dans tous les domaines créatifs m'a poussé à étudier <b>la programmation et le développement web</b>, mais aussi <b>le design graphique</b>, <b>la gestion de communautés</b>, <b>le son</b>, et même <b>l'harmonie moderne</b>.",
+    "goal": "Mon objectif ? Comprendre tous les rôles impliqués dans le développement d'un <b>produit</b>, d'une <b>idée</b> ou d'un <b>contenu</b>, et m'assurer qu'il remplisse sa mission : un <b>business plan</b>, <b>du divertissement</b>, <b>fidéliser</b>, <b>créer de l'engagement</b>... Les motivations sont infinies. <b>Et toi, c'est quoi la tienne ?</b>",
+    "location": "Où suis-je ? Entre <b>Madrid</b>, <b>Asturies</b> et <b>Navarre</b> (l'Espagne).",
     "soft_skills": "Soft Skills"
   },
   "login": {

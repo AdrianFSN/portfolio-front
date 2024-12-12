@@ -1,9 +1,10 @@
 {
   "bio": {
     "title": "Bio",
-    "introduction": "Me llamo Adrián Sotés, de ahí A S, para acabar en '¡A ese!' Porque quiero que me elijas para trabajar juntos en tus proyectos. Soy creador de contenido, desarrollador web full stack junior y experto en gamificación.",
-    "career": "He dedicado una gran parte de mi carrera profesional al desarrollo de comunidades virtuales. Soy licenciado en Comunicación Audiovisual. Mi deseo de seguir creciendo profesionalmente en todo tipo de áreas creativas me ha llevado a estudiar diseño, gestión de comunidades, sonido, armonía moderna y ahora, programación y desarrollo web.",
-    "goal": "Mi objetivo es entender todos los perfiles desde los que se puede abordar el desarrollo de contenido, logrando así una funcionalidad para el fin para el que ha sido diseñado: un plan de negocio, arte, entretenimiento... Las motivaciones son infinitas. ¿Cuál es la tuya?",
+    "introduction": "Me llamo <b>Adrián Sotés</b>, de ahí A S, para acabar en <b>'¡A ese!'</b> Porque quiero que me elijas para trabajar en tus proyectos. Soy desarrollador web full stack y experto en LiveOps y monetización a través de la gamificación.",
+    "career": "He dedicado una gran parte de mi carrera profesional al desarrollo de comunidades virtuales. Soy licenciado en Comunicación Audiovisual. Mi deseo de seguir creciendo profesionalmente en todo tipo de áreas creativas me ha llevado a estudiar <b>programación y desarrollo web</b>, además de <b>diseño gráfico</b>, <b>gestión de comunidades</b>, <b>sonido</b> e incluso <b>armonía moderna</b>.",
+    "goal": "Mi objetivo es entender todos los perfiles desde los que se puede abordar el desarrollo de una <b>aplicación</b>, una <b>idea</b> o un <b>contenido</b>; con el objetivo de dotarlo de la funcionalidad para la que se ha diseñado: un <b>plan de negocio</b>, <b>entretenimiento</b>, <b>fidelización</b>, <b>engagement</b>... Las motivaciones son infinitas. <b>¿Cuál es la tuya?</b>",
+    "location": "¿Dónde me encuentro? <b>Madrid</b>, <b>Asturias</b> y <b>Navarra</b>.",
     "soft_skills": "Habilidades blandas"
   },
   "login": {
