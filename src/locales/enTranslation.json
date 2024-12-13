@@ -3,13 +3,13 @@
     "title": "Bio",
     "introduction": "Hey there! I'm <b>Adrián Sotés</b>, which is where A S comes from, leading to <b>'¡A ese!'</b> ('Pick that one!'). Why? Because I want you to choose me to work on your projects. I'm a full-stack web developer and a pro at LiveOps and monetization through gamification.",
     "career": "I've spent a big part of my career building virtual communities. I have a degree in Audiovisual Communication. My passion for growing in all sorts of creative areas pushed me to learn <b>web programming and development</b>, along with <b>graphic design</b>, <b>community management</b>, <b>sound design</b>, and even <b>modern harmony</b>.",
-    "goal": "My goal? To understand all the different roles involved in creating a <b>product</b>, <b>idea</b>, or <b>content</b>, and make sure it serves the purpose it was designed for: a <b>business plan</b>, <b>entertainment</b>, <b>customer loyalty</b>, <b>engagement</b>... The possibilities are endless. <b>What's your motivation?</b>",
+    "goal": "My goal? To understand all the different layers involved in creating a <b>product</b>, <b>idea</b>, or <b>content</b>, and make sure it serves the purpose it was designed for: to execute a <b>business plan</b>, <b>entertainment</b>, <b>customer loyalty</b>, <b>engagement</b>... The possibilities are endless. <b>What's your motivation?</b>",
     "location": "Where am I? You'll find me between <b>Madrid</b>, <b>Asturias</b>, and <b>Navarra</b> (Spain).",
     "soft_skills": "Soft Skills"
   },
   "login": {
     "login": "Login",
-    "already_signed_in": "You are already signed in}",
+    "already_signed_in": "You are already signed in",
     "credentials": "Credentials"
   },
   "admin": {

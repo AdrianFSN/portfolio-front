@@ -3,6 +3,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 interface CustomPulseLoaderProps {
   isLoading: boolean;
   $customHeight?: string;
+  $customBackground?: string;
 }
 
 const CustomPulseLoader: React.FC<CustomPulseLoaderProps> = ({
@@ -13,9 +14,12 @@ const CustomPulseLoader: React.FC<CustomPulseLoaderProps> = ({
     <div
       style={{
         display: "flex",
+        width: "100%",
+        margin: "0 auto",
         justifyContent: "center",
         alignItems: "center",
         height: $customHeight,
+        background: "var(--bg-color)",
       }}
     >
       <PulseLoader

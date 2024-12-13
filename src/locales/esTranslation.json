@@ -3,7 +3,7 @@
     "title": "Bio",
     "introduction": "Me llamo <b>Adrián Sotés</b>, de ahí A S, para acabar en <b>'¡A ese!'</b> Porque quiero que me elijas para trabajar en tus proyectos. Soy desarrollador web full stack y experto en LiveOps y monetización a través de la gamificación.",
     "career": "He dedicado una gran parte de mi carrera profesional al desarrollo de comunidades virtuales. Soy licenciado en Comunicación Audiovisual. Mi deseo de seguir creciendo profesionalmente en todo tipo de áreas creativas me ha llevado a estudiar <b>programación y desarrollo web</b>, además de <b>diseño gráfico</b>, <b>gestión de comunidades</b>, <b>sonido</b> e incluso <b>armonía moderna</b>.",
-    "goal": "Mi objetivo es entender todos los perfiles desde los que se puede abordar el desarrollo de una <b>aplicación</b>, una <b>idea</b> o un <b>contenido</b>; con el objetivo de dotarlo de la funcionalidad para la que se ha diseñado: un <b>plan de negocio</b>, <b>entretenimiento</b>, <b>fidelización</b>, <b>engagement</b>... Las motivaciones son infinitas. <b>¿Cuál es la tuya?</b>",
+    "goal": "Mi aspiración es entender todos los perfiles desde los que se puede abordar el desarrollo de una <b>aplicación</b>, una <b>idea</b> o un <b>contenido</b>; con el objetivo de dotarlo de la funcionalidad para la que se ha diseñado: ejecutar un <b>plan de negocio</b>, <b>entretenimiento</b>, <b>fidelización</b>, <b>engagement</b>... Las motivaciones son infinitas. <b>¿Cuál es la tuya?</b>",
     "location": "¿Dónde me encuentro? <b>Madrid</b>, <b>Asturias</b> y <b>Navarra</b>.",
     "soft_skills": "Habilidades blandas"
   },
@@ -16,7 +16,7 @@
     "title": "Admin",
     "edit_job": "Editar proyecto",
     "job_title": "Título del proyecto",
-    "job_excerpt": "Extracto del proyecto",
+    "job_excerpt": "Intro del proyecto",
     "descriptive_info": "Información descriptiva",
     "context_info": "Contexto",
     "launch_period": "Período de lanzamiento",
@@ -49,7 +49,7 @@
   },
   "generic": {
     "empty_section": "Esta sección está vacía",
-    "confirm_deletion": "¿Estás seguro de que quieres eliminar esto?",
+    "confirm_deletion": "¿Seguro que quieres eliminar esto?",
     "cancel": "Cancelar",
     "yes": "Sí",
     "characters": "caracteres",
