@@ -1,9 +1,10 @@
 import axios from "axios";
 import i18n from "i18next";
 import storage from "../utils/storage";
+import { API_BASE_URL } from "../utils/constants";
 
 export const client = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: API_BASE_URL,
 });
 
 client.interceptors.request.use(
