@@ -9,6 +9,7 @@ interface CustomPulseLoaderProps {
 const CustomPulseLoader: React.FC<CustomPulseLoaderProps> = ({
   isLoading,
   $customHeight = "200px",
+  $customBackground = "var(--bg-color)",
 }) => {
   return (
     <div
@@ -19,7 +20,7 @@ const CustomPulseLoader: React.FC<CustomPulseLoaderProps> = ({
         justifyContent: "center",
         alignItems: "center",
         height: $customHeight,
-        background: "var(--bg-color)",
+        background: $customBackground,
       }}
     >
       <PulseLoader
