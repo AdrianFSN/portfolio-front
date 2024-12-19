@@ -51,11 +51,19 @@ a {
 
 body {
   background: transparent;
+  color: var(--main-text-color);
 }
 
 main {
   text-align: justify;
   color: var(--main-text-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  body,
+  main {
+    color: var(--main-text-color);
+  }
 }
 
 @media (hover: hover) {
