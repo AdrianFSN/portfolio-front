@@ -377,6 +377,7 @@ const EditJobPictures = () => {
                   <CustomPulseLoader
                     isLoading={isLoading}
                     $customHeight="100%"
+                    $customBackground="transparent"
                   />
                 ) : (
                   t("generic.submit")
