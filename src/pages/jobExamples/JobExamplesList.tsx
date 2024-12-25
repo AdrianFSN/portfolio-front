@@ -15,7 +15,7 @@ import {
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import convertStringToIcon from "../../utils/convertStringToIcon";
 import icons from "../../utils/icons";
-import imgNotAvailable from "../../assets/img_not_available.jpg";
+import imgNotAvailable from "../../assets/IMAGE_NOT_AVAILABLE.jpg";
 import { useNavigate } from "react-router-dom";
 import CustomAlert from "../../components/shared/alert/CustomAlert";
 import { resetJobExamples } from "../../store/slices/jobExamplesSlice";

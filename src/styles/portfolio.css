@@ -103,7 +103,8 @@
 
 .porfolio__grid__panel__item__list img {
   width: 100%;
-  border-radius: 3px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px #cfcc98;
 }
 
 .porfolio__grid__panel__item__list img:hover {
@@ -210,7 +211,7 @@
   .porfolio__item__picture {
     display: block;
     margin: 0 auto;
-    width: 72%;
+    width: 90%;
   }
 }
 
@@ -233,7 +234,7 @@
   .porfolio__item__picture {
     display: block;
     margin: 0 auto;
-    width: 60%;
+    width: 90%;
   }
 }
 
