@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 
-function useCaroussel(
-  items: unknown[],
-  interval: number = 3000,
-  autoPlay = true
-) {
+function useCaroussel<T>(items: T[], interval: number = 3000, autoPlay = true) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [animationClass, setAnimationClass] = useState("entering");
 

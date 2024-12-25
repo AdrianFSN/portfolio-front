@@ -2,7 +2,7 @@ import { JobExample } from "../../@types/jobExample";
 import { IMAGES_DB_PATH, JOB_ROUTES_URI, ORIGIN } from "../../utils/constants";
 import useCaroussel from "../../hooks/useCarousel";
 import "../../components/shared/caroussel/caroussel.css";
-import imgNotAvailable from "../../assets/img_not_available.jpg";
+import imgNotAvailable from "../../assets/IMAGE_NOT_AVAILABLE.jpg";
 import { useNavigate } from "react-router-dom";
 
 interface JobsCarousselProps {
@@ -10,7 +10,7 @@ interface JobsCarousselProps {
   autoPlay?: boolean;
 }
 
-const JobsCaroussel: React.FC<JobsCarousselProps> = ({ items, autoPlay }) => {
+const JobsCaroussel = ({ items, autoPlay }: JobsCarousselProps) => {
   const origin = ORIGIN;
   const navigate = useNavigate();
   const imgUrlPath = IMAGES_DB_PATH;
