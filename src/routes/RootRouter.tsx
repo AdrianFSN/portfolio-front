@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-
+import "./RootRouter.css";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Bio from "../pages/bio/Bio";
 import Job from "../pages/jobExamples/Job";
@@ -58,7 +58,15 @@ const subjectsPaths = [
 
 const RootRouter = () => {
   return (
-    <Suspense fallback={<CustomPulseLoader isLoading={true} />}>
+    <Suspense
+      fallback={
+        <CustomPulseLoader
+          isLoading={true}
+          $customWidth="100dvh"
+          $customHeight="100dvh"
+        />
+      }
+    >
       <Routes>
         <Route
           element={
