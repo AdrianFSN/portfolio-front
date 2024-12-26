@@ -10,9 +10,9 @@
   font-family: "Inconsolata", sans-serif;
 }
 
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
 html {
   scroll-behavior: smooth;
@@ -20,8 +20,6 @@ html {
 
 html,
 body {
-  margin: 0;
-  padding: 0;
   overflow-x: hidden;
 }
 

@@ -63,7 +63,7 @@ const RootRouter = () => {
         <CustomPulseLoader
           isLoading={true}
           $customWidth="100dvh"
-          $customHeight="100dvh"
+          /* $customHeight="100dvh" */
         />
       }
     >

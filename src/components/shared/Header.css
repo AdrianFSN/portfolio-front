@@ -161,7 +161,7 @@
 @media (width >= 768px) {
   .header {
     background-color: var(--bg-color);
-    height: 5dvh;
+    height: 8dvh;
     flex-direction: row;
     justify-content: space-between;
   }
