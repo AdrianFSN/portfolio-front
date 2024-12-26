@@ -108,7 +108,7 @@
 .header .header__mask {
   position: absolute;
   top: 0;
-  height: 25dvh;
+  height: 23dvh;
   width: 100%;
   background-color: var(--bg-color);
   z-index: -1;
