@@ -38,9 +38,10 @@ export const IMG_THUMBNAILS_DB_PATH = `${
 export const ORIGIN = API_BASE_URL;
 
 export const PAGE_DEFAULT = 1;
-export const LIMIT_DEFAULT = "4";
-export const LIMIT_UNDER_769 = "1";
-export const LIMIT_OVER_769 = "4";
+export const LIMIT_DEFAULT = "6";
+export const LIMIT_UNDER_768 = "1";
+export const LIMIT_768 = "4";
+export const LIMIT_OVER_768 = "6";
 export const MESSAGES_LIST_LIMIT_DEFAULT = "4";
 export const MESSAGES_LIST_LIMIT_UNDER_769 = "4";
 export const MESSAGES_LIST_LIMIT_OVER_769 = "10";
