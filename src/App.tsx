@@ -11,7 +11,11 @@ import {
   getIsLoggedSelector,
   getStartSessionCountdown,
 } from "./store/selectors/AuthSelectors/authSelectors";
-import { logout, setAuthorizationHeader } from "./api/client";
+import {
+  logout,
+  removeAuthorizationHeader,
+  setAuthorizationHeader,
+} from "./api/client";
 import { AppDispatch } from "./store/store";
 import { resetLogin } from "./store/slices/loginSlice";
 import { ADMIN_SESSION_LENGTH } from "./utils/constants";
@@ -33,6 +37,7 @@ function App() {
       const sessionTimeout = setTimeout(() => {
         logout();
         dispatch(resetLogin());
+        removeAuthorizationHeader();
       }, ADMIN_SESSION_LENGTH);
       return () => clearTimeout(sessionTimeout);
     }
