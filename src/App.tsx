@@ -11,17 +11,15 @@ import {
   getIsLoggedSelector,
   getStartSessionCountdown,
 } from "./store/selectors/AuthSelectors/authSelectors";
-import {
-  logout,
-  removeAuthorizationHeader,
-  setAuthorizationHeader,
-} from "./api/client";
+import { logout, setAuthorizationHeader } from "./api/client";
 import { AppDispatch } from "./store/store";
 import { resetLogin } from "./store/slices/loginSlice";
-import { ADMIN_SESSION_LENGTH } from "./utils/constants";
+import { ADMIN_SESSION_LENGTH, AUTH_ROUTES_PATH } from "./utils/constants";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const accessToken = storage.get("authToken") || null;
   const userIsLogged = useSelector(getIsLoggedSelector);
   const startSessionCountdown = useSelector(getStartSessionCountdown);
@@ -37,11 +35,11 @@ function App() {
       const sessionTimeout = setTimeout(() => {
         logout();
         dispatch(resetLogin());
-        removeAuthorizationHeader();
+        navigate(AUTH_ROUTES_PATH);
       }, ADMIN_SESSION_LENGTH);
       return () => clearTimeout(sessionTimeout);
     }
-  }, [startSessionCountdown, dispatch]);
+  }, [startSessionCountdown, dispatch, navigate]);
 
   return (
     <>

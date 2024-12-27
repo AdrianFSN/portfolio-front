@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import "./RootRouter.css";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Bio from "../pages/bio/Bio";
 import Job from "../pages/jobExamples/Job";
