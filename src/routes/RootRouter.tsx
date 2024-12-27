@@ -62,8 +62,8 @@ const RootRouter = () => {
       fallback={
         <CustomPulseLoader
           isLoading={true}
-          $customWidth="100dvh"
-          /* $customHeight="100dvh" */
+          $customWidth="100vw"
+          $customHeight="100vh"
         />
       }
     >
