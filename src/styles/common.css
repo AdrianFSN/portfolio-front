@@ -18,6 +18,20 @@ html {
   scroll-behavior: smooth;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--main-brand-color);
+  border: 1px dotted var(--main-text-color);
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
 html,
 body {
   overflow-x: hidden;
