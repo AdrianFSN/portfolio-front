@@ -71,10 +71,19 @@
 
 .job__detail .porfolio__icons__tech {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   margin-bottom: 0;
-  gap: 0;
+  gap: 1rem;
   text-align: center;
+}
+.job__detail .porfolio__icons__tech .tech__text {
+  font-size: 1rem;
+}
+
+@media (max-width: 320px) {
+  .job__detail .porfolio__icons__tech {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 768px) {
