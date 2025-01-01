@@ -103,7 +103,7 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {job.linkToUrl}
+                    <strong>{t("generic.go_to_url")} </strong>
                   </a>
                 ) : (
                   t("generic.not_available")
@@ -117,7 +117,7 @@ const JobDetail: React.FC<JobDetailProps> = ({ jobId, job }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {job.linkToGitHub}
+                    <strong>{t("generic.go_to_git_url")} </strong>
                   </a>
                 ) : (
                   t("generic.not_available")

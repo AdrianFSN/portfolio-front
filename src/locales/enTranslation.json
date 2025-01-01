@@ -87,7 +87,10 @@
     "url": "Web",
     "git_url": "GitHub",
     "read_more": "Read more >",
-    "not_available": "Not available"
+    "not_available": "Not available",
+    "go_to_url": "Click to web!",
+    "web_not_available": "Web not available",
+    "go_to_git_url": "Click to GitHub!"
   },
   "job": {
     "job_not_found": "Could not find the job you requested"
