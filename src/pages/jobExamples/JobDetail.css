@@ -80,7 +80,7 @@
   font-size: 1rem;
 }
 
-@media (max-width: 320px) {
+@media (max-width: 425px) {
   .job__detail .porfolio__icons__tech {
     grid-template-columns: repeat(2, 1fr);
   }

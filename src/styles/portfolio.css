@@ -208,7 +208,7 @@
   cursor: zoom-out;
 }
 
-@media (max-width: 320px) {
+@media (max-width: 425px) {
   .techs.job__examples ul {
     grid-template-columns: repeat(2, 1fr);
     gap: 0;
