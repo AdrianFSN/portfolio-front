@@ -86,7 +86,11 @@
     "allow_switch_language_disabled": "Idioma desactivado",
     "url": "Web",
     "git_url": "GitHub",
-    "read_more": "Leer más >"
+    "read_more": "Leer más >",
+    "not_available": "No disponible",
+    "go_to_url": "¡Click a la web!",
+    "web_not_available": "Web no disponible",
+    "go_to_git_url": "¡Click a GitHub!"
   },
   "job": {
     "job_not_found": "No se ha podido encontrar el proyecto que pediste"
