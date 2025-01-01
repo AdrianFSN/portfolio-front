@@ -133,7 +133,7 @@
 }
 .techs ul {
   list-style: none;
-  padding: 1rem;
+  padding: 0rem;
 }
 
 .porfolio__icons__tech {
@@ -183,7 +183,8 @@
   font-size: 3rem;
 }
 .techs.job__examples .porfolio__icons__tech .tech__text {
-  font-size: 1.5rem;
+  margin: 2rem 0;
+  font-size: 1rem;
 }
 
 .img__overlay__bg {
