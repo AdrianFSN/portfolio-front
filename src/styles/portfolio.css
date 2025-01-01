@@ -208,6 +208,13 @@
   cursor: zoom-out;
 }
 
+@media (max-width: 320px) {
+  .techs.job__examples ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+}
+
 @media (min-width: 768px) {
   .porfolio__item__picture {
     display: block;
