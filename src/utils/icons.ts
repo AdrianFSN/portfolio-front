@@ -19,7 +19,6 @@ const icons: Icons = {
   javascript: "fa-brands fa-js",
   jquery: "fa-brands fa-js-square",
   linux: "fa-brands fa-linux",
-  mongodb: "fa-brands fa-leaf",
   mysql: "fa-solid fa-database",
   node: "fa-brands fa-node",
   nodejs: "fa-brands fa-node-js",
