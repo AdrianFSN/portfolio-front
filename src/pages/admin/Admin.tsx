@@ -5,6 +5,7 @@ import { AppDispatch } from "../../store/store";
 import { useEffect } from "react";
 import { getJobExamplesListThunk } from "../../store/thunks/jobExamplesListThunk";
 import {
+  getAllowSwitchLanguageSelector,
   getJobExamplesListSelector,
   getJobsListErrorSelector,
   getJobsListLoadingSelector,
@@ -19,6 +20,7 @@ import {
 import CustomPulseLoader from "../../components/shared/spinner/CustomPulseLoader";
 import RegularButton from "../../components/shared/buttons/RegularButton";
 import { useNavigate } from "react-router-dom";
+import { setAllowSwitchLanguage } from "../../store/slices/allowSwitchLanguageSlice";
 
 const Admin = () => {
   const { t, i18n } = useTranslation();
@@ -30,10 +32,17 @@ const Admin = () => {
   const limit = "1000";
   const isLoading = useSelector(getJobsListLoadingSelector);
   const error = useSelector(getJobsListErrorSelector);
+  const allowSwitchLanguage = getAllowSwitchLanguageSelector;
 
   useEffect(() => {
     dispatch(getJobExamplesListThunk({ limit: limit }));
   }, [dispatch, i18n.language]);
+
+  useEffect(() => {
+    if (!allowSwitchLanguage) {
+      dispatch(setAllowSwitchLanguage(true));
+    }
+  }, [allowSwitchLanguage, dispatch]);
 
   return (
     <div className="admin__layout">

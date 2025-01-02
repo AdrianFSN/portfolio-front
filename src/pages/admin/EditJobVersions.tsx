@@ -125,11 +125,12 @@ const EditJobVersions = () => {
 
   useEffect(() => {
     if (error) {
-      setAlertMessage(error.message);
+      const errorMessage = extractErrorMessage(error, t);
+      setAlertMessage(errorMessage);
     } else {
       setAlertMessage("");
     }
-  }, [error]);
+  }, [error, t]);
 
   const handleVersionsOnChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -164,7 +165,6 @@ const EditJobVersions = () => {
       );
     } catch (error) {
       setError(error as AxiosError);
-      setAlertMessage(extractErrorMessage(error, t));
     } finally {
       setIsLoading(false);
     }
