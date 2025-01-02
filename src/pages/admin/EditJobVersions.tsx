@@ -174,6 +174,7 @@ const EditJobVersions = () => {
     event.preventDefault();
     setAlertMessage("");
     if (!error) {
+      dispatch(setAllowSwitchLanguage(true));
       dispatch(resetJobDetail());
       navigate(toEditPage);
     }
