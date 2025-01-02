@@ -77,12 +77,13 @@ const CreateNewMessage = () => {
 
   useEffect(() => {
     if (error) {
-      setAlertMessage(error.message);
+      const errorMessage = extractErrorMessage(error, t);
+      setAlertMessage(errorMessage);
       setDisableSubmit(true);
     } else {
       setAlertMessage("");
     }
-  }, [error]);
+  }, [error, t]);
 
   useEffect(() => {
     if (
@@ -148,7 +149,6 @@ const CreateNewMessage = () => {
       });
     } catch (error) {
       setError(error as AxiosError);
-      setAlertMessage(extractErrorMessage(error, t));
     } finally {
       setIsLoading(false);
     }

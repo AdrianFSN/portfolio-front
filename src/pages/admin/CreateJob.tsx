@@ -157,11 +157,12 @@ const CreateJob = () => {
 
   useEffect(() => {
     if (error) {
-      setAlertMessage(error.message);
+      const errorMessage = extractErrorMessage(error, t);
+      setAlertMessage(errorMessage);
     } else {
       setAlertMessage("");
     }
-  }, [error]);
+  }, [error, t]);
 
   const handleFormOnChange = (
     event: React.ChangeEvent<
@@ -285,7 +286,6 @@ const CreateJob = () => {
       setError(null);
     } catch (error) {
       setError(error as AxiosError);
-      setAlertMessage(extractErrorMessage(error, t));
     } finally {
       setIsLoading(false);
     }

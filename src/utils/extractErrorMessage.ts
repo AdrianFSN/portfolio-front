@@ -9,6 +9,7 @@ const extractErrorMessage = (error: unknown, t: TFunction): string => {
     const validationErrors = (error as { validationErrors: string[] })
       .validationErrors;
     if (Array.isArray(validationErrors)) {
+      console.log("He pasado por validationErrors: ", validationErrors);
       return validationErrors.join("\n");
     }
     return t("errors.unknown_validation");
@@ -17,6 +18,7 @@ const extractErrorMessage = (error: unknown, t: TFunction): string => {
     error !== null &&
     "message" in error
   ) {
+    console.log("Esto es error.message: ", error.message);
     return (error as { message: string }).message;
   }
   return t("errors.unknown_validation");
