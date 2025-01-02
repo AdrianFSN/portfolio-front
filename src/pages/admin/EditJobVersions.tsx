@@ -182,6 +182,7 @@ const EditJobVersions = () => {
 
   const handleToEditPage = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    dispatch(setAllowSwitchLanguage(true));
     navigate(toEditPage);
   };
 
