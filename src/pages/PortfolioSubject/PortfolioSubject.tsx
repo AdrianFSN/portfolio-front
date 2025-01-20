@@ -59,6 +59,12 @@ const PortfolioSubject: React.FC<JobPagesProps> = ({ category }) => {
     }
   }, [category, dispatch, page, limit, i18n.language]);
 
+  useEffect(() => {
+    if (category) {
+      setPage(PAGE_DEFAULT);
+    }
+  }, [category]);
+
   const handleNextPage = () => {
     setPage(((page as number) % jobsTotalPages) + 1);
   };
