@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /session/
+Disallow: /edit/
+Disallow: /messages/
+
+Sitemap: https://www.aesedeveloper.com/sitemap.xml
