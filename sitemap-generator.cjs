@@ -1,6 +1,6 @@
-import { SitemapStream } from "sitemap";
-import { createWriteStream } from "fs";
-import { resolve } from "path";
+const { SitemapStream } = require("sitemap");
+const { createWriteStream } = require("fs");
+const { resolve } = require("path");
 
 const links = [
   { url: "/", changefreq: "daily", priority: 1.0 },
