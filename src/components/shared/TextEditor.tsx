@@ -17,7 +17,13 @@ const TextEditor = ({ value, onChange }: TextEditorProps) => {
 
   useEffect(() => {
     const newEditor = new Editor({
-      extensions: [StarterKit, Underline],
+      extensions: [
+        StarterKit.configure({
+          underline: false,
+          link: false,
+        }),
+        Underline,
+      ],
       content: value,
       onUpdate: ({ editor }) => {
         onChange(editor.getHTML());
@@ -34,8 +40,11 @@ const TextEditor = ({ value, onChange }: TextEditorProps) => {
 
   useEffect(() => {
     if (editor) {
-      editor.commands.setContent(value, false, {
-        preserveWhitespace: "full",
+      editor.commands.setContent(value, {
+        emitUpdate: false,
+        parseOptions: {
+          preserveWhitespace: "full",
+        },
       });
     }
   }, [value, editor]);

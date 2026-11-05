@@ -10,7 +10,13 @@ interface TextReaderProps {
 
 const TextReader = ({ value, className = "" }: TextReaderProps) => {
   const editor = new Editor({
-    extensions: [StarterKit, Underline],
+    extensions: [
+      StarterKit.configure({
+        underline: false,
+        link: false,
+      }),
+      Underline,
+    ],
     content: value,
   });
 

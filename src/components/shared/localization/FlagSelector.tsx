@@ -15,7 +15,11 @@ interface FlagSelectorProps {
   onClick?: () => void;
 }
 
-const StyledFlag: React.FC<StyledFlagInterface> = styled(Flag)`
+const FlagComponent =
+  (Flag as typeof Flag & { default?: typeof Flag }).default ?? Flag;
+console.log("Flag import:", Flag, "typeof:", typeof Flag);
+
+const StyledFlag: React.FC<StyledFlagInterface> = styled(FlagComponent)`
   width: ${(props) => props.$customWidth || "50px"};
   height: ${(props) => props.$customHeight || "30px"};
   object-fit: cover;

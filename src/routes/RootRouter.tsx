@@ -7,10 +7,10 @@ const Admin = React.lazy(() => import("../pages/admin/Admin"));
 const CreateJob = React.lazy(() => import("../pages/admin/CreateJob"));
 const EditJob = React.lazy(() => import("../pages/admin/EditJob"));
 const EditJobVersions = React.lazy(
-  () => import("../pages/admin/EditJobVersions")
+  () => import("../pages/admin/EditJobVersions"),
 );
 const EditJobPictures = React.lazy(
-  () => import("../pages/admin/EditJobPictures")
+  () => import("../pages/admin/EditJobPictures"),
 );
 const EditJobVideos = React.lazy(() => import("../pages/admin/EditJobVideos"));
 const EditJobAudios = React.lazy(() => import("../pages/admin/EditJobAudios"));
@@ -79,6 +79,23 @@ const RootRouter = () => {
             path={ABOUT_ME_ROUTES_PATH}
             element={<Bio />}
           />
+
+          <Route
+            path="/prueba-eekox"
+            element={
+              <iframe
+                src="https://eekox.com/search"
+                title="Buscador de Eekox"
+                style={{
+                  display: "block",
+                  width: "100%",
+                  height: "85vh",
+                  border: 0,
+                }}
+              />
+            }
+          />
+
           <Route
             path={CONTACT_ROUTES_PATH}
             element={<CreateNewMessage />}
