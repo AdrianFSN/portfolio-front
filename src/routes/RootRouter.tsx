@@ -81,10 +81,10 @@ const RootRouter = () => {
           />
 
           <Route
-            path="/buscador-de-espacios-eekox"
+            path="/eekox/buscador-de-espacios"
             element={
               <iframe
-                src="http://localhost:3000/partners/asociacion-startups"
+                src="https://dev.eekox.com/partners/asociacion-startups"
                 title="Buscador de Eekox"
                 style={{
                   display: "block",
